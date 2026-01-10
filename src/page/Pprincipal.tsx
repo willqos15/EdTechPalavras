@@ -8,7 +8,10 @@ import { IoSend } from "react-icons/io5";
 import { FaLightbulb } from "react-icons/fa";
 import { MdChangeCircle } from "react-icons/md";
 import { AiFillThunderbolt } from "react-icons/ai";
+import { RiArrowDownWideLine } from "react-icons/ri";
+import { RiArrowUpWideLine } from "react-icons/ri";
 
+import Poup from '../components/poup';
 type Tdados = { campo: string }
 
 type Tfrases = {
@@ -20,11 +23,16 @@ export default function Pprincipal() {
 
     const [digi, setDigi] = useState<string[]>([])
     const [erro, setErro] = useState<string[]>([])
-    const [red, setRed] = useState<number>(0)
+    const [yel, setYel] = useState<number>(0)
     const [blue, setBlue] = useState<number>(0)
     const [enerb, setEnerB] = useState<number>(5)
+    const [enery, setEnerY] = useState<number>(5)
     const [help, setHelp] = useState<boolean>(false)
     const [mletra, setMLetra] = useState<boolean>(true)
+    const [nameb, setNameB] = useState<string>("Time Azul")
+    const [inputeb, setInputEB] = useState<number>(0)
+    const [inputpb, setInputPB] = useState<number>(0)
+    const [showcb, setShowCB] = useState<boolean>(false)
 
     function normalizar(texto: string) {
         return texto
@@ -39,7 +47,7 @@ export default function Pprincipal() {
 
 
         if (mletra && [... new Set(Array.from(normalizar(frases[fase].palavra)))].sort().join("") === normalizar([... new Set(digi)].sort().join(""))) {
-            
+
             setDigi([])
             setErro([])
             console.log("zerou")
@@ -116,15 +124,35 @@ export default function Pprincipal() {
     }
 
 
-
+    const [poupdica, setPoupDica] = useState<boolean>(false)
 
     return (<>
+
+        <Poup
+            titulo='AVISO'
+            modo={poupdica}
+            f1={() => {
+                setEnerB(ant => ant - 1)
+                setPoupDica(false)
+            }}
+            f2={() => {
+                setEnerY(ant => ant - 1)
+                setPoupDica(false)
+            }}
+            f3={() => { setPoupDica(false) }}
+            descricao={<> <p> Dica custa 1 <AiFillThunderbolt className='inline-block' /> </p>
+                <p>Informe qual equipe solicitou a dica</p></>} />
 
         <div className='flex flex-row justify-between w-[90dvw]'>
 
             <div className='bg-white font-bold px-0 whitespace-nowrap flex flex-col h-fit items-center justify-center gap-y-2 text-blue-950'>
-                <p className='bg-blue-900 w-full px-3 text-bold text-white'>Team Blue:</p>
-                <p className='text-5xl'>{blue}</p>
+                <p className=' bg-blue-900 w-full px-3 text-bold text-white'> {nameb ? nameb : "Time Azul"} </p>
+
+                <div>
+                    <p className='inline-block text-5xl'>{blue}</p>
+                    <p className='inline-block'>{blue <= 1 ? "Pt" : "Pts"}</p>
+                </div>
+
                 <div>
                     <button onClick={() => setBlue(ant => ant + 1)}
                         className='cursor-pointer bg-white px-2'>
@@ -135,11 +163,138 @@ export default function Pprincipal() {
                     >
                         <IoMdRemoveCircleOutline className='cursor-pointer hover:bg-blue-200 transition duration-300 text-4xl rounded-full  p-0 flex items-center justify-center' /> </button>
 
-                        <p>Energia: </p>
+                    {enerb > 20 ?
+                        <div className='flex justify-center items-center gap-1 bg-white '>
+                            <p className='pl-2 text-sm flex items-center justify-center'>Energia: {enerb}</p> <AiFillThunderbolt className='inline-block' />
+
+                        </div>
+
+                        :
+
+                        <div className={`${enerb < 5 ? `flex justify-center` : "grid grid-cols-5 place-items-center w-fit mx-auto"}`}>
                             {
-                                [...Array(enerb)].map(()=> <AiFillThunderbolt className='inline-block'/>)
-                            } 
-                        
+                                [...Array(enerb)].map(() => <AiFillThunderbolt className='inline-block' />)
+                            }
+                        </div>
+
+                    }
+
+                    {showcb ?
+                    <RiArrowUpWideLine
+                        onClick={() => setShowCB(!showcb)}
+                        className='mx-auto font-bold text-4xl text-gray-400 hover:text-[#21285C] transition duration-300' />
+                    :
+                    <RiArrowDownWideLine
+                        onClick={() => setShowCB(!showcb)}
+                        className='mx-auto font-bold text-4xl text-gray-400 hover:text-[#21285C] transition duration-300' />
+                    }
+                    
+
+                    <div className={ `overflow-hidden transition-[max-height, opacity] duration-300 ease-in
+                    ${showcb ?
+                        'max-h-96 max-w-35 px-2 opacity-100' :
+                        'max-h-0  max-w-35 px-2 opacity-0 ease-out'}
+                    `}>
+                        <hr className='border' />
+
+
+                        <p className='text-sm text-center mt-2'>
+                            Nome da Equipe:</p>
+                        <input
+                            onChange={(e) => { setNameB(e.target.value) }}
+                            type="text"
+                            maxLength={12}
+                            className='bg-[#e6eae1] block text-center text-sm max-w-full' />
+
+
+
+
+
+
+
+                        <div className='flex flex-row justify-center py-1'>
+
+                            <div className='flex flex-row justify-center max-w-40 w-full'>
+
+
+
+                                <div className='w-fit'>
+                                    <p className='block text-sm'>Pts:</p>
+
+                                    <AiFillThunderbolt className='inline-block' />:
+
+
+
+                                </div>
+
+
+
+                                <div className='flex flex-col justify-center items-center max-w-full gap-y-1 w-12 mx-auto'>
+
+
+
+                                    <input
+                                        type="text"
+                                        pattern='[0-9]'
+                                        value={inputpb}
+
+                                        onKeyDown={(e) => {
+                                            if (e.key === "Enter") setBlue(inputpb)
+                                        }}
+                                        className='bg-[#e6eae1] block text-center text-sm max-w-full'
+                                        maxLength={3}
+                                        onChange={(e) => {
+                                            setInputPB(Number(e.target.value.replace(/\D/g, "")))
+                                            if (e.target.value.length <= 3) setInputPB(Number(e.target.value))
+                                        }} />
+
+                                    <input
+                                        type="text"
+                                        pattern='[0-9]'
+                                        value={inputeb}
+                                        onKeyDown={(e) => {
+
+                                            if (e.key === "Enter") setEnerB(inputeb)
+                                        }}
+                                        className='bg-[#e6eae1] text-sm max-w-full text-center'
+                                        maxLength={2}
+                                        onChange={(e) => {
+                                            setInputEB(Number(e.target.value.replace(/\D/g, "")))
+                                            if (e.target.value.length <= 3) setInputEB(Number(e.target.value))
+                                        }
+                                        } />
+                                </div>
+
+
+
+                            </div>
+
+
+
+
+
+                            <div className='flex flex-col gap-1'>
+
+                                <button
+                                    onClick={() => setBlue(inputpb)}
+                                    className="bg-[#21285C] hover:scale-110 transition-all duration-300 w-fit text-white mx-auto text-[10px] rounded-md px-2 py-1"> Ok</button>
+
+                                <button
+                                    onClick={() => setEnerB(inputeb)}
+                                    className="bg-[#21285C] hover:scale-110 transition-all duration-300 w-fit text-white mx-auto text-[10px] rounded-md px-2 py-1"> Ok</button>
+                            </div>
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
                 </div>
 
             </div>
@@ -185,7 +340,9 @@ export default function Pprincipal() {
                     }
                 </div>
 
-                <div className="mx-auto py-2 px-3 rounded-xl my-3 bg-[#21285C] text-white w-fit div flex flex-row items-center">
+                <div
+                    onClick={() => setPoupDica(true)}
+                    className="mx-auto py-2 px-3 rounded-xl my-3 bg-[#21285C] text-white w-fit div flex flex-row items-center">
 
                     <div className='flex flex-col justify-center items-center w-fit'>
 
@@ -243,7 +400,7 @@ export default function Pprincipal() {
                             <p className='bg-red-100 rounded-xl font-bold text-red-600 px-2'> {[... new Set(erro)].join(" , ").toUpperCase()}</p>
                         </div>
 
-                        
+
 
                     </div>
                 }
@@ -252,29 +409,29 @@ export default function Pprincipal() {
 
 
 
-
-            <div className='bg-white font-bold px-0 whitespace-nowrap flex flex-col h-fit items-center justify-center gap-y-2 text-red-950'>
-                <p className='bg-red-900 w-full px-3 text-bold text-white'>Team Red:</p>
-                <p className='text-5xl'>{red}</p>
+            {/* CARD TIME AMARELO */}
+            <div className='bg-white font-bold px-0 whitespace-nowrap flex flex-col h-fit items-center justify-center gap-y-2 text-yellow-950'>
+                <p className='bg-[#F7CD21] w-full px-3 text-bold text-yellow-950'>Team Yellow:</p>
+                <p className='text-5xl'>{yel}</p>
                 <div>
-                    <button onClick={() => setRed(ant => ant + 1)}
+                    <button onClick={() => setYel(ant => ant + 1)}
                         className='cursor-pointer bg-white px-2'>
                         <IoMdAddCircleOutline
                             className='cursor-pointer hover:bg-blue-200 transition duration-300 text-4xl rounded-full  p-0 flex items-center justify-center' /> </button>
 
-                    <button onClick={() => setRed(ant => ant - 1)}
+                    <button onClick={() => setYel(ant => ant - 1)}
                     >
                         <IoMdRemoveCircleOutline className='cursor-pointer hover:bg-blue-200 transition duration-300 text-4xl rounded-full  p-0 flex items-center justify-center' /> </button>
                 </div>
 
                 <p>Energia: </p>
                 <div className='flex'>
-                            {
-                                [...Array(enerb)].map(()=> <AiFillThunderbolt className='inline-block'/>)
-                            } 
-                            </div>
+                    {
+                        [...Array(enery)].map(() => <AiFillThunderbolt className='inline-block' />)
+                    }
+                </div>
 
-                
+
 
             </div>
 

@@ -1,5 +1,4 @@
 import './App.css'
-import Poup from './components/poup'
 import Pprincipal from './page/Pprincipal'
 
 function App() {
@@ -7,7 +6,7 @@ function App() {
 
   return (
     <>
-    {/* <Poup/> */}
+     
     <Pprincipal/>
       
     </>
