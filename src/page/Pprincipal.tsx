@@ -40,20 +40,23 @@ export default function Pprincipal() {
         console.log(digi.length, 'digi leng', digi)
         if (digi.length < 1) return
 
+        console.log("fase",fase)
+        console.log("complete",complete)
+        console.log('completeinclude fase', complete.includes(fase))
 
         if (mletra && [... new Set(Array.from(normalizar(frases[fase].palavra)))].sort().join("") === normalizar([... new Set(digi)].sort().join(""))) {
 
-            setDigi([])
+            
             setErro([])
-            console.log("zerou")
+            setComplete(ant=> [...ant, fase])
 
         }
 
 
-        console.log(normalizar(digi[0]), '=', normalizar(frases[fase].palavra))
 
         if (!mletra && normalizar(frases[fase].palavra) == normalizar(digi[0])) {
-            console.log('DEU CERTO')
+            setErro([])
+            setComplete(ant=> [...ant, fase])
 
         }
     }
@@ -88,20 +91,15 @@ export default function Pprincipal() {
     ]
 
     const [fase, setFase] = useState<number>(0)
+    const [complete,setComplete] = useState<number[]>([])
+
 
     useEffect(() => {
-
-        if (fase < 0) {
+        if (fase < 0) 
             setFase(0)
-        }
-
-        if (fase > frases.length) {
+    
+        if (fase > frases.length) 
             setFase(frases.length)
-        }
-
-        console.log('frases', frases.length)
-        console.log('fase', fase)
-
     }, [fase])
 
 
@@ -109,27 +107,17 @@ export default function Pprincipal() {
 
         if (!dados.campo) return
 
-
-
-        if (!mletra && normalizar(dados.campo) === normalizar(frases[fase].palavra)) {
+        if (!mletra && normalizar(dados.campo) === normalizar(frases[fase].palavra)) 
             setDigi([dados.campo])
-        }
-        else if (!mletra) {
+        
+        else if (!mletra) 
             setErro(ant => [...ant, dados.campo])
-        }
-
-
-        if (mletra && Array.from(normalizar(frases[fase].palavra)).includes((normalizar(dados.campo)).toUpperCase())) {
+        
+        if (mletra && Array.from(normalizar(frases[fase].palavra)).includes((normalizar(dados.campo)).toUpperCase())) 
             setDigi(ant => [...ant, dados.campo.toUpperCase()])
-            console.log('acertou')
-        }
-        else if (mletra) {
-            console.log('errou')
+
+        else if (mletra) 
             setErro(ant => [...ant, dados.campo])
-        }
-
-
-
 
         setValue("campo", "")
 
@@ -242,14 +230,16 @@ export default function Pprincipal() {
 
                 <div className='select-none flex gap-2 justify-center'>
                     {frases[fase].palavra.split("").map((letra) => (
+                        <div className="w-13 bg-[#e6eae1] text-4xl px-2 py-3 rounded-md text-[#21285C] border-3">
                         <span className={
-                            (Array.from(digi).map(normalizar)).includes(normalizar(letra)) || normalizar(digi.join("")) === normalizar(frases[fase].palavra) ?
-
-                                "w-13 bg-[#e6eae1] text-4xl px-2 py-1 rounded-md text-[#21285C] border-3" :
-                                "w-13 py-2 bg-[#e6eae1] text-4xl px-2 rounded-md text-[#e6eae1] border-3 border-[#21285C]"}>
+                            (Array.from(digi).map(normalizar)).includes(normalizar(letra)) || normalizar(digi.join("")) === normalizar(frases[fase].palavra) || complete.includes(fase) ?
+                                    'opacity-100'
+                                 :
+                                "opacity-0"}>
                             {letra}
-                        </span>))
-                    }
+                        </span>
+                        </div>
+                        ))}
                 </div>
 
                 <div
