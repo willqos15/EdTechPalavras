@@ -68,7 +68,24 @@ export default function Pprincipal() {
         { palavra: "GENOMA", dica: "Conjunto Completo de genes de um organismo." },
         { palavra: "DNA", dica: "Molécula que carrega a informação genética." },
         { palavra: "RNA", dica: "Molécula que transmite a informação do DNA para síntese de proteínas." },
-        { palavra: "CÉLULA", dica: "Unidade básica da vida." },]
+        { palavra: "CÉLULA", dica: "Unidade básica da vida." },
+         { palavra: "ÉTER", dica: "acento teste" },
+        { palavra: "GENOMA", dica: "Conjunto Completo de genes de um organismo." },
+        { palavra: "DNA", dica: "Molécula que carrega a informação genética." },
+        { palavra: "RNA", dica: "Molécula que transmite a informação do DNA para síntese de proteínas." },
+        { palavra: "CÉLULA", dica: "Unidade básica da vida." },
+         { palavra: "ÉTER", dica: "acento teste" },
+        { palavra: "GENOMA", dica: "Conjunto Completo de genes de um organismo." },
+        { palavra: "DNA", dica: "Molécula que carrega a informação genética." },
+        { palavra: "RNA", dica: "Molécula que transmite a informação do DNA para síntese de proteínas." },
+        { palavra: "CÉLULA", dica: "Unidade básica da vida." },
+         { palavra: "ÉTER", dica: "acento teste" },
+        { palavra: "GENOMA", dica: "Conjunto Completo de genes de um organismo." },
+        { palavra: "DNA", dica: "Molécula que carrega a informação genética." },
+        { palavra: "RNA", dica: "Molécula que transmite a informação do DNA para síntese de proteínas." },
+        { palavra: "CÉLULA", dica: "Unidade básica da vida." },
+    
+    ]
 
     const [fase, setFase] = useState<number>(0)
 
@@ -120,25 +137,54 @@ export default function Pprincipal() {
 
 
     const [poupdica, setPoupDica] = useState<boolean>(false)
+    const [disabledica, setDisableDica] = useState<boolean>(false)
     const [enerb, setEnerB] = useState<number>(5)
     const [enery, setEnerY] = useState<number>(5)
 
     return (<>
 
         <Poup
-            titulo='AVISO'
-            modo={poupdica}
+            titulo= { <><p className='inline-block'> Custa 1 de </p> <AiFillThunderbolt className='inline-block' /></>}
+            show={poupdica}
+            modo='time'
             f1={() => {
                 setEnerB(ant => ant - 1)
+                setHelp(true)
                 setPoupDica(false)
             }}
             f2={() => {
                 setEnerY(ant => ant - 1)
+                setHelp(true)
                 setPoupDica(false)
             }}
-            f3={() => { setPoupDica(false) }}
-            descricao={<> <p> Dica custa 1 <AiFillThunderbolt className='inline-block' /> </p>
+            f3={() => {
+                setPoupDica(false) 
+                setHelp(true)
+            }}
+
+            close={()=> {setPoupDica(false)}}
+
+            descricao={<>
                 <p>Informe qual equipe solicitou a dica</p></>} />
+
+
+            <Poup
+            titulo= { <><p className='inline-block'> AVISO </p> </>}
+            show={disabledica}
+            modo='confirma'
+            f1={() => {
+                setHelp(false)
+                setDisableDica(false)
+            }}
+            f2={() => {
+                setDisableDica(false)
+            }}
+
+            close={()=> {setDisableDica(false)}}
+
+            descricao={<>
+                <p>Deseja desativar a dica?</p></>} />
+
 
         <div className='flex flex-row justify-between w-[90dvw]'>
 
@@ -160,9 +206,13 @@ export default function Pprincipal() {
 
             <div className='w-fit text-[#21285C] bg-white rounded-4xl'>
 
-                <h1 className='text-3xl font-bold bg-[#F7CD21] py-2 px-5'>
-                    Biologia - Genética [Desafio: {fase + 1}]
+                <div className='text-3xl font-bold bg-[#F7CD21] py-2 px-5'>
+                <h1 className='inline-block'>
+                    Biologia - Genética
                 </h1>
+
+                <p className='inline-block bg-white rounded-full px-2 max-h-9 ml-4'>{fase+1<=9? '0'+(fase+1) : fase+ 1}</p>
+                </div>
 
                 <div className='flex justify-center gap-x-5 items-center py-3'>
 
@@ -170,17 +220,19 @@ export default function Pprincipal() {
                         onClick={() => {
                             setFase(ant => ant - 1)
                             setDigi([])
+                            setHelp(false)
                         }}
                         className={fase > 0 ? 'bg-[#21285C] text-[#F7CD21] hover:scale-110 hover:p-1.4 transition-all duration-300 h-fit p-1 rounded-full text-4xl flex justify-center items-center font-bold ' : 'bg-[#21285C] text-[#F7CD21] hover:scale-110 hover:p-1.4 transition-all duration-300 h-fit p-1 rounded-full text-4xl flex justify-center items-center font-bold opacity-0 pointer-events-none'}>
                         <FaArrowCircleLeft />
                     </button>
 
-                    <img className='h-fit w-40 rounded-xl' src='https://disruptivaseconectadas.com.br/wp-content/uploads/2022/04/04-04-genoma-humano.png'></img>
+                    <img className='select-none h-fit w-40 rounded-xl' src='https://disruptivaseconectadas.com.br/wp-content/uploads/2022/04/04-04-genoma-humano.png'></img>
 
                     <button
                         onClick={() => {
                             setFase(ant => ant + 1)
                             setDigi([])
+                            setHelp(false)
                         }}
                         className={fase <= (frases.length - 2) ? 'bg-[#21285C] text-[#F7CD21] hover:scale-110 hover:p-1.4 transition-all duration-300 h-fit p-1 rounded-full text-4xl flex justify-center items-center font-bold ' : ' bg-[#21285C] text-[#F7CD21] hover:scale-110 hover:p-1.4 transition-all duration-300 h-fit p-1 rounded-full text-4xl flex justify-center items-center font-bold  opacity-0 pointer-events-none'}>
                         <FaArrowCircleRight />
@@ -188,7 +240,7 @@ export default function Pprincipal() {
 
                 </div>
 
-                <div className='flex gap-2 justify-center'>
+                <div className='select-none flex gap-2 justify-center'>
                     {frases[fase].palavra.split("").map((letra) => (
                         <span className={
                             (Array.from(digi).map(normalizar)).includes(normalizar(letra)) || normalizar(digi.join("")) === normalizar(frases[fase].palavra) ?
@@ -201,14 +253,18 @@ export default function Pprincipal() {
                 </div>
 
                 <div
-                    onClick={() => setPoupDica(true)}
+                    onClick={() => {
+                        if(!help){setPoupDica(true)}
+                        if(help) {setDisableDica(true)
+                            console.log(disabledica, "valor")
+                        }
+                        }}
                     className="mx-auto py-2 px-3 rounded-xl my-3 bg-[#21285C] text-white w-fit div flex flex-row items-center">
 
                     <div className='flex flex-col justify-center items-center w-fit'>
 
                         <FaLightbulb
-                            onClick={() => setHelp(!help)}
-                            className='text-4xl text-white hover:text-[#F7CD21]' />
+                            className={`text-4xl ${help ? "text-[#F7CD21]" : " text-white hover:text-[#F7CD21]" }`} />
 
                     </div>
                     <p className=' wrap-normal text-center max-w-80 px-2'>
