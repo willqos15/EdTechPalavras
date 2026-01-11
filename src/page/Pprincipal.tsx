@@ -1,17 +1,17 @@
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
-import { IoMdAddCircleOutline } from "react-icons/io";
-import { IoMdRemoveCircleOutline } from "react-icons/io";
+
 import { FaArrowCircleRight } from "react-icons/fa";
 import { FaArrowCircleLeft } from "react-icons/fa";
 import { IoSend } from "react-icons/io5";
 import { FaLightbulb } from "react-icons/fa";
 import { MdChangeCircle } from "react-icons/md";
 import { AiFillThunderbolt } from "react-icons/ai";
-import { RiArrowDownWideLine } from "react-icons/ri";
-import { RiArrowUpWideLine } from "react-icons/ri";
+
+
 
 import Poup from '../components/poup';
+import CountCard from '../components/countcard';
 type Tdados = { campo: string }
 
 type Tfrases = {
@@ -23,16 +23,11 @@ export default function Pprincipal() {
 
     const [digi, setDigi] = useState<string[]>([])
     const [erro, setErro] = useState<string[]>([])
-    const [yel, setYel] = useState<number>(0)
-    const [blue, setBlue] = useState<number>(0)
-    const [enerb, setEnerB] = useState<number>(5)
-    const [enery, setEnerY] = useState<number>(5)
+
     const [help, setHelp] = useState<boolean>(false)
     const [mletra, setMLetra] = useState<boolean>(true)
-    const [nameb, setNameB] = useState<string>("Time Azul")
-    const [inputeb, setInputEB] = useState<number>(0)
-    const [inputpb, setInputPB] = useState<number>(0)
-    const [showcb, setShowCB] = useState<boolean>(false)
+   
+
 
     function normalizar(texto: string) {
         return texto
@@ -125,6 +120,8 @@ export default function Pprincipal() {
 
 
     const [poupdica, setPoupDica] = useState<boolean>(false)
+    const [enerb, setEnerB] = useState<number>(5)
+    const [enery, setEnerY] = useState<number>(5)
 
     return (<>
 
@@ -145,164 +142,27 @@ export default function Pprincipal() {
 
         <div className='flex flex-row justify-between w-[90dvw]'>
 
-            <div className='bg-white font-bold px-0 whitespace-nowrap flex flex-col h-fit items-center justify-center gap-y-2 text-blue-950'>
-                <p className=' bg-blue-900 w-full px-3 text-bold text-white'> {nameb ? nameb : "Time Azul"} </p>
+            
 
-                <div>
-                    <p className='inline-block text-5xl'>{blue}</p>
-                    <p className='inline-block'>{blue <= 1 ? "Pt" : "Pts"}</p>
-                </div>
+            <CountCard
+            equipe="Time Azul"
+            bgcolor='bg-blue-900'
+            titlecolor='text-white'
+            textcolor="text-blue-950"
+            statee={enerb}
+            setStateE={setEnerB}/>
 
-                <div>
-                    <button onClick={() => setBlue(ant => ant + 1)}
-                        className='cursor-pointer bg-white px-2'>
-                        <IoMdAddCircleOutline
-                            className='cursor-pointer hover:bg-blue-200 transition duration-300 text-4xl rounded-full  p-0 flex items-center justify-center' /> </button>
-
-                    <button onClick={() => setBlue(ant => ant - 1)}
-                    >
-                        <IoMdRemoveCircleOutline className='cursor-pointer hover:bg-blue-200 transition duration-300 text-4xl rounded-full  p-0 flex items-center justify-center' /> </button>
-
-                    {enerb > 20 ?
-                        <div className='flex justify-center items-center gap-1 bg-white '>
-                            <p className='pl-2 text-sm flex items-center justify-center'>Energia: {enerb}</p> <AiFillThunderbolt className='inline-block' />
-
-                        </div>
-
-                        :
-
-                        <div className={`${enerb < 5 ? `flex justify-center` : "grid grid-cols-5 place-items-center w-fit mx-auto"}`}>
-                            {
-                                [...Array(enerb)].map(() => <AiFillThunderbolt className='inline-block' />)
-                            }
-                        </div>
-
-                    }
-
-                    {showcb ?
-                    <RiArrowUpWideLine
-                        onClick={() => setShowCB(!showcb)}
-                        className='mx-auto font-bold text-4xl text-gray-400 hover:text-[#21285C] transition duration-300' />
-                    :
-                    <RiArrowDownWideLine
-                        onClick={() => setShowCB(!showcb)}
-                        className='mx-auto font-bold text-4xl text-gray-400 hover:text-[#21285C] transition duration-300' />
-                    }
-                    
-
-                    <div className={ `overflow-hidden transition-[max-height, opacity] duration-300 ease-in
-                    ${showcb ?
-                        'max-h-96 max-w-35 px-2 opacity-100' :
-                        'max-h-0  max-w-35 px-2 opacity-0 ease-out'}
-                    `}>
-                        <hr className='border' />
-
-
-                        <p className='text-sm text-center mt-2'>
-                            Nome da Equipe:</p>
-                        <input
-                            onChange={(e) => { setNameB(e.target.value) }}
-                            type="text"
-                            maxLength={12}
-                            className='bg-[#e6eae1] block text-center text-sm max-w-full' />
+       
 
 
 
 
-
-
-
-                        <div className='flex flex-row justify-center py-1'>
-
-                            <div className='flex flex-row justify-center max-w-40 w-full'>
-
-
-
-                                <div className='w-fit'>
-                                    <p className='block text-sm'>Pts:</p>
-
-                                    <AiFillThunderbolt className='inline-block' />:
-
-
-
-                                </div>
-
-
-
-                                <div className='flex flex-col justify-center items-center max-w-full gap-y-1 w-12 mx-auto'>
-
-
-
-                                    <input
-                                        type="text"
-                                        pattern='[0-9]'
-                                        value={inputpb}
-
-                                        onKeyDown={(e) => {
-                                            if (e.key === "Enter") setBlue(inputpb)
-                                        }}
-                                        className='bg-[#e6eae1] block text-center text-sm max-w-full'
-                                        maxLength={3}
-                                        onChange={(e) => {
-                                            setInputPB(Number(e.target.value.replace(/\D/g, "")))
-                                            if (e.target.value.length <= 3) setInputPB(Number(e.target.value))
-                                        }} />
-
-                                    <input
-                                        type="text"
-                                        pattern='[0-9]'
-                                        value={inputeb}
-                                        onKeyDown={(e) => {
-
-                                            if (e.key === "Enter") setEnerB(inputeb)
-                                        }}
-                                        className='bg-[#e6eae1] text-sm max-w-full text-center'
-                                        maxLength={2}
-                                        onChange={(e) => {
-                                            setInputEB(Number(e.target.value.replace(/\D/g, "")))
-                                            if (e.target.value.length <= 3) setInputEB(Number(e.target.value))
-                                        }
-                                        } />
-                                </div>
-
-
-
-                            </div>
-
-
-
-
-
-                            <div className='flex flex-col gap-1'>
-
-                                <button
-                                    onClick={() => setBlue(inputpb)}
-                                    className="bg-[#21285C] hover:scale-110 transition-all duration-300 w-fit text-white mx-auto text-[10px] rounded-md px-2 py-1"> Ok</button>
-
-                                <button
-                                    onClick={() => setEnerB(inputeb)}
-                                    className="bg-[#21285C] hover:scale-110 transition-all duration-300 w-fit text-white mx-auto text-[10px] rounded-md px-2 py-1"> Ok</button>
-                            </div>
-
-
-
-                        </div>
-
-
-
-                    </div>
-
-
-
-
-                </div>
-
-            </div>
 
             <div className='w-fit text-[#21285C] bg-white rounded-4xl'>
 
-                <h1 className='text-3xl font-bold bg-[#F7CD21] py-2 px-5 
-        '> Biologia - Genética [Desafio: {fase + 1}]</h1>
+                <h1 className='text-3xl font-bold bg-[#F7CD21] py-2 px-5'>
+                    Biologia - Genética [Desafio: {fase + 1}]
+                </h1>
 
                 <div className='flex justify-center gap-x-5 items-center py-3'>
 
@@ -408,32 +268,17 @@ export default function Pprincipal() {
             </div>
 
 
-
-            {/* CARD TIME AMARELO */}
-            <div className='bg-white font-bold px-0 whitespace-nowrap flex flex-col h-fit items-center justify-center gap-y-2 text-yellow-950'>
-                <p className='bg-[#F7CD21] w-full px-3 text-bold text-yellow-950'>Team Yellow:</p>
-                <p className='text-5xl'>{yel}</p>
-                <div>
-                    <button onClick={() => setYel(ant => ant + 1)}
-                        className='cursor-pointer bg-white px-2'>
-                        <IoMdAddCircleOutline
-                            className='cursor-pointer hover:bg-blue-200 transition duration-300 text-4xl rounded-full  p-0 flex items-center justify-center' /> </button>
-
-                    <button onClick={() => setYel(ant => ant - 1)}
-                    >
-                        <IoMdRemoveCircleOutline className='cursor-pointer hover:bg-blue-200 transition duration-300 text-4xl rounded-full  p-0 flex items-center justify-center' /> </button>
-                </div>
-
-                <p>Energia: </p>
-                <div className='flex'>
-                    {
-                        [...Array(enery)].map(() => <AiFillThunderbolt className='inline-block' />)
-                    }
-                </div>
+                 <CountCard
+            equipe="Time Amarelo"
+            bgcolor='bg-[#F7CD21]'
+            titlecolor='text-yellow-1000'
+            textcolor="text-yellow-950"
+            statee={enery}
+            setStateE={setEnerY}/>
 
 
 
-            </div>
+
 
 
 
