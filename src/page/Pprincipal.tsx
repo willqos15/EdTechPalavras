@@ -1,11 +1,11 @@
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 
-import { FaArrowCircleRight } from "react-icons/fa";
+import { FaArrowCircleRight, FaCode } from "react-icons/fa";
 import { FaArrowCircleLeft } from "react-icons/fa";
 import { IoSend } from "react-icons/io5";
 import { FaLightbulb } from "react-icons/fa";
-import { MdChangeCircle } from "react-icons/md";
+import { MdChangeCircle, MdEmail } from "react-icons/md";
 import { AiFillThunderbolt } from "react-icons/ai";
 import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
@@ -13,6 +13,10 @@ import logo from '../assets/logo.png'
 import { IoIosSave } from "react-icons/io";
 import { FaQuestionCircle } from "react-icons/fa";
 import { TbWorld } from "react-icons/tb";
+import { FaLinkedin } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
+import { IoLogoWhatsapp } from "react-icons/io";
+import { FaGear } from "react-icons/fa6";
 
 
 
@@ -33,7 +37,6 @@ export default function Pprincipal() {
 
     const [digi, setDigi] = useState<string[]>([])
     const [erro, setErro] = useState<string[]>([])
-
     const [help, setHelp] = useState<boolean>(false)
     const [mletra, setMLetra] = useState<boolean>(true)
 
@@ -59,6 +62,7 @@ export default function Pprincipal() {
 
             setErro([])
             setComplete(ant => [...ant, fase])
+            setPoupAcerto(true)
 
         }
 
@@ -67,6 +71,7 @@ export default function Pprincipal() {
         if (!mletra && normalizar(frases[fase].palavra) == normalizar(digi[0])) {
             setErro([])
             setComplete(ant => [...ant, fase])
+            setPoupAcerto(true)
 
         }
     }
@@ -123,17 +128,46 @@ export default function Pprincipal() {
     const [poupdica, setPoupDica] = useState<boolean>(false)
     const [poupsword, setPoupSWord] = useState<boolean>(false)
     const [disabledica, setDisableDica] = useState<boolean>(false)
+    const [poupduvidas, setPoupDuvidas] = useState<boolean>(false)
+    const [poupsobre, setPoupSobre] = useState<boolean> (false)
     const [enerb, setEnerB] = useState<number>(5)
     const [enery, setEnerY] = useState<number>(5)
-
+    const [ptblue,setPtBlue] = useState<number>(0)
+    const [ptyellow,setPtYellow] = useState<number>(0)
+    const [poupacerto,setPoupAcerto] = useState<boolean>(false)
 
 
     return (<>
 
         <Poup
+            titulo={<><p className='inline-block'>
+                VOCÊ ACERTOU! </p></>}
+            show={poupacerto}
+            modo='time'
+            qtdbtn={2}
+            
+            f1={() => { setPtBlue(ant=>ant+1)
+                setPoupAcerto(false)
+                
+            }}
+            f2={() => { setPtYellow(ant=>ant+1)
+                setPoupAcerto(false)
+                
+            }}
+
+            close={() => { setPoupDica(false) }}
+
+            descricao={<>
+                <p> A palavra era {frases[fase].palavra}</p>
+                <p className='w-50'>Este ponto vai para qual equipe?</p></>} 
+                />
+
+
+
+        <Poup
             titulo={<><p className='inline-block'> Custa 1 de </p> <AiFillThunderbolt className='inline-block' /></>}
             show={poupdica}
-            modo='time'
+            modo='time' qtdbtn={3}
             f1={() => {
                 setEnerB(ant => ant - 1)
                 setHelp(true)
@@ -159,6 +193,7 @@ export default function Pprincipal() {
             titulo={<><p className='inline-block'> AVISO </p> </>}
             show={disabledica}
             modo='confirma'
+            qtdbtn={2}
             f1={() => {
                 setHelp(false)
                 setDisableDica(false)
@@ -175,26 +210,125 @@ export default function Pprincipal() {
 
 
         <Poup
-            titulo={<><p className='inline-block'> AVISO </p> </>}
-            show={poupsword}
-            modo='confirma'
+            titulo={<p className='inline-block'> AVISO </p>}
+            show={poupsword} modo='confirma'
+            qtdbtn={2}
             f1={() => {
-                if (!complete.includes(fase))
+                if (!complete.includes(fase)) {
                     setComplete(ant => [...ant, fase])
-                setPoupSWord(false)
+                    setPoupSWord(false)
+                }
             }}
-            f2={() => {
-                setPoupSWord(false)
-            }}
-
-            close={() => { setPoupSWord(false) }}
-
-            descricao={<>
-                <p>Deseja revelar a palavra?</p></>}
+            f2={() => setPoupSWord(false)}
+            close={() => setPoupSWord(false)}
+            descricao={<p>Deseja revelar a palavra?</p>}
         />
 
+        <Poup
 
-        <div className='flex flex-row justify-between w-[90dvw]'>
+            titulo={<p className='inline-block '> DÚVIDAS </p>}
+            show={poupduvidas} modo='info'
+            close={() => setPoupDuvidas(false)}
+            descricao={
+                <div className='tduvida h-96  mr-2 
+                overflow-y-auto border-8'>
+                    
+                    <div>
+                    <h3>1 - Como a turma é organizada?</h3>
+                    <p>A turma é dividida em duas equipes: Azul e Amarela.</p>
+                    </div>
+                    
+                    <div>
+                    <h3>2 - Quem controla o jogo?</h3>
+                    <p>Somente o professor controla a aplicação, exibindo o jogo em uma TV ou DataShow.</p>
+                    </div>
+
+                    
+                    <div>
+                    <h3>3- Quem começa jogando?</h3>
+                    <p>O professor pode definir manualmente a equipe inicial ou usar a aba "Sorteio".</p>
+                    </div>
+
+                    <div>
+                    <h3>4 - Como funciona cada rodada?</h3>
+                    <p>Um aluno da equipe escolhe uma letra por rodada.</p>
+                    <p>O aluno só pode jogar novamente após todos de sua equipe participarem.</p>
+                    </div>
+
+                    <div>
+                    <h3>5 - É permitido adivinhar a palavra inteira?</h3>
+                    <p>Sim. O aluno pode tentar adivinhar a palavra completa a qualquer momento.</p>
+                    <p>Se acertar, a equipe ganha o ponto imediatamente.</p>
+                    </div>
+
+                    <div>
+                    <h3>6 - Existe ajuda durante a rodada?</h3>
+                    <p>A equipe pode revelar uma dica da palavra com custo de 1 ponto de energia.</p>
+                    </div>
+
+                    <div>
+                    <h3>7 - Como funciona a pontuação por comportamento?</h3>
+                    <p>A equipe recebe Bônus ou Penalidade no placar total a depender do comportamento.</p>
+                    <p>- Comportamento muito ruim: <strong>-2 pontos</strong></p>
+                    <p>- Comportamento ruim: <strong>-1 ponto</strong></p>
+                    <p>- Comportamento mediano: <strong>0 ponto</strong></p>
+                    <p>- Comportamento bom: <strong>+1 ponto</strong></p>
+                    <p>- Comportamento muito bom: <strong>+2 pontos</strong></p>
+                    </div>
+
+                    <div>
+                    <h3>8 - Como se ganha o jogo?</h3>
+                    <p>Ganha a equipe que somar mais pontos ao final, considerando acertos e comportamento.</p>
+                    </div>
+
+                    <div>
+                    <h3>9 - As regras são fixas?</h3>
+                    <p>Não. As regras podem ser adaptadas conforme a necessidade do professor.</p>
+                    </div>
+
+                </div>
+                }/>
+
+
+                 <Poup
+
+            titulo={<p className='inline-block '> SOBRE </p>}
+            show={poupsobre} modo='info'
+            close={() => setPoupSobre(false)}
+            descricao={
+                <>
+                <p className='max-w-50 mt-3'>
+                    Aplicação Web desenvolvida com React, Typescript e Tailwind.
+                </p>
+
+                <hr className='border my-2'/>
+
+                <p>
+                    <FaGear className='inline-block mr-1'/>
+                     Desenvolvido por William Queiroz: </p>
+                <div className='flex flex-col items-start text-sm linkct'>
+                
+                <a
+                 href='https://queirozdeveloper.vercel.app/'> <FaCode className='inline-block mr-1'/>  Portfólio: queirozdeveloper.vercel.app</a>
+
+                 <div className='mx-auto text-xl'>
+                 <a href='https://www.linkedin.com/in/william-queiroz-a36573120/'> <FaLinkedin className='inline-block mr-1'/></a>
+                <a > <MdEmail className='inline-block mr-1'/> </a>
+                <a href='https://github.com/dashboard/'> <FaGithub className='inline-block mr-1'/></a>
+                <a href='wa.me/5593991878598'> <IoLogoWhatsapp className='inline-block mr-1 '/></a>
+                </div>
+               
+
+                
+                </div>
+                
+                </>
+
+                }/>
+        
+
+
+            <div className='flex flex-row justify-between w-[90dvw]'>
 
 
 
@@ -204,7 +338,9 @@ export default function Pprincipal() {
                 titlecolor='text-white'
                 textcolor="text-blue-950"
                 statee={enerb}
-                setStateE={setEnerB} />
+                setStateE={setEnerB}
+                pt={ptblue}
+                setPt={setPtBlue} />
 
 
 
@@ -212,21 +348,25 @@ export default function Pprincipal() {
             <div>
                 <div className='flex flex-row w-130 justify-start gap-3 items-end '>
                     <img
-                    src={logo}
-                    className='h-8 bg-[#F7CD21] px-5 p-1 rounded-t-md
-                    hover:bg-white transition-all duration-300'
-                ></img>
-
-                    
-                   
+                        src={logo}
+                        className='h-8 bg-[#F7CD21] px-5 p-1 rounded-t-md'
+                    ></img>
 
 
 
-                    <div className='h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 hover:bg-white transition-all duration-300'>
+
+
+
+                    <div
+                        onClick={() => setPoupDuvidas(!poupduvidas)}
+                        className='h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 hover:bg-white transition-all duration-300'>
                         <FaQuestionCircle /> Dúvidas
                     </div>
 
-                    <div className='h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
+                    <div
+                    onClick={() => setPoupSobre(!poupsobre)}
+                    
+                    className='h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
                         <TbWorld /> Sobre
                     </div>
 
@@ -238,7 +378,7 @@ export default function Pprincipal() {
 
                 <div className='w-130 text-[#21285C] bg-white rounded-lg h-112-5'>
 
-                    <div className='text-3xl font-bold bg-[#F7CD21] px-5 flex items-center h-12 justify-between rounded-r-lg'>
+                    <div className='text-3xl font-bold bg-[#F7CD21] px-5 flex items-center h-12 justify-between rounded-tr-lg'>
 
 
                         <h1 className='inline-block text-color[#2D3194] py-2'>
@@ -344,11 +484,11 @@ export default function Pprincipal() {
                     </div>
 
                     <hr className='border-2' />
-                    <div className='flex justify-center items-center'>
+                    <div className='flex items-center relative w-fit px-5 mx-auto'>
 
                         <button
                             onClick={() => setMLetra(!mletra)}
-                            className='ml-4 px-2 h-fit flex flex-row items-center cursor-pointer'>
+                            className='ml-4 px-2 h-fit flex flex-row items-center cursor-pointer absolute -left-20'>
                             <MdChangeCircle className='text-2xl' />
                             {mletra ? 'Letra' : 'Palavra'}
 
@@ -357,19 +497,19 @@ export default function Pprincipal() {
 
 
                         <form onSubmit={handleSubmit(enviar)}>
-                            <div className='flex gap-2 items-center px-10'>
+                            <div className='flex gap-2 items-center'>
                                 <input
                                     {...register("campo", { required: true })}
                                     maxLength={mletra ? 1 : 40}
                                     placeholder={mletra ? 'Digite uma letra aqui' : 'Digite uma palavra aqui'}
-                                    className="uppercase my-3 bg-[#e6eae1] w-60 h-11 px-3 border-4" type="text"
+                                    className="uppercase my-3 bg-[#e6eae1] w-60 h-11 px-3 border-3" type="text"
                                     onChange={(e) => setValue("campo", e.target.value.toUpperCase())}
 
                                 />
 
 
                                 <button type='submit'
-                                    className="mx-0 h-fit " > <IoSend className='text-[#21285C] text-2xl' />
+                                    className="mx-0 h-fit absolute -right-2.5" > <IoSend className='text-[#21285C] text-2xl' />
                                 </button>
 
 
@@ -401,7 +541,9 @@ export default function Pprincipal() {
                 titlecolor='text-yellow-1000'
                 textcolor="text-yellow-950"
                 statee={enery}
-                setStateE={setEnerY} />
+                setStateE={setEnerY} 
+                pt={ptyellow}
+                setPt={setPtYellow} />
 
 
 

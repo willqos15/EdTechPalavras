@@ -7,6 +7,35 @@
   margin: 0;
 }
 
+.tduvida{
+  text-align: left;
+  border: 20px;
+  width: fit-content;
+  box-sizing: content-box;
+}
+
+.tduvida h3 {
+  background-color: #F7CD21;
+  padding-inline: 10px;
+  width: 390px;
+  
+}
+
+.tduvida p{
+  padding-inline: 10px;
+  width: 390px;
+
+}
+
+.tduvida div {border: 2px solid #F7CD21;
+margin-bottom: 20px;
+margin-right: 7px;
+}
+
+.linkct a:hover {
+  color: rgb(24, 24, 163);
+  
+}
 .no-spinner {
   -moz-appearance: textfield; 
    appearance: none; 

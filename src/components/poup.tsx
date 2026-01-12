@@ -1,26 +1,28 @@
 import type { ReactNode } from "react";
 import { IoClose } from "react-icons/io5";
 
-type propmodo = "time" | "confirma"
+type propmodo = "time" | "confirma" | "info"
+type propbtn = 2 | 3 
 
 interface Propriedades {
     titulo: ReactNode
 descricao: ReactNode
 show: boolean
 modo: propmodo
-f1: () => void
-f2: () => void
+qtdbtn?: propbtn
+f1?: () => void
+f2?: () => void
 f3?: () => void
 close: ()=> void
 }
 
-export default function Poup({titulo, descricao, show, modo, f1, f2,f3, close}:Propriedades) {
+export default function Poup({titulo, descricao, show, modo, f1, f2,f3, close, qtdbtn}:Propriedades) {
 
     return (<>
 
-    <div className={`${ show ? "bg-[rgba(0,0,0,0.8)] fixed flex items-center inset-0" : "hidden" } `}>
+    <div className={`${ show ? "bg-[rgba(0,0,0,0.8)] fixed flex items-center inset-0 z-10" : "hidden" } `}>
 
-        <div className="bg-white max-w-60 mx-auto">
+        <div className="bg-white max-w-96 mx-auto">
 
             <div className="flex items-center w-full bg-[#F7CD21] font-bold text-[#21285C] text-xl relative">
                <h1 className="w-full text-center">{titulo}</h1> 
@@ -41,14 +43,21 @@ export default function Poup({titulo, descricao, show, modo, f1, f2,f3, close}:P
                  {modo==="time"? 
                  <>
 
+                 {qtdbtn=== 2 || qtdbtn=== 3 ? <>
+
                 <button onClick={f1}
                 className="bg-[#21285C] hover:scale-110 transition-all duration-300 w-fit text-white mx-auto rounded-md px-3 py-1"> Blue</button>
 
                 <button onClick={f2}
                 className="bg-[#F7CD21] w-fit font-bold text-[#21285C]  hover:scale-110 transition-all duration-300 mx-auto rounded-md px-3 py-1"> Yellow </button>
+                </> : qtdbtn===3 ?
 
                 <button onClick={f3}
                 className="bg-[#2d5c21] w-fit text-white hover:scale-110 transition-all duration-300 mx-auto rounded-md px-3 py-1"> Livre </button>
+
+                : null
+
+                }
 
                 </>
 

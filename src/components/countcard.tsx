@@ -13,15 +13,17 @@ interface propcard {
     textcolor: string
     setStateE: (x: number) => void
     statee: number
+    setPt: React.Dispatch<React.SetStateAction<number>>
+    pt : number
 }
 
-export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, statee, setStateE }: propcard) {
+export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, statee, setStateE, setPt, pt}: propcard) {
 
 
     const [inputeb, setInputEB] = useState<number>(0)
     const [inputpb, setInputPB] = useState<number>(0)
     const [showcb, setShowCB] = useState<boolean>(false)
-    const [blue, setBlue] = useState<number>(0)
+    // const [pt, setPt] = useState<number>(0)
 
     const [nameb, setNameB] = useState<string>(equipe)
     const [comport, setComport] = useState<number>(3)
@@ -29,16 +31,16 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
 
     useEffect(() => {
         if (comport == 1)
-            setTotalPt(blue - 2)
+            setTotalPt(pt - 2)
         if (comport == 2)
-            setTotalPt(blue - 1)
+            setTotalPt(pt - 1)
         if (comport == 3)
-            setTotalPt(blue)
+            setTotalPt(pt)
         if (comport == 4)
-            setTotalPt(blue + 1)
+            setTotalPt(pt + 1)
         if (comport == 5)
-            setTotalPt(blue + 2)
-    }, [comport, blue])
+            setTotalPt(pt + 2)
+    }, [comport, pt])
 
 
     return (<>
@@ -48,19 +50,22 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
 
             <div className={`flex items-end ${comport > 3 ? 'text-green-800' : comport < 3 ? 'text-red-800' : textcolor}`}>
 
+                <div className='inline-block'>
                 <p className="inline-block text-5xl">
                     {totalpt}</p>
+                
 
-                <p className='inline-block'>{totalpt == 1 || totalpt === 0 ? "Pt" : "Pts"}</p>
+                <p className='bottom-0 inline-block'>{totalpt == 1 || totalpt === 0 ? "Pt" : "Pts"}</p>
+                </div>
             </div>
 
             <div>
-                <button onClick={() => setBlue(ant => ant + 1)}
+                <button onClick={() => setPt(ant => ant + 1)}
                     className='cursor-pointer bg-white px-2'>
                     <IoMdAddCircleOutline
                         className='cursor-pointer hover:bg-green-400 transition duration-300 text-4xl rounded-full  p-0 flex items-center justify-center' /> </button>
 
-                <button onClick={() => setBlue(ant => ant - 1)}
+                <button onClick={() => setPt(ant => ant - 1)}
                 >
                     <IoMdRemoveCircleOutline className='cursor-pointer hover:bg-red-400 transition duration-300 text-4xl rounded-full  p-0 flex items-center justify-center' /> </button>
 
@@ -165,7 +170,7 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
                                     value={inputpb}
 
                                     onKeyDown={(e) => {
-                                        if (e.key === "Enter") setBlue(inputpb)
+                                        if (e.key === "Enter") setPt(inputpb)
                                     }}
                                     className='bg-[#e6eae1] block text-center text-sm max-w-full'
                                     maxLength={3}
@@ -204,7 +209,7 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
                         <div className='flex flex-col gap-1'>
 
                             <button
-                                onClick={() => setBlue(inputpb)}
+                                onClick={() => setPt(inputpb)}
                                 className={`${bgcolor} hover:scale-110 transition-all duration-300 w-fit ${titlecolor} mx-auto text-[10px] rounded-md px-1  hover:bg-blue-950`}>
                                 <HiCheck className='text-lg' />
                             </button>
