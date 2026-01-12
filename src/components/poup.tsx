@@ -22,11 +22,11 @@ export default function Poup({titulo, descricao, show, modo, f1, f2,f3, close}:P
 
         <div className="bg-white max-w-60 mx-auto">
 
-            <div className="flex items-center w-full bg-[#F7CD21] font-bold text-[#21285C] text-xl">
+            <div className="flex items-center w-full bg-[#F7CD21] font-bold text-[#21285C] text-xl relative">
                <h1 className="w-full text-center">{titulo}</h1> 
                <IoClose
                onClick={close}
-               className="mr-2 rounded-md font-bold text-white bg-red-600 transition-all duration-300 hover:scale-80"/> 
+               className="absolute right-0 mr-2 rounded-md font-bold text-white bg-red-600 transition-all duration-300 hover:bg-red-800"/> 
             </div>
 
             
@@ -59,8 +59,11 @@ export default function Poup({titulo, descricao, show, modo, f1, f2,f3, close}:P
                 <button onClick={f2}
                 className="bg-red-700 w-fit text-white hover:scale-110 transition-all duration-300 mx-auto rounded-md px-3 py-1"> Não </button>
                 </>: null}
+                
 
             </div>
+
+          
         </div>
         </div>
 
