@@ -15,9 +15,17 @@ interface propcard {
     statee: number
     setPt: React.Dispatch<React.SetStateAction<number>>
     pt : number
+    setTotalPt: React.Dispatch<React.SetStateAction<number>>
+    totalpt : number
+    setComport: React.Dispatch<React.SetStateAction<number>>
+    comport: number
+    setObserv: React.Dispatch<React.SetStateAction<string>>
+    observ: string
+    name: string
+    setName: React.Dispatch<React.SetStateAction<string>>
 }
 
-export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, statee, setStateE, setPt, pt}: propcard) {
+export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, statee, setStateE, setPt, pt, setTotalPt,totalpt,setComport,comport, observ, setObserv, name, setName}: propcard) {
 
 
     const [inputeb, setInputEB] = useState<number>(0)
@@ -25,9 +33,8 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
     const [showcb, setShowCB] = useState<boolean>(false)
     // const [pt, setPt] = useState<number>(0)
 
-    const [nameb, setNameB] = useState<string>(equipe)
-    const [comport, setComport] = useState<number>(3)
-    const [totalpt, setTotalPt] = useState<number>(0)
+    
+
 
     useEffect(() => {
         if (comport == 1)
@@ -46,7 +53,7 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
     return (<>
 
         <div className={`bg-white font-bold px-0 whitespace-nowrap flex flex-col h-fit  items-center justify-center gap-y-2 ${textcolor}`}>
-            <p className={`${bgcolor} w-full px-3 text-bold ${titlecolor}`}> {nameb ? nameb : equipe} </p>
+            <p className={`${bgcolor} w-full px-3 text-bold ${titlecolor}`}> {name ? name : equipe} </p>
 
             <div className={`flex items-end ${comport > 3 ? 'text-green-800' : comport < 3 ? 'text-red-800' : textcolor}`}>
 
@@ -69,7 +76,7 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
                 >
                     <IoMdRemoveCircleOutline className='cursor-pointer hover:bg-red-400 transition duration-300 text-4xl rounded-full  p-0 flex items-center justify-center' /> </button>
 
-                {statee > 20 ?
+                {statee > 15 ?
                     <div className='flex justify-center items-center gap-1 bg-white '>
                         <p className='pl-2 text-sm flex items-center justify-center'>Energia: {statee}</p> <AiFillThunderbolt className='inline-block' />
 
@@ -138,8 +145,8 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
                     <p className='text-sm text-center'>
                         Nome da Equipe:</p>
                     <input
-                        onChange={(e) => { setNameB(e.target.value) }}
-                        value={nameb}
+                        onChange={(e) => { setName(e.target.value) }}
+                        value={name}
                         type="text"
                         maxLength={12}
                         className='bg-[#e6eae1] block text-center text-sm max-w-full' />
@@ -225,9 +232,10 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
                     <hr className='border my-1'/>
 
                     <p>Observações:</p>
-                    <textarea className='bg-[#e6eae1] w-full min-h-6 px-1 text-md text-gray-700'>
-
-                    </textarea>
+                    <textarea
+                    onChange={(e)=>setObserv(e.target.value)}
+                    className={` ${observ.length>0 ? 'bg-white border-2 border-black': 'bg-[#e6eae1'}] w-full min-h-6 px-1 text-md text-gray-700`}
+                    />
 
 
 

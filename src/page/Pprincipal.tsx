@@ -17,12 +17,14 @@ import { FaLinkedin } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { FaGear } from "react-icons/fa6";
-
+import { Document, Packer, Paragraph, AlignmentType, TextRun } from "docx";
 
 
 
 import Poup from '../components/poup';
 import CountCard from '../components/countcard';
+
+
 
 type Tdados = { campo: string }
 
@@ -37,8 +39,324 @@ export default function Pprincipal() {
 
     const [digi, setDigi] = useState<string[]>([])
     const [erro, setErro] = useState<string[]>([])
+    const [histletra, setHistLetra] = useState<string[]>([])
+    const [histpalavra, setHistPalavra] = useState<string[]>([])
+    const [histerro, setHistErro] = useState<string[]>([])
     const [help, setHelp] = useState<boolean>(false)
     const [mletra, setMLetra] = useState<boolean>(true)
+
+    async function salvar() {
+
+        const tempo = new Date()
+
+        const doc = new Document({
+            sections:
+                [{
+                    children:
+                        [new Paragraph({
+                            alignment: AlignmentType.CENTER,
+                            children: [
+                                new TextRun({
+                                    text: `2º Semestre Biologia`,
+                                    size: 40,
+                                    bold: true,
+                                })
+                            ]
+
+                        }),
+
+                        new Paragraph(``),
+
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `Data: `,
+                                    size: 25,
+                                    bold: true,
+
+
+                                }),
+                                new TextRun({
+                                    text: `${tempo.toLocaleDateString("pt-BR")}\t\t`,
+                                    size: 25,
+                                }),
+
+                                new TextRun({
+                                    text: `Hora: `,
+                                    size: 25,
+                                    bold: true,
+                                }),
+
+                                new TextRun({
+                                    text: `${tempo.toLocaleTimeString("pt-BR", {
+                                        hour: "2-digit",
+                                        minute: "2-digit",
+                                    })}`,
+                                    size: 25,
+                                })
+                            ]
+                        }),
+
+                        new Paragraph(``),
+
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `Níveis completados: `,
+                                    size: 25,
+                                    bold: true,
+                                }),
+                                new TextRun({
+                                    text: `${complete.map((n) => n + 1)}`,
+                                    size: 25
+                                })
+
+                            ]
+                        }),
+
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `Palavras completadas: `,
+                                    size: 25,
+                                    bold: true,
+                                }),
+                                new TextRun({
+                                    text: `${complete.map(x => frases[x].palavra)}`,
+                                    size: 25
+                                })
+
+                            ]
+                        }),
+
+                        new Paragraph(``),
+
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `Letras digitadas corretas: `,
+                                    size: 25,
+                                    bold: true,
+                                }),
+                                new TextRun({
+                                    text: `${histletra.length > 0 ? histletra : 'Nenhuma'}`,
+                                    size: 25
+                                })
+
+                            ]
+                        }),
+
+
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `Palavras digitadas corretas: `,
+                                    size: 25,
+                                    bold: true,
+                                }),
+                                new TextRun({
+                                    text: `${histpalavra.length > 0 ? histpalavra : 'Nenhuma'}`,
+                                    size: 25
+                                })
+
+                            ]
+                        }),
+
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `Letras e palavras erradas: `,
+                                    size: 25,
+                                    bold: true,
+                                }),
+                                new TextRun({
+                                    text: `${histerro.length > 0 ? histerro : 'Nenhum'}`,
+                                    size: 25
+                                })
+
+                            ]
+                        }),
+
+
+
+                        new Paragraph(``),
+
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `Equipe Azul${nameb.length > 0 ? ` (${nameb})` : ''}: `,
+                                    size: 25,
+                                    bold: true,
+                                }),
+                                new TextRun({
+                                    text: `${totalptblue}pts`,
+                                    size: 25,
+                                })
+                            ]
+                        }),
+
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `Palavras Completadas: `,
+                                    size: 25,
+                                    bold: true,
+                                }),
+                                new TextRun({
+                                    text: `${completeb}`,
+                                    size: 25,
+                                })
+                            ]
+                        }),
+
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `Comportamento: `,
+                                    size: 25,
+                                    bold: true,
+                                }),
+                                new TextRun({
+                                    text: `${comportblue === 1 ? "Muito ruim!" :
+                                        comportblue === 2 ? "Ruim" :
+                                            comportblue === 3 ? "Mediano" :
+                                                comportblue === 4 ? "Bom" :
+                                                    comportblue === 5 ? "Muito Bom!" : ""
+                                        }`,
+                                    size: 25,
+
+                                }),
+                            ]
+                        }),
+
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `Energia: `,
+                                    size: 25,
+                                    bold: true,
+                                }),
+                                new TextRun({
+                                    text: `${enerb}`,
+                                    size: 25,
+
+                                }),
+                            ]
+                        }),
+
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `Observações: `,
+                                    size: 25,
+                                    bold: true,
+                                }),
+                                new TextRun({
+                                    text: `${observblue.length > 0 ? observblue : 'Nenhuma'}`,
+                                    size: 25,
+
+                                }),
+                            ]
+                        }),
+
+
+
+                        new Paragraph(``),
+
+
+
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `Equipe Amarela${namey.length > 0 ? ` (${namey})` : ''}: `,
+                                    size: 25,
+                                    bold: true,
+                                }),
+                                new TextRun({
+                                    text: `${totalptyellow}pts`,
+                                    size: 25,
+                                })
+                            ]
+                        }),
+
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `Palavras Completadas: `,
+                                    size: 25,
+                                    bold: true,
+                                }),
+                                new TextRun({
+                                    text: `${completey}`,
+                                    size: 25,
+                                })
+                            ]
+                        }),
+
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `Comportamento: `,
+                                    size: 25,
+                                    bold: true,
+                                }),
+                                new TextRun({
+                                    text: `${comportyellow === 1 ? "Muito ruim!" :
+                                        comportyellow === 2 ? "Ruim" :
+                                            comportyellow === 3 ? "Mediano" :
+                                                comportyellow === 4 ? "Bom" :
+                                                    comportyellow === 5 ? "Muito Bom!" : ""
+                                        }`,
+                                    size: 25,
+
+                                }),
+                            ]
+                        }),
+
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `Energia: `,
+                                    size: 25,
+                                    bold: true,
+                                }),
+                                new TextRun({
+                                    text: `${enery}`,
+                                    size: 25,
+
+                                }),
+                            ]
+                        }),
+
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `Observações: `,
+                                    size: 25,
+                                    bold: true,
+                                }),
+                                new TextRun({
+                                    text: `${observyellow.length > 0 ? observyellow : 'Nenhuma'}`,
+                                    size: 25,
+
+                                }),
+                            ]
+                        }),
+                        ],
+                }
+                ],
+        })
+
+        const blob = await Packer.toBlob(doc)
+        const url = URL.createObjectURL(blob)
+        const a = document.createElement("a")
+        a.href = url
+        a.download = "relatorio.docx"
+        a.click()
+        URL.revokeObjectURL(url)
+
+
+    }
 
 
 
@@ -53,11 +371,8 @@ export default function Pprincipal() {
         console.log(digi.length, 'digi leng', digi)
         if (digi.length < 1) return
 
-        console.log("fase", fase)
-        console.log("complete", complete)
-        console.log('completeinclude fase', complete.includes(fase))
 
-        if (mletra && [... new Set(Array.from(normalizar(frases[fase].palavra)))].sort().join("") === normalizar([... new Set(digi)].sort().join(""))) {
+        if (mletra && [... new Set(Array.from(normalizar(frases[fase].palavra)))].sort().join("") === [... new Set(digi.map(normalizar))].sort().join("")) {
 
 
             setErro([])
@@ -82,17 +397,19 @@ export default function Pprincipal() {
     const { register, handleSubmit, setValue } = useForm({ mode: "onChange", defaultValues: { campo: "" } })
 
     const frases: Array<Tfrases> = [
-        { palavra: "ÉTER", dica: "acento teste", imagem: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7pM2Gzej2rVpvCY0kYukuiqhNZNQsb0GFlQ&s" },
-        { palavra: "GENOMA", dica: "Conjunto Completo de genes de um organismo.", imagem: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbq1a3LjC6ORXpBR_LFFq26Bbig046ZhpZPA&s" },
+      
+        { palavra: "GENOMA", dica: "Conjunto Completo de genes de um organismo.", imagem: "https://upload.wikimedia.org/wikipedia/commons/d/df/Human_male_karyotpe_high_resolution.jpg" },
         { palavra: "DNA", dica: "Molécula que carrega a informação genética.", imagem: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYUKqhStT-7Bfk8i2qOBdzWLbIAemRJ-4gHg&s" },
-        { palavra: "RNA", dica: "Molécula que transmite a informação do DNA para síntese de proteínas.", imagem: "https://netnature.wordpress.com/wp-content/uploads/2015/01/dna1.png" },
-        { palavra: "CÉLULA", dica: "Unidade básica da vida.", imagem: "https://lh5.googleusercontent.com/proxy/ZMEpFMMO2M2BWH9yz7AKWQe8WjTw7acBaQFont-F461AteLkV7G7s15nC88tVKdxR6eqRMw4vJh4m2rJd-BDTC7O4vGR7p5GLyoRJGELNwXpujQufB6f0oB7MEJFXqEfl0pw4ZQpTc2UXidH9K4crctJ9TEMfCbDN-gosiiJRUY9yh8XcI7RB6ZGt595E0i9HabTan5dsjRT0IJ-hIoc" },
+        { palavra: "RNA", dica: "Molécula que transmite a informação do DNA para síntese de proteínas.", imagem: "https://elpais.com/infografias/2020/11/arn/cabecera/cabecera-movil2.jpg?v=6259" },
+        { palavra: "CÉLULA", dica: "Unidade básica da vida.", imagem: "https://static.todamateria.com.br/upload/ce/lu/celulaanimal-0.jpg" },
 
 
     ]
 
     const [fase, setFase] = useState<number>(0)
     const [complete, setComplete] = useState<number[]>([])
+    const [completeb, setCompleteB] = useState<string[]>([])
+    const [completey, setCompleteY] = useState<string[]>([])
 
 
     useEffect(() => {
@@ -108,17 +425,28 @@ export default function Pprincipal() {
 
         if (!dados.campo) return
 
-        if (!mletra && normalizar(dados.campo) === normalizar(frases[fase].palavra))
+
+
+        if (!mletra && normalizar(dados.campo) === normalizar(frases[fase].palavra)) {
             setDigi([dados.campo])
+            setHistPalavra(ant => [...ant, dados.campo])
+        }
 
-        else if (!mletra)
+
+        else if (!mletra) {
             setErro(ant => [...ant, dados.campo])
+            setHistErro(ant => [...ant, dados.campo])
+        }
 
-        if (mletra && Array.from(normalizar(frases[fase].palavra)).includes((normalizar(dados.campo)).toUpperCase()))
+        if (mletra && Array.from(normalizar(frases[fase].palavra)).includes((normalizar(dados.campo)))) {
             setDigi(ant => [...ant, dados.campo.toUpperCase()])
+            setHistLetra(ant => [...ant, dados.campo.toUpperCase()])
+        }
 
-        else if (mletra)
+        else if (mletra) {
             setErro(ant => [...ant, dados.campo])
+            setHistErro(ant => [...ant, dados.campo])
+        }
 
         setValue("campo", "")
 
@@ -129,12 +457,20 @@ export default function Pprincipal() {
     const [poupsword, setPoupSWord] = useState<boolean>(false)
     const [disabledica, setDisableDica] = useState<boolean>(false)
     const [poupduvidas, setPoupDuvidas] = useState<boolean>(false)
-    const [poupsobre, setPoupSobre] = useState<boolean> (false)
+    const [poupsobre, setPoupSobre] = useState<boolean>(false)
     const [enerb, setEnerB] = useState<number>(5)
     const [enery, setEnerY] = useState<number>(5)
-    const [ptblue,setPtBlue] = useState<number>(0)
-    const [ptyellow,setPtYellow] = useState<number>(0)
-    const [poupacerto,setPoupAcerto] = useState<boolean>(false)
+    const [ptblue, setPtBlue] = useState<number>(0)
+    const [ptyellow, setPtYellow] = useState<number>(0)
+    const [poupacerto, setPoupAcerto] = useState<boolean>(false)
+    const [comportblue, setComportBlue] = useState<number>(3)
+    const [totalptblue, setTotalPtBlue] = useState<number>(0)
+    const [comportyellow, setComportYellow] = useState<number>(3)
+    const [totalptyellow, setTotalPtYellow] = useState<number>(0)
+    const [observblue, setObservBlue] = useState<string>("")
+    const [observyellow, setObservYellow] = useState<string>("")
+    const [nameb, setNameB] = useState<string>("")
+    const [namey, setNameY] = useState<string>("")
 
 
     return (<>
@@ -145,22 +481,26 @@ export default function Pprincipal() {
             show={poupacerto}
             modo='time'
             qtdbtn={2}
-            
-            f1={() => { setPtBlue(ant=>ant+1)
+
+            f1={() => {
+                setPtBlue(ant => ant + 1)
+                setCompleteB(ant => [...ant, frases[fase].palavra])
                 setPoupAcerto(false)
-                
+
             }}
-            f2={() => { setPtYellow(ant=>ant+1)
+            f2={() => {
+                setPtYellow(ant => ant + 1)
+                setCompleteY(ant => [...ant, frases[fase].palavra])
                 setPoupAcerto(false)
-                
+
             }}
 
-            close={() => { setPoupDica(false) }}
+            close={() => { setPoupAcerto(false) }}
 
             descricao={<>
                 <p> A palavra era {frases[fase].palavra}</p>
-                <p className='w-50'>Este ponto vai para qual equipe?</p></>} 
-                />
+                <p className='w-50'>Este ponto vai para qual equipe?</p></>}
+        />
 
 
 
@@ -232,115 +572,125 @@ export default function Pprincipal() {
             descricao={
                 <div className='tduvida h-96  mr-2 
                 overflow-y-auto border-8'>
-                    
-                    <div>
-                    <h3>1 - Como a turma é organizada?</h3>
-                    <p>A turma é dividida em duas equipes: Azul e Amarela.</p>
-                    </div>
-                    
-                    <div>
-                    <h3>2 - Quem controla o jogo?</h3>
-                    <p>Somente o professor controla a aplicação, exibindo o jogo em uma TV ou DataShow.</p>
-                    </div>
 
-                    
                     <div>
-                    <h3>3- Quem começa jogando?</h3>
-                    <p>O professor pode definir manualmente a equipe inicial ou usar a aba "Sorteio".</p>
+                        <h3>1 - Como a turma é organizada?</h3>
+                        <p>A turma é dividida em duas equipes: Azul e Amarela.</p>
                     </div>
 
                     <div>
-                    <h3>4 - Como funciona cada rodada?</h3>
-                    <p>Um aluno da equipe escolhe uma letra por rodada.</p>
-                    <p>O aluno só pode jogar novamente após todos de sua equipe participarem.</p>
+                        <h3>2 - Quem controla o jogo?</h3>
+                        <p>Somente o professor controla a aplicação, exibindo o jogo em uma TV ou DataShow.</p>
+                    </div>
+
+
+                    <div>
+                        <h3>3- Quem começa jogando?</h3>
+                        <p>O professor pode definir manualmente a equipe inicial ou usar a aba "Sorteio".</p>
                     </div>
 
                     <div>
-                    <h3>5 - É permitido adivinhar a palavra inteira?</h3>
-                    <p>Sim. O aluno pode tentar adivinhar a palavra completa a qualquer momento.</p>
-                    <p>Se acertar, a equipe ganha o ponto imediatamente.</p>
+                        <h3>4 - Como funciona cada rodada?</h3>
+                        <p>Um aluno da equipe escolhe uma letra por rodada.</p>
+                        <p>O aluno só pode jogar novamente após todos de sua equipe participarem.</p>
                     </div>
 
                     <div>
-                    <h3>6 - Existe ajuda durante a rodada?</h3>
-                    <p>A equipe pode revelar uma dica da palavra com custo de 1 ponto de energia.</p>
+                        <h3>5 - É permitido adivinhar a palavra inteira?</h3>
+                        <p>Sim. O aluno pode tentar adivinhar a palavra completa a qualquer momento.</p>
+                        <p>Se acertar, a equipe ganha o ponto imediatamente.</p>
                     </div>
 
                     <div>
-                    <h3>7 - Como funciona a pontuação por comportamento?</h3>
-                    <p>A equipe recebe Bônus ou Penalidade no placar total a depender do comportamento.</p>
-                    <p>- Comportamento muito ruim: <strong>-2 pontos</strong></p>
-                    <p>- Comportamento ruim: <strong>-1 ponto</strong></p>
-                    <p>- Comportamento mediano: <strong>0 ponto</strong></p>
-                    <p>- Comportamento bom: <strong>+1 ponto</strong></p>
-                    <p>- Comportamento muito bom: <strong>+2 pontos</strong></p>
+                        <h3>6 - Existe ajuda durante a rodada?</h3>
+                        <p>A equipe pode revelar uma dica da palavra com custo de 1 ponto de energia.</p>
                     </div>
 
                     <div>
-                    <h3>8 - Como se ganha o jogo?</h3>
-                    <p>Ganha a equipe que somar mais pontos ao final, considerando acertos e comportamento.</p>
+                        <h3>7 - Como funciona a pontuação por comportamento?</h3>
+                        <p>A equipe recebe Bônus ou Penalidade no placar total a depender do comportamento.</p>
+                        <p>- Comportamento muito ruim: <strong>-2 pontos</strong></p>
+                        <p>- Comportamento ruim: <strong>-1 ponto</strong></p>
+                        <p>- Comportamento mediano: <strong>0 ponto</strong></p>
+                        <p>- Comportamento bom: <strong>+1 ponto</strong></p>
+                        <p>- Comportamento muito bom: <strong>+2 pontos</strong></p>
                     </div>
 
                     <div>
-                    <h3>9 - As regras são fixas?</h3>
-                    <p>Não. As regras podem ser adaptadas conforme a necessidade do professor.</p>
+                        <h3>8 - Como se ganha o jogo?</h3>
+                        <p>Ganha a equipe que somar mais pontos ao final, considerando acertos e comportamento.</p>
+                    </div>
+
+                    <div>
+                        <h3>9 - As regras são fixas?</h3>
+                        <p>Não. As regras podem ser adaptadas conforme a necessidade do professor.</p>
                     </div>
 
                 </div>
-                }/>
+            } />
 
 
-                 <Poup
+        <Poup
 
             titulo={<p className='inline-block '> SOBRE </p>}
             show={poupsobre} modo='info'
             close={() => setPoupSobre(false)}
             descricao={
                 <>
-                <p className='max-w-50 mt-3'>
-                    Aplicação Web desenvolvida com React, Typescript e Tailwind.
-                </p>
+                    <p className='max-w-50 mt-3'>
+                        Aplicação Web desenvolvida com React, Typescript e Tailwind.
+                    </p>
 
-                <hr className='border my-2'/>
+                    <hr className='border my-2' />
 
-                <p>
-                    <FaGear className='inline-block mr-1'/>
-                     Desenvolvido por William Queiroz: </p>
-                <div className='flex flex-col items-start text-sm linkct'>
-                
-                <a
-                 href='https://queirozdeveloper.vercel.app/'> <FaCode className='inline-block mr-1'/>  Portfólio: queirozdeveloper.vercel.app</a>
+                    <p>
+                        <FaGear className='inline-block mr-1' />
+                        Desenvolvido por William Queiroz: </p>
+                    <div className='flex flex-col items-start text-sm linkct'>
 
-                 <div className='mx-auto text-xl'>
-                 <a href='https://www.linkedin.com/in/william-queiroz-a36573120/'> <FaLinkedin className='inline-block mr-1'/></a>
-                <a > <MdEmail className='inline-block mr-1'/> </a>
-                <a href='https://github.com/dashboard/'> <FaGithub className='inline-block mr-1'/></a>
-                <a href='wa.me/5593991878598'> <IoLogoWhatsapp className='inline-block mr-1 '/></a>
-                </div>
-               
+                        <a
+                            href='https://queirozdeveloper.vercel.app/'> <FaCode className='inline-block mr-1' />  Portfólio: queirozdeveloper.vercel.app</a>
 
-                
-                </div>
-                
+                        <div className='mx-auto text-xl'>
+                            <a href='https://www.linkedin.com/in/william-queiroz-a36573120/'> <FaLinkedin className='inline-block mr-1' /></a>
+                            <a > <MdEmail className='inline-block mr-1' /> </a>
+                            <a href='https://github.com/dashboard/'> <FaGithub className='inline-block mr-1' /></a>
+                            <a href='wa.me/5593991878598'> <IoLogoWhatsapp className='inline-block mr-1 ' /></a>
+                        </div>
+
+
+
+                    </div>
+
                 </>
 
-                }/>
-        
+            } />
 
 
-            <div className='flex flex-row justify-between w-[90dvw]'>
+
+        <div className='flex flex-row justify-between w-[90dvw]'>
 
 
 
             <CountCard
                 equipe="Time Azul"
+                name={nameb}
+                setName={setNameB}
                 bgcolor='bg-blue-900'
                 titlecolor='text-white'
                 textcolor="text-blue-950"
                 statee={enerb}
                 setStateE={setEnerB}
                 pt={ptblue}
-                setPt={setPtBlue} />
+                setPt={setPtBlue}
+                setComport={setComportBlue}
+                comport={comportblue}
+                setTotalPt={setTotalPtBlue}
+                totalpt={totalptblue}
+                observ={observblue}
+                setObserv={setObservBlue}
+
+            />
 
 
 
@@ -364,13 +714,15 @@ export default function Pprincipal() {
                     </div>
 
                     <div
-                    onClick={() => setPoupSobre(!poupsobre)}
-                    
-                    className='h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
+                        onClick={() => setPoupSobre(!poupsobre)}
+
+                        className='h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
                         <TbWorld /> Sobre
                     </div>
 
-                    <div className='h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
+                    <div
+                        onClick={salvar}
+                        className='h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
                         <IoIosSave /> Salvar
                     </div>
 
@@ -382,7 +734,7 @@ export default function Pprincipal() {
 
 
                         <h1 className='inline-block text-color[#2D3194] py-2'>
-                            Biologia 2º Semestre - Genética
+                            Biologia 2º Semestre
                         </h1>
 
                         <div className='flex items-end h-full'>
@@ -446,13 +798,13 @@ export default function Pprincipal() {
                                     console.log(disabledica, "valor")
                                 }
                             }}
-                            className={`h-14 px-3 rounded-xl my-3 bg-[#21285C] transition-all duration-300 w-fit flex flex-row items-center text-white
+                            className={`h-fit py-1 px-3 rounded-xl my-3 bg-[#21285C] transition-all duration-300 w-fit max-w-96 flex flex-row items-center text-white
                     ${help ? "" : " hover:text-yellow-300"}`}>
 
                             <span className='flex flex-col justify-center items-center w-fit'>
 
                                 <FaLightbulb
-                                    className={`text-4xl ${help ? 'text-yellow-300' :
+                                    className={`text-xl ${help ? 'text-yellow-300' :
                                         ''}`} />
 
                             </span>
@@ -468,12 +820,14 @@ export default function Pprincipal() {
                                 if (!complete.includes(fase))
                                     setPoupSWord(true)
 
-                                if (complete.includes(fase))
+                                if (complete.includes(fase)) {
                                     setComplete(ant => ant.filter(x => x !== fase))
+                                    setDigi([])
+                                }
 
                             }
                             }
-                            className={`h-14 px-3 rounded-xl my-3 bg-[#21285C] transition-all duration-300 w-fit div flex flex-row items-center text-3xl text-white
+                            className={`h-8 px-3 rounded-xl my-3 bg-[#21285C] transition-all duration-300 w-fit div flex flex-row items-center text-2xl text-white
                     ${help ? "" : " hover:text-yellow-300"}`}>
                             {complete.includes(fase) ?
                                 <IoMdEyeOff /> : <IoMdEye />
@@ -500,16 +854,19 @@ export default function Pprincipal() {
                             <div className='flex gap-2 items-center'>
                                 <input
                                     {...register("campo", { required: true })}
-                                    maxLength={mletra ? 1 : 40}
-                                    placeholder={mletra ? 'Digite uma letra aqui' : 'Digite uma palavra aqui'}
-                                    className="uppercase my-3 bg-[#e6eae1] w-60 h-11 px-3 border-3" type="text"
+                                    disabled=
+                                    {complete.includes(fase) ? true : false}
+                                    maxLength={complete.includes(fase) ? 0 : mletra ? 1 : 25}
+                                    placeholder={complete.includes(fase) ? 'COMPLETADO' : mletra ? 'Digite uma letra aqui' : 'Digite uma palavra aqui'}
+                                    className={`uppercase my-3 w-60 h-11 px-3 border-3 ${complete.includes(fase) ? 'bg-green-800 text-white text-center opacity-100' : 'bg-[#e6eae1]'}`} type="text"
                                     onChange={(e) => setValue("campo", e.target.value.toUpperCase())}
 
                                 />
 
 
                                 <button type='submit'
-                                    className="mx-0 h-fit absolute -right-2.5" > <IoSend className='text-[#21285C] text-2xl' />
+                                    disabled={complete.includes(fase) ? true : false}
+                                    className="mx-0 h-fit absolute -right-2.5" > <IoSend className={` text-2x ${complete.includes(fase) ? 'text-gray-400' : 'text-[#21285C]'}`} />
                                 </button>
 
 
@@ -517,14 +874,25 @@ export default function Pprincipal() {
 
                         </form>
                     </div>
+
+
+
+
                     {erro.length > 0 &&
                         <div className='flex justify-center text-center mt-0 m-3 px-3 w-11/12 pb-1 whitespace-nowrap'>
 
+
+
                             <p className='font-bold text-[#21285C] text-center pr-2'> Erros: </p>
 
-                            <div className=' overflow-x-auto max-w-96'>
-                                <p className='bg-red-100 rounded-xl font-bold text-red-600 px-2'> {[... new Set(erro)].join(" , ").toUpperCase()}</p>
+
+
+                            <div className='overflow-x-auto max-w-96'>
+                                <p className='font-bold text-red-600 px-2'>
+                                    {!mletra && erro[erro.length - 1].length < 2 ? 'Não é permitido enviar letras no "modo Palavra".'
+                                        : [... new Set(erro)].join(" , ").toUpperCase()}</p>
                             </div>
+
 
 
 
@@ -537,13 +905,22 @@ export default function Pprincipal() {
 
             <CountCard
                 equipe="Time Amarelo"
+                name={namey}
+                setName={setNameY}
                 bgcolor='bg-[#F7CD21]'
                 titlecolor='text-yellow-1000'
                 textcolor="text-yellow-950"
                 statee={enery}
-                setStateE={setEnerY} 
+                setStateE={setEnerY}
                 pt={ptyellow}
-                setPt={setPtYellow} />
+                setPt={setPtYellow}
+                setComport={setComportYellow}
+                comport={comportyellow}
+                setTotalPt={setTotalPtYellow}
+                totalpt={totalptyellow}
+                observ={observyellow}
+                setObserv={setObservYellow}
+            />
 
 
 
