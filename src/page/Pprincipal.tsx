@@ -652,7 +652,7 @@ export default function Pprincipal() {
 
                         <div className='mx-auto text-xl'>
                             <a href='https://www.linkedin.com/in/william-queiroz-a36573120/'> <FaLinkedin className='inline-block mr-1' /></a>
-                            <a > <MdEmail className='inline-block mr-1' /> </a>
+                            <a href='mailto:willqos15@gmail.com' className='cursor-pointer'> <MdEmail className='inline-block mr-1' /> </a>
                             <a href='https://github.com/dashboard/'> <FaGithub className='inline-block mr-1' /></a>
                             <a href='wa.me/5593991878598'> <IoLogoWhatsapp className='inline-block mr-1 ' /></a>
                         </div>
@@ -667,7 +667,7 @@ export default function Pprincipal() {
 
 
 
-        <div className='flex flex-row gap-5 justify-center w-245'>
+        <div className='flex flex-row gap-5 justify-center items-st w-245 h-110'>
 
 
             
@@ -809,7 +809,7 @@ export default function Pprincipal() {
                             </span>
                             <span
 
-                                className={`wrap-normal text-center max-w-80 px-2 '}`}>
+                                className={`cursor-pointer wrap-normal text-center max-w-80 px-2 '}`}>
                                 {help ? frases[fase].dica : 'Dica desativada'}</span>
                         </button>
 
@@ -886,7 +886,7 @@ export default function Pprincipal() {
 
 
 
-                            <div className='overflow-x-auto max-w-96'>
+                            <div className='overflow-x-auto overflow-y-hidden y-20 max-w-96'>
                                 <p className='font-bold text-red-600 px-2'>
                                     {!mletra && erro[erro.length - 1].length < 2 ? 'Não é permitido enviar letras no "modo Palavra".'
                                         : [... new Set(erro)].join(" , ").toUpperCase()}</p>

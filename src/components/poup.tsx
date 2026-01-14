@@ -46,22 +46,22 @@ export default function Poup({titulo, descricao, show, modo, f1, f2,f3, close, q
                  {qtdbtn=== 2 ? <>
 
                 <button onClick={f1}
-                className="bg-[#21285C] hover:scale-110 transition-all duration-300 w-fit text-white mx-auto rounded-md px-3 py-1"> Azul</button>
+                className="cursor-pointer bg-[#21285C] hover:scale-110 transition-all duration-300 w-fit text-white mx-auto rounded-md px-3 py-1"> Azul</button>
 
                 <button onClick={f2}
-                className="bg-[#F7CD21] w-fit font-bold text-[#21285C]  hover:scale-110 transition-all duration-300 mx-auto rounded-md px-3 py-1"> Amarela </button>
+                className="cursor-pointer bg-[#F7CD21] w-fit font-bold text-[#21285C]  hover:scale-110 transition-all duration-300 mx-auto rounded-md px-3 py-1"> Amarela </button>
                 </> : qtdbtn===3 ?
 
                 <>
 
                 <button onClick={f1}
-                className="bg-[#21285C] hover:scale-110 transition-all duration-300 w-fit text-white mx-auto rounded-md px-3 py-1"> Azul</button>
+                className= "cursor-pointer bg-[#21285C] hover:scale-110 transition-all duration-300 w-fit text-white mx-auto rounded-md px-3 py-1"> Azul</button>
 
                 <button onClick={f2}
-                className="bg-[#F7CD21] w-fit font-bold text-[#21285C]  hover:scale-110 transition-all duration-300 mx-auto rounded-md px-3 py-1"> Amarela </button>
+                className="cursor-pointer bg-[#F7CD21] w-fit font-bold text-[#21285C]  hover:scale-110 transition-all duration-300 mx-auto rounded-md px-3 py-1"> Amarela </button>
 
                 <button onClick={f3}
-                className="bg-[#2d5c21] w-fit text-white hover:scale-110 transition-all duration-300 mx-auto rounded-md px-3 py-1"> Livre </button>
+                className="cursor-pointer bg-[#2d5c21] w-fit text-white hover:scale-110 transition-all duration-300 mx-auto rounded-md px-3 py-1"> Livre </button>
 
                 </>
 
@@ -73,10 +73,10 @@ export default function Poup({titulo, descricao, show, modo, f1, f2,f3, close, q
 
                 : modo==="confirma" ? <>
                 <button onClick={f1}
-                className="bg-[#2d5c21] w-fit text-white hover:scale-110 transition-all duration-300 mx-auto rounded-md px-3 py-1"> Sim </button>
+                className="cursor-pointer bg-[#2d5c21] w-fit text-white hover:scale-110 transition-all duration-300 mx-auto rounded-md px-3 py-1"> Sim </button>
 
                 <button onClick={f2}
-                className="bg-red-700 w-fit text-white hover:scale-110 transition-all duration-300 mx-auto rounded-md px-3 py-1"> Não </button>
+                className="cursor-pointer bg-red-700 w-fit text-white hover:scale-110 transition-all duration-300 mx-auto rounded-md px-3 py-1"> Não </button>
                 </>: null}
                 
 
