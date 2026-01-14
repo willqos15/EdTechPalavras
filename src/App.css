@@ -7,34 +7,38 @@
   margin: 0;
 }
 
+
+*{
+  box-sizing: border-box;
+}
 .tduvida{
   text-align: left;
   border: 20px;
-  width: fit-content;
+  width: 400px;
   box-sizing: content-box;
 }
 
 .tduvida h3 {
   background-color: #F7CD21;
   padding-inline: 10px;
-  width: 390px;
+  width: 370px;
   
 }
 
 .tduvida p{
   padding-inline: 10px;
-  width: 390px;
+  width: 370px;
 
 }
 
 .tduvida div {border: 2px solid #F7CD21;
+  width: 370px;
 margin-bottom: 20px;
-margin-right: 7px;
+margin-right: 0px;
 }
 
 .linkct a:hover {
   color: rgb(24, 24, 163);
-  
 }
 .no-spinner {
   -moz-appearance: textfield; 

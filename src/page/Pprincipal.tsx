@@ -397,7 +397,7 @@ export default function Pprincipal() {
     const { register, handleSubmit, setValue } = useForm({ mode: "onChange", defaultValues: { campo: "" } })
 
     const frases: Array<Tfrases> = [
-      
+
         { palavra: "GENOMA", dica: "Conjunto Completo de genes de um organismo.", imagem: "https://upload.wikimedia.org/wikipedia/commons/d/df/Human_male_karyotpe_high_resolution.jpg" },
         { palavra: "DNA", dica: "Molécula que carrega a informação genética.", imagem: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYUKqhStT-7Bfk8i2qOBdzWLbIAemRJ-4gHg&s" },
         { palavra: "RNA", dica: "Molécula que transmite a informação do DNA para síntese de proteínas.", imagem: "https://elpais.com/infografias/2020/11/arn/cabecera/cabecera-movil2.jpg?v=6259" },
@@ -565,12 +565,11 @@ export default function Pprincipal() {
         />
 
         <Poup
-
             titulo={<p className='inline-block '> DÚVIDAS </p>}
             show={poupduvidas} modo='info'
             close={() => setPoupDuvidas(false)}
             descricao={
-                <div className='tduvida h-96  mr-2 
+                <div className='tduvida h-96  mr-0 
                 overflow-y-auto border-8'>
 
                     <div>
@@ -668,29 +667,29 @@ export default function Pprincipal() {
 
 
 
-        <div className='flex flex-row justify-between w-[90dvw]'>
+        <div className='flex flex-row gap-5 justify-center w-245'>
 
 
-
-            <CountCard
-                equipe="Time Azul"
-                name={nameb}
-                setName={setNameB}
-                bgcolor='bg-blue-900'
-                titlecolor='text-white'
-                textcolor="text-blue-950"
-                statee={enerb}
-                setStateE={setEnerB}
-                pt={ptblue}
-                setPt={setPtBlue}
-                setComport={setComportBlue}
-                comport={comportblue}
-                setTotalPt={setTotalPtBlue}
-                totalpt={totalptblue}
-                observ={observblue}
-                setObserv={setObservBlue}
-
-            />
+            
+                <CountCard
+                    equipe="Time Azul"
+                    name={nameb}
+                    setName={setNameB}
+                    bgcolor='bg-blue-900'
+                    titlecolor='text-white'
+                    textcolor="text-blue-950"
+                    statee={enerb}
+                    setStateE={setEnerB}
+                    pt={ptblue}
+                    setPt={setPtBlue}
+                    setComport={setComportBlue}
+                    comport={comportblue}
+                    setTotalPt={setTotalPtBlue}
+                    totalpt={totalptblue}
+                    observ={observblue}
+                    setObserv={setObservBlue}
+                />
+            
 
 
 
@@ -709,20 +708,20 @@ export default function Pprincipal() {
 
                     <div
                         onClick={() => setPoupDuvidas(!poupduvidas)}
-                        className='h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 hover:bg-white transition-all duration-300'>
+                        className='cursor-pointer h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 hover:bg-white transition-all duration-300'>
                         <FaQuestionCircle /> Dúvidas
                     </div>
 
                     <div
                         onClick={() => setPoupSobre(!poupsobre)}
 
-                        className='h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
+                        className='cursor-pointer h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
                         <TbWorld /> Sobre
                     </div>
 
                     <div
                         onClick={salvar}
-                        className='h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
+                        className='cursor-pointer h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
                         <IoIosSave /> Salvar
                     </div>
 
@@ -738,7 +737,7 @@ export default function Pprincipal() {
                         </h1>
 
                         <div className='flex items-end h-full'>
-                            <p className='inline-block bg-white text-3xl rounded-t-md px-2 h-10 pt-1'>{fase + 1 <= 9 ? '0' + (fase + 1) : fase + 1}</p>
+                            <p className=' inline-block bg-white text-3xl rounded-t-md px-2 h-10 pt-1'>{fase + 1 <= 9 ? '0' + (fase + 1) : fase + 1}</p>
                         </div>
                     </div>
 
@@ -750,7 +749,7 @@ export default function Pprincipal() {
                                 setDigi([])
                                 setHelp(false)
                             }}
-                            className={fase > 0 ? 'bg-[#21285C] text-[#F7CD21] hover:scale-110 hover:p-1.4 transition-all duration-300 h-fit p-1 rounded-full text-4xl flex justify-center items-center font-bold ' : 'bg-[#21285C] text-[#F7CD21] hover:scale-110 hover:p-1.4 transition-all duration-300 h-fit p-1 rounded-full text-4xl flex justify-center items-center font-bold opacity-0 pointer-events-none'}>
+                            className={fase > 0 ? 'cursor-pointer bg-[#21285C] text-[#F7CD21] hover:scale-110 hover:p-1.4 transition-all duration-300 h-fit p-1 rounded-full text-4xl flex justify-center items-center font-bold ' : 'bg-[#21285C] text-[#F7CD21] hover:scale-110 hover:p-1.4 transition-all duration-300 h-fit p-1 rounded-full text-4xl flex justify-center items-center font-bold opacity-0 pointer-events-none'}>
                             <FaArrowCircleLeft />
                         </button>
 
@@ -769,7 +768,7 @@ export default function Pprincipal() {
                                 setDigi([])
                                 setHelp(false)
                             }}
-                            className={fase <= (frases.length - 2) ? 'bg-[#21285C] text-[#F7CD21] hover:scale-110 hover:p-1.4 transition-all duration-300 h-fit p-1 rounded-full text-4xl flex justify-center items-center font-bold ' : ' bg-[#21285C] text-[#F7CD21] hover:scale-110 hover:p-1.4 transition-all duration-300 h-fit p-1 rounded-full text-4xl flex justify-center items-center font-bold  opacity-0 pointer-events-none'}>
+                            className={fase <= (frases.length - 2) ? 'cursor-pointer bg-[#21285C] text-[#F7CD21] hover:scale-110 hover:p-1.4 transition-all duration-300 h-fit p-1 rounded-full text-4xl flex justify-center items-center font-bold ' : ' bg-[#21285C] text-[#F7CD21] hover:scale-110 hover:p-1.4 transition-all duration-300 h-fit p-1 rounded-full text-4xl flex justify-center items-center font-bold  opacity-0 pointer-events-none'}>
                             <FaArrowCircleRight />
                         </button>
 
@@ -789,7 +788,7 @@ export default function Pprincipal() {
                         ))}
                     </div>
 
-                    <div className='flex flex-row justify-center items-center gap-3'>
+                    <div className='cursor-pointer flex flex-row justify-center items-center gap-3'>
                         <button
                             onClick={() => {
                                 if (!help) { setPoupDica(true) }
@@ -827,7 +826,7 @@ export default function Pprincipal() {
 
                             }
                             }
-                            className={`h-8 px-3 rounded-xl my-3 bg-[#21285C] transition-all duration-300 w-fit div flex flex-row items-center text-2xl text-white
+                            className={`cursor-pointer h-8 px-3 rounded-xl my-3 bg-[#21285C] transition-all duration-300 w-fit div flex flex-row items-center text-2xl text-white
                     ${help ? "" : " hover:text-yellow-300"}`}>
                             {complete.includes(fase) ?
                                 <IoMdEyeOff /> : <IoMdEye />
@@ -842,7 +841,7 @@ export default function Pprincipal() {
 
                         <button
                             onClick={() => setMLetra(!mletra)}
-                            className='ml-4 px-2 h-fit flex flex-row items-center cursor-pointer absolute -left-20'>
+                            className='cursor-pointer ml-4 px-2 h-fit flex flex-row items-center absolute -left-20'>
                             <MdChangeCircle className='text-2xl' />
                             {mletra ? 'Letra' : 'Palavra'}
 
@@ -858,7 +857,7 @@ export default function Pprincipal() {
                                     {complete.includes(fase) ? true : false}
                                     maxLength={complete.includes(fase) ? 0 : mletra ? 1 : 25}
                                     placeholder={complete.includes(fase) ? 'COMPLETADO' : mletra ? 'Digite uma letra aqui' : 'Digite uma palavra aqui'}
-                                    className={`uppercase my-3 w-60 h-11 px-3 border-3 ${complete.includes(fase) ? 'bg-green-800 text-white text-center opacity-100' : 'bg-[#e6eae1]'}`} type="text"
+                                    className={`uppercase my-3 w-60 h-11 px-3 rounded-sm border-3 ${complete.includes(fase) ? 'bg-green-800 text-white text-center opacity-100' : 'bg-[#e6eae1]'}`} type="text"
                                     onChange={(e) => setValue("campo", e.target.value.toUpperCase())}
 
                                 />
@@ -866,7 +865,7 @@ export default function Pprincipal() {
 
                                 <button type='submit'
                                     disabled={complete.includes(fase) ? true : false}
-                                    className="mx-0 h-fit absolute -right-2.5" > <IoSend className={` text-2x ${complete.includes(fase) ? 'text-gray-400' : 'text-[#21285C]'}`} />
+                                    className="cursor-pointer mx-0 h-fit absolute -right-2.5" > <IoSend className={` text-2x ${complete.includes(fase) ? 'text-gray-400' : 'text-[#21285C]'}`} />
                                 </button>
 
 
@@ -902,7 +901,7 @@ export default function Pprincipal() {
                 </div>
             </div>
 
-
+            
             <CountCard
                 equipe="Time Amarelo"
                 name={namey}

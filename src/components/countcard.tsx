@@ -52,7 +52,7 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
 
     return (<>
 
-        <div className={`bg-white font-bold px-0 whitespace-nowrap flex flex-col h-fit  items-center justify-center gap-y-2 ${textcolor}`}>
+        <div className={`max-h-[90vh] w-fit bg-white font-bold px-0 whitespace-nowrap flex flex-col h-fit  items-center justify-center gap-y-2 ${textcolor}`}>
             <p className={`${bgcolor} w-full px-3 text-bold ${titlecolor}`}> {name ? name : equipe} </p>
 
             <div className={`flex items-end ${comport > 3 ? 'text-green-800' : comport < 3 ? 'text-red-800' : textcolor}`}>
@@ -95,11 +95,11 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
                 {showcb ?
                     <RiArrowUpWideLine
                         onClick={() => setShowCB(!showcb)}
-                        className='mx-auto font-bold text-4xl text-gray-400 hover:text-gray-600 transition duration-300' />
+                        className='cursor-pointer mx-auto font-bold text-4xl text-gray-400 hover:text-gray-600 transition duration-300' />
                     :
                     <RiArrowDownWideLine
                         onClick={() => setShowCB(!showcb)}
-                        className='mx-auto font-bold text-4xl text-gray-400  hover:text-gray-600  transition duration-300' />
+                        className='cursor-pointer mx-auto font-bold text-4xl text-gray-400  hover:text-gray-600  transition duration-300' />
                 }
 
 
@@ -117,7 +117,7 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
                         max="5"
                         step="1"
                         onChange={(e) => setComport(Number(e.target.value))}
-                        className={`
+                        className={`cursor-pointer w-30
                         ${comport === 1 ? "accent-red-700"
                                 : comport === 2 ? "accent-orange-600"
                                     : comport === 3 ? "accent-gray-500"
@@ -217,13 +217,13 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
 
                             <button
                                 onClick={() => setPt(inputpb)}
-                                className={`${bgcolor} hover:scale-110 transition-all duration-300 w-fit ${titlecolor} mx-auto text-[10px] rounded-md px-1  hover:bg-blue-950`}>
+                                className={`${bgcolor} cursor-pointer hover:scale-110 transition-all duration-300 w-fit ${titlecolor} mx-auto text-[10px] rounded-md px-1  hover:bg-blue-950`}>
                                 <HiCheck className='text-lg' />
                             </button>
 
                             <button
                                 onClick={() => setStateE(inputeb)}
-                                className={`${bgcolor} hover:scale-110 transition-all duration-300 w-fit ${titlecolor} mx-auto text-[10px] rounded-md px-1 hover:bg-blue-950`}>
+                                className={`${bgcolor} cursor-pointer hover:scale-110 transition-all duration-300 w-fit ${titlecolor} mx-auto text-[10px] rounded-md px-1 hover:bg-blue-950`}>
                                 <HiCheck className='text-lg' />
                             </button>
                         </div>

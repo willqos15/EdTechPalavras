@@ -28,7 +28,7 @@ export default function Poup({titulo, descricao, show, modo, f1, f2,f3, close, q
                <h1 className="w-full text-center">{titulo}</h1> 
                <IoClose
                onClick={close}
-               className="absolute right-0 mr-2 rounded-md font-bold text-white bg-red-600 transition-all duration-300 hover:bg-red-800"/> 
+               className="cursor-pointer absolute right-0 mr-2 rounded-md font-bold text-white bg-red-600 transition-all duration-300 hover:bg-red-800"/> 
             </div>
 
             
