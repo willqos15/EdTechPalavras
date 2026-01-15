@@ -53,7 +53,7 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
     return (<>
 
         <div className={`max-h-dvh w-fit bg-white font-bold px-0 whitespace-nowrap flex flex-col items-center justify-center gap-y-2 mb-4 ${textcolor}`}>
-            <p className={`${bgcolor} w-full px-3 text-bold ${titlecolor}`}> {name ? name : equipe} </p>
+            <p className={`${bgcolor} text-center w-full px-3 text-bold ${titlecolor}`}> {name ? name : equipe} </p>
 
             <div className={`flex items-end ${comport > 3 ? 'text-green-800' : comport < 3 ? 'text-red-800' : textcolor}`}>
 

@@ -18,6 +18,7 @@ import { FaGithub } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { FaGear } from "react-icons/fa6";
 import { Document, Packer, Paragraph, AlignmentType, TextRun } from "docx";
+import { GiPerspectiveDiceSixFacesFive } from "react-icons/gi";
 
 
 
@@ -420,7 +421,7 @@ export default function Pprincipal() {
 {tema: "Geografia - Internacional",  palavra: "ONU", dica: "Organização criada após um conflito global para evitar novas guerras e mediar disputas internacionais.", imagem: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Flag_of_the_United_Nations.svg" },
 
 
-{tema: "Geografia - Internacional",  palavra: "MARSHALL", dica: "Plano lançado pelo país para reconstruir a Europa Ocidental após a Segunda Guerra Mundial e conter a influência comunista.", imagem: "https://s1.static.brasilescola.uol.com.br/be/conteudo/images/logotipo-plano-marshall-criado-pelos-eua-para-divulgar-programa-5661c2f7308d5.jpg" },
+{tema: "Geografia - Internacional",  palavra: "MARSHALL", dica: "Plano lançado pelo país para reconstruir a Europa Ocidental após a Segunda Guerra Mundial e conter a influência comunista.", imagem: "https://s3.static.brasilescola.uol.com.br/be/2024/06/desfile-em-homenagem-ao-plano-marshall.jpg" },
 
 
 {tema: "Geografia - Internacional",  palavra: "VIETNÃ", dica: "Nação do Sudeste Asiático dividida entre Norte comunista e Sul capitalista, palco de guerra intensa com forte intervenção externa entre 1955 e 1975.", imagem: "https://www.thebalancemoney.com/thmb/UseR_mHrkABJ47Esq3aNuAvuFbQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-515541786-5c2d29cbc9e77c00018fd2a9.jpg" },
@@ -495,10 +496,25 @@ export default function Pprincipal() {
 
     }
 
+    function sortear () {
 
+       const sort = Math.random()<0.5 ? nameb : namey
+        setSorteio("load")
+       setTimeout(() => {
+        setSorteio(sort)
+        
+       }, 2000);
+       
+
+    }
+
+
+    const [sorteio,setSorteio] = useState<string>("")
+    const [poupsorteio, setPoupSorteio] = useState<boolean>(false)
     const [poupdica, setPoupDica] = useState<boolean>(false)
     const [poupsword, setPoupSWord] = useState<boolean>(false)
     const [poupimg,setPoupImg] = useState<boolean>(false)
+    const [poupacerto, setPoupAcerto] = useState<boolean>(false)
     const [disabledica, setDisableDica] = useState<boolean>(false)
     const [poupduvidas, setPoupDuvidas] = useState<boolean>(false)
     const [poupsobre, setPoupSobre] = useState<boolean>(false)
@@ -506,15 +522,14 @@ export default function Pprincipal() {
     const [enery, setEnerY] = useState<number>(5)
     const [ptblue, setPtBlue] = useState<number>(0)
     const [ptyellow, setPtYellow] = useState<number>(0)
-    const [poupacerto, setPoupAcerto] = useState<boolean>(false)
     const [comportblue, setComportBlue] = useState<number>(3)
     const [totalptblue, setTotalPtBlue] = useState<number>(0)
     const [comportyellow, setComportYellow] = useState<number>(3)
     const [totalptyellow, setTotalPtYellow] = useState<number>(0)
     const [observblue, setObservBlue] = useState<string>("")
     const [observyellow, setObservYellow] = useState<string>("")
-    const [nameb, setNameB] = useState<string>("")
-    const [namey, setNameY] = useState<string>("")
+    const [nameb, setNameB] = useState<string>("Equipe Azul")
+    const [namey, setNameY] = useState<string>("Equipe Amarela")
 
 
     return (<>
@@ -686,6 +701,34 @@ export default function Pprincipal() {
                 <img className='min-w-full'  src={frases[fase].imagem}></img> </div></>}
         />
 
+         <Poup
+            titulo={<> SORTEAR </>}
+            show={poupsorteio}
+            modo='info'
+            qtdbtn={2}
+
+            close={() => { setPoupSorteio(false) }}
+
+            descricao={<>
+            <div className='flex flex-col justify-center items-center px-2 mt-2 min-w-40'>
+
+                <p>A equipe sorteada foi</p>
+                <p className='text-2xl'>{
+                sorteio==="load"? "..." : sorteio
+                
+                }</p>
+                <button onClick={sortear}
+                className='mt-3 cursor-pointer text-[#21285C] hover:scale-90 transition-all duration-300 w-fit px-2 rounded-md text-4xl'
+                >
+                    {sorteio=== "load" ? <GiPerspectiveDiceSixFacesFive className='animate-spin' /> : 
+                    <MdChangeCircle/> 
+                    }
+                    
+                </button>
+                </div>
+                </>}
+        />
+
 
         <Poup
 
@@ -724,7 +767,7 @@ export default function Pprincipal() {
             } />
 
 
-        <div className='flex flex-row justify center items-center sm:h-screen'>
+        <div className='flex flex-row justify center items-center xl:h-screen'>
             <div className='flex flex-row flex-wrap sm:gap-5 gap-y-3 gap-x-2 justify-center items-start mx-auto sm:p-0 my-2'>
 
 
@@ -732,7 +775,7 @@ export default function Pprincipal() {
 
                 <div className='xl:order-1 order-2'>
                     <CountCard
-                        equipe="Time Azul"
+                        equipe={nameb}
                         name={nameb}
                         setName={setNameB}
                         bgcolor='bg-blue-900'
@@ -755,8 +798,8 @@ export default function Pprincipal() {
 
 
 
-                <div className='lg:order-2 order-1 flex flex-row justify-center items-center lg:w-fit w-full sm:mb-6 mb-0'>
-                    <div className='sm:w-fit w-full block mx-auto'>
+                <div className='lg:order-2 order-1 flex flex-row justify-center items-center lg:w-fit w-full mb-0'>
+                    <div className='lg:w-fit w-full block mx-auto'>
 
                         <div className='w-full'>
 
@@ -783,6 +826,16 @@ export default function Pprincipal() {
 
                                     className='cursor-pointer h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
                                     <TbWorld /> <p className='sm:flex hidden'>Sobre</p>
+                                </div>
+
+                                
+
+                                <div
+                                onClick={()=> {
+                                    sortear()
+                                    setPoupSorteio(true)}}
+                                className='cursor-pointer h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
+                                    <GiPerspectiveDiceSixFacesFive /> <p className='sm:flex hidden'>Sortear</p>
                                 </div>
 
                                 <div
@@ -990,7 +1043,7 @@ export default function Pprincipal() {
 
                 <div className='lg:order-3 order-2'>
                     <CountCard
-                        equipe="Time Amarelo"
+                        equipe={namey}
                         name={namey}
                         setName={setNameY}
                         bgcolor='bg-[#F7CD21]'
