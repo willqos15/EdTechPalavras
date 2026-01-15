@@ -882,11 +882,13 @@ export default function Pprincipal() {
                                     </button>
 
                                     <div onClick={() => setPoupImg(true)}
-                                        className='flex items-center w-45 max-h-30 px-2'>
+                                        className='flex items-center w-45 sm:max-h-30 h-32 px-2'>
 
                                         <img className="
                                         w-auto
-                                        object-cover object-center
+                                        mx-auto
+                                        max-h-30
+                                        
                                         select-none rounded-xl"
 
 
