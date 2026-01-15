@@ -400,49 +400,48 @@ export default function Pprincipal() {
 
     const frases: Array<Tfrases> = [
 
-        {tema: "Biologia - Genética", palavra: "GENOMA", dica: "Conjunto Completo de genes de um organismo.", imagem: "https://upload.wikimedia.org/wikipedia/commons/d/df/Human_male_karyotpe_high_resolution.jpg" },
-        {tema: "Biologia - Genética", palavra: "DNA", dica: "Molécula que carrega a informação genética.", imagem: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCg9Rjn6qJmJhgi63-LLkBtTF_ay8jrseISg&s" },
-        {tema: "Biologia - Genética", palavra: "RNA", dica: "Molécula que transmite a informação do DNA para síntese de proteínas.", imagem: "https://elpais.com/infografias/2020/11/arn/cabecera/cabecera-movil2.jpg?v=6259" },
-        {tema: "Biologia - Genética", palavra: "CÉLULA", dica: "Unidade básica da vida.", imagem: "https://static.todamateria.com.br/upload/ce/lu/celulaanimal-0.jpg" },
-        {tema: "Biologia - Genética", palavra: "FENÓTIPO", dica: "Expressão observável das características de um organismo, resultado da interação entre genótipo e ambiente.", imagem: "https://static.todamateria.com.br/upload/sh/ut/shutterstock2189929933convertido-cke.jpg" },
+        { tema: "Biologia - Genética", palavra: "GENOMA", dica: "Conjunto Completo de genes de um organismo.", imagem: "https://upload.wikimedia.org/wikipedia/commons/d/df/Human_male_karyotpe_high_resolution.jpg" },
+        { tema: "Biologia - Genética", palavra: "DNA", dica: "Molécula que carrega a informação genética.", imagem: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCg9Rjn6qJmJhgi63-LLkBtTF_ay8jrseISg&s" },
+        { tema: "Biologia - Genética", palavra: "RNA", dica: "Molécula que transmite a informação do DNA para síntese de proteínas.", imagem: "https://elpais.com/infografias/2020/11/arn/cabecera/cabecera-movil2.jpg?v=6259" },
+        { tema: "Biologia - Genética", palavra: "CÉLULA", dica: "Unidade básica da vida.", imagem: "https://static.todamateria.com.br/upload/ce/lu/celulaanimal-0.jpg" },
+        { tema: "Biologia - Genética", palavra: "FENÓTIPO", dica: "Expressão observável das características de um organismo, resultado da interação entre genótipo e ambiente.", imagem: "https://static.todamateria.com.br/upload/sh/ut/shutterstock2189929933convertido-cke.jpg" },
 
 
-        
-       {tema: "Português - Gramática", palavra: "SUBSTANTIVO", dica: "Nomeia seres, objetos e lugares.", imagem: "https://static.todamateria.com.br/upload/su/bs/substantivos-og.jpg?class=ogImageWide" },
-        {tema: "Português - Gramática", palavra: "VERBO", dica: "Indica ação ou estado.", imagem: "https://f.i.uol.com.br/fotografia/2020/08/25/15983913555f45843b71558_1598391355_3x2_md.jpg" },
-        {tema: "Português - Gramática", palavra: "ADJETIVO", dica: "Qualifica o substantivo.", imagem: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJ4ruPSaPLirLfjY63cozJQt8nX5yLVNbsfw&s" },
-        {tema: "Português - Gramática", palavra: "SUJEITO", dica: "Quem realiza ou recebe o que se diz.", imagem: "https://st4.depositphotos.com/13349494/25169/i/450/depositphotos_251691910-stock-photo-silhouette-man-looking-camera-isolated.jpg" },
-        {tema: "Português - Gramática", palavra: "PREDICADO", dica: "O que se diz sobre o sujeito.", imagem: "https://img.freepik.com/fotos-gratis/dedos-note-relatorio-jornalista-enchimento_1150-1044.jpg?semt=ais_hybrid&w=740&q=80" },
+        { tema: "Português - Gramática", palavra: "SUBSTANTIVO", dica: "Nomeia seres, objetos e lugares.", imagem: "https://static.todamateria.com.br/upload/su/bs/substantivos-og.jpg?class=ogImageWide" },
+        { tema: "Português - Gramática", palavra: "VERBO", dica: "Indica ação ou estado.", imagem: "https://f.i.uol.com.br/fotografia/2020/08/25/15983913555f45843b71558_1598391355_3x2_md.jpg" },
+        { tema: "Português - Gramática", palavra: "ADJETIVO", dica: "Qualifica o substantivo.", imagem: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJ4ruPSaPLirLfjY63cozJQt8nX5yLVNbsfw&s" },
+        { tema: "Português - Gramática", palavra: "SUJEITO", dica: "Quem realiza ou recebe o que se diz.", imagem: "https://st4.depositphotos.com/13349494/25169/i/450/depositphotos_251691910-stock-photo-silhouette-man-looking-camera-isolated.jpg" },
+        { tema: "Português - Gramática", palavra: "PREDICADO", dica: "O que se diz sobre o sujeito.", imagem: "https://img.freepik.com/fotos-gratis/dedos-note-relatorio-jornalista-enchimento_1150-1044.jpg?semt=ais_hybrid&w=740&q=80" },
 
 
 
-       {tema: "Geografia - Internacional", palavra: "OTAN", dica: "Aliança militar ocidental formada para conter a expansão ideológica e militar de blocos rivais.", imagem: "https://eq7xsvyn9ek.exactdn.com/blog/wp-content/uploads/2023/10/O-que-e-OTAN.jpg" },
+        { tema: "Geografia - Internacional", palavra: "OTAN", dica: "Aliança militar ocidental formada para conter a expansão ideológica e militar de blocos rivais.", imagem: "https://eq7xsvyn9ek.exactdn.com/blog/wp-content/uploads/2023/10/O-que-e-OTAN.jpg" },
 
-{tema: "Geografia - Internacional",  palavra: "ONU", dica: "Organização criada após um conflito global para evitar novas guerras e mediar disputas internacionais.", imagem: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Flag_of_the_United_Nations.svg" },
-
-
-{tema: "Geografia - Internacional",  palavra: "MARSHALL", dica: "Plano lançado pelo país para reconstruir a Europa Ocidental após a Segunda Guerra Mundial e conter a influência comunista.", imagem: "https://s3.static.brasilescola.uol.com.br/be/2024/06/desfile-em-homenagem-ao-plano-marshall.jpg" },
+        { tema: "Geografia - Internacional", palavra: "ONU", dica: "Organização criada após um conflito global para evitar novas guerras e mediar disputas internacionais.", imagem: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Flag_of_the_United_Nations.svg" },
 
 
-{tema: "Geografia - Internacional",  palavra: "VIETNÃ", dica: "Nação do Sudeste Asiático dividida entre Norte comunista e Sul capitalista, palco de guerra intensa com forte intervenção externa entre 1955 e 1975.", imagem: "https://www.thebalancemoney.com/thmb/UseR_mHrkABJ47Esq3aNuAvuFbQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-515541786-5c2d29cbc9e77c00018fd2a9.jpg" },
-
-{tema: "Geografia - Internacional",  palavra: "COLÔNIA", dica: "Território ocupado e explorado por uma potência estrangeira, gerando tensões históricas.", imagem: "https://static.preparaenem.com/2024/04/engenho-de-acucar-da-epoca-do-brasil-colonia-retratado-em-pintura.jpg" },
+        { tema: "Geografia - Internacional", palavra: "MARSHALL", dica: "Plano lançado pelo país para reconstruir a Europa Ocidental após a Segunda Guerra Mundial e conter a influência comunista.", imagem: "https://s3.static.brasilescola.uol.com.br/be/2024/06/desfile-em-homenagem-ao-plano-marshall.jpg" },
 
 
+        { tema: "Geografia - Internacional", palavra: "VIETNÃ", dica: "Nação do Sudeste Asiático dividida entre Norte comunista e Sul capitalista, palco de guerra intensa com forte intervenção externa entre 1955 e 1975.", imagem: "https://www.thebalancemoney.com/thmb/UseR_mHrkABJ47Esq3aNuAvuFbQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-515541786-5c2d29cbc9e77c00018fd2a9.jpg" },
+
+        { tema: "Geografia - Internacional", palavra: "COLÔNIA", dica: "Território ocupado e explorado por uma potência estrangeira, gerando tensões históricas.", imagem: "https://static.preparaenem.com/2024/04/engenho-de-acucar-da-epoca-do-brasil-colonia-retratado-em-pintura.jpg" },
 
 
 
 
-       {tema: "English - School Objects",  palavra: "PENCIL", dica: "Tool used for writing or drawing, erasable and often wooden.", imagem: "https://img.freepik.com/vetores-gratis/estilo-liso-redondo-do-lapis_78370-7571.jpg?semt=ais_hybrid&w=740&q=80" },
-
-{tema: "English - School Objects", palavra: "ERASER", dica: "Small item used to remove graphite or ink marks from paper.", imagem: "https://images.tcdn.com.br/img/img_prod/1258915/borracha_escolar_fc_max_pequena_faber_castell_c_capa_2272403_1_75861322dd563233d7afab1953fdfb5e.jpg" },
-
-{tema: "English - School Objects", palavra: "RULER", dica: "Instrument used to measure or draw straight lines.", imagem: "https://res.cloudinary.com/rsc/image/upload/b_rgb:FFFFFF,c_pad,dpr_1.0,f_auto,q_auto,w_700/c_pad,w_700/F3006613-01" },
-
-{tema: "English - School Objects", palavra: "BACKPACK", dica: "Item carried on the back to transport books and supplies.", imagem: "https://static.vecteezy.com/ti/fotos-gratis/p2/2694882-menina-crianca-com-bolsa-escola-pronta-para-ir-para-a-escola-gratis-foto.jpg" },
 
 
-{tema: "English - School Objects", palavra: "GLUE", dica: "Substance used to stick paper or craft materials together.", imagem: "https://www.tilibra.com.br/storage/products/md/cola-branca-120g-lavavel_345563-e1.jpg?c=88f51d10807abf8d5f0097c252673442" },
+        { tema: "English - School Objects", palavra: "PENCIL", dica: "Tool used for writing or drawing, erasable and often wooden.", imagem: "https://img.freepik.com/vetores-gratis/estilo-liso-redondo-do-lapis_78370-7571.jpg?semt=ais_hybrid&w=740&q=80" },
+
+        { tema: "English - School Objects", palavra: "ERASER", dica: "Small item used to remove graphite or ink marks from paper.", imagem: "https://images.tcdn.com.br/img/img_prod/1258915/borracha_escolar_fc_max_pequena_faber_castell_c_capa_2272403_1_75861322dd563233d7afab1953fdfb5e.jpg" },
+
+        { tema: "English - School Objects", palavra: "RULER", dica: "Instrument used to measure or draw straight lines.", imagem: "https://res.cloudinary.com/rsc/image/upload/b_rgb:FFFFFF,c_pad,dpr_1.0,f_auto,q_auto,w_700/c_pad,w_700/F3006613-01" },
+
+        { tema: "English - School Objects", palavra: "BACKPACK", dica: "Item carried on the back to transport books and supplies.", imagem: "https://static.vecteezy.com/ti/fotos-gratis/p2/2694882-menina-crianca-com-bolsa-escola-pronta-para-ir-para-a-escola-gratis-foto.jpg" },
+
+
+        { tema: "English - School Objects", palavra: "GLUE", dica: "Substance used to stick paper or craft materials together.", imagem: "https://www.tilibra.com.br/storage/products/md/cola-branca-120g-lavavel_345563-e1.jpg?c=88f51d10807abf8d5f0097c252673442" },
 
 
 
@@ -496,24 +495,24 @@ export default function Pprincipal() {
 
     }
 
-    function sortear () {
+    function sortear() {
 
-       const sort = Math.random()<0.5 ? nameb : namey
+        const sort = Math.random() < 0.5 ? nameb : namey
         setSorteio("load")
-       setTimeout(() => {
-        setSorteio(sort)
-        
-       }, 2000);
-       
+        setTimeout(() => {
+            setSorteio(sort)
+
+        }, 2000);
+
 
     }
 
 
-    const [sorteio,setSorteio] = useState<string>("")
+    const [sorteio, setSorteio] = useState<string>("")
     const [poupsorteio, setPoupSorteio] = useState<boolean>(false)
     const [poupdica, setPoupDica] = useState<boolean>(false)
     const [poupsword, setPoupSWord] = useState<boolean>(false)
-    const [poupimg,setPoupImg] = useState<boolean>(false)
+    const [poupimg, setPoupImg] = useState<boolean>(false)
     const [poupacerto, setPoupAcerto] = useState<boolean>(false)
     const [disabledica, setDisableDica] = useState<boolean>(false)
     const [poupduvidas, setPoupDuvidas] = useState<boolean>(false)
@@ -688,7 +687,7 @@ export default function Pprincipal() {
             } />
 
 
-             <Poup
+        <Poup
             titulo={<> Imagem: {frases[fase].tema}</>}
             show={poupimg}
             modo='info'
@@ -697,11 +696,11 @@ export default function Pprincipal() {
             close={() => { setPoupImg(false) }}
 
             descricao={<>
-                <div className='sm:min-w-96 p-1'> 
-                <img className='min-w-full'  src={frases[fase].imagem}></img> </div></>}
+                <div className='sm:min-w-96 p-1'>
+                    <img className='min-w-full' src={frases[fase].imagem}></img> </div></>}
         />
 
-         <Poup
+        <Poup
             titulo={<> SORTEAR </>}
             show={poupsorteio}
             modo='info'
@@ -710,23 +709,23 @@ export default function Pprincipal() {
             close={() => { setPoupSorteio(false) }}
 
             descricao={<>
-            <div className='flex flex-col justify-center items-center px-2 mt-2 min-w-40'>
+                <div className='flex flex-col justify-center items-center px-2 mt-2 min-w-40'>
 
-                <p>A equipe sorteada foi</p>
-                <p className='text-2xl'>{
-                sorteio==="load"? "..." : sorteio
-                
-                }</p>
-                <button onClick={sortear}
-                className='mt-3 cursor-pointer text-[#21285C] hover:scale-90 transition-all duration-300 w-fit px-2 rounded-md text-4xl'
-                >
-                    {sorteio=== "load" ? <GiPerspectiveDiceSixFacesFive className='animate-spin' /> : 
-                    <MdChangeCircle/> 
-                    }
-                    
-                </button>
+                    <p>A equipe sorteada foi</p>
+                    <p className='text-2xl'>{
+                        sorteio === "load" ? "..." : sorteio
+
+                    }</p>
+                    <button onClick={sortear}
+                        className='mt-3 cursor-pointer text-[#21285C] hover:scale-90 transition-all duration-300 w-fit px-2 rounded-md text-4xl'
+                    >
+                        {sorteio === "load" ? <GiPerspectiveDiceSixFacesFive className='animate-spin' /> :
+                            <MdChangeCircle />
+                        }
+
+                    </button>
                 </div>
-                </>}
+            </>}
         />
 
 
@@ -803,7 +802,7 @@ export default function Pprincipal() {
 
                         <div className='w-full'>
 
-                            <div className='flex flex-row justify-start gap-3 items-end mx-auto'>
+                            <div className='flex flex-row justify-start gap-2 items-end mx-auto'>
                                 <img
                                     src={logo}
                                     className='h-8 bg-[#F7CD21] px-5 p-1 rounded-t-md'
@@ -828,13 +827,14 @@ export default function Pprincipal() {
                                     <TbWorld /> <p className='sm:flex hidden'>Sobre</p>
                                 </div>
 
-                                
+
 
                                 <div
-                                onClick={()=> {
-                                    sortear()
-                                    setPoupSorteio(true)}}
-                                className='cursor-pointer h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
+                                    onClick={() => {
+                                        sortear()
+                                        setPoupSorteio(true)
+                                    }}
+                                    className='cursor-pointer h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
                                     <GiPerspectiveDiceSixFacesFive /> <p className='sm:flex hidden'>Sortear</p>
                                 </div>
 
@@ -878,22 +878,22 @@ export default function Pprincipal() {
                                         <FaArrowCircleLeft />
                                     </button>
 
-                                    <div onClick={()=>setPoupImg(true)}
-                                    className='flex items-center w-40 h-35 px-2'>
+                                    <div onClick={() => setPoupImg(true)}
+                                        className='flex items-center w-40 h-35 px-2'>
 
-                                    <img
-                                
+                                        <img
 
 
-                                        className="
+
+                                            className="
                                         w-auto
                                         object-cover object-center
                                         select-none rounded-xl"
 
 
-                                        src={frases[fase].imagem}></img>
+                                            src={frases[fase].imagem}></img>
 
-                                        </div>
+                                    </div>
 
                                     <button
                                         onClick={() => {
