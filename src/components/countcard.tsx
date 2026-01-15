@@ -52,7 +52,7 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
 
     return (<>
 
-        <div className={`max-h-[90vh] w-fit bg-white font-bold px-0 whitespace-nowrap flex flex-col h-fit  items-center justify-center gap-y-2 ${textcolor}`}>
+        <div className={`max-h-dvh w-fit bg-white font-bold px-0 whitespace-nowrap flex flex-col items-center justify-center gap-y-2 mb-4 ${textcolor}`}>
             <p className={`${bgcolor} w-full px-3 text-bold ${titlecolor}`}> {name ? name : equipe} </p>
 
             <div className={`flex items-end ${comport > 3 ? 'text-green-800' : comport < 3 ? 'text-red-800' : textcolor}`}>
@@ -66,7 +66,8 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
                 </div>
             </div>
 
-            <div>
+            <div className='flex flex-col justify-center items-center w-fit'>
+                <div>
                 <button onClick={() => setPt(ant => ant + 1)}
                     className='cursor-pointer bg-white px-2'>
                     <IoMdAddCircleOutline
@@ -75,6 +76,7 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
                 <button onClick={() => setPt(ant => ant - 1)}
                 >
                     <IoMdRemoveCircleOutline className='cursor-pointer hover:bg-red-400 transition duration-300 text-4xl rounded-full  p-0 flex items-center justify-center' /> </button>
+                </div>
 
                 {statee > 15 ?
                     <div className='flex justify-center items-center gap-1 bg-white '>
@@ -84,7 +86,7 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
 
                     :
 
-                    <div className={`${statee < 5 ? `flex justify-center` : "grid grid-cols-5 place-items-center w-fit mx-auto"}`}>
+                    <div className={`${statee < 5 ? `flex justify-center items-center` : "grid grid-cols-5 place-items-center justify-center w-fit"}`}>
                         {
                             [...Array(statee)].map(() => <AiFillThunderbolt className='inline-block' />)
                         }
@@ -95,7 +97,7 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
                 {showcb ?
                     <RiArrowUpWideLine
                         onClick={() => setShowCB(!showcb)}
-                        className='cursor-pointer mx-auto font-bold text-4xl text-gray-400 hover:text-gray-600 transition duration-300' />
+                        className='cursor-pointer font-bold text-4xl text-gray-400 hover:text-gray-600 transition duration-300' />
                     :
                     <RiArrowDownWideLine
                         onClick={() => setShowCB(!showcb)}
@@ -103,13 +105,13 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
                 }
 
 
-                <div className={`overflow-hidden transition-[max-height, opacity] duration-300 ease-in
+                <div className={`flex flex-col items-center justify-center overflow-hidden transition-[max-height, opacity] duration-300 ease-in px-2
                         ${showcb ?
-                        'max-h-96 max-w-35 px-2 opacity-100' :
-                        'max-h-0  max-w-35 px-2 opacity-0 ease-out'}
+                        'max-h-fit max-w-fit opacity-100' :
+                        'max-h-0  max-w-fit opacity-0 ease-out'}
                         `}>
 
-                    <hr className='border mb-1' />
+                    <hr className='border mb-1 w-full' />
 
                     <p>Comportamento:</p>
                     <input type="range"
@@ -117,7 +119,7 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
                         max="5"
                         step="1"
                         onChange={(e) => setComport(Number(e.target.value))}
-                        className={`cursor-pointer w-30
+                        className={`cursor-pointer sm:w-30 w-25 max-w-fit
                         ${comport === 1 ? "accent-red-700"
                                 : comport === 2 ? "accent-orange-600"
                                     : comport === 3 ? "accent-gray-500"
@@ -140,8 +142,9 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
                         {comport === 5 && "Muito Bom! +2pts"}
                     </p>
 
-                    <hr className='border my-2' />
-
+                    <hr className='border my-2 w-full' />
+                            
+                    
                     <p className='text-sm text-center'>
                         Nome da Equipe:</p>
                     <input
@@ -149,15 +152,15 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
                         value={name}
                         type="text"
                         maxLength={12}
-                        className='bg-[#e6eae1] block text-center text-sm max-w-full' />
+                        className='bg-[#e6eae1] block text-center text-sm sm:w-11/12 w-25' />
 
 
 
 
 
-                    <div className='flex flex-row justify-center py-1'>
+                    <div className='flex flex-row items-center justify-center py-1 gap-1'>
 
-                        <div className='flex flex-row justify-center max-w-40 w-full'>
+                        <div className='flex flex-row justify-center max-w-40 w-fit gap-1'>
 
                             <div className='w-fit'>
                                 <p className='block text-sm'>Pts:</p>
@@ -167,7 +170,7 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
                             </div>
 
 
-                            <div className='flex flex-col justify-center items-center max-w-full gap-y-1 w-12 mx-auto'>
+                            <div className='flex flex-col justify-center items-center gap-y-1 w-8'>
 
 
 
@@ -229,12 +232,13 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
                         </div>
                     </div>
 
-                    <hr className='border my-1'/>
+                    <hr className='border my-1 w-full'/>
 
                     <p>Observações:</p>
                     <textarea
                     onChange={(e)=>setObserv(e.target.value)}
-                    className={` ${observ.length>0 ? 'bg-white border-2 border-black': 'bg-[#e6eae1'}] w-full min-h-6 px-1 text-md text-gray-700`}
+                    className={`text-sm ${observ.length>0 ? 'bg-white border-2 border-black': 'bg-[#e6eae1'}] 
+                    sm:w-30 w-25 min-h-7 max-h-15 px-1 mb-2 text-gray-700`}
                     />
 
 

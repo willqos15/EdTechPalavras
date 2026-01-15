@@ -666,11 +666,13 @@ export default function Pprincipal() {
             } />
 
 
+        
+        <div className='flex flex-row flex-wrap sm:gap-5 gap-y-3 gap-x-2 justify-center items-start mx-auto sm:p-0 my-2'>
 
-        <div className='flex flex-row gap-5 justify-center items-st w-245 h-110'>
+        
 
 
-            
+            <div className='xl:order-1 order-2'>
                 <CountCard
                     equipe="Time Azul"
                     name={nameb}
@@ -689,13 +691,18 @@ export default function Pprincipal() {
                     observ={observblue}
                     setObserv={setObservBlue}
                 />
+                </div>
             
 
 
 
 
-            <div>
-                <div className='flex flex-row w-130 justify-start gap-3 items-end '>
+            <div className= 'lg:order-2 order-1 flex flex-row justify-center items-center lg:w-fit w-full sm:mb-6 mb-0'>
+                <div className='sm:w-fit w-full block mx-auto'>
+
+                    <div className='w-full'>
+                    
+                <div className='flex flex-row justify-start gap-3 items-end mx-auto'>
                     <img
                         src={logo}
                         className='h-8 bg-[#F7CD21] px-5 p-1 rounded-t-md'
@@ -709,39 +716,43 @@ export default function Pprincipal() {
                     <div
                         onClick={() => setPoupDuvidas(!poupduvidas)}
                         className='cursor-pointer h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 hover:bg-white transition-all duration-300'>
-                        <FaQuestionCircle /> Dúvidas
+                        <FaQuestionCircle /> <p className='sm:flex hidden'>
+                            Dúvidas</p> 
                     </div>
 
                     <div
                         onClick={() => setPoupSobre(!poupsobre)}
 
                         className='cursor-pointer h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
-                        <TbWorld /> Sobre
+                        <TbWorld /> <p className='sm:flex hidden'>Sobre</p>
                     </div>
 
                     <div
                         onClick={salvar}
                         className='cursor-pointer h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
-                        <IoIosSave /> Salvar
+                        <IoIosSave /> <p className='sm:flex hidden'>Salvar</p> 
                     </div>
 
                 </div>
 
-                <div className='w-130 text-[#21285C] bg-white rounded-lg h-112-5'>
+                <div className='sm:w-130 w-full text-[#21285C] bg-white sm:rounded-lg rounded-tr-lg h-fit mx-auto'>
 
-                    <div className='text-3xl font-bold bg-[#F7CD21] px-5 flex items-center h-12 justify-between rounded-tr-lg'>
+                    <div className='text-3xl font-bold bg-[#F7CD21] px-5 flex items-center h-12 justify-between sm:rounded-tr-lg rounded-0'>
 
 
-                        <h1 className='inline-block text-color[#2D3194] py-2'>
+                        <h1 className='inline-block text-color[#2D3194] py-2 sm:text-3xl text-2xl'>
                             Biologia 2º Semestre
                         </h1>
 
                         <div className='flex items-end h-full'>
-                            <p className=' inline-block bg-white text-3xl rounded-t-md px-2 h-10 pt-1'>{fase + 1 <= 9 ? '0' + (fase + 1) : fase + 1}</p>
+                            <p className=' inline-block bg-white sm:text-3xl text-xl rounded-t-md px-2 h-10 pt-1'>{fase + 1 <= 9 ? '0' + (fase + 1) : fase + 1}</p>
                         </div>
                     </div>
+                    </div>
 
-                    <div className='flex justify-center gap-x-5 items-center py-3 h-40'>
+                    <div className='bg-white'>
+
+                    <div className='flex justify-center gap-x-2 items-center py-3 h-40'>
 
                         <button
                             onClick={() => {
@@ -749,7 +760,10 @@ export default function Pprincipal() {
                                 setDigi([])
                                 setHelp(false)
                             }}
-                            className={fase > 0 ? 'cursor-pointer bg-[#21285C] text-[#F7CD21] hover:scale-110 hover:p-1.4 transition-all duration-300 h-fit p-1 rounded-full text-4xl flex justify-center items-center font-bold ' : 'bg-[#21285C] text-[#F7CD21] hover:scale-110 hover:p-1.4 transition-all duration-300 h-fit p-1 rounded-full text-4xl flex justify-center items-center font-bold opacity-0 pointer-events-none'}>
+                            className={
+                                
+                                ` bg-[#21285C] text-[#F7CD21] hover:scale-110 hover:p-1.4 transition-all duration-300 h-fit p-1 rounded-full ml-1 sm:text-4xl text-2xl flex justify-center items-center font-bold  ${ fase > 0 ? 'cursor-pointer' : 'opacity-0 pointer-events-none'}`
+                               }>
                             <FaArrowCircleLeft />
                         </button>
 
@@ -768,7 +782,9 @@ export default function Pprincipal() {
                                 setDigi([])
                                 setHelp(false)
                             }}
-                            className={fase <= (frases.length - 2) ? 'cursor-pointer bg-[#21285C] text-[#F7CD21] hover:scale-110 hover:p-1.4 transition-all duration-300 h-fit p-1 rounded-full text-4xl flex justify-center items-center font-bold ' : ' bg-[#21285C] text-[#F7CD21] hover:scale-110 hover:p-1.4 transition-all duration-300 h-fit p-1 rounded-full text-4xl flex justify-center items-center font-bold  opacity-0 pointer-events-none'}>
+                            className={                                 
+                                ` bg-[#21285C] text-[#F7CD21] hover:scale-110 hover:p-1.4 transition-all duration-300 h-fit p-1 rounded-full sm:text-4xl text-2xl mr-1 flex justify-center items-center font-bold  ${ fase <= (frases.length - 2) ? 'cursor-pointer' : 'opacity-0 pointer-events-none'}`
+                               }> 
                             <FaArrowCircleRight />
                         </button>
 
@@ -776,7 +792,7 @@ export default function Pprincipal() {
 
                     <div className='select-none flex gap-2 justify-center'>
                         {frases[fase].palavra.split("").map((letra) => (
-                            <div className="w-13 bg-[#e6eae1] text-4xl px-2 py-3 rounded-md text-[#21285C] border-3">
+                            <div className="sm:w-13 sm:text-4xl sm:py-3 py-1 w-8 text-lg bg-[#e6eae1]  px-2  rounded-md text-[#21285C] border-3">
                                 <span className={
                                     (Array.from(digi).map(normalizar)).includes(normalizar(letra)) || normalizar(digi.join("")) === normalizar(frases[fase].palavra) || complete.includes(fase) ?
                                         'opacity-100'
@@ -841,9 +857,11 @@ export default function Pprincipal() {
 
                         <button
                             onClick={() => setMLetra(!mletra)}
-                            className='cursor-pointer ml-4 px-2 h-fit flex flex-row items-center absolute -left-20'>
-                            <MdChangeCircle className='text-2xl' />
+                            className='cursor-pointer ml-4 px-2 h-fit flex flex-row items-center absolute sm:-left-20 -left-11'>
+                            <MdChangeCircle className='text-2xl text-[#21285C] ' />
+                            <p className='sm:flex hidden'>
                             {mletra ? 'Letra' : 'Palavra'}
+                            </p>
 
 
                         </button>
@@ -855,9 +873,10 @@ export default function Pprincipal() {
                                     {...register("campo", { required: true })}
                                     disabled=
                                     {complete.includes(fase) ? true : false}
+                                    autoComplete="off"
                                     maxLength={complete.includes(fase) ? 0 : mletra ? 1 : 25}
-                                    placeholder={complete.includes(fase) ? 'COMPLETADO' : mletra ? 'Digite uma letra aqui' : 'Digite uma palavra aqui'}
-                                    className={`uppercase my-3 w-60 h-11 px-3 rounded-sm border-3 ${complete.includes(fase) ? 'bg-green-800 text-white text-center opacity-100' : 'bg-[#e6eae1]'}`} type="text"
+                                    placeholder={complete.includes(fase) ? 'COMPLETADO' : mletra ? 'Digite uma letra' : 'Digite uma palavra'}
+                                    className={`uppercase my-3 sm:w-60 sm:text-xl text-[10pt] w-35 h-11 sm:px-3 px-1 rounded-sm border-3 ${complete.includes(fase) ? 'bg-green-800 text-white text-center opacity-100' : 'bg-[#e6eae1]'}`} type="text"
                                     onChange={(e) => setValue("campo", e.target.value.toUpperCase())}
 
                                 />
@@ -897,11 +916,13 @@ export default function Pprincipal() {
 
                         </div>
                     }
-
+</div>
+                </div>
                 </div>
             </div>
 
             
+            <div className='lg:order-3 order-2'>
             <CountCard
                 equipe="Time Amarelo"
                 name={namey}
@@ -920,6 +941,7 @@ export default function Pprincipal() {
                 observ={observyellow}
                 setObserv={setObservYellow}
             />
+            </div>
 
 
 
