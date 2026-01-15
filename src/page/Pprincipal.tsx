@@ -498,8 +498,8 @@ export default function Pprincipal() {
             close={() => { setPoupAcerto(false) }}
 
             descricao={<>
-                <p> A palavra era {frases[fase].palavra}</p>
-                <p className='w-50'>Este ponto vai para qual equipe?</p></>}
+                <p className='px-2 text-center'> A palavra era {frases[fase].palavra}</p>
+                <p className='w-50 px-2 text-center'>Este ponto vai para qual equipe?</p></>}
         />
 
 
@@ -526,7 +526,7 @@ export default function Pprincipal() {
             close={() => { setPoupDica(false) }}
 
             descricao={<>
-                <p>Informe qual equipe solicitou a dica</p></>} />
+                <p className='p-2 text-center'>Informe qual equipe solicitou a dica</p></>} />
 
 
         <Poup
@@ -545,7 +545,7 @@ export default function Pprincipal() {
             close={() => { setDisableDica(false) }}
 
             descricao={<>
-                <p>Deseja desativar a dica?</p></>}
+                <p className='p-2 text-center'>Deseja desativar a dica?</p></>}
         />
 
 
@@ -561,7 +561,7 @@ export default function Pprincipal() {
             }}
             f2={() => setPoupSWord(false)}
             close={() => setPoupSWord(false)}
-            descricao={<p>Deseja revelar a palavra?</p>}
+            descricao={<p className='p-2 text-center'>Deseja revelar a palavra?</p>}
         />
 
         <Poup
@@ -569,8 +569,8 @@ export default function Pprincipal() {
             show={poupduvidas} modo='info'
             close={() => setPoupDuvidas(false)}
             descricao={
-                <div className='tduvida h-96  mr-0 
-                overflow-y-auto border-8'>
+                <div className='tduvida h-96 mr-0 
+                overflow-y-auto px-2 py-2'>
 
                     <div>
                         <h3>1 - Como a turma é organizada?</h3>
@@ -635,17 +635,17 @@ export default function Pprincipal() {
             show={poupsobre} modo='info'
             close={() => setPoupSobre(false)}
             descricao={
-                <>
-                    <p className='max-w-50 mt-3'>
+                <div className='flex flex-col justify-center items-center px-2'>
+                    <p className='max-w-50 mt-3 text-center'>
                         Aplicação Web desenvolvida com React, Typescript e Tailwind.
                     </p>
 
                     <hr className='border my-2' />
 
-                    <p>
-                        <FaGear className='inline-block mr-1' />
+                    <p className='text-center'>
+                        <FaGear className='inline-block' />
                         Desenvolvido por William Queiroz: </p>
-                    <div className='flex flex-col items-start text-sm linkct'>
+                    <div className='flex flex-col items-start text-sm linkct px-2 text-center'>
 
                         <a
                             href='https://queirozdeveloper.vercel.app/'> <FaCode className='inline-block mr-1' />  Portfólio: queirozdeveloper.vercel.app</a>
@@ -661,12 +661,12 @@ export default function Pprincipal() {
 
                     </div>
 
-                </>
+                </div>
 
             } />
 
 
-        
+        <div className='flex flex-row justify center items-center sm:h-screen'>
         <div className='flex flex-row flex-wrap sm:gap-5 gap-y-3 gap-x-2 justify-center items-start mx-auto sm:p-0 my-2'>
 
         
@@ -769,7 +769,7 @@ export default function Pprincipal() {
 
                         <img
 
-                            className="select-none h-fit w-40 rounded-xl
+                            className="select-none h-auto w-40 rounded-xl
                         transform-[transformation] duration-300
                         "
 
@@ -858,7 +858,7 @@ export default function Pprincipal() {
                         <button
                             onClick={() => setMLetra(!mletra)}
                             className='cursor-pointer ml-4 px-2 h-fit flex flex-row items-center absolute sm:-left-20 -left-11'>
-                            <MdChangeCircle className='text-2xl text-[#21285C] ' />
+                            <MdChangeCircle className= {`text-2xl ${complete.includes(fase) ? 'text-gray-400' : 'text-[#21285C]'}`} />
                             <p className='sm:flex hidden'>
                             {mletra ? 'Letra' : 'Palavra'}
                             </p>
@@ -876,7 +876,7 @@ export default function Pprincipal() {
                                     autoComplete="off"
                                     maxLength={complete.includes(fase) ? 0 : mletra ? 1 : 25}
                                     placeholder={complete.includes(fase) ? 'COMPLETADO' : mletra ? 'Digite uma letra' : 'Digite uma palavra'}
-                                    className={`uppercase my-3 sm:w-60 sm:text-xl text-[10pt] w-35 h-11 sm:px-3 px-1 rounded-sm border-3 ${complete.includes(fase) ? 'bg-green-800 text-white text-center opacity-100' : 'bg-[#e6eae1]'}`} type="text"
+                                    className={`uppercase my-3 sm:w-60 sm:text-xl text-base w-35 h-11 sm:px-3 px-1 rounded-sm border-3 ${complete.includes(fase) ? 'bg-green-800 text-white text-center opacity-100' : 'bg-[#e6eae1]'}`} type="text"
                                     onChange={(e) => setValue("campo", e.target.value.toUpperCase())}
 
                                 />
@@ -949,6 +949,7 @@ export default function Pprincipal() {
 
 
 
+        </div>
         </div>
     </>)
 }

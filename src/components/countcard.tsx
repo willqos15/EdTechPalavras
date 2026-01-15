@@ -71,11 +71,11 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
                 <button onClick={() => setPt(ant => ant + 1)}
                     className='cursor-pointer bg-white px-2'>
                     <IoMdAddCircleOutline
-                        className='cursor-pointer hover:bg-green-400 transition duration-300 text-4xl rounded-full  p-0 flex items-center justify-center' /> </button>
+                        className='cursor-pointer hover:bg-green-400 active:bg-green-400 transition duration-300 text-4xl rounded-full  p-0 flex items-center justify-center' /> </button>
 
                 <button onClick={() => setPt(ant => ant - 1)}
                 >
-                    <IoMdRemoveCircleOutline className='cursor-pointer hover:bg-red-400 transition duration-300 text-4xl rounded-full  p-0 flex items-center justify-center' /> </button>
+                    <IoMdRemoveCircleOutline className='cursor-pointer hover:bg-red-400 active:bg-red-400 transition duration-300 text-4xl rounded-full  p-0 flex items-center justify-center' /> </button>
                 </div>
 
                 {statee > 15 ?
@@ -105,10 +105,10 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
                 }
 
 
-                <div className={`flex flex-col items-center justify-center overflow-hidden transition-[max-height, opacity] duration-300 ease-in px-2
+                <div className={`flex flex-col items-center justify-center overflow-hidden transition-[max-height, opacity] duration-300 ease-in px-2 max-w-fit
                         ${showcb ?
-                        'max-h-fit max-w-fit opacity-100' :
-                        'max-h-0  max-w-fit opacity-0 ease-out'}
+                        'max-h-fit  opacity-100' :
+                        'max-h-0  opacity-0 ease-out'}
                         `}>
 
                     <hr className='border mb-1 w-full' />
@@ -119,7 +119,7 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
                         max="5"
                         step="1"
                         onChange={(e) => setComport(Number(e.target.value))}
-                        className={`cursor-pointer sm:w-30 w-25 max-w-fit
+                        className={`cursor-pointer w-11/12 max-w-fit
                         ${comport === 1 ? "accent-red-700"
                                 : comport === 2 ? "accent-orange-600"
                                     : comport === 3 ? "accent-gray-500"

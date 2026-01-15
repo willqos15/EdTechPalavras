@@ -33,7 +33,7 @@ export default function Poup({titulo, descricao, show, modo, f1, f2,f3, close, q
 
             
 
-            <p className="text-[#21285C] px-3 py-2">
+            <p className="text-[#21285C]">
             {descricao}</p>
 
 
