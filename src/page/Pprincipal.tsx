@@ -32,6 +32,7 @@ type Tfrases = {
     palavra: string
     dica: string
     imagem?: string
+    tema?: string
 }
 
 export default function Pprincipal() {
@@ -398,10 +399,52 @@ export default function Pprincipal() {
 
     const frases: Array<Tfrases> = [
 
-        { palavra: "GENOMA", dica: "Conjunto Completo de genes de um organismo.", imagem: "https://upload.wikimedia.org/wikipedia/commons/d/df/Human_male_karyotpe_high_resolution.jpg" },
-        { palavra: "DNA", dica: "Molécula que carrega a informação genética.", imagem: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYUKqhStT-7Bfk8i2qOBdzWLbIAemRJ-4gHg&s" },
-        { palavra: "RNA", dica: "Molécula que transmite a informação do DNA para síntese de proteínas.", imagem: "https://elpais.com/infografias/2020/11/arn/cabecera/cabecera-movil2.jpg?v=6259" },
-        { palavra: "CÉLULA", dica: "Unidade básica da vida.", imagem: "https://static.todamateria.com.br/upload/ce/lu/celulaanimal-0.jpg" },
+        {tema: "Biologia - Genética", palavra: "GENOMA", dica: "Conjunto Completo de genes de um organismo.", imagem: "https://upload.wikimedia.org/wikipedia/commons/d/df/Human_male_karyotpe_high_resolution.jpg" },
+        {tema: "Biologia - Genética", palavra: "DNA", dica: "Molécula que carrega a informação genética.", imagem: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCg9Rjn6qJmJhgi63-LLkBtTF_ay8jrseISg&s" },
+        {tema: "Biologia - Genética", palavra: "RNA", dica: "Molécula que transmite a informação do DNA para síntese de proteínas.", imagem: "https://elpais.com/infografias/2020/11/arn/cabecera/cabecera-movil2.jpg?v=6259" },
+        {tema: "Biologia - Genética", palavra: "CÉLULA", dica: "Unidade básica da vida.", imagem: "https://static.todamateria.com.br/upload/ce/lu/celulaanimal-0.jpg" },
+        {tema: "Biologia - Genética", palavra: "FENÓTIPO", dica: "Expressão observável das características de um organismo, resultado da interação entre genótipo e ambiente.", imagem: "https://static.todamateria.com.br/upload/sh/ut/shutterstock2189929933convertido-cke.jpg" },
+
+
+        
+       {tema: "Português - Gramática", palavra: "SUBSTANTIVO", dica: "Nomeia seres, objetos e lugares.", imagem: "https://static.todamateria.com.br/upload/su/bs/substantivos-og.jpg?class=ogImageWide" },
+        {tema: "Português - Gramática", palavra: "VERBO", dica: "Indica ação ou estado.", imagem: "https://f.i.uol.com.br/fotografia/2020/08/25/15983913555f45843b71558_1598391355_3x2_md.jpg" },
+        {tema: "Português - Gramática", palavra: "ADJETIVO", dica: "Qualifica o substantivo.", imagem: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJ4ruPSaPLirLfjY63cozJQt8nX5yLVNbsfw&s" },
+        {tema: "Português - Gramática", palavra: "SUJEITO", dica: "Quem realiza ou recebe o que se diz.", imagem: "https://st4.depositphotos.com/13349494/25169/i/450/depositphotos_251691910-stock-photo-silhouette-man-looking-camera-isolated.jpg" },
+        {tema: "Português - Gramática", palavra: "PREDICADO", dica: "O que se diz sobre o sujeito.", imagem: "https://img.freepik.com/fotos-gratis/dedos-note-relatorio-jornalista-enchimento_1150-1044.jpg?semt=ais_hybrid&w=740&q=80" },
+
+
+
+       {tema: "Geografia - Internacional", palavra: "OTAN", dica: "Aliança militar ocidental formada para conter a expansão ideológica e militar de blocos rivais.", imagem: "https://eq7xsvyn9ek.exactdn.com/blog/wp-content/uploads/2023/10/O-que-e-OTAN.jpg" },
+
+{tema: "Geografia - Internacional",  palavra: "ONU", dica: "Organização criada após um conflito global para evitar novas guerras e mediar disputas internacionais.", imagem: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Flag_of_the_United_Nations.svg" },
+
+
+{tema: "Geografia - Internacional",  palavra: "MARSHALL", dica: "Plano lançado pelo país para reconstruir a Europa Ocidental após a Segunda Guerra Mundial e conter a influência comunista.", imagem: "https://s1.static.brasilescola.uol.com.br/be/conteudo/images/logotipo-plano-marshall-criado-pelos-eua-para-divulgar-programa-5661c2f7308d5.jpg" },
+
+
+{tema: "Geografia - Internacional",  palavra: "VIETNÃ", dica: "Nação do Sudeste Asiático dividida entre Norte comunista e Sul capitalista, palco de guerra intensa com forte intervenção externa entre 1955 e 1975.", imagem: "https://www.thebalancemoney.com/thmb/UseR_mHrkABJ47Esq3aNuAvuFbQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-515541786-5c2d29cbc9e77c00018fd2a9.jpg" },
+
+{tema: "Geografia - Internacional",  palavra: "COLÔNIA", dica: "Território ocupado e explorado por uma potência estrangeira, gerando tensões históricas.", imagem: "https://static.preparaenem.com/2024/04/engenho-de-acucar-da-epoca-do-brasil-colonia-retratado-em-pintura.jpg" },
+
+
+
+
+
+
+       {tema: "English - School Objects",  palavra: "PENCIL", dica: "Tool used for writing or drawing, erasable and often wooden.", imagem: "https://img.freepik.com/vetores-gratis/estilo-liso-redondo-do-lapis_78370-7571.jpg?semt=ais_hybrid&w=740&q=80" },
+
+{tema: "English - School Objects", palavra: "ERASER", dica: "Small item used to remove graphite or ink marks from paper.", imagem: "https://images.tcdn.com.br/img/img_prod/1258915/borracha_escolar_fc_max_pequena_faber_castell_c_capa_2272403_1_75861322dd563233d7afab1953fdfb5e.jpg" },
+
+{tema: "English - School Objects", palavra: "RULER", dica: "Instrument used to measure or draw straight lines.", imagem: "https://res.cloudinary.com/rsc/image/upload/b_rgb:FFFFFF,c_pad,dpr_1.0,f_auto,q_auto,w_700/c_pad,w_700/F3006613-01" },
+
+{tema: "English - School Objects", palavra: "BACKPACK", dica: "Item carried on the back to transport books and supplies.", imagem: "https://static.vecteezy.com/ti/fotos-gratis/p2/2694882-menina-crianca-com-bolsa-escola-pronta-para-ir-para-a-escola-gratis-foto.jpg" },
+
+
+{tema: "English - School Objects", palavra: "GLUE", dica: "Substance used to stick paper or craft materials together.", imagem: "https://www.tilibra.com.br/storage/products/md/cola-branca-120g-lavavel_345563-e1.jpg?c=88f51d10807abf8d5f0097c252673442" },
+
+
+
 
 
     ]
@@ -455,6 +498,7 @@ export default function Pprincipal() {
 
     const [poupdica, setPoupDica] = useState<boolean>(false)
     const [poupsword, setPoupSWord] = useState<boolean>(false)
+    const [poupimg,setPoupImg] = useState<boolean>(false)
     const [disabledica, setDisableDica] = useState<boolean>(false)
     const [poupduvidas, setPoupDuvidas] = useState<boolean>(false)
     const [poupsobre, setPoupSobre] = useState<boolean>(false)
@@ -629,6 +673,20 @@ export default function Pprincipal() {
             } />
 
 
+             <Poup
+            titulo={<> Imagem: {frases[fase].tema}</>}
+            show={poupimg}
+            modo='info'
+            qtdbtn={2}
+
+            close={() => { setPoupImg(false) }}
+
+            descricao={<>
+                <div className='sm:min-w-96 p-1'> 
+                <img className='min-w-full'  src={frases[fase].imagem}></img> </div></>}
+        />
+
+
         <Poup
 
             titulo={<p className='inline-block '> SOBRE </p>}
@@ -667,289 +725,297 @@ export default function Pprincipal() {
 
 
         <div className='flex flex-row justify center items-center sm:h-screen'>
-        <div className='flex flex-row flex-wrap sm:gap-5 gap-y-3 gap-x-2 justify-center items-start mx-auto sm:p-0 my-2'>
-
-        
-
-
-            <div className='xl:order-1 order-2'>
-                <CountCard
-                    equipe="Time Azul"
-                    name={nameb}
-                    setName={setNameB}
-                    bgcolor='bg-blue-900'
-                    titlecolor='text-white'
-                    textcolor="text-blue-950"
-                    statee={enerb}
-                    setStateE={setEnerB}
-                    pt={ptblue}
-                    setPt={setPtBlue}
-                    setComport={setComportBlue}
-                    comport={comportblue}
-                    setTotalPt={setTotalPtBlue}
-                    totalpt={totalptblue}
-                    observ={observblue}
-                    setObserv={setObservBlue}
-                />
-                </div>
-            
+            <div className='flex flex-row flex-wrap sm:gap-5 gap-y-3 gap-x-2 justify-center items-start mx-auto sm:p-0 my-2'>
 
 
 
 
-            <div className= 'lg:order-2 order-1 flex flex-row justify-center items-center lg:w-fit w-full sm:mb-6 mb-0'>
-                <div className='sm:w-fit w-full block mx-auto'>
-
-                    <div className='w-full'>
-                    
-                <div className='flex flex-row justify-start gap-3 items-end mx-auto'>
-                    <img
-                        src={logo}
-                        className='h-8 bg-[#F7CD21] px-5 p-1 rounded-t-md'
-                    ></img>
-
-
-
-
-
-
-                    <div
-                        onClick={() => setPoupDuvidas(!poupduvidas)}
-                        className='cursor-pointer h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 hover:bg-white transition-all duration-300'>
-                        <FaQuestionCircle /> <p className='sm:flex hidden'>
-                            Dúvidas</p> 
-                    </div>
-
-                    <div
-                        onClick={() => setPoupSobre(!poupsobre)}
-
-                        className='cursor-pointer h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
-                        <TbWorld /> <p className='sm:flex hidden'>Sobre</p>
-                    </div>
-
-                    <div
-                        onClick={salvar}
-                        className='cursor-pointer h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
-                        <IoIosSave /> <p className='sm:flex hidden'>Salvar</p> 
-                    </div>
-
+                <div className='xl:order-1 order-2'>
+                    <CountCard
+                        equipe="Time Azul"
+                        name={nameb}
+                        setName={setNameB}
+                        bgcolor='bg-blue-900'
+                        titlecolor='text-white'
+                        textcolor="text-blue-950"
+                        statee={enerb}
+                        setStateE={setEnerB}
+                        pt={ptblue}
+                        setPt={setPtBlue}
+                        setComport={setComportBlue}
+                        comport={comportblue}
+                        setTotalPt={setTotalPtBlue}
+                        totalpt={totalptblue}
+                        observ={observblue}
+                        setObserv={setObservBlue}
+                    />
                 </div>
 
-                <div className='sm:w-130 w-full text-[#21285C] bg-white sm:rounded-lg rounded-tr-lg h-fit mx-auto'>
-
-                    <div className='text-3xl font-bold bg-[#F7CD21] px-5 flex items-center h-12 justify-between sm:rounded-tr-lg rounded-0'>
 
 
-                        <h1 className='inline-block text-color[#2D3194] py-2 sm:text-3xl text-2xl'>
-                            Biologia 2º Semestre
-                        </h1>
 
-                        <div className='flex items-end h-full'>
-                            <p className=' inline-block bg-white sm:text-3xl text-xl rounded-t-md px-2 h-10 pt-1'>{fase + 1 <= 9 ? '0' + (fase + 1) : fase + 1}</p>
-                        </div>
-                    </div>
-                    </div>
 
-                    <div className='bg-white'>
+                <div className='lg:order-2 order-1 flex flex-row justify-center items-center lg:w-fit w-full sm:mb-6 mb-0'>
+                    <div className='sm:w-fit w-full block mx-auto'>
 
-                    <div className='flex justify-center gap-x-2 items-center py-3 h-40'>
+                        <div className='w-full'>
 
-                        <button
-                            onClick={() => {
-                                setFase(ant => ant - 1)
-                                setDigi([])
-                                setHelp(false)
-                            }}
-                            className={
+                            <div className='flex flex-row justify-start gap-3 items-end mx-auto'>
+                                <img
+                                    src={logo}
+                                    className='h-8 bg-[#F7CD21] px-5 p-1 rounded-t-md'
+                                ></img>
+
+
+
+
+
+
+                                <div
+                                    onClick={() => setPoupDuvidas(!poupduvidas)}
+                                    className='cursor-pointer h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 hover:bg-white transition-all duration-300'>
+                                    <FaQuestionCircle /> <p className='sm:flex hidden'>
+                                        Dúvidas</p>
+                                </div>
+
+                                <div
+                                    onClick={() => setPoupSobre(!poupsobre)}
+
+                                    className='cursor-pointer h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
+                                    <TbWorld /> <p className='sm:flex hidden'>Sobre</p>
+                                </div>
+
+                                <div
+                                    onClick={salvar}
+                                    className='cursor-pointer h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
+                                    <IoIosSave /> <p className='sm:flex hidden'>Salvar</p>
+                                </div>
+
+                            </div>
+
+                            <div className='sm:w-130 min-w-full text-[#21285C] bg-white sm:rounded-lg rounded-tr-lg h-fit mx-auto '>
+
+                                <div className='text-3xl font-bold bg-[#F7CD21] px-5 flex items-center h-12 justify-between sm:rounded-tr-lg rounded-0 w-full'>
+
+
+                                    <h1 className='inline-block text-color[#2D3194] py-2 sm:text-3xl text-2xl'>
+                                        {frases[fase].tema}
+                                    </h1>
+
+                                    <div className='flex items-end h-full'>
+                                        <p className=' inline-block bg-white sm:text-3xl text-xl rounded-t-md px-2 h-10 pt-1'>{fase + 1 <= 9 ? '0' + (fase + 1) : fase + 1}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className='bg-white'>
+
+                                <div className='flex justify-center gap-x-2 items-center py-3 h-40'>
+
+                                    <button
+                                        onClick={() => {
+                                            setFase(ant => ant - 1)
+                                            setDigi([])
+                                            setHelp(false)
+                                        }}
+                                        className={
+
+                                            ` bg-[#21285C] text-[#F7CD21] hover:scale-110 hover:p-1.4 transition-all duration-300 h-fit p-1 rounded-full ml-1 sm:text-4xl text-2xl flex justify-center items-center font-bold  ${fase > 0 ? 'cursor-pointer' : 'opacity-0 pointer-events-none'}`
+                                        }>
+                                        <FaArrowCircleLeft />
+                                    </button>
+
+                                    <div onClick={()=>setPoupImg(true)}
+                                    className='flex items-center w-40 h-35 px-2'>
+
+                                    <img
                                 
-                                ` bg-[#21285C] text-[#F7CD21] hover:scale-110 hover:p-1.4 transition-all duration-300 h-fit p-1 rounded-full ml-1 sm:text-4xl text-2xl flex justify-center items-center font-bold  ${ fase > 0 ? 'cursor-pointer' : 'opacity-0 pointer-events-none'}`
-                               }>
-                            <FaArrowCircleLeft />
-                        </button>
-
-                        <img
-
-                            className="select-none h-auto w-40 rounded-xl
-                        transform-[transformation] duration-300
-                        "
 
 
-                            src={frases[fase].imagem}></img>
+                                        className="
+                                        w-auto
+                                        object-cover object-center
+                                        select-none rounded-xl"
 
-                        <button
-                            onClick={() => {
-                                setFase(ant => ant + 1)
-                                setDigi([])
-                                setHelp(false)
-                            }}
-                            className={                                 
-                                ` bg-[#21285C] text-[#F7CD21] hover:scale-110 hover:p-1.4 transition-all duration-300 h-fit p-1 rounded-full sm:text-4xl text-2xl mr-1 flex justify-center items-center font-bold  ${ fase <= (frases.length - 2) ? 'cursor-pointer' : 'opacity-0 pointer-events-none'}`
-                               }> 
-                            <FaArrowCircleRight />
-                        </button>
 
-                    </div>
+                                        src={frases[fase].imagem}></img>
 
-                    <div className='select-none flex gap-2 justify-center'>
-                        {frases[fase].palavra.split("").map((letra) => (
-                            <div className="sm:w-13 sm:text-4xl sm:py-3 py-1 w-8 text-lg bg-[#e6eae1]  px-2  rounded-md text-[#21285C] border-3">
-                                <span className={
-                                    (Array.from(digi).map(normalizar)).includes(normalizar(letra)) || normalizar(digi.join("")) === normalizar(frases[fase].palavra) || complete.includes(fase) ?
-                                        'opacity-100'
-                                        :
-                                        "opacity-0"}>
-                                    {letra}
-                                </span>
-                            </div>
-                        ))}
-                    </div>
+                                        </div>
 
-                    <div className='cursor-pointer flex flex-row justify-center items-center gap-3'>
-                        <button
-                            onClick={() => {
-                                if (!help) { setPoupDica(true) }
-                                if (help) {
-                                    setDisableDica(true)
-                                    console.log(disabledica, "valor")
-                                }
-                            }}
-                            className={`h-fit py-1 px-3 rounded-xl my-3 bg-[#21285C] transition-all duration-300 w-fit max-w-96 flex flex-row items-center text-white
+                                    <button
+                                        onClick={() => {
+                                            setFase(ant => ant + 1)
+                                            setDigi([])
+                                            setHelp(false)
+                                        }}
+                                        className={
+                                            ` bg-[#21285C] text-[#F7CD21] hover:scale-110 hover:p-1.4 transition-all duration-300 h-fit p-1 rounded-full sm:text-4xl text-2xl mr-1 flex justify-center items-center font-bold  ${fase <= (frases.length - 2) ? 'cursor-pointer' : 'opacity-0 pointer-events-none'}`
+                                        }>
+                                        <FaArrowCircleRight />
+                                    </button>
+
+                                </div>
+
+                                <div className='select-none flex sm:gap-2 gap-1 justify-center px-2'>
+                                    {frases[fase].palavra.split("").map((letra) => (
+                                        <div className="sm:w-8 sm:text-4xl sm:py-3 py-1 w-5 text-lg bg-[#e6eae1]  px-1  rounded-md text-[#21285C] border-3 text-center">
+                                            <span className={
+                                                (Array.from(digi).map(normalizar)).includes(normalizar(letra)) || normalizar(digi.join("")) === normalizar(frases[fase].palavra) || complete.includes(fase) ?
+                                                    'opacity-100'
+                                                    :
+                                                    "opacity-0"}>
+                                                {letra}
+                                            </span>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                <div className='cursor-pointer flex flex-row justify-center items-center gap-3'>
+                                    <button
+                                        onClick={() => {
+                                            if (!help) { setPoupDica(true) }
+                                            if (help) {
+                                                setDisableDica(true)
+                                                console.log(disabledica, "valor")
+                                            }
+                                        }}
+                                        className={`h-fit py-1 px-3 rounded-xl my-3 bg-[#21285C] transition-all duration-300 w-fit max-w-96 flex flex-row items-center text-white
                     ${help ? "" : " hover:text-yellow-300"}`}>
 
-                            <span className='flex flex-col justify-center items-center w-fit'>
+                                        <span className='flex flex-col justify-center items-center w-fit'>
 
-                                <FaLightbulb
-                                    className={`text-xl ${help ? 'text-yellow-300' :
-                                        ''}`} />
+                                            <FaLightbulb
+                                                className={`text-xl ${help ? 'text-yellow-300' :
+                                                    ''}`} />
 
-                            </span>
-                            <span
+                                        </span>
+                                        <span
 
-                                className={`cursor-pointer wrap-normal text-center max-w-80 px-2 '}`}>
-                                {help ? frases[fase].dica : 'Dica desativada'}</span>
-                        </button>
+                                            className={`cursor-pointer wrap-normal text-center max-w-80 px-2 '}`}>
+                                            {help ? frases[fase].dica : 'Dica desativada'}</span>
+                                    </button>
 
-                        <button
-                            onClick={() => {
+                                    <button
+                                        onClick={() => {
 
-                                if (!complete.includes(fase))
-                                    setPoupSWord(true)
+                                            if (!complete.includes(fase))
+                                                setPoupSWord(true)
 
-                                if (complete.includes(fase)) {
-                                    setComplete(ant => ant.filter(x => x !== fase))
-                                    setDigi([])
-                                }
+                                            if (complete.includes(fase)) {
+                                                setComplete(ant => ant.filter(x => x !== fase))
+                                                setDigi([])
+                                            }
 
-                            }
-                            }
-                            className={`cursor-pointer h-8 px-3 rounded-xl my-3 bg-[#21285C] transition-all duration-300 w-fit div flex flex-row items-center text-2xl text-white
+                                        }
+                                        }
+                                        className={`cursor-pointer h-8 px-3 rounded-xl my-3 bg-[#21285C] transition-all duration-300 w-fit div flex flex-row items-center text-2xl text-white
                     ${help ? "" : " hover:text-yellow-300"}`}>
-                            {complete.includes(fase) ?
-                                <IoMdEyeOff /> : <IoMdEye />
-                            }
+                                        {complete.includes(fase) ?
+                                            <IoMdEyeOff /> : <IoMdEye />
+                                        }
 
-                        </button>
+                                    </button>
 
-                    </div>
+                                </div>
 
-                    <hr className='border-2' />
-                    <div className='flex items-center relative w-fit px-5 mx-auto'>
+                                <hr className='border-2' />
+                                <div className='flex items-center relative w-fit px-5 mx-auto'>
 
-                        <button
-                            onClick={() => setMLetra(!mletra)}
-                            className='cursor-pointer ml-4 px-2 h-fit flex flex-row items-center absolute sm:-left-20 -left-11'>
-                            <MdChangeCircle className= {`text-2xl ${complete.includes(fase) ? 'text-gray-400' : 'text-[#21285C]'}`} />
-                            <p className='sm:flex hidden'>
-                            {mletra ? 'Letra' : 'Palavra'}
-                            </p>
-
-
-                        </button>
+                                    <button
+                                        onClick={() => setMLetra(!mletra)}
+                                        className='cursor-pointer ml-4 px-2 h-fit flex flex-row items-center absolute sm:-left-20 -left-11'>
+                                        <MdChangeCircle className={`text-2xl ${complete.includes(fase) ? 'text-gray-400' : 'text-[#21285C]'}`} />
+                                        <p className='sm:flex hidden'>
+                                            {mletra ? 'Letra' : 'Palavra'}
+                                        </p>
 
 
-                        <form onSubmit={handleSubmit(enviar)}>
-                            <div className='flex gap-2 items-center'>
-                                <input
-                                    {...register("campo", { required: true })}
-                                    disabled=
-                                    {complete.includes(fase) ? true : false}
-                                    autoComplete="off"
-                                    maxLength={complete.includes(fase) ? 0 : mletra ? 1 : 25}
-                                    placeholder={complete.includes(fase) ? 'COMPLETADO' : mletra ? 'Digite uma letra' : 'Digite uma palavra'}
-                                    className={`uppercase my-3 sm:w-60 sm:text-xl text-base w-35 h-11 sm:px-3 px-1 rounded-sm border-3 ${complete.includes(fase) ? 'bg-green-800 text-white text-center opacity-100' : 'bg-[#e6eae1]'}`} type="text"
-                                    onChange={(e) => setValue("campo", e.target.value.toUpperCase())}
-
-                                />
+                                    </button>
 
 
-                                <button type='submit'
-                                    disabled={complete.includes(fase) ? true : false}
-                                    className="cursor-pointer mx-0 h-fit absolute -right-2.5" > <IoSend className={` text-2x ${complete.includes(fase) ? 'text-gray-400' : 'text-[#21285C]'}`} />
-                                </button>
+                                    <form onSubmit={handleSubmit(enviar)}>
+                                        <div className='flex gap-2 items-center'>
+                                            <input
+                                                {...register("campo", { required: true })}
+                                                disabled=
+                                                {complete.includes(fase) ? true : false}
+                                                autoComplete="off"
+                                                maxLength={complete.includes(fase) ? 0 : mletra ? 1 : 25}
+                                                placeholder={complete.includes(fase) ? 'COMPLETADO' : mletra ? 'Digite uma letra' : 'Digite uma palavra'}
+                                                className={`uppercase my-3 sm:w-60 sm:text-xl text-base w-35 h-11 sm:px-3 px-1 rounded-sm border-3 ${complete.includes(fase) ? 'bg-green-800 text-white text-center opacity-100' : 'bg-[#e6eae1]'}`} type="text"
+                                                onChange={(e) => setValue("campo", e.target.value.toUpperCase())}
+
+                                            />
 
 
+                                            <button type='submit'
+                                                disabled={complete.includes(fase) ? true : false}
+                                                className="cursor-pointer mx-0 h-fit absolute -right-2.5" > <IoSend className={` text-2x ${complete.includes(fase) ? 'text-gray-400' : 'text-[#21285C]'}`} />
+                                            </button>
+
+
+                                        </div>
+
+                                    </form>
+                                </div>
+
+
+
+
+                                {erro.length > 0 &&
+                                    <div className='flex justify-center text-center mt-0 m-3 px-3 w-11/12 pb-1 whitespace-nowrap'>
+
+
+
+                                        <p className='font-bold text-[#21285C] text-center pr-2'> Erros: </p>
+
+
+
+                                        <div className='overflow-x-auto overflow-y-hidden y-20 max-w-96'>
+                                            <p className='font-bold text-red-600 px-2'>
+                                                {!mletra && erro[erro.length - 1].length < 2 ? 'Não é permitido enviar letras no "modo Palavra".'
+                                                    : [... new Set(erro)].join(" , ").toUpperCase()}</p>
+                                        </div>
+
+
+
+
+                                    </div>
+                                }
                             </div>
-
-                        </form>
-                    </div>
-
-
-
-
-                    {erro.length > 0 &&
-                        <div className='flex justify-center text-center mt-0 m-3 px-3 w-11/12 pb-1 whitespace-nowrap'>
-
-
-
-                            <p className='font-bold text-[#21285C] text-center pr-2'> Erros: </p>
-
-
-
-                            <div className='overflow-x-auto overflow-y-hidden y-20 max-w-96'>
-                                <p className='font-bold text-red-600 px-2'>
-                                    {!mletra && erro[erro.length - 1].length < 2 ? 'Não é permitido enviar letras no "modo Palavra".'
-                                        : [... new Set(erro)].join(" , ").toUpperCase()}</p>
-                            </div>
-
-
-
-
                         </div>
-                    }
-</div>
+                    </div>
                 </div>
+
+
+                <div className='lg:order-3 order-2'>
+                    <CountCard
+                        equipe="Time Amarelo"
+                        name={namey}
+                        setName={setNameY}
+                        bgcolor='bg-[#F7CD21]'
+                        titlecolor='text-yellow-1000'
+                        textcolor="text-yellow-950"
+                        statee={enery}
+                        setStateE={setEnerY}
+                        pt={ptyellow}
+                        setPt={setPtYellow}
+                        setComport={setComportYellow}
+                        comport={comportyellow}
+                        setTotalPt={setTotalPtYellow}
+                        totalpt={totalptyellow}
+                        observ={observyellow}
+                        setObserv={setObservYellow}
+                    />
                 </div>
+
+
+
+
+
+
+
             </div>
-
-            
-            <div className='lg:order-3 order-2'>
-            <CountCard
-                equipe="Time Amarelo"
-                name={namey}
-                setName={setNameY}
-                bgcolor='bg-[#F7CD21]'
-                titlecolor='text-yellow-1000'
-                textcolor="text-yellow-950"
-                statee={enery}
-                setStateE={setEnerY}
-                pt={ptyellow}
-                setPt={setPtYellow}
-                setComport={setComportYellow}
-                comport={comportyellow}
-                setTotalPt={setTotalPtYellow}
-                totalpt={totalptyellow}
-                observ={observyellow}
-                setObserv={setObservYellow}
-            />
-            </div>
-
-
-
-
-
-
-
-        </div>
         </div>
     </>)
 }

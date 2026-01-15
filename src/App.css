@@ -52,9 +52,11 @@ body {
     background-image:
     /* linear-gradient(
       rgba(0, 0, 0, 0.8),
-      rgba(0, 0, 100, 0.6)
+      rgba(0, 0, 0, 0.8),
+      rgba(0, 0, 50, 0.8),
+      rgba(0, 0,40 , 1)
     ), */
-    url('https://www.publicdomainpictures.net/pictures/40000/nahled/--1359709322C31.jpg');
+    url('../public/bg.png');
   background-size: cover;
 background-position: center;
 background-repeat: no-repeat;
