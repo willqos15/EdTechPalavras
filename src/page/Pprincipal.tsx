@@ -767,7 +767,7 @@ export default function Pprincipal() {
 
 
         <div className='flex flex-row justify center items-center xl:h-screen'>
-            <div className='flex flex-row flex-wrap sm:gap-5 gap-y-3 gap-x-2 justify-center items-start mx-auto sm:p-0 my-2'>
+            <div className='flex flex-row flex-wrap sm:gap-5 gap-y-3 gap-x-2 justify-center items-start mx-auto sm:p-0 my-24 sm:h-125'>
 
 
 
@@ -808,6 +808,20 @@ export default function Pprincipal() {
                                     className='h-8 bg-[#F7CD21] px-5 p-1 rounded-t-md'
                                 ></img>
 
+                            <div
+                                    onClick={() => {
+                                        sortear()
+                                        setPoupSorteio(true)
+                                    }}
+                                    className='cursor-pointer h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
+                                    <GiPerspectiveDiceSixFacesFive /> <p className='sm:flex hidden'>Sortear</p>
+                                </div>
+
+                                 <div
+                                    onClick={salvar}
+                                    className='cursor-pointer h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
+                                    <IoIosSave /> <p className='sm:flex hidden'>Salvar</p>
+                                </div>
 
 
 
@@ -829,20 +843,9 @@ export default function Pprincipal() {
 
 
 
-                                <div
-                                    onClick={() => {
-                                        sortear()
-                                        setPoupSorteio(true)
-                                    }}
-                                    className='cursor-pointer h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
-                                    <GiPerspectiveDiceSixFacesFive /> <p className='sm:flex hidden'>Sortear</p>
-                                </div>
+                                
 
-                                <div
-                                    onClick={salvar}
-                                    className='cursor-pointer h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
-                                    <IoIosSave /> <p className='sm:flex hidden'>Salvar</p>
-                                </div>
+                               
 
                             </div>
 
@@ -879,13 +882,9 @@ export default function Pprincipal() {
                                     </button>
 
                                     <div onClick={() => setPoupImg(true)}
-                                        className='flex items-center w-40 h-35 px-2'>
+                                        className='flex items-center w-45 max-h-30 px-2'>
 
-                                        <img
-
-
-
-                                            className="
+                                        <img className="
                                         w-auto
                                         object-cover object-center
                                         select-none rounded-xl"
@@ -911,7 +910,7 @@ export default function Pprincipal() {
 
                                 <div className='select-none flex sm:gap-2 gap-1 justify-center px-2'>
                                     {frases[fase].palavra.split("").map((letra) => (
-                                        <div className="sm:w-8 sm:text-4xl sm:py-3 py-1 w-5 text-lg bg-[#e6eae1]  px-1  rounded-md text-[#21285C] border-3 text-center">
+                                        <div className="sm:w-8 sm:text-4xl sm:py-1 py-1 w-5 text-lg bg-[#e6eae1]  px-1  rounded-md text-[#21285C] border-3 text-center">
                                             <span className={
                                                 (Array.from(digi).map(normalizar)).includes(normalizar(letra)) || normalizar(digi.join("")) === normalizar(frases[fase].palavra) || complete.includes(fase) ?
                                                     'opacity-100'

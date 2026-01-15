@@ -78,7 +78,7 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
                     <IoMdRemoveCircleOutline className='cursor-pointer hover:bg-red-400 active:bg-red-400 transition duration-300 text-4xl rounded-full  p-0 flex items-center justify-center' /> </button>
                 </div>
 
-                {statee > 15 ?
+                {statee > 5 ?
                     <div className='flex justify-center items-center gap-1 bg-white '>
                         <p className='pl-2 text-sm flex items-center justify-center'>Energia: {statee}</p> <AiFillThunderbolt className='inline-block' />
 
