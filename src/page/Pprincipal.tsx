@@ -1,29 +1,24 @@
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 
-import { FaArrowCircleRight, FaCode } from "react-icons/fa";
+import { FaArrowCircleRight } from "react-icons/fa";
 import { FaArrowCircleLeft } from "react-icons/fa";
 import { IoSend } from "react-icons/io5";
 import { FaLightbulb } from "react-icons/fa";
-import { MdChangeCircle, MdEmail } from "react-icons/md";
-import { AiFillThunderbolt } from "react-icons/ai";
+import { MdChangeCircle } from "react-icons/md";
+
 import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
 import logo from '../assets/logo.png'
 import { IoIosSave } from "react-icons/io";
 import { FaQuestionCircle } from "react-icons/fa";
 import { TbWorld } from "react-icons/tb";
-import { FaLinkedin } from "react-icons/fa";
-import { FaGithub } from "react-icons/fa";
-import { IoLogoWhatsapp } from "react-icons/io";
-import { FaGear } from "react-icons/fa6";
-import { Document, Packer, Paragraph, AlignmentType, TextRun } from "docx";
+
 import { GiPerspectiveDiceSixFacesFive } from "react-icons/gi";
+import { Save } from '../components/save';
 
-
-
-import Poup from '../components/poup';
 import CountCard from '../components/countcard';
+import AllPoups from '../components/allpoups';
 
 
 
@@ -46,320 +41,6 @@ export default function Pprincipal() {
     const [histerro, setHistErro] = useState<string[]>([])
     const [help, setHelp] = useState<boolean>(false)
     const [mletra, setMLetra] = useState<boolean>(true)
-
-    async function salvar() {
-
-        const tempo = new Date()
-
-        const doc = new Document({
-            sections:
-                [{
-                    children:
-                        [new Paragraph({
-                            alignment: AlignmentType.CENTER,
-                            children: [
-                                new TextRun({
-                                    text: `2º Semestre Biologia`,
-                                    size: 40,
-                                    bold: true,
-                                })
-                            ]
-
-                        }),
-
-                        new Paragraph(``),
-
-                        new Paragraph({
-                            children: [
-                                new TextRun({
-                                    text: `Data: `,
-                                    size: 25,
-                                    bold: true,
-
-
-                                }),
-                                new TextRun({
-                                    text: `${tempo.toLocaleDateString("pt-BR")}\t\t`,
-                                    size: 25,
-                                }),
-
-                                new TextRun({
-                                    text: `Hora: `,
-                                    size: 25,
-                                    bold: true,
-                                }),
-
-                                new TextRun({
-                                    text: `${tempo.toLocaleTimeString("pt-BR", {
-                                        hour: "2-digit",
-                                        minute: "2-digit",
-                                    })}`,
-                                    size: 25,
-                                })
-                            ]
-                        }),
-
-                        new Paragraph(``),
-
-                        new Paragraph({
-                            children: [
-                                new TextRun({
-                                    text: `Níveis completados: `,
-                                    size: 25,
-                                    bold: true,
-                                }),
-                                new TextRun({
-                                    text: `${complete.map((n) => n + 1)}`,
-                                    size: 25
-                                })
-
-                            ]
-                        }),
-
-                        new Paragraph({
-                            children: [
-                                new TextRun({
-                                    text: `Palavras completadas: `,
-                                    size: 25,
-                                    bold: true,
-                                }),
-                                new TextRun({
-                                    text: `${complete.map(x => frases[x].palavra)}`,
-                                    size: 25
-                                })
-
-                            ]
-                        }),
-
-                        new Paragraph(``),
-
-                        new Paragraph({
-                            children: [
-                                new TextRun({
-                                    text: `Letras digitadas corretas: `,
-                                    size: 25,
-                                    bold: true,
-                                }),
-                                new TextRun({
-                                    text: `${histletra.length > 0 ? histletra : 'Nenhuma'}`,
-                                    size: 25
-                                })
-
-                            ]
-                        }),
-
-
-                        new Paragraph({
-                            children: [
-                                new TextRun({
-                                    text: `Palavras digitadas corretas: `,
-                                    size: 25,
-                                    bold: true,
-                                }),
-                                new TextRun({
-                                    text: `${histpalavra.length > 0 ? histpalavra : 'Nenhuma'}`,
-                                    size: 25
-                                })
-
-                            ]
-                        }),
-
-                        new Paragraph({
-                            children: [
-                                new TextRun({
-                                    text: `Letras e palavras erradas: `,
-                                    size: 25,
-                                    bold: true,
-                                }),
-                                new TextRun({
-                                    text: `${histerro.length > 0 ? histerro : 'Nenhum'}`,
-                                    size: 25
-                                })
-
-                            ]
-                        }),
-
-
-
-                        new Paragraph(``),
-
-                        new Paragraph({
-                            children: [
-                                new TextRun({
-                                    text: `Equipe Azul${nameb.length > 0 ? ` (${nameb})` : ''}: `,
-                                    size: 25,
-                                    bold: true,
-                                }),
-                                new TextRun({
-                                    text: `${totalptblue}pts`,
-                                    size: 25,
-                                })
-                            ]
-                        }),
-
-                        new Paragraph({
-                            children: [
-                                new TextRun({
-                                    text: `Palavras Completadas: `,
-                                    size: 25,
-                                    bold: true,
-                                }),
-                                new TextRun({
-                                    text: `${completeb}`,
-                                    size: 25,
-                                })
-                            ]
-                        }),
-
-                        new Paragraph({
-                            children: [
-                                new TextRun({
-                                    text: `Comportamento: `,
-                                    size: 25,
-                                    bold: true,
-                                }),
-                                new TextRun({
-                                    text: `${comportblue === 1 ? "Muito ruim!" :
-                                        comportblue === 2 ? "Ruim" :
-                                            comportblue === 3 ? "Mediano" :
-                                                comportblue === 4 ? "Bom" :
-                                                    comportblue === 5 ? "Muito Bom!" : ""
-                                        }`,
-                                    size: 25,
-
-                                }),
-                            ]
-                        }),
-
-                        new Paragraph({
-                            children: [
-                                new TextRun({
-                                    text: `Energia: `,
-                                    size: 25,
-                                    bold: true,
-                                }),
-                                new TextRun({
-                                    text: `${enerb}`,
-                                    size: 25,
-
-                                }),
-                            ]
-                        }),
-
-                        new Paragraph({
-                            children: [
-                                new TextRun({
-                                    text: `Observações: `,
-                                    size: 25,
-                                    bold: true,
-                                }),
-                                new TextRun({
-                                    text: `${observblue.length > 0 ? observblue : 'Nenhuma'}`,
-                                    size: 25,
-
-                                }),
-                            ]
-                        }),
-
-
-
-                        new Paragraph(``),
-
-
-
-                        new Paragraph({
-                            children: [
-                                new TextRun({
-                                    text: `Equipe Amarela${namey.length > 0 ? ` (${namey})` : ''}: `,
-                                    size: 25,
-                                    bold: true,
-                                }),
-                                new TextRun({
-                                    text: `${totalptyellow}pts`,
-                                    size: 25,
-                                })
-                            ]
-                        }),
-
-                        new Paragraph({
-                            children: [
-                                new TextRun({
-                                    text: `Palavras Completadas: `,
-                                    size: 25,
-                                    bold: true,
-                                }),
-                                new TextRun({
-                                    text: `${completey}`,
-                                    size: 25,
-                                })
-                            ]
-                        }),
-
-                        new Paragraph({
-                            children: [
-                                new TextRun({
-                                    text: `Comportamento: `,
-                                    size: 25,
-                                    bold: true,
-                                }),
-                                new TextRun({
-                                    text: `${comportyellow === 1 ? "Muito ruim!" :
-                                        comportyellow === 2 ? "Ruim" :
-                                            comportyellow === 3 ? "Mediano" :
-                                                comportyellow === 4 ? "Bom" :
-                                                    comportyellow === 5 ? "Muito Bom!" : ""
-                                        }`,
-                                    size: 25,
-
-                                }),
-                            ]
-                        }),
-
-                        new Paragraph({
-                            children: [
-                                new TextRun({
-                                    text: `Energia: `,
-                                    size: 25,
-                                    bold: true,
-                                }),
-                                new TextRun({
-                                    text: `${enery}`,
-                                    size: 25,
-
-                                }),
-                            ]
-                        }),
-
-                        new Paragraph({
-                            children: [
-                                new TextRun({
-                                    text: `Observações: `,
-                                    size: 25,
-                                    bold: true,
-                                }),
-                                new TextRun({
-                                    text: `${observyellow.length > 0 ? observyellow : 'Nenhuma'}`,
-                                    size: 25,
-
-                                }),
-                            ]
-                        }),
-                        ],
-                }
-                ],
-        })
-
-        const blob = await Packer.toBlob(doc)
-        const url = URL.createObjectURL(blob)
-        const a = document.createElement("a")
-        a.href = url
-        a.download = "relatorio.docx"
-        a.click()
-        URL.revokeObjectURL(url)
-
-
-    }
-
 
 
     function normalizar(texto: string) {
@@ -533,246 +214,45 @@ export default function Pprincipal() {
 
     return (<>
 
-        <Poup
-            titulo={<><p className='inline-block'>
-                VOCÊ ACERTOU! </p></>}
-            show={poupacerto}
-            modo='time'
-            qtdbtn={2}
-
-            f1={() => {
-                setPtBlue(ant => ant + 1)
-                setCompleteB(ant => [...ant, frases[fase].palavra])
-                setPoupAcerto(false)
-
-            }}
-            f2={() => {
-                setPtYellow(ant => ant + 1)
-                setCompleteY(ant => [...ant, frases[fase].palavra])
-                setPoupAcerto(false)
-
-            }}
-
-            close={() => { setPoupAcerto(false) }}
-
-            descricao={<>
-                <p className='px-2 text-center'> A palavra era {frases[fase].palavra}</p>
-                <p className='w-50 px-2 text-center'>Este ponto vai para qual equipe?</p></>}
+        <AllPoups
+            fase={fase}
+            frases={frases}
+            complete={complete}
+            sorteio={sorteio}
+            sortear={sortear}
+            poupacerto={poupacerto}
+            poupdica={poupdica}
+            poupsword={poupsword}
+            poupduvidas={poupduvidas}
+            poupimg={poupimg}
+            poupsorteio={poupsorteio}
+            poupsobre={poupsobre}
+            disabledica={disabledica}
+            setPoupAcerto={setPoupAcerto}
+            setPoupDica={setPoupDica}
+            setPoupSWord={setPoupSWord}
+            setPoupDuvidas={setPoupDuvidas}
+            setPoupImg={setPoupImg}
+            setPoupSorteio={setPoupSorteio}
+            setPoupSobre={setPoupSobre}
+            setDisableDica={setDisableDica}
+            setHelp={setHelp}
+            setComplete={setComplete}
+            setCompleteB={setCompleteB}
+            setCompleteY={setCompleteY}
+            setPtBlue={setPtBlue}
+            setPtYellow={setPtYellow}
+            setEnerB={setEnerB}
+            setEnerY={setEnerY}
         />
-
-
-
-        <Poup
-            titulo={<><p className='inline-block'> Custa 1 de </p> <AiFillThunderbolt className='inline-block' /></>}
-            show={poupdica}
-            modo='time' qtdbtn={3}
-            f1={() => {
-                setEnerB(ant => ant - 1)
-                setHelp(true)
-                setPoupDica(false)
-            }}
-            f2={() => {
-                setEnerY(ant => ant - 1)
-                setHelp(true)
-                setPoupDica(false)
-            }}
-            f3={() => {
-                setPoupDica(false)
-                setHelp(true)
-            }}
-
-            close={() => { setPoupDica(false) }}
-
-            descricao={<>
-                <p className='p-2 text-center'>Informe qual equipe solicitou a dica</p></>} />
-
-
-        <Poup
-            titulo={<><p className='inline-block'> AVISO </p> </>}
-            show={disabledica}
-            modo='confirma'
-            qtdbtn={2}
-            f1={() => {
-                setHelp(false)
-                setDisableDica(false)
-            }}
-            f2={() => {
-                setDisableDica(false)
-            }}
-
-            close={() => { setDisableDica(false) }}
-
-            descricao={<>
-                <p className='p-2 text-center'>Deseja desativar a dica?</p></>}
-        />
-
-
-        <Poup
-            titulo={<p className='inline-block'> AVISO </p>}
-            show={poupsword} modo='confirma'
-            qtdbtn={2}
-            f1={() => {
-                if (!complete.includes(fase)) {
-                    setComplete(ant => [...ant, fase])
-                    setPoupSWord(false)
-                }
-            }}
-            f2={() => setPoupSWord(false)}
-            close={() => setPoupSWord(false)}
-            descricao={<p className='p-2 text-center'>Deseja revelar a palavra?</p>}
-        />
-
-        <Poup
-            titulo={<p className='inline-block '> DÚVIDAS </p>}
-            show={poupduvidas} modo='info'
-            close={() => setPoupDuvidas(false)}
-            descricao={
-                <div className='tduvida h-96 mr-0 
-                overflow-y-auto px-2 py-2'>
-
-                    <div>
-                        <h3>1 - Como a turma é organizada?</h3>
-                        <p>A turma é dividida em duas equipes: Azul e Amarela.</p>
-                    </div>
-
-                    <div>
-                        <h3>2 - Quem controla o jogo?</h3>
-                        <p>Somente o professor controla a aplicação, exibindo o jogo em uma TV ou DataShow.</p>
-                    </div>
-
-
-                    <div>
-                        <h3>3- Quem começa jogando?</h3>
-                        <p>O professor pode definir manualmente a equipe inicial ou usar a aba "Sorteio".</p>
-                    </div>
-
-                    <div>
-                        <h3>4 - Como funciona cada rodada?</h3>
-                        <p>Um aluno da equipe escolhe uma letra por rodada.</p>
-                        <p>O aluno só pode jogar novamente após todos de sua equipe participarem.</p>
-                    </div>
-
-                    <div>
-                        <h3>5 - É permitido adivinhar a palavra inteira?</h3>
-                        <p>Sim. O aluno pode tentar adivinhar a palavra completa a qualquer momento.</p>
-                        <p>Se acertar, a equipe ganha o ponto imediatamente.</p>
-                    </div>
-
-                    <div>
-                        <h3>6 - Existe ajuda durante a rodada?</h3>
-                        <p>A equipe pode revelar uma dica da palavra com custo de 1 ponto de energia.</p>
-                    </div>
-
-                    <div>
-                        <h3>7 - Como funciona a pontuação por comportamento?</h3>
-                        <p>A equipe recebe Bônus ou Penalidade no placar total a depender do comportamento.</p>
-                        <p>- Comportamento muito ruim: <strong>-2 pontos</strong></p>
-                        <p>- Comportamento ruim: <strong>-1 ponto</strong></p>
-                        <p>- Comportamento mediano: <strong>0 ponto</strong></p>
-                        <p>- Comportamento bom: <strong>+1 ponto</strong></p>
-                        <p>- Comportamento muito bom: <strong>+2 pontos</strong></p>
-                    </div>
-
-                    <div>
-                        <h3>8 - Como se ganha o jogo?</h3>
-                        <p>Ganha a equipe que somar mais pontos ao final, considerando acertos e comportamento.</p>
-                    </div>
-
-                    <div>
-                        <h3>9 - As regras são fixas?</h3>
-                        <p>Não. As regras podem ser adaptadas conforme a necessidade do professor.</p>
-                    </div>
-
-                </div>
-            } />
-
-
-        <Poup
-            titulo={<> Imagem: {frases[fase].tema}</>}
-            show={poupimg}
-            modo='info'
-            qtdbtn={2}
-
-            close={() => { setPoupImg(false) }}
-
-            descricao={<>
-                <div className='sm:min-w-96 p-1'>
-                    <img className='min-w-full' src={frases[fase].imagem}></img> </div></>}
-        />
-
-        <Poup
-            titulo={<> SORTEAR </>}
-            show={poupsorteio}
-            modo='info'
-            qtdbtn={2}
-
-            close={() => { setPoupSorteio(false) }}
-
-            descricao={<>
-                <div className='flex flex-col justify-center items-center px-2 mt-2 min-w-40'>
-
-                    <p>A equipe sorteada foi</p>
-                    <p className='text-2xl'>{
-                        sorteio === "load" ? "..." : sorteio
-
-                    }</p>
-                    <button onClick={sortear}
-                        className='mt-3 cursor-pointer text-[#21285C] hover:scale-90 transition-all duration-300 w-fit px-2 rounded-md text-4xl'
-                    >
-                        {sorteio === "load" ? <GiPerspectiveDiceSixFacesFive className='animate-spin' /> :
-                            <MdChangeCircle />
-                        }
-
-                    </button>
-                </div>
-            </>}
-        />
-
-
-        <Poup
-
-            titulo={<p className='inline-block '> SOBRE </p>}
-            show={poupsobre} modo='info'
-            close={() => setPoupSobre(false)}
-            descricao={
-                <div className='flex flex-col justify-center items-center px-2'>
-                    <p className='max-w-50 mt-3 text-center'>
-                        Aplicação Web desenvolvida com React, Typescript e Tailwind.
-                    </p>
-
-                    <hr className='border my-2' />
-
-                    <p className='text-center'>
-                        <FaGear className='inline-block' />
-                        Desenvolvido por William Queiroz: </p>
-                    <div className='flex flex-col items-start text-sm linkct px-2 text-center'>
-
-                        <a
-                            href='https://queirozdeveloper.vercel.app/'> <FaCode className='inline-block mr-1' />  Portfólio: queirozdeveloper.vercel.app</a>
-
-                        <div className='mx-auto text-xl'>
-                            <a href='https://www.linkedin.com/in/william-queiroz-a36573120/'> <FaLinkedin className='inline-block mr-1' /></a>
-                            <a href='mailto:willqos15@gmail.com' className='cursor-pointer'> <MdEmail className='inline-block mr-1' /> </a>
-                            <a href='https://github.com/dashboard/'> <FaGithub className='inline-block mr-1' /></a>
-                            <a href='wa.me/5593991878598'> <IoLogoWhatsapp className='inline-block mr-1 ' /></a>
-                        </div>
-
-
-
-                    </div>
-
-                </div>
-
-            } />
 
 
         <div className='flex flex-row justify center items-center xl:h-screen'>
             <div className='flex flex-row flex-wrap sm:gap-5 gap-y-3 gap-x-2 justify-center items-start mx-auto sm:p-0 my-24 sm:h-125'>
 
 
-
-
                 <div className='xl:order-1 order-2'>
+
                     <CountCard
                         equipe={nameb}
                         name={nameb}
@@ -794,21 +274,16 @@ export default function Pprincipal() {
                 </div>
 
 
-
-
-
                 <div className='lg:order-2 order-1 flex flex-row justify-center items-center lg:w-fit w-full mb-0'>
                     <div className='lg:w-fit w-full block mx-auto'>
 
                         <div className='w-full'>
 
                             <div className='flex flex-row justify-start gap-2 items-end mx-auto'>
-                                <img
-                                    src={logo}
-                                    className='h-8 bg-[#F7CD21] px-5 p-1 rounded-t-md'
-                                ></img>
+                                <img src={logo}
+                                    className='h-8 bg-[#F7CD21] px-5 p-1 rounded-t-md'/>
 
-                            <div
+                                <div
                                     onClick={() => {
                                         sortear()
                                         setPoupSorteio(true)
@@ -817,13 +292,11 @@ export default function Pprincipal() {
                                     <GiPerspectiveDiceSixFacesFive /> <p className='sm:flex hidden'>Sortear</p>
                                 </div>
 
-                                 <div
-                                    onClick={salvar}
+                                <div
+                                    onClick={() => Save({ complete, frases, histletra, histpalavra, histerro, nameb, namey, completeb, completey, comportyellow, comportblue, observblue, observyellow, totalptyellow, totalptblue, enerb, enery })}
                                     className='cursor-pointer h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
                                     <IoIosSave /> <p className='sm:flex hidden'>Salvar</p>
                                 </div>
-
-
 
 
 
@@ -836,23 +309,15 @@ export default function Pprincipal() {
 
                                 <div
                                     onClick={() => setPoupSobre(!poupsobre)}
-
                                     className='cursor-pointer h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
                                     <TbWorld /> <p className='sm:flex hidden'>Sobre</p>
                                 </div>
-
-
-
-                                
-
-                               
-
                             </div>
+
 
                             <div className='sm:w-130 min-w-full text-[#21285C] bg-white sm:rounded-lg rounded-tr-lg h-fit mx-auto '>
 
                                 <div className='text-3xl font-bold bg-[#F7CD21] px-5 flex items-center h-12 justify-between sm:rounded-tr-lg rounded-0 w-full'>
-
 
                                     <h1 className='inline-block text-color[#2D3194] py-2 sm:text-3xl text-2xl'>
                                         {frases[fase].tema}
@@ -875,7 +340,6 @@ export default function Pprincipal() {
                                             setHelp(false)
                                         }}
                                         className={
-
                                             ` bg-[#21285C] text-[#F7CD21] hover:scale-110 hover:p-1.4 transition-all duration-300 h-fit p-1 rounded-full ml-1 sm:text-4xl text-2xl flex justify-center items-center font-bold  ${fase > 0 ? 'cursor-pointer' : 'opacity-0 pointer-events-none'}`
                                         }>
                                         <FaArrowCircleLeft />
@@ -883,17 +347,7 @@ export default function Pprincipal() {
 
                                     <div onClick={() => setPoupImg(true)}
                                         className='flex items-center w-45 sm:max-h-30 h-32 px-2'>
-
-                                        <img className="
-                                        w-auto
-                                        mx-auto
-                                        max-h-30
-                                        
-                                        select-none rounded-xl"
-
-
-                                            src={frases[fase].imagem}></img>
-
+                                        <img className="w-auto mx-auto max-h-30 select-none rounded-xl" src={frases[fase].imagem}/>
                                     </div>
 
                                     <button
@@ -944,7 +398,6 @@ export default function Pprincipal() {
 
                                         </span>
                                         <span
-
                                             className={`cursor-pointer wrap-normal text-center max-w-80 px-2 '}`}>
                                             {help ? frases[fase].dica : 'Dica desativada'}</span>
                                     </button>
@@ -1006,10 +459,7 @@ export default function Pprincipal() {
                                                 disabled={complete.includes(fase) ? true : false}
                                                 className="cursor-pointer mx-0 h-fit absolute -right-2.5" > <IoSend className={` text-2x ${complete.includes(fase) ? 'text-gray-400' : 'text-[#21285C]'}`} />
                                             </button>
-
-
                                         </div>
-
                                     </form>
                                 </div>
 
@@ -1019,21 +469,13 @@ export default function Pprincipal() {
                                 {erro.length > 0 &&
                                     <div className='flex justify-center text-center mt-0 m-3 px-3 w-11/12 pb-1 whitespace-nowrap'>
 
-
-
                                         <p className='font-bold text-[#21285C] text-center pr-2'> Erros: </p>
-
-
 
                                         <div className='overflow-x-auto overflow-y-hidden y-20 max-w-96'>
                                             <p className='font-bold text-red-600 px-2'>
                                                 {!mletra && erro[erro.length - 1].length < 2 ? 'Não é permitido enviar letras no "modo Palavra".'
                                                     : [... new Set(erro)].join(" , ").toUpperCase()}</p>
                                         </div>
-
-
-
-
                                     </div>
                                 }
                             </div>
@@ -1062,11 +504,6 @@ export default function Pprincipal() {
                         setObserv={setObservYellow}
                     />
                 </div>
-
-
-
-
-
 
 
             </div>
