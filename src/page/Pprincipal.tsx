@@ -41,7 +41,46 @@ export default function Pprincipal() {
     const [histerro, setHistErro] = useState<string[]>([])
     const [help, setHelp] = useState<boolean>(false)
     const [mletra, setMLetra] = useState<boolean>(true)
+    const [fase, setFase] = useState<number>(0)
+    const [complete, setComplete] = useState<number[]>([])
+    const [completeb, setCompleteB] = useState<string[]>([])
+    const [completey, setCompleteY] = useState<string[]>([])
+    const [errob,setErroB] = useState<string[]>([])
+    const [erroy,setErroY] = useState<string[]>([])
+    const [pouperro,setPoupErro] = useState<boolean>(false)
+    const [sorteio, setSorteio] = useState<string>("")
+    const [poupsorteio, setPoupSorteio] = useState<boolean>(false)
+    const [poupdica, setPoupDica] = useState<boolean>(false)
+    const [poupsword, setPoupSWord] = useState<boolean>(false)
+    const [poupimg, setPoupImg] = useState<boolean>(false)
+    const [poupacerto, setPoupAcerto] = useState<boolean>(false)
+    const [disabledica, setDisableDica] = useState<boolean>(false)
+    const [poupduvidas, setPoupDuvidas] = useState<boolean>(false)
+    const [poupsobre, setPoupSobre] = useState<boolean>(false)
+    const [enerb, setEnerB] = useState<number>(5)
+    const [enery, setEnerY] = useState<number>(5)
+    const [ptblue, setPtBlue] = useState<number>(0)
+    const [ptyellow, setPtYellow] = useState<number>(0)
+    const [comportblue, setComportBlue] = useState<number>(3)
+    const [totalptblue, setTotalPtBlue] = useState<number>(0)
+    const [comportyellow, setComportYellow] = useState<number>(3)
+    const [totalptyellow, setTotalPtYellow] = useState<number>(0)
+    const [observblue, setObservBlue] = useState<string>("")
+    const [observyellow, setObservYellow] = useState<string>("")
+    const [nameb, setNameB] = useState<string>("Equipe Azul")
+    const [namey, setNameY] = useState<string>("Equipe Amarela")
 
+        type testando = {
+            equipe:string;
+            erros: string;
+            fase: number
+        }
+
+       const [arrayerro,setArrayErro] =  useState<testando[]>([])
+
+
+       
+    
 
     function normalizar(texto: string) {
         return texto
@@ -54,23 +93,16 @@ export default function Pprincipal() {
         console.log(digi.length, 'digi leng', digi)
         if (digi.length < 1) return
 
-
         if (mletra && [... new Set(Array.from(normalizar(frases[fase].palavra)))].sort().join("") === [... new Set(digi.map(normalizar))].sort().join("")) {
-
-
             setErro([])
             setComplete(ant => [...ant, fase])
             setPoupAcerto(true)
-
         }
-
-
 
         if (!mletra && normalizar(frases[fase].palavra) == normalizar(digi[0])) {
             setErro([])
             setComplete(ant => [...ant, fase])
             setPoupAcerto(true)
-
         }
     }
         , [digi])
@@ -99,42 +131,18 @@ export default function Pprincipal() {
         { tema: "Geografia - Internacional", palavra: "OTAN", dica: "Aliança militar ocidental formada para conter a expansão ideológica e militar de blocos rivais.", imagem: "https://eq7xsvyn9ek.exactdn.com/blog/wp-content/uploads/2023/10/O-que-e-OTAN.jpg" },
 
         { tema: "Geografia - Internacional", palavra: "ONU", dica: "Organização criada após um conflito global para evitar novas guerras e mediar disputas internacionais.", imagem: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Flag_of_the_United_Nations.svg" },
-
-
         { tema: "Geografia - Internacional", palavra: "MARSHALL", dica: "Plano lançado pelo país para reconstruir a Europa Ocidental após a Segunda Guerra Mundial e conter a influência comunista.", imagem: "https://s3.static.brasilescola.uol.com.br/be/2024/06/desfile-em-homenagem-ao-plano-marshall.jpg" },
-
-
         { tema: "Geografia - Internacional", palavra: "VIETNÃ", dica: "Nação do Sudeste Asiático dividida entre Norte comunista e Sul capitalista, palco de guerra intensa com forte intervenção externa entre 1955 e 1975.", imagem: "https://www.thebalancemoney.com/thmb/UseR_mHrkABJ47Esq3aNuAvuFbQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-515541786-5c2d29cbc9e77c00018fd2a9.jpg" },
-
         { tema: "Geografia - Internacional", palavra: "COLÔNIA", dica: "Território ocupado e explorado por uma potência estrangeira, gerando tensões históricas.", imagem: "https://static.preparaenem.com/2024/04/engenho-de-acucar-da-epoca-do-brasil-colonia-retratado-em-pintura.jpg" },
 
-
-
-
-
-
         { tema: "English - School Objects", palavra: "PENCIL", dica: "Tool used for writing or drawing, erasable and often wooden.", imagem: "https://img.freepik.com/vetores-gratis/estilo-liso-redondo-do-lapis_78370-7571.jpg?semt=ais_hybrid&w=740&q=80" },
-
         { tema: "English - School Objects", palavra: "ERASER", dica: "Small item used to remove graphite or ink marks from paper.", imagem: "https://images.tcdn.com.br/img/img_prod/1258915/borracha_escolar_fc_max_pequena_faber_castell_c_capa_2272403_1_75861322dd563233d7afab1953fdfb5e.jpg" },
-
         { tema: "English - School Objects", palavra: "RULER", dica: "Instrument used to measure or draw straight lines.", imagem: "https://res.cloudinary.com/rsc/image/upload/b_rgb:FFFFFF,c_pad,dpr_1.0,f_auto,q_auto,w_700/c_pad,w_700/F3006613-01" },
-
         { tema: "English - School Objects", palavra: "BACKPACK", dica: "Item carried on the back to transport books and supplies.", imagem: "https://static.vecteezy.com/ti/fotos-gratis/p2/2694882-menina-crianca-com-bolsa-escola-pronta-para-ir-para-a-escola-gratis-foto.jpg" },
-
-
         { tema: "English - School Objects", palavra: "GLUE", dica: "Substance used to stick paper or craft materials together.", imagem: "https://www.tilibra.com.br/storage/products/md/cola-branca-120g-lavavel_345563-e1.jpg?c=88f51d10807abf8d5f0097c252673442" },
-
-
-
-
-
     ]
 
-    const [fase, setFase] = useState<number>(0)
-    const [complete, setComplete] = useState<number[]>([])
-    const [completeb, setCompleteB] = useState<string[]>([])
-    const [completey, setCompleteY] = useState<string[]>([])
-
+    
 
     useEffect(() => {
         if (fase < 0)
@@ -149,8 +157,6 @@ export default function Pprincipal() {
 
         if (!dados.campo) return
 
-
-
         if (!mletra && normalizar(dados.campo) === normalizar(frases[fase].palavra)) {
             setDigi([dados.campo])
             setHistPalavra(ant => [...ant, dados.campo])
@@ -160,6 +166,7 @@ export default function Pprincipal() {
         else if (!mletra) {
             setErro(ant => [...ant, dados.campo])
             setHistErro(ant => [...ant, dados.campo])
+            setPoupErro(true)
         }
 
         if (mletra && Array.from(normalizar(frases[fase].palavra)).includes((normalizar(dados.campo)))) {
@@ -170,6 +177,7 @@ export default function Pprincipal() {
         else if (mletra) {
             setErro(ant => [...ant, dados.campo])
             setHistErro(ant => [...ant, dados.campo])
+            setPoupErro(true)
         }
 
         setValue("campo", "")
@@ -182,34 +190,11 @@ export default function Pprincipal() {
         setSorteio("load")
         setTimeout(() => {
             setSorteio(sort)
-
         }, 2000);
-
-
     }
 
 
-    const [sorteio, setSorteio] = useState<string>("")
-    const [poupsorteio, setPoupSorteio] = useState<boolean>(false)
-    const [poupdica, setPoupDica] = useState<boolean>(false)
-    const [poupsword, setPoupSWord] = useState<boolean>(false)
-    const [poupimg, setPoupImg] = useState<boolean>(false)
-    const [poupacerto, setPoupAcerto] = useState<boolean>(false)
-    const [disabledica, setDisableDica] = useState<boolean>(false)
-    const [poupduvidas, setPoupDuvidas] = useState<boolean>(false)
-    const [poupsobre, setPoupSobre] = useState<boolean>(false)
-    const [enerb, setEnerB] = useState<number>(5)
-    const [enery, setEnerY] = useState<number>(5)
-    const [ptblue, setPtBlue] = useState<number>(0)
-    const [ptyellow, setPtYellow] = useState<number>(0)
-    const [comportblue, setComportBlue] = useState<number>(3)
-    const [totalptblue, setTotalPtBlue] = useState<number>(0)
-    const [comportyellow, setComportYellow] = useState<number>(3)
-    const [totalptyellow, setTotalPtYellow] = useState<number>(0)
-    const [observblue, setObservBlue] = useState<string>("")
-    const [observyellow, setObservYellow] = useState<string>("")
-    const [nameb, setNameB] = useState<string>("Equipe Azul")
-    const [namey, setNameY] = useState<string>("Equipe Amarela")
+    
 
 
     return (<>
@@ -244,6 +229,17 @@ export default function Pprincipal() {
             setPtYellow={setPtYellow}
             setEnerB={setEnerB}
             setEnerY={setEnerY}
+            setPoupErro={setPoupErro}
+            erro={erro}
+            setErroB={setErroB}
+            setErroY={setErroY}
+            pouperro={pouperro}
+            nameb={nameb}
+            namey={namey}
+            setArrayErro={setArrayErro}
+            errob={errob}
+            erroy={erroy}
+           
         />
 
 
@@ -252,7 +248,6 @@ export default function Pprincipal() {
 
 
                 <div className='xl:order-1 order-2'>
-
                     <CountCard
                         equipe={nameb}
                         name={nameb}
@@ -270,6 +265,9 @@ export default function Pprincipal() {
                         totalpt={totalptblue}
                         observ={observblue}
                         setObserv={setObservBlue}
+                        erro={errob}
+                        arrayerro={arrayerro}
+                        frases={frases}
                     />
                 </div>
 
@@ -474,7 +472,7 @@ export default function Pprincipal() {
                                         <div className='overflow-x-auto overflow-y-hidden y-20 max-w-96'>
                                             <p className='font-bold text-red-600 px-2'>
                                                 {!mletra && erro[erro.length - 1].length < 2 ? 'Não é permitido enviar letras no "modo Palavra".'
-                                                    : [... new Set(erro)].join(" , ").toUpperCase()}</p>
+                                                    : erro.join(" , ").toUpperCase()}</p>
                                         </div>
                                     </div>
                                 }
@@ -502,6 +500,9 @@ export default function Pprincipal() {
                         totalpt={totalptyellow}
                         observ={observyellow}
                         setObserv={setObservYellow}
+                        erro={erroy}
+                        arrayerro={arrayerro}
+                        frases={frases}
                     />
                 </div>
 

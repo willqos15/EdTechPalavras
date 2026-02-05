@@ -5,6 +5,20 @@ import { IoMdAddCircleOutline } from "react-icons/io";
 import { IoMdRemoveCircleOutline } from "react-icons/io";
 import { AiFillThunderbolt } from "react-icons/ai";
 import { HiCheck } from "react-icons/hi";
+import Poup from './poup';
+
+type Tfrases = {
+    palavra: string
+    dica: string
+    imagem?: string
+    tema?: string
+}
+
+type testando = {
+    equipe: string;
+    erros: string,
+    fase: number
+}
 
 interface propcard {
     equipe: string
@@ -14,26 +28,31 @@ interface propcard {
     setStateE: (x: number) => void
     statee: number
     setPt: React.Dispatch<React.SetStateAction<number>>
-    pt : number
+    pt: number
     setTotalPt: React.Dispatch<React.SetStateAction<number>>
-    totalpt : number
+    totalpt: number
     setComport: React.Dispatch<React.SetStateAction<number>>
     comport: number
     setObserv: React.Dispatch<React.SetStateAction<string>>
     observ: string
     name: string
     setName: React.Dispatch<React.SetStateAction<string>>
+    erro: string[]
+    arrayerro: Array<testando>
+    frases: Tfrases[]
+
 }
 
-export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, statee, setStateE, setPt, pt, setTotalPt,totalpt,setComport,comport, observ, setObserv, name, setName}: propcard) {
+export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, statee, setStateE, setPt, pt, setTotalPt, totalpt, setComport, comport, observ, setObserv, name, setName, erro, arrayerro, frases }: propcard) {
 
 
     const [inputeb, setInputEB] = useState<number>(0)
     const [inputpb, setInputPB] = useState<number>(0)
     const [showcb, setShowCB] = useState<boolean>(false)
+    const [showerro, setShowErro] = useState<boolean>(false)
     // const [pt, setPt] = useState<number>(0)
 
-    
+
 
 
     useEffect(() => {
@@ -49,8 +68,39 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
             setTotalPt(pt + 2)
     }, [comport, pt])
 
-
+    //PARA CADA ITEM NO ERRO, PARA CADA FASE, fase 0: erros, erros, erros
     return (<>
+
+        <Poup titulo={`Relatório de erros`}
+            descricao={
+                <div className='w-96 flex flex-col justify-center items-center h-96 pt-4'>
+                    <p className='text-lg'> {equipe} - Erros: {erro.length > 0 && erro.length}</p>
+
+                    <div className=' flex flex-col w-80 mx-auto overflow-y-scroll'>
+
+                    {[...Array(frases.length).keys()].map(lvl => {
+                        return (
+                            <>
+                                <p key={lvl}> Fase {lvl+1}:
+                                    {arrayerro.filter(x => x.fase === lvl && x.equipe === equipe).map(x=> ` ${x.erros},`)}
+                                    {/* {arrayerro.filter(x => x.fase === lvl && x.equipe === equipe).at(-1)?.erros} */}
+                                </p>
+                            </>
+                        )
+                    })}
+
+                    </div>
+
+
+                    {/* <p>Total: {arrayerro.length > 0 && arrayerro[arrayerro.length - 1].erros.map(x => `${x},`)}</p> */}
+
+
+
+                    
+
+                </div>
+            }
+            close={() => setShowErro(false)} modo='info' show={showerro} />
 
         <div className={`max-h-dvh w-fit bg-white font-bold px-0 whitespace-nowrap flex flex-col items-center justify-center gap-y-2 mb-4 ${textcolor}`}>
             <p className={`${bgcolor} text-center w-full px-3 text-bold ${titlecolor}`}> {name ? name : equipe} </p>
@@ -58,25 +108,30 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
             <div className={`flex items-end ${comport > 3 ? 'text-green-800' : comport < 3 ? 'text-red-800' : textcolor}`}>
 
                 <div className='inline-block'>
-                <p className="inline-block text-5xl">
-                    {totalpt}</p>
-                
+                    <p className="inline-block text-5xl">
+                        {totalpt}</p>
 
-                <p className='bottom-0 inline-block'>{totalpt == 1 || totalpt === 0 ? "Pt" : "Pts"}</p>
+                    <p className='bottom-0 inline-block'>{totalpt == 1 || totalpt === 0 ? "Pt" : "Pts"}</p>
                 </div>
             </div>
 
             <div className='flex flex-col justify-center items-center w-fit'>
                 <div>
-                <button onClick={() => setPt(ant => ant + 1)}
-                    className='cursor-pointer bg-white px-2'>
-                    <IoMdAddCircleOutline
-                        className='cursor-pointer hover:bg-green-400 active:bg-green-400 transition duration-300 text-4xl rounded-full  p-0 flex items-center justify-center' /> </button>
+                    <button onClick={() => setPt(ant => ant + 1)}
+                        className='cursor-pointer bg-white px-2'>
+                        <IoMdAddCircleOutline
+                            className='cursor-pointer hover:bg-green-400 active:bg-green-400 transition duration-300 text-4xl rounded-full  p-0 flex items-center justify-center' /> </button>
 
-                <button onClick={() => setPt(ant => ant - 1)}
-                >
-                    <IoMdRemoveCircleOutline className='cursor-pointer hover:bg-red-400 active:bg-red-400 transition duration-300 text-4xl rounded-full  p-0 flex items-center justify-center' /> </button>
+                    <button onClick={() => setPt(ant => ant - 1)}
+                    >
+                        <IoMdRemoveCircleOutline className='cursor-pointer hover:bg-red-400 active:bg-red-400 transition duration-300 text-4xl rounded-full  p-0 flex items-center justify-center' /> </button>
                 </div>
+
+
+                <button className={`cursor-pointer hover:text-red-700`} onClick={() => setShowErro(true)}>
+                    Erros: {erro.length}
+                </button>
+
 
                 {statee > 5 ?
                     <div className='flex justify-center items-center gap-1 bg-white '>
@@ -143,8 +198,8 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
                     </p>
 
                     <hr className='border my-2 w-full' />
-                            
-                    
+
+
                     <p className='text-sm text-center'>
                         Nome da Equipe:</p>
                     <input
@@ -232,12 +287,12 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
                         </div>
                     </div>
 
-                    <hr className='border my-1 w-full'/>
+                    <hr className='border my-1 w-full' />
 
                     <p>Observações:</p>
                     <textarea
-                    onChange={(e)=>setObserv(e.target.value)}
-                    className={`text-sm ${observ.length>0 ? 'bg-white border-2 border-black': 'bg-[#e6eae1'}] 
+                        onChange={(e) => setObserv(e.target.value)}
+                        className={`text-sm ${observ.length > 0 ? 'bg-white border-2 border-black' : 'bg-[#e6eae1'}] 
                     sm:w-30 w-25 min-h-7 max-h-15 px-1 mb-2 text-gray-700`}
                     />
 

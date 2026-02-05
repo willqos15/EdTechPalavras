@@ -16,8 +16,14 @@ interface Fraseparams {
     tema?: string
 }
 
+type testando = {
+            equipe:string;
+            erros: string;
+            fase: number
+        }
+
 interface Poupprops {
-    // Estados Booleanos (Visibilidade dos Popups)
+
     poupacerto: boolean;
     poupdica: boolean;
     poupsword: boolean;
@@ -26,8 +32,10 @@ interface Poupprops {
     poupsorteio: boolean;
     poupsobre: boolean;
     disabledica: boolean;
+    pouperro: boolean,
+    
+    
 
-    // Funções SetState para os Popups
     setPoupAcerto: React.Dispatch<React.SetStateAction<boolean>>;
     setPoupDica: React.Dispatch<React.SetStateAction<boolean>>;
     setPoupSWord: React.Dispatch<React.SetStateAction<boolean>>;
@@ -37,14 +45,18 @@ interface Poupprops {
     setPoupSobre: React.Dispatch<React.SetStateAction<boolean>>;
     setDisableDica: React.Dispatch<React.SetStateAction<boolean>>;
     setHelp: React.Dispatch<React.SetStateAction<boolean>>;
+    setPoupErro: React.Dispatch<React.SetStateAction<boolean>>;
 
-    // Estados de Dados e Lógica
     complete: number[];
     frases: Fraseparams[]; 
     fase: number;
     sorteio: string;  
     sortear: () => void;
-
+    erro: string[];
+    nameb: string;
+    namey: string;
+    errob: string[]
+    erroy: string[]
 
     setComplete: React.Dispatch<React.SetStateAction<number[]>>;
     setCompleteB: React.Dispatch<React.SetStateAction<string[]>>;
@@ -53,6 +65,9 @@ interface Poupprops {
     setPtYellow: React.Dispatch<React.SetStateAction<number>>;
     setEnerB: React.Dispatch<React.SetStateAction<number>>;
     setEnerY: React.Dispatch<React.SetStateAction<number>>;
+    setErroB: React.Dispatch<React.SetStateAction<string[]>>;
+    setErroY: React.Dispatch<React.SetStateAction<string[]>>;
+    setArrayErro: React.Dispatch<React.SetStateAction<testando[]>>;
 }
 
 
@@ -77,12 +92,66 @@ export default function AllPoups({ poupacerto, setComplete, setCompleteB, setCom
     sorteio,
     sortear,
     poupsobre,
-    setPoupSobre }: Poupprops) {
+    setPoupSobre,
+    erro,
+    pouperro,
+    setPoupErro,
+    setErroB,
+    setErroY,
+    nameb,
+    namey,
+    setArrayErro,
+    
+    
+}: Poupprops) {
+
+     
+
+
     return (<>
 
+         <Poup
+            titulo={<p className='inline-block'>
+                VOCÊ ERROU! </p>}
+            show={pouperro}
+            modo='time'
+            qtdbtn={2}
+
+            f1={() => {
+                // setErroB(ant => [...ant, `${erro[erro.length-1]}`])
+                
+                // setArrayErro(ant => [...ant, {equipe: nameb, erros:errob, fase:fase}])
+
+
+                 setErroB(ant => [...ant, `${erro[erro.length-1]}`]
+                   )
+
+                setArrayErro(arr => [...arr, {equipe: nameb, erros:erro[erro.length-1], fase:fase}])
+
+                setPoupErro(false)
+            }}
+
+            f2={() => {
+
+                setErroY(ant => [...ant, `${erro[erro.length-1]}`]
+                   
+                   )
+
+                    setArrayErro(arr => [...arr, {equipe: namey, erros:erro[erro.length-1], fase:fase}])
+                    
+                setPoupErro(false)
+            }}
+
+            close={() => { setPoupErro(false) }}
+
+            descricao={<>
+                <p className='w-50 px-2 text-center'>Qual equipe errou a palavra?</p>
+                </>}
+        />
+
         <Poup
-            titulo={<><p className='inline-block'>
-                VOCÊ ACERTOU! </p></>}
+            titulo={<p className='inline-block'>
+                VOCÊ ACERTOU! </p>}
             show={poupacerto}
             modo='time'
             qtdbtn={2}
