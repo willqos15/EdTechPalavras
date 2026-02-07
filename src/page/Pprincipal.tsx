@@ -69,14 +69,20 @@ export default function Pprincipal() {
     const [observyellow, setObservYellow] = useState<string>("")
     const [nameb, setNameB] = useState<string>("Equipe Azul")
     const [namey, setNameY] = useState<string>("Equipe Amarela")
+    
 
-        type testando = {
+        type objtentativa = {
             equipe:string;
-            erros: string;
-            fase: number
+            tentativa: string;
+            fase: number;
+            descricao?: string;
         }
 
-       const [arrayerro,setArrayErro] =  useState<testando[]>([])
+      
+
+       const [arrayerro,setArrayErro] =  useState<objtentativa[]>([])
+       const [arrayacerto,setArrayAcerto] =  useState<objtentativa[]>([])
+      
 
 
        
@@ -237,6 +243,7 @@ export default function Pprincipal() {
             nameb={nameb}
             namey={namey}
             setArrayErro={setArrayErro}
+            setArrayAcerto={setArrayAcerto}
             errob={errob}
             erroy={erroy}
            
@@ -291,7 +298,7 @@ export default function Pprincipal() {
                                 </div>
 
                                 <div
-                                    onClick={() => Save({ complete, frases, histletra, histpalavra, histerro, nameb, namey, completeb, completey, comportyellow, comportblue, observblue, observyellow, totalptyellow, totalptblue, enerb, enery })}
+                                    onClick={() => Save({ complete, frases, histletra, histpalavra, histerro, nameb, namey, comportyellow, comportblue, observblue, observyellow, totalptyellow, totalptblue, enerb, enery, arrayacerto, arrayerro })}
                                     className='cursor-pointer h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
                                     <IoIosSave /> <p className='sm:flex hidden'>Salvar</p>
                                 </div>

@@ -7,7 +7,8 @@ import { IoLogoWhatsapp } from "react-icons/io";
 import { FaGear } from "react-icons/fa6";
 import Poup from '../components/poup';
 import { GiPerspectiveDiceSixFacesFive } from "react-icons/gi";
-import { MdChangeCircle} from "react-icons/md";
+import { MdChangeCircle } from "react-icons/md";
+import { useState } from 'react'
 
 interface Fraseparams {
     palavra: string
@@ -16,11 +17,12 @@ interface Fraseparams {
     tema?: string
 }
 
-type testando = {
-            equipe:string;
-            erros: string;
-            fase: number
-        }
+type objtentativa = {
+    equipe: string;
+    tentativa: string;
+    fase: number;
+    observacao?: string;
+}
 
 interface Poupprops {
 
@@ -33,8 +35,8 @@ interface Poupprops {
     poupsobre: boolean;
     disabledica: boolean;
     pouperro: boolean,
-    
-    
+
+
 
     setPoupAcerto: React.Dispatch<React.SetStateAction<boolean>>;
     setPoupDica: React.Dispatch<React.SetStateAction<boolean>>;
@@ -48,9 +50,9 @@ interface Poupprops {
     setPoupErro: React.Dispatch<React.SetStateAction<boolean>>;
 
     complete: number[];
-    frases: Fraseparams[]; 
+    frases: Fraseparams[];
     fase: number;
-    sorteio: string;  
+    sorteio: string;
     sortear: () => void;
     erro: string[];
     nameb: string;
@@ -67,7 +69,8 @@ interface Poupprops {
     setEnerY: React.Dispatch<React.SetStateAction<number>>;
     setErroB: React.Dispatch<React.SetStateAction<string[]>>;
     setErroY: React.Dispatch<React.SetStateAction<string[]>>;
-    setArrayErro: React.Dispatch<React.SetStateAction<testando[]>>;
+    setArrayErro: React.Dispatch<React.SetStateAction<objtentativa[]>>;
+    setArrayAcerto: React.Dispatch<React.SetStateAction<objtentativa[]>>;
 }
 
 
@@ -101,16 +104,17 @@ export default function AllPoups({ poupacerto, setComplete, setCompleteB, setCom
     nameb,
     namey,
     setArrayErro,
-    
-    
+    setArrayAcerto
+
+
 }: Poupprops) {
 
-     
+    const [observacao, setObservacao] = useState<string>("")
 
 
     return (<>
 
-         <Poup
+        <Poup
             titulo={<p className='inline-block'>
                 VOCÊ ERROU! </p>}
             show={pouperro}
@@ -118,35 +122,41 @@ export default function AllPoups({ poupacerto, setComplete, setCompleteB, setCom
             qtdbtn={2}
 
             f1={() => {
-                // setErroB(ant => [...ant, `${erro[erro.length-1]}`])
-                
-                // setArrayErro(ant => [...ant, {equipe: nameb, erros:errob, fase:fase}])
 
+                setErroB(ant => [...ant, `${erro[erro.length - 1]}`])
 
-                 setErroB(ant => [...ant, `${erro[erro.length-1]}`]
-                   )
-
-                setArrayErro(arr => [...arr, {equipe: nameb, erros:erro[erro.length-1], fase:fase}])
+                setArrayErro(arr => [...arr, { equipe: nameb, tentativa: erro[erro.length - 1], fase: fase, observacao: observacao }])
 
                 setPoupErro(false)
+                setObservacao("")
             }}
 
             f2={() => {
 
-                setErroY(ant => [...ant, `${erro[erro.length-1]}`]
-                   
-                   )
+                setErroY(ant => [...ant, `${erro[erro.length - 1]}`]
 
-                    setArrayErro(arr => [...arr, {equipe: namey, erros:erro[erro.length-1], fase:fase}])
-                    
+                )
+
+                setArrayErro(arr => [...arr, { equipe: namey, tentativa: erro[erro.length - 1], fase: fase, observacao: observacao }])
+
                 setPoupErro(false)
+                setObservacao("")
             }}
 
-            close={() => { setPoupErro(false) }}
+            close={() => {
+                setPoupErro(false)
+                setObservacao("")
+            }}
 
-            descricao={<>
+            descricao={<div className="w-full flex flex-col justify-center items-center">
                 <p className='w-50 px-2 text-center'>Qual equipe errou a palavra?</p>
-                </>}
+                <p>Observação:</p>
+                <textarea className="max-h-96 min-h-10 w-11/12 bg-[#e6eae1] px-2"
+                    value={observacao}
+                    onChange={(e) => setObservacao(e.target.value)}
+                >
+                </textarea>
+            </div>}
         />
 
         <Poup
@@ -159,21 +169,32 @@ export default function AllPoups({ poupacerto, setComplete, setCompleteB, setCom
             f1={() => {
                 setPtBlue(ant => ant + 1)
                 setCompleteB(ant => [...ant, frases[fase].palavra])
+                setArrayAcerto(arr => [...arr, { equipe: nameb, tentativa: frases[fase].palavra, fase: fase, observacao: observacao }])
+                setObservacao("")
                 setPoupAcerto(false)
 
             }}
             f2={() => {
                 setPtYellow(ant => ant + 1)
                 setCompleteY(ant => [...ant, frases[fase].palavra])
+                setArrayAcerto(arr => [...arr, { equipe: namey, tentativa: frases[fase].palavra, fase: fase, observacao: observacao }])
+                setObservacao("")
                 setPoupAcerto(false)
 
             }}
 
             close={() => { setPoupAcerto(false) }}
 
-            descricao={<>
+            descricao={<div className="w-full flex flex-col justify-center items-center">
                 <p className='px-2 text-center'> A palavra era {frases[fase].palavra}</p>
-                <p className='w-50 px-2 text-center'>Este ponto vai para qual equipe?</p></>}
+                <p className='w-50 px-2 text-center'>Este ponto vai para qual equipe?</p>
+                <p>Observação:</p>
+                <textarea className="max-h-96 min-h-10 w-11/12 bg-[#e6eae1] px-2"
+                    value={observacao}
+                    onChange={(e) => setObservacao(e.target.value)}
+                >
+                </textarea>
+            </div>}
         />
 
 

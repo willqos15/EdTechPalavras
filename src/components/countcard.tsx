@@ -14,10 +14,11 @@ type Tfrases = {
     tema?: string
 }
 
-type testando = {
+type objtentativa = {
     equipe: string;
-    erros: string,
+    tentativa: string,
     fase: number
+    observacao?: string
 }
 
 interface propcard {
@@ -38,7 +39,7 @@ interface propcard {
     name: string
     setName: React.Dispatch<React.SetStateAction<string>>
     erro: string[]
-    arrayerro: Array<testando>
+    arrayerro: Array<objtentativa>
     frases: Tfrases[]
 
 }
@@ -82,7 +83,7 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
                         return (
                             <>
                                 <p key={lvl}> Fase {lvl+1}:
-                                    {arrayerro.filter(x => x.fase === lvl && x.equipe === equipe).map(x=> ` ${x.erros},`)}
+                                    {arrayerro.filter(x => x.fase === lvl && x.equipe === equipe).map(x=> ` ${x.tentativa} ${x.observacao},`)}
                                     {/* {arrayerro.filter(x => x.fase === lvl && x.equipe === equipe).at(-1)?.erros} */}
                                 </p>
                             </>

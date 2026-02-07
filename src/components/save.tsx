@@ -7,14 +7,20 @@ interface Fraseparams {
     tema?: string
 }
 
+type objtentativa = {
+    equipe: string;
+    tentativa: string,
+    fase: number
+    observacao?: string
+}
+
+
 interface Docparams{
     complete: number[];
     frases: Fraseparams[];
     histletra: string[];
     histpalavra: string[];
     histerro: string[];
-    completey:string[]
-    completeb:string[]
     nameb:string;
     namey:string;
     comportblue:number;
@@ -25,9 +31,11 @@ interface Docparams{
     observyellow:string;
     totalptyellow: number; 
     totalptblue: number;
+    arrayacerto: objtentativa[];
+    arrayerro: objtentativa[];
 }
 
-export const Save = async ({complete,frases,histletra,histpalavra,histerro,nameb,namey,completeb,completey,comportyellow, comportblue,observblue, observyellow, totalptyellow, totalptblue, enerb,enery}:Docparams)=> 
+export const Save = async ({complete,frases,histletra,histpalavra,histerro,nameb,namey,comportyellow, comportblue,observblue, observyellow, totalptyellow, totalptblue, enerb,enery,arrayacerto, arrayerro}:Docparams)=> 
     {console.log("oi")
 
         const tempo = new Date()
@@ -181,16 +189,31 @@ export const Save = async ({complete,frases,histletra,histpalavra,histerro,nameb
                         new Paragraph({
                             children: [
                                 new TextRun({
-                                    text: `Palavras Completadas: `,
+                                    text: `${arrayacerto.filter(x => x.equipe === nameb && x.tentativa.length>0).length} Palavras Completadas: `,
                                     size: 25,
                                     bold: true,
                                 }),
                                 new TextRun({
-                                    text: `${completeb}`,
+                                    text: ` ${arrayacerto.filter(x => x.equipe === nameb && x.tentativa.length>0).map(x=> ` ${x.tentativa} <=(${x.observacao})`)}`,
                                     size: 25,
                                 })
                             ]
                         }),
+
+                        new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `${arrayerro.filter(x => x.equipe === nameb).length} Erros: `,
+                                    size: 25,
+                                    bold: true,
+                                }),
+                                new TextRun({
+                                    text: ` ${arrayerro.filter(x => x.equipe === nameb && x.tentativa.length>0).map(x=> ` ${x.tentativa} <=(${x.observacao})`)}`,
+                                    size: 25,
+                                })
+                            ]
+                        }),
+
 
                         new Paragraph({
                             children: [
@@ -265,12 +288,27 @@ export const Save = async ({complete,frases,histletra,histpalavra,histerro,nameb
                         new Paragraph({
                             children: [
                                 new TextRun({
-                                    text: `Palavras Completadas: `,
+                                    text: `${arrayacerto.filter(x => x.equipe === namey && x.tentativa.length>0).length} Palavras Completadas: `,
                                     size: 25,
                                     bold: true,
                                 }),
                                 new TextRun({
-                                    text: `${completey}`,
+                                    text: ` ${arrayacerto.filter(x => x.equipe === namey && x.tentativa.length>0).map(x=> ` ${x.tentativa} <=(${x.observacao})`)
+                                    }`,
+                                    size: 25,
+                                })
+                            ]
+                        }),
+
+                         new Paragraph({
+                            children: [
+                                new TextRun({
+                                    text: `${arrayerro.filter(x => x.equipe === namey).length} Erros: `,
+                                    size: 25,
+                                    bold: true,
+                                }),
+                                new TextRun({
+                                    text: ` ${arrayerro.filter(x => x.equipe === namey && x.tentativa.length>0).map(x=> ` ${x.tentativa} <=(${x.observacao})`)}`,
                                     size: 25,
                                 })
                             ]
