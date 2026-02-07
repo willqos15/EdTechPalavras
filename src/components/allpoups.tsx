@@ -61,8 +61,6 @@ interface Poupprops {
     erroy: string[]
 
     setComplete: React.Dispatch<React.SetStateAction<number[]>>;
-    setCompleteB: React.Dispatch<React.SetStateAction<string[]>>;
-    setCompleteY: React.Dispatch<React.SetStateAction<string[]>>;
     setPtBlue: React.Dispatch<React.SetStateAction<number>>;
     setPtYellow: React.Dispatch<React.SetStateAction<number>>;
     setEnerB: React.Dispatch<React.SetStateAction<number>>;
@@ -76,7 +74,7 @@ interface Poupprops {
 
 
 
-export default function AllPoups({ poupacerto, setComplete, setCompleteB, setCompleteY, setPtBlue, setPtYellow, frases, fase, setPoupAcerto, poupdica,
+export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYellow, frases, fase, setPoupAcerto, poupdica,
     setPoupDica,
     setEnerB,
     setEnerY,
@@ -168,7 +166,6 @@ export default function AllPoups({ poupacerto, setComplete, setCompleteB, setCom
 
             f1={() => {
                 setPtBlue(ant => ant + 1)
-                setCompleteB(ant => [...ant, frases[fase].palavra])
                 setArrayAcerto(arr => [...arr, { equipe: nameb, tentativa: frases[fase].palavra, fase: fase, observacao: observacao }])
                 setObservacao("")
                 setPoupAcerto(false)
@@ -176,7 +173,7 @@ export default function AllPoups({ poupacerto, setComplete, setCompleteB, setCom
             }}
             f2={() => {
                 setPtYellow(ant => ant + 1)
-                setCompleteY(ant => [...ant, frases[fase].palavra])
+     
                 setArrayAcerto(arr => [...arr, { equipe: namey, tentativa: frases[fase].palavra, fase: fase, observacao: observacao }])
                 setObservacao("")
                 setPoupAcerto(false)

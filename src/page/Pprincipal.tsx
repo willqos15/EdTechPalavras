@@ -43,8 +43,6 @@ export default function Pprincipal() {
     const [mletra, setMLetra] = useState<boolean>(true)
     const [fase, setFase] = useState<number>(0)
     const [complete, setComplete] = useState<number[]>([])
-    const [completeb, setCompleteB] = useState<string[]>([])
-    const [completey, setCompleteY] = useState<string[]>([])
     const [errob,setErroB] = useState<string[]>([])
     const [erroy,setErroY] = useState<string[]>([])
     const [pouperro,setPoupErro] = useState<boolean>(false)
@@ -229,8 +227,7 @@ export default function Pprincipal() {
             setDisableDica={setDisableDica}
             setHelp={setHelp}
             setComplete={setComplete}
-            setCompleteB={setCompleteB}
-            setCompleteY={setCompleteY}
+     
             setPtBlue={setPtBlue}
             setPtYellow={setPtYellow}
             setEnerB={setEnerB}
