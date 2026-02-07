@@ -275,6 +275,7 @@ export default function Pprincipal() {
                         erro={errob}
                         arrayerro={arrayerro}
                         frases={frases}
+                        fase={fase}
                     />
                 </div>
 
@@ -510,6 +511,7 @@ export default function Pprincipal() {
                         erro={erroy}
                         arrayerro={arrayerro}
                         frases={frases}
+                        fase={fase}
                     />
                 </div>
 

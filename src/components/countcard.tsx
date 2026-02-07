@@ -41,10 +41,11 @@ interface propcard {
     erro: string[]
     arrayerro: Array<objtentativa>
     frases: Tfrases[]
+    fase: number
 
 }
 
-export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, statee, setStateE, setPt, pt, setTotalPt, totalpt, setComport, comport, observ, setObserv, name, setName, erro, arrayerro, frases }: propcard) {
+export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, statee, setStateE, setPt, pt, setTotalPt, totalpt, setComport, comport, observ, setObserv, name, setName, erro, arrayerro, frases, fase }: propcard) {
 
 
     const [inputeb, setInputEB] = useState<number>(0)
@@ -75,7 +76,7 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
         <Poup titulo={`Relatório de erros`}
             descricao={
                 <div className='w-96 flex flex-col justify-center items-center h-96 pt-4'>
-                    <p className='text-lg'> {equipe} - Erros: {erro.length > 0 && erro.length}</p>
+                    <p className='text-lg'> {equipe} - Erros Totais: {erro.length > 0 && erro.length}</p>
 
                     <div className=' flex flex-col w-80 mx-auto overflow-y-scroll'>
 
@@ -83,7 +84,7 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
                         return (
                             <>
                                 <p key={lvl}> Fase {lvl+1}:
-                                    {arrayerro.filter(x => x.fase === lvl && x.equipe === equipe).map(x=> ` ${x.tentativa} ${x.observacao},`)}
+                                    {arrayerro.filter(x => x.fase === lvl && x.equipe === equipe).map(x=> ` ${x.tentativa}(${x.observacao}),`)}
                                     {/* {arrayerro.filter(x => x.fase === lvl && x.equipe === equipe).at(-1)?.erros} */}
                                 </p>
                             </>
@@ -130,7 +131,7 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
 
 
                 <button className={`cursor-pointer hover:text-red-700`} onClick={() => setShowErro(true)}>
-                    Erros: {erro.length}
+                  Erros : {arrayerro.filter(x => x.fase === fase && x.equipe === equipe).length}
                 </button>
 
 
