@@ -8,7 +8,13 @@ import { FaGear } from "react-icons/fa6";
 import Poup from '../components/poup';
 import { GiPerspectiveDiceSixFacesFive } from "react-icons/gi";
 import { MdChangeCircle } from "react-icons/md";
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import Classes from "./classes";
+
+type Aluno = {
+    nome: string;
+}
+
 
 interface Fraseparams {
     palavra: string
@@ -25,7 +31,8 @@ type objtentativa = {
 }
 
 interface Poupprops {
-
+    turma: Aluno[];
+    setTurma: React.Dispatch<React.SetStateAction<Aluno[]>>
     poupacerto: boolean;
     poupdica: boolean;
     poupsword: boolean;
@@ -60,6 +67,7 @@ interface Poupprops {
     errob: string[]
     erroy: string[]
 
+
     setComplete: React.Dispatch<React.SetStateAction<number[]>>;
     setPtBlue: React.Dispatch<React.SetStateAction<number>>;
     setPtYellow: React.Dispatch<React.SetStateAction<number>>;
@@ -92,7 +100,7 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
     setPoupSorteio,
     sorteio,
     sortear,
-    poupsobre,
+    poupsobre: poupturma,
     setPoupSobre,
     erro,
     pouperro,
@@ -102,15 +110,28 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
     nameb,
     namey,
     setArrayErro,
-    setArrayAcerto
+    setArrayAcerto,
+    turma,
+    setTurma
 
 
 }: Poupprops) {
 
+    
+    const [mlista, setMLista] = useState<boolean>(false);
+
     const [observacao, setObservacao] = useState<string>("")
 
+    useEffect(()=>{
+        if (turma.length>0){
+            setMLista(true)
+        }
+        else {setMLista(false)}
+    },[turma])
 
     return (<>
+
+
 
         <Poup
             titulo={<p className='inline-block'>
@@ -120,23 +141,15 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
             qtdbtn={2}
 
             f1={() => {
-
                 setErroB(ant => [...ant, `${erro[erro.length - 1]}`])
-
                 setArrayErro(arr => [...arr, { equipe: nameb, tentativa: erro[erro.length - 1], fase: fase, observacao: observacao }])
-
                 setPoupErro(false)
                 setObservacao("")
             }}
 
             f2={() => {
-
-                setErroY(ant => [...ant, `${erro[erro.length - 1]}`]
-
-                )
-
+                setErroY(ant => [...ant, `${erro[erro.length - 1]}`])
                 setArrayErro(arr => [...arr, { equipe: namey, tentativa: erro[erro.length - 1], fase: fase, observacao: observacao }])
-
                 setPoupErro(false)
                 setObservacao("")
             }}
@@ -147,19 +160,36 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
             }}
 
             descricao={<div className="w-full flex flex-col justify-center items-center">
-                <p className='w-50 px-2 text-center'>Qual equipe errou a palavra?</p>
-                <p>Observação:</p>
-                <textarea className="max-h-96 min-h-10 w-11/12 bg-[#e6eae1] px-2"
-                    value={observacao}
-                    onChange={(e) => setObservacao(e.target.value)}
-                >
-                </textarea>
-            </div>}
+                <p className='w-50 px-2 text-center'>Quem errou a palavra?</p>
+
+             
+                <div className="flex items-center cursor-pointer" onClick={()=> setMLista(!mlista)}>
+                {turma.length>0 &&
+                <MdChangeCircle />
+                }
+                {mlista? "Modo lista": "Modo texto"}
+                </div>
+
+                {mlista && turma.length > 0  ?
+                <select value={observacao} onChange={(e)=>setObservacao(e.target.value)}
+                className="bg-[#e6eae1] my-2">
+                    <option value="">Nenhum</option>
+                {turma.map(x=><option value={x.nome} key={x.nome}>{x.nome}</option>)}
+                </select> : <>
+                    <textarea className="max-h-96 min-h-10 w-11/12 bg-[#e6eae1] px-2"
+                    placeholder="Digite o nome do aluno aqui"
+                        value={observacao}
+                        onChange={(e) => setObservacao(e.target.value)} />
+                </>
+                }
+                
+
+            </div >}
         />
 
-        <Poup
-            titulo={<p className='inline-block'>
-                VOCÊ ACERTOU! </p>}
+        < Poup
+            titulo={< p className='inline-block' >
+                VOCÊ ACERTOU! </p >}
             show={poupacerto}
             modo='time'
             qtdbtn={2}
@@ -173,7 +203,7 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
             }}
             f2={() => {
                 setPtYellow(ant => ant + 1)
-     
+
                 setArrayAcerto(arr => [...arr, { equipe: namey, tentativa: frases[fase].palavra, fase: fase, observacao: observacao }])
                 setObservacao("")
                 setPoupAcerto(false)
@@ -182,21 +212,37 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
 
             close={() => { setPoupAcerto(false) }}
 
-            descricao={<div className="w-full flex flex-col justify-center items-center">
+            descricao={< div className="w-full flex flex-col justify-center items-center" >
                 <p className='px-2 text-center'> A palavra era {frases[fase].palavra}</p>
-                <p className='w-50 px-2 text-center'>Este ponto vai para qual equipe?</p>
-                <p>Observação:</p>
-                <textarea className="max-h-96 min-h-10 w-11/12 bg-[#e6eae1] px-2"
-                    value={observacao}
-                    onChange={(e) => setObservacao(e.target.value)}
-                >
-                </textarea>
-            </div>}
+                <p className='w-50 px-2 text-center'>Quem acertou a palavra?</p>
+                
+
+<div className="flex items-center cursor-pointer" onClick={()=> setMLista(!mlista)}>
+                {turma.length>0 &&
+                <MdChangeCircle />
+                }
+                {mlista? "Modo lista": "Modo texto"}
+                </div>
+
+                {mlista && turma.length > 0  ?
+                <select value={observacao} onChange={(e)=>setObservacao(e.target.value)}
+                className="bg-[#e6eae1] my-2">
+                    <option value="">Nenhum</option>
+                {turma.map(x=><option value={x.nome} key={x.nome}>{x.nome}</option>)}
+                </select> : <>
+                    <textarea className="max-h-96 min-h-10 w-11/12 bg-[#e6eae1] px-2"
+                    placeholder="Digite o nome do aluno aqui"
+                        value={observacao}
+                        onChange={(e) => setObservacao(e.target.value)} />
+                </>}
+
+
+            </div >}
         />
 
 
 
-        <Poup
+        < Poup
             titulo={<><p className='inline-block'> Custa 1 de </p> <AiFillThunderbolt className='inline-block' /></>}
             show={poupdica}
             modo='time' qtdbtn={3}
@@ -221,8 +267,8 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
                 <p className='p-2 text-center'>Informe qual equipe solicitou a dica</p></>} />
 
 
-        <Poup
-            titulo={<><p className='inline-block'> AVISO </p> </>}
+        < Poup
+            titulo={<> <p className='inline-block'> AVISO </p> </>}
             show={disabledica}
             modo='confirma'
             qtdbtn={2}
@@ -241,8 +287,8 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
         />
 
 
-        <Poup
-            titulo={<p className='inline-block'> AVISO </p>}
+        < Poup
+            titulo={< p className='inline-block' > AVISO </p >}
             show={poupsword} modo='confirma'
             qtdbtn={2}
             f1={() => {
@@ -253,21 +299,20 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
             }}
             f2={() => setPoupSWord(false)}
             close={() => setPoupSWord(false)}
-            descricao={<p className='p-2 text-center'>Deseja revelar a palavra?</p>}
+            descricao={< p className='p-2 text-center' > Deseja revelar a palavra ?</p >}
         />
 
-        <Poup
-            titulo={<p className='inline-block '> DÚVIDAS </p>}
+        < Poup
+            titulo={< p className='inline-block ' > DÚVIDAS </p >}
             show={poupduvidas} modo='info'
             close={() => setPoupDuvidas(false)}
             descricao={
-                <div className='tduvida h-96 mr-0 
-                    overflow-y-auto px-2 py-2'>
+                < div className='tduvida h-96 mr-0 overflow-y-auto px-2 py-2'>
 
-                    <div>
+                    < div >
                         <h3>1 - Como a turma é organizada?</h3>
                         <p>A turma é dividida em duas equipes: Azul e Amarela.</p>
-                    </div>
+                    </div >
 
                     <div>
                         <h3>2 - Quem controla o jogo?</h3>
@@ -317,11 +362,35 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
                         <p>Não. As regras podem ser adaptadas conforme a necessidade do professor.</p>
                     </div>
 
-                </div>
+                    <span className='flex flex-col justify-center items-center px-2'>
+
+
+                        <p className='text-center'>
+                            <FaGear className='inline-block' />
+                            Desenvolvido por William Queiroz: </p>
+                        <span className='flex flex-col items-start text-sm linkct px-2 text-center'>
+
+                            <a
+                                href='https://queirozdeveloper.vercel.app/'> <FaCode className='inline-block mr-1' />  Portfólio: queirozdeveloper.vercel.app</a>
+
+                            <span className='mx-auto text-xl'>
+                                <a href='https://www.linkedin.com/in/william-queiroz-a36573120/'> <FaLinkedin className='inline-block mr-1' /></a>
+                                <a href='mailto:willqos15@gmail.com' className='cursor-pointer'> <MdEmail className='inline-block mr-1' /> </a>
+                                <a href='https://github.com/dashboard/'> <FaGithub className='inline-block mr-1' /></a>
+                                <a href='wa.me/5593991878598'> <IoLogoWhatsapp className='inline-block mr-1 ' /></a>
+                            </span>
+
+
+
+                        </span>
+
+                    </span>
+
+                </div >
             } />
 
 
-        <Poup
+        < Poup
             titulo={<> Imagem: {frases[fase].tema}</>}
             show={poupimg}
             modo='info'
@@ -334,7 +403,7 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
                     <img className='min-w-full' src={frases[fase].imagem}></img> </div></>}
         />
 
-        <Poup
+        < Poup
             titulo={<> SORTEAR </>}
             show={poupsorteio}
             modo='info'
@@ -363,39 +432,15 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
         />
 
 
-        <Poup
+        < Poup
 
-            titulo={<p className='inline-block '> SOBRE </p>}
-            show={poupsobre} modo='info'
+            titulo={< p className='inline-block ' > Turma </p >}
+            show={poupturma} modo='info'
             close={() => setPoupSobre(false)}
             descricao={
-                <div className='flex flex-col justify-center items-center px-2'>
-                    <p className='max-w-50 mt-3 text-center'>
-                        Aplicação Web desenvolvida com React, Typescript e Tailwind.
-                    </p>
-
-                    <hr className='border my-2' />
-
-                    <p className='text-center'>
-                        <FaGear className='inline-block' />
-                        Desenvolvido por William Queiroz: </p>
-                    <div className='flex flex-col items-start text-sm linkct px-2 text-center'>
-
-                        <a
-                            href='https://queirozdeveloper.vercel.app/'> <FaCode className='inline-block mr-1' />  Portfólio: queirozdeveloper.vercel.app</a>
-
-                        <div className='mx-auto text-xl'>
-                            <a href='https://www.linkedin.com/in/william-queiroz-a36573120/'> <FaLinkedin className='inline-block mr-1' /></a>
-                            <a href='mailto:willqos15@gmail.com' className='cursor-pointer'> <MdEmail className='inline-block mr-1' /> </a>
-                            <a href='https://github.com/dashboard/'> <FaGithub className='inline-block mr-1' /></a>
-                            <a href='wa.me/5593991878598'> <IoLogoWhatsapp className='inline-block mr-1 ' /></a>
-                        </div>
-
-
-
-                    </div>
-
-                </div>
+                < div className='flex flex-col justify-center items-center px-2' >
+                    <Classes turma={turma} setTurma={setTurma} />
+                </div >
 
             } />
 

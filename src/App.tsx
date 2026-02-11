@@ -1,5 +1,6 @@
 import './App.css'
-import Pprincipal from './page/Pprincipal'
+import Pmenu from './page/Pmenu'
+// import Pprincipal from './page/Pprincipal'
 
 function App() {
 
@@ -7,7 +8,7 @@ function App() {
   return (
     <>
      
-    <Pprincipal/>
+    <Pmenu/>
       
     </>
   )

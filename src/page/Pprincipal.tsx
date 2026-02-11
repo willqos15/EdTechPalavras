@@ -12,7 +12,7 @@ import { IoMdEyeOff } from "react-icons/io";
 import logo from '../assets/logo.png'
 import { IoIosSave } from "react-icons/io";
 import { FaQuestionCircle } from "react-icons/fa";
-import { TbWorld } from "react-icons/tb";
+import { FaUserGroup } from "react-icons/fa6";
 
 import { GiPerspectiveDiceSixFacesFive } from "react-icons/gi";
 import { Save } from '../components/save';
@@ -31,9 +31,13 @@ type Tfrases = {
     tema?: string
 }
 
+type Aluno = {
+  nome: string;
+}
+
 export default function Pprincipal() {
 
-
+     const [turma, setTurma]= useState<Aluno[]> ([])
     const [digi, setDigi] = useState<string[]>([])
     const [erro, setErro] = useState<string[]>([])
     const [histletra, setHistLetra] = useState<string[]>([])
@@ -54,7 +58,7 @@ export default function Pprincipal() {
     const [poupacerto, setPoupAcerto] = useState<boolean>(false)
     const [disabledica, setDisableDica] = useState<boolean>(false)
     const [poupduvidas, setPoupDuvidas] = useState<boolean>(false)
-    const [poupsobre, setPoupSobre] = useState<boolean>(false)
+    const [poupTurma, setPoupTurma] = useState<boolean>(false)
     const [enerb, setEnerB] = useState<number>(5)
     const [enery, setEnerY] = useState<number>(5)
     const [ptblue, setPtBlue] = useState<number>(0)
@@ -215,7 +219,7 @@ export default function Pprincipal() {
             poupduvidas={poupduvidas}
             poupimg={poupimg}
             poupsorteio={poupsorteio}
-            poupsobre={poupsobre}
+            poupsobre={poupTurma}
             disabledica={disabledica}
             setPoupAcerto={setPoupAcerto}
             setPoupDica={setPoupDica}
@@ -223,7 +227,7 @@ export default function Pprincipal() {
             setPoupDuvidas={setPoupDuvidas}
             setPoupImg={setPoupImg}
             setPoupSorteio={setPoupSorteio}
-            setPoupSobre={setPoupSobre}
+            setPoupSobre={setPoupTurma}
             setDisableDica={setDisableDica}
             setHelp={setHelp}
             setComplete={setComplete}
@@ -243,6 +247,8 @@ export default function Pprincipal() {
             setArrayAcerto={setArrayAcerto}
             errob={errob}
             erroy={erroy}
+            turma={turma}
+            setTurma={setTurma}
            
         />
 
@@ -286,6 +292,13 @@ export default function Pprincipal() {
                                 <img src={logo}
                                     className='h-8 bg-[#F7CD21] px-5 p-1 rounded-t-md'/>
 
+                                 <div
+                                    onClick={() => setPoupDuvidas(!poupduvidas)}
+                                    className='cursor-pointer h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 hover:bg-white transition-all duration-300'>
+                                    <FaQuestionCircle /> <p className='sm:flex hidden'>
+                                        Dúvidas</p>
+                                </div>
+
                                 <div
                                     onClick={() => {
                                         sortear()
@@ -295,25 +308,23 @@ export default function Pprincipal() {
                                     <GiPerspectiveDiceSixFacesFive /> <p className='sm:flex hidden'>Sortear</p>
                                 </div>
 
+                                
+
+
+
+                               
+
+                                <div
+                                    onClick={() => setPoupTurma(!poupTurma)}
+                                    className='cursor-pointer h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
+                                    <FaUserGroup /> <p className='sm:flex hidden'>Turma</p>
+                                </div>
+
+
                                 <div
                                     onClick={() => Save({ complete, frases, histletra, histpalavra, histerro, nameb, namey, comportyellow, comportblue, observblue, observyellow, totalptyellow, totalptblue, enerb, enery, arrayacerto, arrayerro })}
                                     className='cursor-pointer h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
                                     <IoIosSave /> <p className='sm:flex hidden'>Salvar</p>
-                                </div>
-
-
-
-                                <div
-                                    onClick={() => setPoupDuvidas(!poupduvidas)}
-                                    className='cursor-pointer h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 hover:bg-white transition-all duration-300'>
-                                    <FaQuestionCircle /> <p className='sm:flex hidden'>
-                                        Dúvidas</p>
-                                </div>
-
-                                <div
-                                    onClick={() => setPoupSobre(!poupsobre)}
-                                    className='cursor-pointer h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
-                                    <TbWorld /> <p className='sm:flex hidden'>Sobre</p>
                                 </div>
                             </div>
 
@@ -369,12 +380,9 @@ export default function Pprincipal() {
 
                                 <div className='select-none flex sm:gap-2 gap-1 justify-center px-2'>
                                     {frases[fase].palavra.split("").map((letra) => (
-                                        <div className="sm:w-8 sm:text-4xl sm:py-1 py-1 w-5 text-lg bg-[#e6eae1]  px-1  rounded-md text-[#21285C] border-3 text-center">
+                                        <div className="sm:w-8 sm:text-4xl sm:py-1 py-1 w-5 text-lg bg-[#e6eae1]    rounded-md text-[#21285C] border-3 text-center">
                                             <span className={
-                                                (Array.from(digi).map(normalizar)).includes(normalizar(letra)) || normalizar(digi.join("")) === normalizar(frases[fase].palavra) || complete.includes(fase) ?
-                                                    'opacity-100'
-                                                    :
-                                                    "opacity-0"}>
+                                                (Array.from(digi).map(normalizar)).includes(normalizar(letra)) || normalizar(digi.join("")) === normalizar(frases[fase].palavra) || complete.includes(fase) ?'opacity-100':"opacity-0"}>
                                                 {letra}
                                             </span>
                                         </div>
