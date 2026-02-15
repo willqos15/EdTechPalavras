@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 
-import { FaArrowCircleRight } from "react-icons/fa";
+import { FaArrowCircleRight, FaClipboard } from "react-icons/fa";
 import { FaArrowCircleLeft } from "react-icons/fa";
 import { IoSend } from "react-icons/io5";
 import { FaLightbulb } from "react-icons/fa";
@@ -13,7 +13,6 @@ import logo from '../assets/logo.png'
 import { IoIosSave } from "react-icons/io";
 import { FaQuestionCircle } from "react-icons/fa";
 import { FaUserGroup } from "react-icons/fa6";
-
 import { GiPerspectiveDiceSixFacesFive } from "react-icons/gi";
 import { Save } from '../components/save';
 
@@ -37,7 +36,7 @@ type Aluno = {
 
 export default function Pprincipal() {
 
-     const [turma, setTurma]= useState<Aluno[]> ([])
+    const [turma, setTurma]= useState<Aluno[]> ([])
     const [digi, setDigi] = useState<string[]>([])
     const [erro, setErro] = useState<string[]>([])
     const [histletra, setHistLetra] = useState<string[]>([])
@@ -249,8 +248,9 @@ export default function Pprincipal() {
             erroy={erroy}
             turma={turma}
             setTurma={setTurma}
-           
         />
+
+        <FaClipboard className='fixed bottom-4 right-4 text-white hover:text-amber-400 transition duration-300 text-5xl'/>
 
 
         <div className='flex flex-row justify center items-center xl:h-screen'>
@@ -277,6 +277,7 @@ export default function Pprincipal() {
                         setObserv={setObservBlue}
                         erro={errob}
                         arrayerro={arrayerro}
+                        arrayacerto={arrayacerto}
                         frases={frases}
                         fase={fase}
                     />
@@ -515,6 +516,7 @@ export default function Pprincipal() {
                         setObserv={setObservYellow}
                         erro={erroy}
                         arrayerro={arrayerro}
+                        arrayacerto={arrayacerto}
                         frases={frases}
                         fase={fase}
                     />

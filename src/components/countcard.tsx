@@ -40,18 +40,20 @@ interface propcard {
     setName: React.Dispatch<React.SetStateAction<string>>
     erro: string[]
     arrayerro: Array<objtentativa>
+    arrayacerto: Array<objtentativa>
     frases: Tfrases[]
     fase: number
 
 }
 
-export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, statee, setStateE, setPt, pt, setTotalPt, totalpt, setComport, comport, observ, setObserv, name, setName, erro, arrayerro, frases, fase }: propcard) {
+export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, statee, setStateE, setPt, pt, setTotalPt, totalpt, setComport, comport, observ, setObserv, name, setName, erro, arrayerro, frases, fase, arrayacerto }: propcard) {
 
 
     const [inputeb, setInputEB] = useState<number>(0)
     const [inputpb, setInputPB] = useState<number>(0)
     const [showcb, setShowCB] = useState<boolean>(false)
     const [showerro, setShowErro] = useState<boolean>(false)
+    const [showacerto, setShowAcerto] = useState<boolean>(false)
     // const [pt, setPt] = useState<number>(0)
 
 
@@ -73,6 +75,30 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
     //PARA CADA ITEM NO ERRO, PARA CADA FASE, fase 0: erros, erros, erros
     return (<>
 
+
+              <Poup titulo={`Relatório de Acertos`}
+            descricao={
+                <div className='w-96 flex flex-col justify-center items-center h-96 pt-4'>
+                    <p className='text-lg'> {equipe} - Acertos Totais: {pt}</p>
+
+                    <div className=' flex flex-col w-80 mx-auto overflow-y-scroll'>
+
+                    {[...Array(frases.length).keys()].map(lvl => {
+                        return (
+                            <>
+                                <p key={lvl}> Fase {lvl+1}:
+                                    {arrayacerto.filter(x => x.fase === lvl && x.equipe === equipe).map(x=> ` ${x.tentativa}(${x.observacao})`)}
+                                </p>
+                            </>
+                        )
+                    })}
+
+                    </div>
+                </div>
+            }
+            close={() => setShowAcerto(false)} modo='info' show={showacerto} />
+
+
         <Poup titulo={`Relatório de erros`}
             descricao={
                 <div className='w-96 flex flex-col justify-center items-center h-96 pt-4'>
@@ -85,21 +111,12 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
                             <>
                                 <p key={lvl}> Fase {lvl+1}:
                                     {arrayerro.filter(x => x.fase === lvl && x.equipe === equipe).map(x=> ` ${x.tentativa}(${x.observacao}),`)}
-                                    {/* {arrayerro.filter(x => x.fase === lvl && x.equipe === equipe).at(-1)?.erros} */}
                                 </p>
                             </>
                         )
                     })}
 
                     </div>
-
-
-                    {/* <p>Total: {arrayerro.length > 0 && arrayerro[arrayerro.length - 1].erros.map(x => `${x},`)}</p> */}
-
-
-
-                    
-
                 </div>
             }
             close={() => setShowErro(false)} modo='info' show={showerro} />
@@ -107,9 +124,10 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
         <div className={`max-h-dvh w-fit bg-white font-bold px-0 whitespace-nowrap flex flex-col items-center justify-center gap-y-2 mb-4 ${textcolor}`}>
             <p className={`${bgcolor} text-center w-full px-3 text-bold ${titlecolor}`}> {name ? name : equipe} </p>
 
-            <div className={`flex items-end ${comport > 3 ? 'text-green-800' : comport < 3 ? 'text-red-800' : textcolor}`}>
+            <div className={`flex items-end ${comport > 3 ? 'text-green-800' : comport < 3 ? 'text-red-700' : textcolor}`}>
 
-                <div className='inline-block'>
+                <div className={`inline-block cursor-pointer hover:text-green-700`}
+                onClick={()=>setShowAcerto(true)}>
                     <p className="inline-block text-5xl">
                         {totalpt}</p>
 
