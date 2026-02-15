@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 
-import { FaArrowCircleRight, FaClipboard } from "react-icons/fa";
+import { FaArrowCircleRight} from "react-icons/fa";
 import { FaArrowCircleLeft } from "react-icons/fa";
 import { IoSend } from "react-icons/io5";
 import { FaLightbulb } from "react-icons/fa";
@@ -15,6 +15,7 @@ import { FaQuestionCircle } from "react-icons/fa";
 import { FaUserGroup } from "react-icons/fa6";
 import { GiPerspectiveDiceSixFacesFive } from "react-icons/gi";
 import { Save } from '../components/save';
+import { IoIosNotifications } from "react-icons/io";
 
 import CountCard from '../components/countcard';
 import AllPoups from '../components/allpoups';
@@ -58,6 +59,7 @@ export default function Pprincipal() {
     const [disabledica, setDisableDica] = useState<boolean>(false)
     const [poupduvidas, setPoupDuvidas] = useState<boolean>(false)
     const [poupTurma, setPoupTurma] = useState<boolean>(false)
+    const [poupconfig, setPoupConfig] = useState<boolean>(false)
     const [enerb, setEnerB] = useState<number>(5)
     const [enery, setEnerY] = useState<number>(5)
     const [ptblue, setPtBlue] = useState<number>(0)
@@ -70,6 +72,7 @@ export default function Pprincipal() {
     const [observyellow, setObservYellow] = useState<string>("")
     const [nameb, setNameB] = useState<string>("Equipe Azul")
     const [namey, setNameY] = useState<string>("Equipe Amarela")
+    const [alerterro,setAlertErro] = useState<number>(0)
     
 
         type objtentativa = {
@@ -248,9 +251,13 @@ export default function Pprincipal() {
             erroy={erroy}
             turma={turma}
             setTurma={setTurma}
+            setPoupConfig={setPoupConfig}
+            poupconfig={poupconfig}
+            setAlertErro={setAlertErro}
         />
 
-        <FaClipboard className='fixed bottom-4 right-4 text-white hover:text-amber-400 transition duration-300 text-5xl'/>
+        <IoIosNotifications onClick={()=>setPoupConfig(true)}
+        className='fixed bottom-4 right-4 text-white hover:text-amber-400 transition duration-300 text-5xl cursor-pointer'/>
 
 
         <div className='flex flex-row justify center items-center xl:h-screen'>
@@ -280,6 +287,7 @@ export default function Pprincipal() {
                         arrayacerto={arrayacerto}
                         frases={frases}
                         fase={fase}
+                            alerterro={alerterro}
                     />
                 </div>
 
@@ -519,6 +527,7 @@ export default function Pprincipal() {
                         arrayacerto={arrayacerto}
                         frases={frases}
                         fase={fase}
+                        alerterro={alerterro}
                     />
                 </div>
 

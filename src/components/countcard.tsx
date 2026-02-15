@@ -43,10 +43,11 @@ interface propcard {
     arrayacerto: Array<objtentativa>
     frases: Tfrases[]
     fase: number
+    alerterro: number
 
 }
 
-export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, statee, setStateE, setPt, pt, setTotalPt, totalpt, setComport, comport, observ, setObserv, name, setName, erro, arrayerro, frases, fase, arrayacerto }: propcard) {
+export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, statee, setStateE, setPt, pt, setTotalPt, totalpt, setComport, comport, observ, setObserv, name, setName, erro, arrayerro, frases, fase, arrayacerto, alerterro }: propcard) {
 
 
     const [inputeb, setInputEB] = useState<number>(0)
@@ -54,9 +55,15 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
     const [showcb, setShowCB] = useState<boolean>(false)
     const [showerro, setShowErro] = useState<boolean>(false)
     const [showacerto, setShowAcerto] = useState<boolean>(false)
+    const [showalerterro, setShowAlertErro] = useState<boolean>(false)
     // const [pt, setPt] = useState<number>(0)
 
-
+    useEffect(
+        () => {
+            if (alerterro != 0 && alerterro === arrayerro.filter(x => x.fase === fase && x.equipe === equipe).length) {
+                setShowAlertErro(true)
+            }
+        }, [alerterro, erro])
 
 
     useEffect(() => {
@@ -76,22 +83,56 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
     return (<>
 
 
-              <Poup titulo={`Relatório de Acertos`}
+        <Poup titulo={`NOTIFICAÇÃO`}
+            descricao={
+                <div className='w-96 flex   flex-col justify-start items-center max-h-96 h-fit pt-4'>
+                    <p className='text-lg bg-red-700 text-white px-2 py-1 mb-2 rounded-md'> {equipe} atingiu {alerterro} erros na fase {fase + 1}!</p>
+
+                    <div className='flex flex-col items-center w-80 mx-auto max-h-64 overflow-y-auto'>
+
+                        {(() => {
+                            const errosDaFase = arrayerro.filter(
+                                x => x.fase === fase && x.equipe === equipe)
+
+                            if (errosDaFase.length === 0) return null
+
+                            return (
+                                <p>
+                                    {errosDaFase
+                                        .map(x => {
+                                            const obs = x.observacao?.trim()
+                                            return `${x.tentativa}${obs ? `(${obs})` : ""}`
+                                        })
+                                        .join(", ")
+                                    }
+                                </p>
+                            )
+                        })()}
+
+                    </div>
+
+                </div>
+            }
+            close={() => setShowAlertErro(false)} modo='info' show={showalerterro} />
+
+
+
+        <Poup titulo={`Relatório de Acertos`}
             descricao={
                 <div className='w-96 flex flex-col justify-center items-center h-96 pt-4'>
                     <p className='text-lg'> {equipe} - Acertos Totais: {pt}</p>
 
                     <div className=' flex flex-col w-80 mx-auto overflow-y-scroll'>
 
-                    {[...Array(frases.length).keys()].map(lvl => {
-                        return (
-                            <>
-                                <p key={lvl}> Fase {lvl+1}:
-                                    {arrayacerto.filter(x => x.fase === lvl && x.equipe === equipe).map(x=> ` ${x.tentativa}(${x.observacao})`)}
-                                </p>
-                            </>
-                        )
-                    })}
+                        {[...Array(frases.length).keys()].map(lvl => {
+                            return (
+                                <>
+                                    <p key={lvl}> Fase {lvl + 1}:
+                                        {arrayacerto.filter(x => x.fase === lvl && x.equipe === equipe).map(x => ` ${x.tentativa}${x.observacao?.trim() ? `(${x.observacao.trim()})` : ""}`)}
+                                    </p>
+                                </>
+                            )
+                        })}
 
                     </div>
                 </div>
@@ -106,15 +147,15 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
 
                     <div className=' flex flex-col w-80 mx-auto overflow-y-scroll'>
 
-                    {[...Array(frases.length).keys()].map(lvl => {
-                        return (
-                            <>
-                                <p key={lvl}> Fase {lvl+1}:
-                                    {arrayerro.filter(x => x.fase === lvl && x.equipe === equipe).map(x=> ` ${x.tentativa}(${x.observacao}),`)}
-                                </p>
-                            </>
-                        )
-                    })}
+                        {[...Array(frases.length).keys()].map(lvl => {
+                            return (
+                                <>
+                                    <p key={lvl}> Fase {lvl + 1}:
+                                        {arrayerro.filter(x => x.fase === lvl && x.equipe === equipe).map(x => ` ${x.tentativa}${x.observacao?.trim() ? `(${x.observacao.trim()})` : ""},`)}
+                                    </p>
+                                </>
+                            )
+                        })}
 
                     </div>
                 </div>
@@ -127,7 +168,7 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
             <div className={`flex items-end ${comport > 3 ? 'text-green-800' : comport < 3 ? 'text-red-700' : textcolor}`}>
 
                 <div className={`inline-block cursor-pointer hover:text-green-700`}
-                onClick={()=>setShowAcerto(true)}>
+                    onClick={() => setShowAcerto(true)}>
                     <p className="inline-block text-5xl">
                         {totalpt}</p>
 
@@ -149,7 +190,7 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
 
 
                 <button className={`cursor-pointer hover:text-red-700`} onClick={() => setShowErro(true)}>
-                  Erros : {arrayerro.filter(x => x.fase === fase && x.equipe === equipe).length}
+                    Erros : {arrayerro.filter(x => x.fase === fase && x.equipe === equipe).length}
                 </button>
 
 

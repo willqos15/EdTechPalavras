@@ -42,6 +42,7 @@ interface Poupprops {
     poupsobre: boolean;
     disabledica: boolean;
     pouperro: boolean,
+    poupconfig: boolean,
 
 
 
@@ -55,6 +56,7 @@ interface Poupprops {
     setDisableDica: React.Dispatch<React.SetStateAction<boolean>>;
     setHelp: React.Dispatch<React.SetStateAction<boolean>>;
     setPoupErro: React.Dispatch<React.SetStateAction<boolean>>;
+    setPoupConfig: React.Dispatch<React.SetStateAction<boolean>>;
 
     complete: number[];
     frases: Fraseparams[];
@@ -77,6 +79,7 @@ interface Poupprops {
     setErroY: React.Dispatch<React.SetStateAction<string[]>>;
     setArrayErro: React.Dispatch<React.SetStateAction<objtentativa[]>>;
     setArrayAcerto: React.Dispatch<React.SetStateAction<objtentativa[]>>;
+    setAlertErro: React.Dispatch<React.SetStateAction<number>>;
 }
 
 
@@ -112,24 +115,49 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
     setArrayErro,
     setArrayAcerto,
     turma,
-    setTurma
+    setTurma,
+    poupconfig,
+    setPoupConfig,
+    setAlertErro,
 
 
 }: Poupprops) {
 
-    
+
     const [mlista, setMLista] = useState<boolean>(false);
 
     const [observacao, setObservacao] = useState<string>("")
 
-    useEffect(()=>{
-        if (turma.length>0){
+    useEffect(() => {
+        if (turma.length > 0) {
             setMLista(true)
         }
-        else {setMLista(false)}
-    },[turma])
+        else { setMLista(false) }
+    }, [turma])
 
     return (<>
+
+    
+
+     < Poup
+            titulo={< p className='inline-block ' > NOTIFICAÇÕES </p >}
+            show={poupconfig} modo='info'
+            close={() => setPoupConfig(false)}
+            descricao={
+                < div className='tduvida h-fit mr-0 overflow-y-auto px-2 py-2 flex justify-center'>
+                    <p>Notificar</p>
+                    <select className="bg-[#e6eae1]" onChange={(e)=>setAlertErro(Number(e.target.value))}>
+                        <option value="1">Desativado</option>
+                        <option value="5">ao atingir 5 erros</option>
+                        <option value="7">ao atingir 7 erros</option>
+                        <option value="10">ao atingir 10 erros</option>
+                        <option value="15">ao atingir 15 erros</option>
+                        <option value="20">ao atingir 20 erros</option>
+                        <option value="30">ao atingir 30 erros</option>
+                    </select>
+
+                </div >
+            } />
 
 
 
@@ -162,27 +190,27 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
             descricao={<div className="w-full flex flex-col justify-center items-center">
                 <p className='w-50 px-2 text-center'>Quem errou a palavra?</p>
 
-             
-                <div className="flex items-center cursor-pointer" onClick={()=> setMLista(!mlista)}>
-                {turma.length>0 &&
-                <MdChangeCircle />
-                }
-                {mlista? "Modo lista": "Modo texto"}
+
+                <div className="flex items-center cursor-pointer" onClick={() => setMLista(!mlista)}>
+                    {turma.length > 0 &&
+                        <MdChangeCircle />
+                    }
+                    {mlista ? "Modo lista" : "Modo texto"}
                 </div>
 
-                {mlista && turma.length > 0  ?
-                <select value={observacao} onChange={(e)=>setObservacao(e.target.value)}
-                className="bg-[#e6eae1] my-2">
-                    <option value="">Nenhum</option>
-                {turma.map(x=><option value={x.nome} key={x.nome}>{x.nome}</option>)}
-                </select> : <>
-                    <textarea className="max-h-96 min-h-10 w-11/12 bg-[#e6eae1] px-2"
-                    placeholder="Digite o nome do aluno aqui"
-                        value={observacao}
-                        onChange={(e) => setObservacao(e.target.value)} />
-                </>
+                {mlista && turma.length > 0 ?
+                    <select value={observacao} onChange={(e) => setObservacao(e.target.value)}
+                        className="bg-[#e6eae1] my-2">
+                        <option value="">Nenhum</option>
+                        {turma.map(x => <option value={x.nome} key={x.nome}>{x.nome}</option>)}
+                    </select> : <>
+                        <textarea className="max-h-96 min-h-10 w-11/12 bg-[#e6eae1] px-2"
+                            placeholder="Digite o nome do aluno aqui"
+                            value={observacao}
+                            onChange={(e) => setObservacao(e.target.value)} />
+                    </>
                 }
-                
+
 
             </div >}
         />
@@ -215,26 +243,26 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
             descricao={< div className="w-full flex flex-col justify-center items-center" >
                 <p className='px-2 text-center'> A palavra era {frases[fase].palavra}</p>
                 <p className='w-50 px-2 text-center'>Quem acertou a palavra?</p>
-                
 
-<div className="flex items-center cursor-pointer" onClick={()=> setMLista(!mlista)}>
-                {turma.length>0 &&
-                <MdChangeCircle />
-                }
-                {mlista? "Modo lista": "Modo texto"}
+
+                <div className="flex items-center cursor-pointer" onClick={() => setMLista(!mlista)}>
+                    {turma.length > 0 &&
+                        <MdChangeCircle />
+                    }
+                    {mlista ? "Modo lista" : "Modo texto"}
                 </div>
 
-                {mlista && turma.length > 0  ?
-                <select value={observacao} onChange={(e)=>setObservacao(e.target.value)}
-                className="bg-[#e6eae1] my-2">
-                    <option value="">Nenhum</option>
-                {turma.map(x=><option value={x.nome} key={x.nome}>{x.nome}</option>)}
-                </select> : <>
-                    <textarea className="max-h-96 min-h-10 w-11/12 bg-[#e6eae1] px-2"
-                    placeholder="Digite o nome do aluno aqui"
-                        value={observacao}
-                        onChange={(e) => setObservacao(e.target.value)} />
-                </>}
+                {mlista && turma.length > 0 ?
+                    <select value={observacao} onChange={(e) => setObservacao(e.target.value)}
+                        className="bg-[#e6eae1] my-2">
+                        <option value="">Nenhum</option>
+                        {turma.map(x => <option value={x.nome} key={x.nome}>{x.nome}</option>)}
+                    </select> : <>
+                        <textarea className="max-h-96 min-h-10 w-11/12 bg-[#e6eae1] px-2"
+                            placeholder="Digite o nome do aluno aqui"
+                            value={observacao}
+                            onChange={(e) => setObservacao(e.target.value)} />
+                    </>}
 
 
             </div >}
