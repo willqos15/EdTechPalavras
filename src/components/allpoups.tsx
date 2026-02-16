@@ -80,6 +80,7 @@ interface Poupprops {
     setArrayErro: React.Dispatch<React.SetStateAction<objtentativa[]>>;
     setArrayAcerto: React.Dispatch<React.SetStateAction<objtentativa[]>>;
     setAlertErro: React.Dispatch<React.SetStateAction<number>>;
+    setAlertAcerto: React.Dispatch<React.SetStateAction<number>>;
 }
 
 
@@ -119,6 +120,7 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
     poupconfig,
     setPoupConfig,
     setAlertErro,
+    setAlertAcerto
 
 
 }: Poupprops) {
@@ -144,9 +146,11 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
             show={poupconfig} modo='info'
             close={() => setPoupConfig(false)}
             descricao={
-                < div className='tduvida h-fit mr-0 overflow-y-auto px-2 py-2 flex justify-center'>
-                    <p>Notificar</p>
-                    <select className="bg-[#e6eae1]" onChange={(e)=>setAlertErro(Number(e.target.value))}>
+                < div className='tduvida h-fit mt-2 overflow-y-auto px-2 py-2 flex flex-col gap-2 '>
+
+                    <section className="flex justify-start">
+                    <p className="whitespace-nowrap">Notificar Erro:</p>
+                    <select className="bg-[#e6eae1] w-full" onChange={(e)=>setAlertErro(Number(e.target.value))}>
                         <option value="1">Desativado</option>
                         <option value="5">ao atingir 5 erros</option>
                         <option value="7">ao atingir 7 erros</option>
@@ -155,6 +159,20 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
                         <option value="20">ao atingir 20 erros</option>
                         <option value="30">ao atingir 30 erros</option>
                     </select>
+                    </section>
+
+                    <section className="flex justify-start">
+                     <p className="whitespace-nowrap">Notificar Acerto:</p>
+                    <select className="bg-[#e6eae1] w-full" onChange={(e)=>setAlertAcerto(Number(e.target.value))}>
+                        <option value="1">Desativado</option>
+                        <option value="5">ao atingir 5 acertos</option>
+                        <option value="7">ao atingir 7 acertos</option>
+                        <option value="10">ao atingir 10 acertos</option>
+                        <option value="15">ao atingir 15 acertos</option>
+                        <option value="20">ao atingir 20 acertos</option>
+                        <option value="30">ao atingir 30 acertos</option>
+                    </select>
+                    </section>
 
                 </div >
             } />
@@ -249,7 +267,7 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
                     {turma.length > 0 &&
                         <MdChangeCircle />
                     }
-                    {mlista ? "Modo lista" : "Modo texto"}
+                    {mlista && turma.length>0 ? "Modo lista" : !mlista && turma.length>0 ? "Modo texto" : ""}
                 </div>
 
                 {mlista && turma.length > 0 ?

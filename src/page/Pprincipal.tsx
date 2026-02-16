@@ -6,7 +6,6 @@ import { FaArrowCircleLeft } from "react-icons/fa";
 import { IoSend } from "react-icons/io5";
 import { FaLightbulb } from "react-icons/fa";
 import { MdChangeCircle } from "react-icons/md";
-
 import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
 import logo from '../assets/logo.png'
@@ -73,6 +72,7 @@ export default function Pprincipal() {
     const [nameb, setNameB] = useState<string>("Equipe Azul")
     const [namey, setNameY] = useState<string>("Equipe Amarela")
     const [alerterro,setAlertErro] = useState<number>(0)
+    const [alertacerto,setAlertAcerto] = useState<number>(0)
     
 
         type objtentativa = {
@@ -254,6 +254,7 @@ export default function Pprincipal() {
             setPoupConfig={setPoupConfig}
             poupconfig={poupconfig}
             setAlertErro={setAlertErro}
+            setAlertAcerto={setAlertAcerto}
         />
 
         <IoIosNotifications onClick={()=>setPoupConfig(true)}
@@ -287,7 +288,8 @@ export default function Pprincipal() {
                         arrayacerto={arrayacerto}
                         frases={frases}
                         fase={fase}
-                            alerterro={alerterro}
+                        alerterro={alerterro}
+                        alertacerto={alertacerto}
                     />
                 </div>
 
@@ -528,6 +530,7 @@ export default function Pprincipal() {
                         frases={frases}
                         fase={fase}
                         alerterro={alerterro}
+                        alertacerto={alertacerto}
                     />
                 </div>
 

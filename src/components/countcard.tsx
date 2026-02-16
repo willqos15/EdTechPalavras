@@ -44,10 +44,11 @@ interface propcard {
     frases: Tfrases[]
     fase: number
     alerterro: number
+    alertacerto: number
 
 }
 
-export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, statee, setStateE, setPt, pt, setTotalPt, totalpt, setComport, comport, observ, setObserv, name, setName, erro, arrayerro, frases, fase, arrayacerto, alerterro }: propcard) {
+export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, statee, setStateE, setPt, pt, setTotalPt, totalpt, setComport, comport, observ, setObserv, name, setName, erro, arrayerro, frases, fase, arrayacerto, alerterro,alertacerto }: propcard) {
 
 
     const [inputeb, setInputEB] = useState<number>(0)
@@ -56,6 +57,7 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
     const [showerro, setShowErro] = useState<boolean>(false)
     const [showacerto, setShowAcerto] = useState<boolean>(false)
     const [showalerterro, setShowAlertErro] = useState<boolean>(false)
+    const [showalertacerto, setShowAlertAcerto] = useState<boolean>(false)
     // const [pt, setPt] = useState<number>(0)
 
     useEffect(
@@ -64,6 +66,14 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
                 setShowAlertErro(true)
             }
         }, [alerterro, erro])
+
+
+        useEffect(
+        () => {
+            if (alertacerto != 0 && alertacerto === pt) {
+                setShowAlertAcerto(true)
+            }
+        }, [alertacerto, pt])
 
 
     useEffect(() => {
@@ -81,6 +91,39 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
 
     //PARA CADA ITEM NO ERRO, PARA CADA FASE, fase 0: erros, erros, erros
     return (<>
+
+
+        <Poup titulo={`NOTIFICAÇÃO`}
+            descricao={
+                <div className='w-96 flex   flex-col justify-start items-center max-h-96 h-fit pt-4'>
+                    <p className='text-lg bg-green-700 text-white px-2 py-1 mb-2 rounded-md'> {equipe} atingiu {alertacerto} acertos!</p>
+
+                    <div className='flex flex-col items-center w-80 mx-auto max-h-64 overflow-y-auto'>
+
+                        {(() => {
+                            const acertosDaFase = arrayacerto.filter(
+                                x => x.equipe === equipe)
+
+                            if (acertosDaFase.length === 0) return null
+
+                            return (
+                                <p>
+                                    {acertosDaFase
+                                        .map(x => {
+                                            const obs = x.observacao?.trim()
+                                            return `${x.tentativa}${obs ? `(${obs})` : ""}`
+                                        })
+                                        .join(", ")
+                                    }
+                                </p>
+                            )
+                        })()}
+
+                    </div>
+
+                </div>
+            }
+            close={() => setShowAlertAcerto(false)} modo='info' show={showalertacerto} />
 
 
         <Poup titulo={`NOTIFICAÇÃO`}
