@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 
-import { FaArrowCircleRight} from "react-icons/fa";
+import { FaArrowCircleRight } from "react-icons/fa";
 import { FaArrowCircleLeft } from "react-icons/fa";
 import { IoSend } from "react-icons/io5";
 import { FaLightbulb } from "react-icons/fa";
@@ -31,12 +31,12 @@ type Tfrases = {
 }
 
 type Aluno = {
-  nome: string;
+    nome: string;
 }
 
 export default function Pprincipal() {
 
-    const [turma, setTurma]= useState<Aluno[]> ([])
+    const [turma, setTurma] = useState<Aluno[]>([])
     const [digi, setDigi] = useState<string[]>([])
     const [erro, setErro] = useState<string[]>([])
     const [histletra, setHistLetra] = useState<string[]>([])
@@ -46,9 +46,9 @@ export default function Pprincipal() {
     const [mletra, setMLetra] = useState<boolean>(true)
     const [fase, setFase] = useState<number>(0)
     const [complete, setComplete] = useState<number[]>([])
-    const [errob,setErroB] = useState<string[]>([])
-    const [erroy,setErroY] = useState<string[]>([])
-    const [pouperro,setPoupErro] = useState<boolean>(false)
+    const [errob, setErroB] = useState<string[]>([])
+    const [erroy, setErroY] = useState<string[]>([])
+    const [pouperro, setPoupErro] = useState<boolean>(false)
     const [sorteio, setSorteio] = useState<string>("")
     const [poupsorteio, setPoupSorteio] = useState<boolean>(false)
     const [poupdica, setPoupDica] = useState<boolean>(false)
@@ -71,26 +71,26 @@ export default function Pprincipal() {
     const [observyellow, setObservYellow] = useState<string>("")
     const [nameb, setNameB] = useState<string>("Equipe Azul")
     const [namey, setNameY] = useState<string>("Equipe Amarela")
-    const [alerterro,setAlertErro] = useState<number>(0)
-    const [alertacerto,setAlertAcerto] = useState<number>(0)
-    
-
-        type objtentativa = {
-            equipe:string;
-            tentativa: string;
-            fase: number;
-            descricao?: string;
-        }
-
-      
-
-       const [arrayerro,setArrayErro] =  useState<objtentativa[]>([])
-       const [arrayacerto,setArrayAcerto] =  useState<objtentativa[]>([])
-      
+    const [alerterro, setAlertErro] = useState<number>(0)
+    const [alertacerto, setAlertAcerto] = useState<number>(0)
 
 
-       
-    
+    type objtentativa = {
+        equipe: string;
+        tentativa: string;
+        fase: number;
+        descricao?: string;
+    }
+
+
+
+    const [arrayerro, setArrayErro] = useState<objtentativa[]>([])
+    const [arrayacerto, setArrayAcerto] = useState<objtentativa[]>([])
+
+
+
+
+
 
     function normalizar(texto: string) {
         return texto
@@ -119,7 +119,14 @@ export default function Pprincipal() {
 
 
 
-    const { register, handleSubmit, setValue } = useForm({ mode: "onChange", defaultValues: { campo: "" } })
+    const { register, handleSubmit, setValue, } = useForm({ mode: "onChange", defaultValues: { campo: "" } })
+    const [campo, setCampo] = useState<string>("")
+
+
+
+
+
+
 
     const frases: Array<Tfrases> = [
 
@@ -152,7 +159,7 @@ export default function Pprincipal() {
         { tema: "English - School Objects", palavra: "GLUE", dica: "Substance used to stick paper or craft materials together.", imagem: "https://www.tilibra.com.br/storage/products/md/cola-branca-120g-lavavel_345563-e1.jpg?c=88f51d10807abf8d5f0097c252673442" },
     ]
 
-    
+
 
     useEffect(() => {
         if (fase < 0)
@@ -167,9 +174,12 @@ export default function Pprincipal() {
 
         if (!dados.campo) return
 
+        setCampo("")
+
         if (!mletra && normalizar(dados.campo) === normalizar(frases[fase].palavra)) {
             setDigi([dados.campo])
             setHistPalavra(ant => [...ant, dados.campo])
+
         }
 
 
@@ -204,7 +214,7 @@ export default function Pprincipal() {
     }
 
 
-    
+
 
 
     return (<>
@@ -233,7 +243,7 @@ export default function Pprincipal() {
             setDisableDica={setDisableDica}
             setHelp={setHelp}
             setComplete={setComplete}
-     
+
             setPtBlue={setPtBlue}
             setPtYellow={setPtYellow}
             setEnerB={setEnerB}
@@ -257,8 +267,8 @@ export default function Pprincipal() {
             setAlertAcerto={setAlertAcerto}
         />
 
-        <IoIosNotifications onClick={()=>setPoupConfig(true)}
-        className='fixed bottom-4 right-4 text-white hover:text-amber-400 transition duration-300 text-5xl cursor-pointer'/>
+        <IoIosNotifications onClick={() => setPoupConfig(true)}
+            className='fixed bottom-4 right-4 text-white hover:text-amber-400 transition duration-300 text-5xl cursor-pointer' />
 
 
         <div className='flex flex-row justify center items-center xl:h-screen'>
@@ -301,9 +311,9 @@ export default function Pprincipal() {
 
                             <div className='flex flex-row justify-start gap-2 items-end mx-auto'>
                                 <img src={logo}
-                                    className='h-8 bg-[#F7CD21] px-5 p-1 rounded-t-md'/>
+                                    className='h-8 bg-[#F7CD21] px-5 p-1 rounded-t-md' />
 
-                                 <div
+                                <div
                                     onClick={() => setPoupDuvidas(!poupduvidas)}
                                     className='cursor-pointer h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 hover:bg-white transition-all duration-300'>
                                     <FaQuestionCircle /> <p className='sm:flex hidden'>
@@ -319,11 +329,11 @@ export default function Pprincipal() {
                                     <GiPerspectiveDiceSixFacesFive /> <p className='sm:flex hidden'>Sortear</p>
                                 </div>
 
-                                
 
 
 
-                               
+
+
 
                                 <div
                                     onClick={() => setPoupTurma(!poupTurma)}
@@ -363,6 +373,7 @@ export default function Pprincipal() {
                                             setFase(ant => ant - 1)
                                             setDigi([])
                                             setHelp(false)
+                                            setCampo("")
                                         }}
                                         className={
                                             ` bg-[#21285C] text-[#F7CD21] hover:scale-110 hover:p-1.4 transition-all duration-300 h-fit p-1 rounded-full ml-1 sm:text-4xl text-2xl flex justify-center items-center font-bold  ${fase > 0 ? 'cursor-pointer' : 'opacity-0 pointer-events-none'}`
@@ -372,7 +383,7 @@ export default function Pprincipal() {
 
                                     <div onClick={() => setPoupImg(true)}
                                         className='flex items-center w-45 sm:max-h-30 h-32 px-2'>
-                                        <img className="w-auto mx-auto max-h-30 select-none rounded-xl" src={frases[fase].imagem}/>
+                                        <img className="w-auto mx-auto max-h-30 select-none rounded-xl" src={frases[fase].imagem} />
                                     </div>
 
                                     <button
@@ -380,6 +391,7 @@ export default function Pprincipal() {
                                             setFase(ant => ant + 1)
                                             setDigi([])
                                             setHelp(false)
+                                            setCampo("")
                                         }}
                                         className={
                                             ` bg-[#21285C] text-[#F7CD21] hover:scale-110 hover:p-1.4 transition-all duration-300 h-fit p-1 rounded-full sm:text-4xl text-2xl mr-1 flex justify-center items-center font-bold  ${fase <= (frases.length - 2) ? 'cursor-pointer' : 'opacity-0 pointer-events-none'}`
@@ -393,7 +405,7 @@ export default function Pprincipal() {
                                     {frases[fase].palavra.split("").map((letra) => (
                                         <div className="sm:w-8 sm:text-4xl sm:py-1 py-1 w-5 text-lg bg-[#e6eae1]    rounded-md text-[#21285C] border-3 text-center">
                                             <span className={
-                                                (Array.from(digi).map(normalizar)).includes(normalizar(letra)) || normalizar(digi.join("")) === normalizar(frases[fase].palavra) || complete.includes(fase) ?'opacity-100':"opacity-0"}>
+                                                (Array.from(digi).map(normalizar)).includes(normalizar(letra)) || normalizar(digi.join("")) === normalizar(frases[fase].palavra) || complete.includes(fase) ? 'opacity-100' : "opacity-0"}>
                                                 {letra}
                                             </span>
                                         </div>
@@ -468,25 +480,34 @@ export default function Pprincipal() {
                                                 {...register("campo", { required: true })}
                                                 disabled=
                                                 {complete.includes(fase) ? true : false}
+                                                value={campo}
                                                 autoComplete="off"
                                                 maxLength={complete.includes(fase) ? 0 : mletra ? 1 : 25}
                                                 placeholder={complete.includes(fase) ? 'COMPLETADO' : mletra ? 'Digite uma letra' : 'Digite uma palavra'}
-                                                className={`uppercase my-3 sm:w-60 sm:text-xl text-base w-35 h-11 sm:px-3 px-1 rounded-sm border-3 ${complete.includes(fase) ? 'bg-green-800 text-white text-center opacity-100' : 'bg-[#e6eae1]'}`} type="text"
-                                                onChange={(e) => setValue("campo", e.target.value.toUpperCase())}
+                                                className={`uppercase my-3 sm:w-60 sm:text-xl text-base w-35 h-11 sm:px-3 px-1 rounded-sm border-3 ${complete.includes(fase) ? 'bg-green-800 text-white text-center opacity-100' : 'bg-[#e6eae1]'}
+                                                ${!complete.includes(fase) && !mletra && campo.length <= 1 ? "bg-red-100" :
+                                                        !complete.includes(fase) && !mletra && campo.length > 1 ? "bg-green-100" : null}
+                                                `} type="text"
+                                                onChange={(e) => {
+
+                                                    setValue("campo", e.target.value.toUpperCase())
+                                                    setCampo(e.target.value.toUpperCase())
+                                                }}
 
                                             />
 
 
                                             <button type='submit'
-                                                disabled={complete.includes(fase) ? true : false}
-                                                className="cursor-pointer mx-0 h-fit absolute -right-2.5" > <IoSend className={` text-2x ${complete.includes(fase) ? 'text-gray-400' : 'text-[#21285C]'}`} />
+                                                disabled={complete.includes(fase) ? true : !mletra && campo.length <= 1 ? true : false}
+                                                className={`${complete.includes(fase) ? "hidden" : !mletra && campo.length <= 1 ? "hidden" : null} cursor-pointer mx-0 h-fit absolute -right-2.5`} > <IoSend className={` text-2x ${complete.includes(fase) ? 'text-gray-400' : 'text-[#21285C]'}`} />
                                             </button>
                                         </div>
                                     </form>
                                 </div>
 
-
-
+                                <p className='font-bold text-red-600 px-2 text-center'>
+                                    {!mletra && campo.length <= 1 ? 'No modo Palavra, digite a palavra completa. Letras únicas não são permitidas. ' : null}
+                                </p>
 
                                 {erro.length > 0 &&
                                     <div className='flex justify-center text-center mt-0 m-3 px-3 w-11/12 pb-1 whitespace-nowrap'>
@@ -495,11 +516,18 @@ export default function Pprincipal() {
 
                                         <div className='overflow-x-auto overflow-y-hidden y-20 max-w-96'>
                                             <p className='font-bold text-red-600 px-2'>
-                                                {!mletra && erro[erro.length - 1].length < 2 ? 'Não é permitido enviar letras no "modo Palavra".'
+                                                {!mletra && erro[erro.length - 1].length < 2 ? 'No modo Palavra, digite a palavra completa. Letras únicas não são permitidas.".'
                                                     : erro.join(" , ").toUpperCase()}</p>
+
+
+
+
                                         </div>
+
                                     </div>
                                 }
+
+
                             </div>
                         </div>
                     </div>

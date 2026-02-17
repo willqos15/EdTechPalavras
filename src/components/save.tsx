@@ -194,7 +194,7 @@ export const Save = async ({complete,frases,histletra,histpalavra,histerro,nameb
                                     bold: true,
                                 }),
                                 new TextRun({
-                                    text: ` ${arrayacerto.filter(x => x.equipe === nameb && x.tentativa.length>0).map(x=> ` ${x.tentativa} <=(${x.observacao})`)}`,
+                                    text: ` ${arrayacerto.filter(x => x.equipe === nameb && x.tentativa.length>0).map(x=> ` ${x.tentativa}${x.observacao?.trim() ? `(${x.observacao.trim()})` : ""}`)}`,
                                     size: 25,
                                 })
                             ]
@@ -208,7 +208,7 @@ export const Save = async ({complete,frases,histletra,histpalavra,histerro,nameb
                                     bold: true,
                                 }),
                                 new TextRun({
-                                    text: ` ${arrayerro.filter(x => x.equipe === nameb && x.tentativa.length>0).map(x=> ` ${x.tentativa} <=(${x.observacao})`)}`,
+                                    text: ` ${arrayerro.filter(x => x.equipe === nameb && x.tentativa.length>0).map(x=> ` ${x.tentativa}${x.observacao?.trim() ? `(${x.observacao.trim()})` : ""}`)}`,
                                     size: 25,
                                 })
                             ]
@@ -293,7 +293,7 @@ export const Save = async ({complete,frases,histletra,histpalavra,histerro,nameb
                                     bold: true,
                                 }),
                                 new TextRun({
-                                    text: ` ${arrayacerto.filter(x => x.equipe === namey && x.tentativa.length>0).map(x=> ` ${x.tentativa} <=(${x.observacao})`)
+                                    text: ` ${arrayacerto.filter(x => x.equipe === namey && x.tentativa.length>0).map(x=> ` ${x.tentativa}${x.observacao?.trim() ? `(${x.observacao.trim()})` : ""}`)
                                     }`,
                                     size: 25,
                                 })
@@ -308,7 +308,7 @@ export const Save = async ({complete,frases,histletra,histpalavra,histerro,nameb
                                     bold: true,
                                 }),
                                 new TextRun({
-                                    text: ` ${arrayerro.filter(x => x.equipe === namey && x.tentativa.length>0).map(x=> ` ${x.tentativa} <=(${x.observacao})`)}`,
+                                    text: ` ${arrayerro.filter(x => x.equipe === namey && x.tentativa.length>0).map(x=> ` ${x.tentativa}${x.observacao?.trim() ? `(${x.observacao.trim()})` : ""}`)}`,
                                     size: 25,
                                 })
                             ]
