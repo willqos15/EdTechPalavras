@@ -34,7 +34,13 @@ type Aluno = {
     nome: string;
 }
 
-export default function Pprincipal() {
+type Props = {
+    perguntas:Tfrases[]
+    img: string
+    setPage: React.Dispatch<React.SetStateAction<string>>
+}
+
+export default function PT6ANO({perguntas, img, setPage}: Props) {
 
     const [turma, setTurma] = useState<Aluno[]>([])
     const [digi, setDigi] = useState<string[]>([])
@@ -73,6 +79,7 @@ export default function Pprincipal() {
     const [namey, setNameY] = useState<string>("Equipe Amarela")
     const [alerterro, setAlertErro] = useState<number>(0)
     const [alertacerto, setAlertAcerto] = useState<number>(0)
+    const [poupback, setPoupBack] = useState<boolean>(false)
 
 
     type objtentativa = {
@@ -83,12 +90,8 @@ export default function Pprincipal() {
     }
 
 
-
     const [arrayerro, setArrayErro] = useState<objtentativa[]>([])
     const [arrayacerto, setArrayAcerto] = useState<objtentativa[]>([])
-
-
-
 
 
 
@@ -123,42 +126,7 @@ export default function Pprincipal() {
     const [campo, setCampo] = useState<string>("")
 
 
-
-
-
-
-
-    const frases: Array<Tfrases> = [
-
-        { tema: "Biologia - Genética", palavra: "GENOMA", dica: "Conjunto Completo de genes de um organismo.", imagem: "https://upload.wikimedia.org/wikipedia/commons/d/df/Human_male_karyotpe_high_resolution.jpg" },
-        { tema: "Biologia - Genética", palavra: "DNA", dica: "Molécula que carrega a informação genética.", imagem: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCg9Rjn6qJmJhgi63-LLkBtTF_ay8jrseISg&s" },
-        { tema: "Biologia - Genética", palavra: "RNA", dica: "Molécula que transmite a informação do DNA para síntese de proteínas.", imagem: "https://elpais.com/infografias/2020/11/arn/cabecera/cabecera-movil2.jpg?v=6259" },
-        { tema: "Biologia - Genética", palavra: "CÉLULA", dica: "Unidade básica da vida.", imagem: "https://static.todamateria.com.br/upload/ce/lu/celulaanimal-0.jpg" },
-        { tema: "Biologia - Genética", palavra: "FENÓTIPO", dica: "Expressão observável das características de um organismo, resultado da interação entre genótipo e ambiente.", imagem: "https://static.todamateria.com.br/upload/sh/ut/shutterstock2189929933convertido-cke.jpg" },
-
-
-        { tema: "Português - Gramática", palavra: "SUBSTANTIVO", dica: "Nomeia seres, objetos e lugares.", imagem: "https://static.todamateria.com.br/upload/su/bs/substantivos-og.jpg?class=ogImageWide" },
-        { tema: "Português - Gramática", palavra: "VERBO", dica: "Indica ação ou estado.", imagem: "https://f.i.uol.com.br/fotografia/2020/08/25/15983913555f45843b71558_1598391355_3x2_md.jpg" },
-        { tema: "Português - Gramática", palavra: "ADJETIVO", dica: "Qualifica o substantivo.", imagem: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJ4ruPSaPLirLfjY63cozJQt8nX5yLVNbsfw&s" },
-        { tema: "Português - Gramática", palavra: "SUJEITO", dica: "Quem realiza ou recebe o que se diz.", imagem: "https://st4.depositphotos.com/13349494/25169/i/450/depositphotos_251691910-stock-photo-silhouette-man-looking-camera-isolated.jpg" },
-        { tema: "Português - Gramática", palavra: "PREDICADO", dica: "O que se diz sobre o sujeito.", imagem: "https://img.freepik.com/fotos-gratis/dedos-note-relatorio-jornalista-enchimento_1150-1044.jpg?semt=ais_hybrid&w=740&q=80" },
-
-
-
-        { tema: "Geografia - Internacional", palavra: "OTAN", dica: "Aliança militar ocidental formada para conter a expansão ideológica e militar de blocos rivais.", imagem: "https://eq7xsvyn9ek.exactdn.com/blog/wp-content/uploads/2023/10/O-que-e-OTAN.jpg" },
-
-        { tema: "Geografia - Internacional", palavra: "ONU", dica: "Organização criada após um conflito global para evitar novas guerras e mediar disputas internacionais.", imagem: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Flag_of_the_United_Nations.svg" },
-        { tema: "Geografia - Internacional", palavra: "MARSHALL", dica: "Plano lançado pelo país para reconstruir a Europa Ocidental após a Segunda Guerra Mundial e conter a influência comunista.", imagem: "https://s3.static.brasilescola.uol.com.br/be/2024/06/desfile-em-homenagem-ao-plano-marshall.jpg" },
-        { tema: "Geografia - Internacional", palavra: "VIETNÃ", dica: "Nação do Sudeste Asiático dividida entre Norte comunista e Sul capitalista, palco de guerra intensa com forte intervenção externa entre 1955 e 1975.", imagem: "https://www.thebalancemoney.com/thmb/UseR_mHrkABJ47Esq3aNuAvuFbQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-515541786-5c2d29cbc9e77c00018fd2a9.jpg" },
-        { tema: "Geografia - Internacional", palavra: "COLÔNIA", dica: "Território ocupado e explorado por uma potência estrangeira, gerando tensões históricas.", imagem: "https://static.preparaenem.com/2024/04/engenho-de-acucar-da-epoca-do-brasil-colonia-retratado-em-pintura.jpg" },
-
-        { tema: "English - School Objects", palavra: "PENCIL", dica: "Tool used for writing or drawing, erasable and often wooden.", imagem: "https://img.freepik.com/vetores-gratis/estilo-liso-redondo-do-lapis_78370-7571.jpg?semt=ais_hybrid&w=740&q=80" },
-        { tema: "English - School Objects", palavra: "ERASER", dica: "Small item used to remove graphite or ink marks from paper.", imagem: "https://images.tcdn.com.br/img/img_prod/1258915/borracha_escolar_fc_max_pequena_faber_castell_c_capa_2272403_1_75861322dd563233d7afab1953fdfb5e.jpg" },
-        { tema: "English - School Objects", palavra: "RULER", dica: "Instrument used to measure or draw straight lines.", imagem: "https://res.cloudinary.com/rsc/image/upload/b_rgb:FFFFFF,c_pad,dpr_1.0,f_auto,q_auto,w_700/c_pad,w_700/F3006613-01" },
-        { tema: "English - School Objects", palavra: "BACKPACK", dica: "Item carried on the back to transport books and supplies.", imagem: "https://static.vecteezy.com/ti/fotos-gratis/p2/2694882-menina-crianca-com-bolsa-escola-pronta-para-ir-para-a-escola-gratis-foto.jpg" },
-        { tema: "English - School Objects", palavra: "GLUE", dica: "Substance used to stick paper or craft materials together.", imagem: "https://www.tilibra.com.br/storage/products/md/cola-branca-120g-lavavel_345563-e1.jpg?c=88f51d10807abf8d5f0097c252673442" },
-    ]
-
+    const frases: Array<Tfrases> = perguntas
 
 
     useEffect(() => {
@@ -218,7 +186,7 @@ export default function Pprincipal() {
 
 
     return (<>
-
+3
         <AllPoups
             fase={fase}
             frases={frases}
@@ -265,6 +233,9 @@ export default function Pprincipal() {
             poupconfig={poupconfig}
             setAlertErro={setAlertErro}
             setAlertAcerto={setAlertAcerto}
+            poupback={poupback}
+            setPoupBack={setPoupBack}
+            setPage={setPage}
         />
 
         <IoIosNotifications onClick={() => setPoupConfig(true)}
@@ -310,8 +281,8 @@ export default function Pprincipal() {
                         <div className='w-full'>
 
                             <div className='flex flex-row justify-start gap-2 items-end mx-auto'>
-                                <img src={logo}
-                                    className='h-8 bg-[#F7CD21] px-5 p-1 rounded-t-md' />
+                                <img src={logo} onClick={()=>setPoupBack(true)}
+                                    className='h-8 bg-[#F7CD21] px-5 p-1 rounded-t-md cursor-pointer hover:bg-white transition-all duration-300' />
 
                                 <div
                                     onClick={() => setPoupDuvidas(!poupduvidas)}
@@ -383,7 +354,7 @@ export default function Pprincipal() {
 
                                     <div onClick={() => setPoupImg(true)}
                                         className='flex items-center w-45 sm:max-h-30 h-32 px-2'>
-                                        <img className="w-auto mx-auto max-h-30 select-none rounded-xl" src={frases[fase].imagem} />
+                                        <img className="w-auto mx-auto max-h-30 select-none rounded-xl" src={frases[fase].imagem? frases[fase].imagem : img} />
                                     </div>
 
                                     <button

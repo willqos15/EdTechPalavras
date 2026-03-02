@@ -43,6 +43,7 @@ interface Poupprops {
     disabledica: boolean;
     pouperro: boolean,
     poupconfig: boolean,
+    poupback: boolean,
 
 
 
@@ -57,6 +58,7 @@ interface Poupprops {
     setHelp: React.Dispatch<React.SetStateAction<boolean>>;
     setPoupErro: React.Dispatch<React.SetStateAction<boolean>>;
     setPoupConfig: React.Dispatch<React.SetStateAction<boolean>>;
+    setPoupBack: React.Dispatch<React.SetStateAction<boolean>>;
 
     complete: number[];
     frases: Fraseparams[];
@@ -81,6 +83,7 @@ interface Poupprops {
     setArrayAcerto: React.Dispatch<React.SetStateAction<objtentativa[]>>;
     setAlertErro: React.Dispatch<React.SetStateAction<number>>;
     setAlertAcerto: React.Dispatch<React.SetStateAction<number>>;
+    setPage: React.Dispatch<React.SetStateAction<string>>;
 }
 
 
@@ -120,7 +123,10 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
     poupconfig,
     setPoupConfig,
     setAlertErro,
-    setAlertAcerto
+    setAlertAcerto,
+    setPoupBack,
+    poupback,
+    setPage
 
 
 }: Poupprops) {
@@ -138,6 +144,28 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
     }, [turma])
 
     return (<>
+
+
+
+    < Poup
+            titulo={<> <p className='inline-block'> AVISO </p> </>}
+            show={poupback}
+            modo='confirma'
+            qtdbtn={2}
+            f1={() => {
+                setPage("home")
+                setPoupBack(false)
+            }}
+            f2={() => {
+                setPoupBack(false)
+            }}
+
+            close={() => { setPoupBack(false) }}
+
+            descricao={<>
+                <p className='p-2 text-center'>Deseja voltar ao menu?</p></>}
+        />
+
 
     
 
