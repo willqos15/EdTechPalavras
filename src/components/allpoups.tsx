@@ -1,8 +1,4 @@
-import { FaCode } from "react-icons/fa";
 import { AiFillThunderbolt } from "react-icons/ai";
-import { MdEmail } from "react-icons/md";
-import { FaLinkedin } from "react-icons/fa";
-import { FaGithub } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { FaGear } from "react-icons/fa6";
 import Poup from '../components/poup';
@@ -439,19 +435,15 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
                     <span className='flex flex-col justify-center items-center px-2'>
 
 
-                        <p className='text-center'>
-                            <FaGear className='inline-block' />
-                            Desenvolvido por William Queiroz: </p>
+                        
                         <span className='flex flex-col items-start text-sm linkct px-2 text-center'>
 
                             <a
-                                href='https://queirozdeveloper.vercel.app/'> <FaCode className='inline-block mr-1' />  Portfólio: queirozdeveloper.vercel.app</a>
+                                href='https://canoatech.vercel.app/'> <FaGear className='inline-block' />   Desenvolvido por Canoa Tech:</a>
 
-                            <span className='mx-auto text-xl'>
-                                <a href='https://www.linkedin.com/in/william-queiroz-a36573120/'> <FaLinkedin className='inline-block mr-1' /></a>
-                                <a href='mailto:willqos15@gmail.com' className='cursor-pointer'> <MdEmail className='inline-block mr-1' /> </a>
-                                <a href='https://github.com/dashboard/'> <FaGithub className='inline-block mr-1' /></a>
-                                <a href='wa.me/5593991878598'> <IoLogoWhatsapp className='inline-block mr-1 ' /></a>
+                            <span className='mx-auto text-base'>
+                               
+                                <a href='https://wa.me/5593991878598'> Contato: (93) 99187-8598 <IoLogoWhatsapp className='inline-block mr-1 ' /></a>
                             </span>
 
 

@@ -12,6 +12,7 @@ import logo from '../assets/logo.png'
 import { IoIosSave } from "react-icons/io";
 import { FaQuestionCircle } from "react-icons/fa";
 import { FaUserGroup } from "react-icons/fa6";
+import { IoArrowBackCircle } from "react-icons/io5";
 import { GiPerspectiveDiceSixFacesFive } from "react-icons/gi";
 import { Save } from '../components/save';
 import { IoIosNotifications } from "react-icons/io";
@@ -35,12 +36,12 @@ type Aluno = {
 }
 
 type Props = {
-    perguntas:Tfrases[]
+    perguntas: Tfrases[]
     img: string
     setPage: React.Dispatch<React.SetStateAction<string>>
 }
 
-export default function PT6ANO({perguntas, img, setPage}: Props) {
+export default function PT6ANO({ perguntas, img, setPage }: Props) {
 
     const [turma, setTurma] = useState<Aluno[]>([])
     const [digi, setDigi] = useState<string[]>([])
@@ -95,12 +96,13 @@ export default function PT6ANO({perguntas, img, setPage}: Props) {
 
 
 
-    function normalizar(texto: string) {
-        return texto
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "")
-            .toUpperCase()
-    }
+function normalizar(texto: string) {
+    return texto
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "") // remove acentos
+        .replace(/[\s-]/g, "")           // remove espaço e hífen
+        .toUpperCase()
+}
 
     useEffect(() => {
         console.log(digi.length, 'digi leng', digi)
@@ -184,9 +186,8 @@ export default function PT6ANO({perguntas, img, setPage}: Props) {
 
 
 
-
     return (<>
-3
+        
         <AllPoups
             fase={fase}
             frases={frases}
@@ -281,9 +282,11 @@ export default function PT6ANO({perguntas, img, setPage}: Props) {
                         <div className='w-full'>
 
                             <div className='flex flex-row justify-start gap-2 items-end mx-auto'>
-                                <img src={logo} onClick={()=>setPoupBack(true)}
-                                    className='h-8 bg-[#F7CD21] px-5 p-1 rounded-t-md cursor-pointer hover:bg-white transition-all duration-300' />
-
+                                <div className='flex items-center justify-center bg-[#F7CD21] rounded-t-md cursor-pointer text-[#2D3097] hover:bg-white transition-all duration-300'
+                                onClick={() => setPoupBack(true)}>
+                                <img src={logo} className='h-8  px-5 p-1 '/>
+                                <IoArrowBackCircle className='mx-2 text-2xl'/>
+                                </div>
                                 <div
                                     onClick={() => setPoupDuvidas(!poupduvidas)}
                                     className='cursor-pointer h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 hover:bg-white transition-all duration-300'>
@@ -300,12 +303,6 @@ export default function PT6ANO({perguntas, img, setPage}: Props) {
                                     <GiPerspectiveDiceSixFacesFive /> <p className='sm:flex hidden'>Sortear</p>
                                 </div>
 
-
-
-
-
-
-
                                 <div
                                     onClick={() => setPoupTurma(!poupTurma)}
                                     className='cursor-pointer h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
@@ -321,9 +318,9 @@ export default function PT6ANO({perguntas, img, setPage}: Props) {
                             </div>
 
 
-                            <div className='sm:w-130 min-w-full text-[#21285C] bg-white sm:rounded-lg rounded-tr-lg h-fit mx-auto '>
+                            <div className='sm:w-130 min-w-full text-[#21285C] bg-white  h-fit mx-auto '>
 
-                                <div className='text-3xl font-bold bg-[#F7CD21] px-5 flex items-center h-12 justify-between sm:rounded-tr-lg rounded-0 w-full'>
+                                <div className='text-3xl font-bold bg-[#F7CD21] px-5 flex items-center h-12 justify-between w-full'>
 
                                     <h1 className='inline-block text-color[#2D3194] py-2 sm:text-3xl text-2xl'>
                                         {frases[fase].tema}
@@ -354,7 +351,7 @@ export default function PT6ANO({perguntas, img, setPage}: Props) {
 
                                     <div onClick={() => setPoupImg(true)}
                                         className='flex items-center w-45 sm:max-h-30 h-32 px-2'>
-                                        <img className="w-auto mx-auto max-h-30 select-none rounded-xl" src={frases[fase].imagem? frases[fase].imagem : img} />
+                                        <img className="w-auto mx-auto max-h-30 select-none rounded-xl" src={frases[fase].imagem ? frases[fase].imagem : img} />
                                     </div>
 
                                     <button
@@ -374,9 +371,15 @@ export default function PT6ANO({perguntas, img, setPage}: Props) {
 
                                 <div className='select-none flex sm:gap-2 gap-1 justify-center px-2'>
                                     {frases[fase].palavra.split("").map((letra) => (
-                                        <div className="sm:w-8 sm:text-4xl sm:py-1 py-1 w-5 text-lg bg-[#e6eae1]    rounded-md text-[#21285C] border-3 text-center">
+                                        <div className= {`${letra === " " ? " " : "bg-[#e6eae1]  text-[#21285C] border-3 "} sm:w-8 sm:text-4xl sm:py-1 py-1 w-5 text-lg   rounded-md text-center`}>
                                             <span className={
-                                                (Array.from(digi).map(normalizar)).includes(normalizar(letra)) || normalizar(digi.join("")) === normalizar(frases[fase].palavra) || complete.includes(fase) ? 'opacity-100' : "opacity-0"}>
+                                                
+                                                    (Array.from(digi).map(normalizar)).includes(normalizar(letra))
+                                                    || normalizar(digi.join("")) === normalizar(frases[fase].palavra)
+                                                    || complete.includes(fase) || letra === "-"
+                                                    ? 'opacity-100'
+                                                    : "opacity-0"
+                                            }>
                                                 {letra}
                                             </span>
                                         </div>

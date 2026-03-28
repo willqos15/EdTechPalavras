@@ -48,7 +48,7 @@ export const Save = async ({complete,frases,histletra,histpalavra,histerro,nameb
                             alignment: AlignmentType.CENTER,
                             children: [
                                 new TextRun({
-                                    text: `2º Semestre Biologia`,
+                                    text: `Relatório - Jogo da Advinhação`,
                                     size: 40,
                                     bold: true,
                                 })
