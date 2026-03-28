@@ -139,6 +139,8 @@ function normalizar(texto: string) {
             setFase(frases.length)
     }, [fase])
 
+    useEffect(()=>{setCampo("")},[mletra])
+
 
     function enviar(dados: Tdados) {
 
@@ -480,7 +482,7 @@ function normalizar(texto: string) {
                                 </div>
 
                                 <p className='font-bold text-red-600 px-2 text-center'>
-                                    {!mletra && campo.length <= 1 ? 'No modo Palavra, digite a palavra completa. Letras únicas não são permitidas. ' : null}
+                                    {!complete.includes(fase) && !mletra && campo.length <= 1 ? 'No modo Palavra, digite a palavra completa. Letras únicas não são permitidas. ' : null}
                                 </p>
 
                                 {erro.length > 0 &&
@@ -490,7 +492,7 @@ function normalizar(texto: string) {
 
                                         <div className='overflow-x-auto overflow-y-hidden y-20 max-w-96'>
                                             <p className='font-bold text-red-600 px-2'>
-                                                {!mletra && erro[erro.length - 1].length < 2 ? 'No modo Palavra, digite a palavra completa. Letras únicas não são permitidas.".'
+                                                {!complete.includes(fase) && !mletra && erro[erro.length - 1].length < 2 ? 'No modo Psalavra, digite a palavra completa. Letras únicas não são permitidas.".'
                                                     : erro.join(" , ").toUpperCase()}</p>
 
 
