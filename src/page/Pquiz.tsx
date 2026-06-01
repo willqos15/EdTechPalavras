@@ -8,7 +8,7 @@ import { FaLightbulb } from "react-icons/fa";
 import { MdChangeCircle } from "react-icons/md";
 import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
-import logo from '../assets/logo.png'
+// import logo from '../assets/logo.png'
 import { IoIosSave } from "react-icons/io";
 import { FaQuestionCircle } from "react-icons/fa";
 import { FaUserGroup } from "react-icons/fa6";
@@ -254,9 +254,9 @@ function normalizar(texto: string) {
                         equipe={nameb}
                         name={nameb}
                         setName={setNameB}
-                        bgcolor='bg-blue-900'
+                        bgcolor='bg-[var(--aprimary)]'
                         titlecolor='text-white'
-                        textcolor="text-blue-950"
+                        textcolor="text-[var(--asecondary)]"
                         statee={enerb}
                         setStateE={setEnerB}
                         pt={ptblue}
@@ -284,14 +284,17 @@ function normalizar(texto: string) {
                         <div className='w-full'>
 
                             <div className='flex flex-row justify-start gap-2 items-end mx-auto'>
-                                <div className='flex items-center justify-center bg-[#F7CD21] rounded-t-md cursor-pointer text-[#2D3097] hover:bg-white transition-all duration-300'
+                                <div className='flex items-center justify-center bg-(--bprimary) rounded-t-md cursor-pointer text-(--bsecondary) hover:bg-white transition-all duration-300 px-2 pt-1'
                                 onClick={() => setPoupBack(true)}>
-                                <img src={logo} className='h-8  px-5 p-1 '/>
-                                <IoArrowBackCircle className='mx-2 text-2xl'/>
+                                {/* <img src={logo} className='h-8  px-5 p-1 '/> */}
+                                
+                                <IoArrowBackCircle className='text-2xl'/>
+                                <p className='text-xl sm:flex hidden'>
+                                        Voltar</p>
                                 </div>
                                 <div
                                     onClick={() => setPoupDuvidas(!poupduvidas)}
-                                    className='cursor-pointer h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 hover:bg-white transition-all duration-300'>
+                                    className='cursor-pointer h-8 bg-(--bprimary)  px-2 pt-1 rounded-t-md text-(--bsecondary) text-xl flex items-center gap-1 hover:bg-white transition-all duration-300'>
                                     <FaQuestionCircle /> <p className='sm:flex hidden'>
                                         Dúvidas</p>
                                 </div>
@@ -301,30 +304,30 @@ function normalizar(texto: string) {
                                         sortear()
                                         setPoupSorteio(true)
                                     }}
-                                    className='cursor-pointer h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
+                                    className='cursor-pointer h-8 bg-(--bprimary)  px-2 pt-1 rounded-t-md text-(--bsecondary)  text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
                                     <GiPerspectiveDiceSixFacesFive /> <p className='sm:flex hidden'>Sortear</p>
                                 </div>
 
                                 <div
                                     onClick={() => setPoupTurma(!poupTurma)}
-                                    className='cursor-pointer h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
+                                    className='cursor-pointer h-8 bg-(--bprimary)  px-2 pt-1 rounded-t-md text-(--bsecondary) text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
                                     <FaUserGroup /> <p className='sm:flex hidden'>Turma</p>
                                 </div>
 
 
                                 <div
                                     onClick={() => Save({ complete, frases, histletra, histpalavra, histerro, nameb, namey, comportyellow, comportblue, observblue, observyellow, totalptyellow, totalptblue, enerb, enery, arrayacerto, arrayerro })}
-                                    className='cursor-pointer h-8 bg-[#F7CD21] px-2 pt-1 rounded-t-md text-[#2D3097] text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
+                                    className='cursor-pointer h-8 bg-(--bprimary) px-2 pt-1 rounded-t-md text-(--bsecondary) text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
                                     <IoIosSave /> <p className='sm:flex hidden'>Salvar</p>
                                 </div>
                             </div>
 
 
-                            <div className='sm:w-130 min-w-full text-[#21285C] bg-white  h-fit mx-auto '>
+                            <div className='sm:w-130 min-w-full text-(--bsecondary) bg-white  h-fit mx-auto '>
 
-                                <div className='text-3xl font-bold bg-[#F7CD21] px-5 flex items-center h-12 justify-between w-full'>
+                                <div className='text-3xl font-bold bg-(--bprimary) px-5 flex items-center h-12 justify-between w-full'>
 
-                                    <h1 className='inline-block text-color[#2D3194] py-2 sm:text-3xl text-2xl'>
+                                    <h1 className='inline-block text-color-(--bsecondary) py-2 sm:text-3xl text-2xl'>
                                         {frases[fase].tema}
                                     </h1>
 
@@ -346,7 +349,7 @@ function normalizar(texto: string) {
                                             setCampo("")
                                         }}
                                         className={
-                                            ` bg-[#21285C] text-[#F7CD21] hover:scale-110 hover:p-1.4 transition-all duration-300 h-fit p-1 rounded-full ml-1 sm:text-4xl text-2xl flex justify-center items-center font-bold  ${fase > 0 ? 'cursor-pointer' : 'opacity-0 pointer-events-none'}`
+                                            `bg-(--asecondary) text-white hover:scale-110 hover:p-1.4 transition-all duration-300 h-fit p-1 rounded-full ml-1 sm:text-4xl text-2xl flex justify-center items-center font-bold  ${fase > 0 ? 'cursor-pointer' : 'opacity-0 pointer-events-none'}`
                                         }>
                                         <FaArrowCircleLeft />
                                     </button>
@@ -364,7 +367,7 @@ function normalizar(texto: string) {
                                             setCampo("")
                                         }}
                                         className={
-                                            ` bg-[#21285C] text-[#F7CD21] hover:scale-110 hover:p-1.4 transition-all duration-300 h-fit p-1 rounded-full sm:text-4xl text-2xl mr-1 flex justify-center items-center font-bold  ${fase <= (frases.length - 2) ? 'cursor-pointer' : 'opacity-0 pointer-events-none'}`
+                                            ` bg-(--asecondary) text-white hover:scale-110 hover:p-1.4 transition-all duration-300 h-fit p-1 rounded-full sm:text-4xl text-2xl mr-1 flex justify-center items-center font-bold  ${fase <= (frases.length - 2) ? 'cursor-pointer' : 'opacity-0 pointer-events-none'}`
                                         }>
                                         <FaArrowCircleRight />
                                     </button>
@@ -373,7 +376,7 @@ function normalizar(texto: string) {
 
                                 <div className='select-none flex sm:gap-2 gap-1 justify-center px-2'>
                                     {frases[fase].palavra.split("").map((letra) => (
-                                        <div className= {`${letra === " " ? " " : "bg-[#e6eae1]  text-[#21285C] border-3 "} sm:w-8 sm:text-4xl sm:py-1 py-1 w-5 text-lg   rounded-md text-center`}>
+                                        <div className= {`${letra === " " ? " " : "bg-[#e6eae1]  text-(--asecondary) border-3 "} sm:w-8 sm:text-4xl sm:py-1 py-1 w-5 text-lg   rounded-md text-center`}>
                                             <span className={
                                                 
                                                     (Array.from(digi).map(normalizar)).includes(normalizar(letra))
@@ -397,13 +400,13 @@ function normalizar(texto: string) {
                                                 console.log(disabledica, "valor")
                                             }
                                         }}
-                                        className={`h-fit py-1 px-3 rounded-xl my-3 bg-[#21285C] transition-all duration-300 w-fit max-w-96 flex flex-row items-center text-white
-                    ${help ? "" : " hover:text-yellow-300"}`}>
+                                        className={`h-fit py-1 px-3 rounded-xl my-3 bg-(--asecondary) transition-all duration-300 w-fit max-w-96 flex flex-row items-center text-white
+                    ${help ? "" : " hover:text-(--bprimary)"}`}>
 
                                         <span className='flex flex-col justify-center items-center w-fit'>
 
                                             <FaLightbulb
-                                                className={`text-xl ${help ? 'text-yellow-300' :
+                                                className={`text-xl ${help ? 'text-(--bprimary)' :
                                                     ''}`} />
 
                                         </span>
@@ -425,8 +428,8 @@ function normalizar(texto: string) {
 
                                         }
                                         }
-                                        className={`cursor-pointer h-8 px-3 rounded-xl my-3 bg-[#21285C] transition-all duration-300 w-fit div flex flex-row items-center text-2xl text-white
-                    ${help ? "" : " hover:text-yellow-300"}`}>
+                                        className={`cursor-pointer h-8 px-3 rounded-xl my-3 bg-(--asecondary) transition-all duration-300 w-fit div flex flex-row items-center text-2xl text-white
+                    ${help ? "" : " hover:text-(--bprimary)"}`}>
                                         {complete.includes(fase) ?
                                             <IoMdEyeOff /> : <IoMdEye />
                                         }
@@ -441,7 +444,7 @@ function normalizar(texto: string) {
                                     <button
                                         onClick={() => setMLetra(!mletra)}
                                         className='cursor-pointer ml-4 px-2 h-fit flex flex-row items-center absolute sm:-left-20 -left-11'>
-                                        <MdChangeCircle className={`text-2xl ${complete.includes(fase) ? 'text-gray-400' : 'text-[#21285C]'}`} />
+                                        <MdChangeCircle className={`text-2xl ${complete.includes(fase) ? 'text-gray-400' : 'text-(--asecondary)'}`} />
                                         <p className='sm:flex hidden'>
                                             {mletra ? 'Letra' : 'Palavra'}
                                         </p>
@@ -475,7 +478,7 @@ function normalizar(texto: string) {
 
                                             <button type='submit'
                                                 disabled={complete.includes(fase) ? true : !mletra && campo.length <= 1 ? true : false}
-                                                className={`${complete.includes(fase) ? "hidden" : !mletra && campo.length <= 1 ? "hidden" : null} cursor-pointer mx-0 h-fit absolute -right-2.5`} > <IoSend className={` text-2x ${complete.includes(fase) ? 'text-gray-400' : 'text-[#21285C]'}`} />
+                                                className={`${complete.includes(fase) ? "hidden" : !mletra && campo.length <= 1 ? "hidden" : null} cursor-pointer mx-0 h-fit absolute -right-2.5`} > <IoSend className={` text-2x ${complete.includes(fase) ? 'text-gray-400' : 'text-(--asecondary)'}`} />
                                             </button>
                                         </div>
                                     </form>
@@ -488,7 +491,7 @@ function normalizar(texto: string) {
                                 {erro.length > 0 &&
                                     <div className='flex justify-center text-center mt-0 m-3 px-3 w-11/12 pb-1 whitespace-nowrap'>
 
-                                        <p className='font-bold text-[#21285C] text-center pr-2'> Erros: </p>
+                                        <p className='font-bold text-(--asecondary) text-center pr-2'> Erros: </p>
 
                                         <div className='overflow-x-auto overflow-y-hidden y-20 max-w-96'>
                                             <p className='font-bold text-red-600 px-2'>
@@ -515,9 +518,9 @@ function normalizar(texto: string) {
                         equipe={namey}
                         name={namey}
                         setName={setNameY}
-                        bgcolor='bg-[#F7CD21]'
-                        titlecolor='text-yellow-1000'
-                        textcolor="text-yellow-950"
+                        bgcolor='bg-(--bprimary)'
+                        titlecolor='text-(--bsecondary)'
+                        textcolor="text-(--bsecondary)"
                         statee={enery}
                         setStateE={setEnerY}
                         pt={ptyellow}

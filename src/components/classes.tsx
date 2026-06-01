@@ -60,7 +60,7 @@ export default function Classes({ turma, setTurma }: PropClasses) {
         <div className="flex flex-col justify-center items-center">
             <p>Importar alunos.</p>
 
-            <div className="flex flex-col items-start justify-start bg-amber-100 p-2">
+            <div className="flex flex-col items-start justify-start bg-gray-100 p-2">
                 <p>Requisitos:</p>
                 <p>- O arquivo deve estar em formato Excel (.xlsx) </p>
                 <p>- Deve existir uma coluna chamada nome.</p>
@@ -71,8 +71,8 @@ export default function Classes({ turma, setTurma }: PropClasses) {
                 <label
                     htmlFor="arquivo"
                     className="flex cursor-pointer
-             bg-[#21285C] text-white hover:text-amber-200 px-3 py-1 rounded
-              transition"
+             bg-(--asecondary) text-white transition-transform hover:scale-95 px-3 py-1 rounded
+              "
                 >
                     {arquivo ? arquivo.name : "Escolha um arquivo"}
                 </label>

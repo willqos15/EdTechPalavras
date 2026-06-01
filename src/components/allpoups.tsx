@@ -486,7 +486,7 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
 
                     }</p>
                     <button onClick={sortear}
-                        className='mt-3 cursor-pointer text-[#21285C] hover:scale-90 transition-all duration-300 w-fit px-2 rounded-md text-4xl'
+                        className='mt-3 cursor-pointer text-(--asecondary) hover:scale-90 transition-all duration-300 w-fit px-2 rounded-md text-4xl'
                     >
                         {sorteio === "load" ? <GiPerspectiveDiceSixFacesFive className='animate-spin' /> :
                             <MdChangeCircle />

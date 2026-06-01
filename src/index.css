@@ -1,11 +1,16 @@
 :root {
+  --aprimary: #1e3a8a;
+  --asecondary: #21285C;
+  --bprimary: #F7CD21;
+  --bsecondary: #602e08;
+}
+
+:root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
- 
- 
-
 }
+
 
 *{
   font-family: "Saira Condensed", sans-serif;

@@ -24,7 +24,7 @@ export default function Poup({titulo, descricao, show, modo, f1, f2,f3, close, q
 
         <div className="bg-white max-w-96 mx-auto">
 
-            <div className="flex items-center w-full bg-[#F7CD21] font-bold text-[#21285C] text-xl relative">
+            <div className="flex items-center w-full bg-(--bprimary) font-bold text-(--bsecondary) text-xl relative">
                <h1 className="w-full text-center">{titulo}</h1> 
                <IoClose
                onClick={close}
@@ -33,7 +33,7 @@ export default function Poup({titulo, descricao, show, modo, f1, f2,f3, close, q
 
             
 
-            <span className="text-[#21285C]">
+            <span className="text-(--asecondary)">
             {descricao}</span>
 
 
@@ -46,19 +46,19 @@ export default function Poup({titulo, descricao, show, modo, f1, f2,f3, close, q
                  {qtdbtn=== 2 ? <>
 
                 <button onClick={f1}
-                className="cursor-pointer bg-[#21285C] hover:scale-110 transition-all duration-300 w-fit text-white mx-auto rounded-md px-3 py-1"> Azul</button>
+                className="cursor-pointer bg-(--asecondary) hover:scale-110 transition-all duration-300 w-fit text-white mx-auto rounded-md px-3 py-1"> Azul</button>
 
                 <button onClick={f2}
-                className="cursor-pointer bg-[#F7CD21] w-fit font-bold text-[#21285C]  hover:scale-110 transition-all duration-300 mx-auto rounded-md px-3 py-1"> Amarela </button>
+                className="cursor-pointer bg-(--bsecondary) w-fit font-bold text-white  hover:scale-110 transition-all duration-300 mx-auto rounded-md px-3 py-1"> Amarela </button>
                 </> : qtdbtn===3 ?
 
                 <>
 
                 <button onClick={f1}
-                className= "cursor-pointer bg-[#21285C] hover:scale-110 transition-all duration-300 w-fit text-white mx-auto rounded-md px-3 py-1"> Azul</button>
+                className= "cursor-pointer bg-(--asecondary) hover:scale-110 transition-all duration-300 w-fit text-white mx-auto rounded-md px-3 py-1"> Azul</button>
 
                 <button onClick={f2}
-                className="cursor-pointer bg-[#F7CD21] w-fit font-bold text-[#21285C]  hover:scale-110 transition-all duration-300 mx-auto rounded-md px-3 py-1"> Amarela </button>
+                className="cursor-pointer bg-(--bsecondary) w-fit font-bold text-white  hover:scale-110 transition-all duration-300 mx-auto rounded-md px-3 py-1"> Amarela </button>
 
                 <button onClick={f3}
                 className="cursor-pointer bg-[#2d5c21] w-fit text-white hover:scale-110 transition-all duration-300 mx-auto rounded-md px-3 py-1"> Livre </button>

@@ -379,13 +379,13 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
 
                             <button
                                 onClick={() => setPt(inputpb)}
-                                className={`${bgcolor} cursor-pointer hover:scale-110 transition-all duration-300 w-fit ${titlecolor} mx-auto text-[10px] rounded-md px-1  hover:bg-blue-950`}>
+                                className={`${bgcolor} cursor-pointer hover:scale-110 transition-all duration-300 w-fit ${titlecolor} mx-auto text-[10px] rounded-md px-1  hover:bg--[var(--asecondary)]`}>
                                 <HiCheck className='text-lg' />
                             </button>
 
                             <button
                                 onClick={() => setStateE(inputeb)}
-                                className={`${bgcolor} cursor-pointer hover:scale-110 transition-all duration-300 w-fit ${titlecolor} mx-auto text-[10px] rounded-md px-1 hover:bg-blue-950`}>
+                                className={`${bgcolor} cursor-pointer hover:scale-110 transition-all duration-300 w-fit ${titlecolor} mx-auto text-[10px] rounded-md px-1 hover:bg--[var(--asecondary)]`}>
                                 <HiCheck className='text-lg' />
                             </button>
                         </div>
