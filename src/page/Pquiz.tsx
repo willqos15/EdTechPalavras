@@ -244,6 +244,8 @@ export default function PT6ANO({ team, perguntas, img, setPage }: Props) {
 
             setPtBlue={setPtBlue}
             setPtYellow={setPtYellow}
+            setPtRed={setPtRed}
+            setPtGreen={setPtGreen}
             setEnerB={setEnerB}
             setEnerY={setEnerY}
             setEnerR={setEnerR}
@@ -288,7 +290,8 @@ export default function PT6ANO({ team, perguntas, img, setPage }: Props) {
                 <div className='xl:order-1 order-2'>
                     {team >= 2 &&
                         <CountCard
-                            equipe={nameb}
+                        id='B'
+                            equipe={"Equipe Azul"}
                             name={nameb}
                             setName={setNameB}
                             bgcolor='bg-[var(--aprimary)]'
@@ -314,6 +317,7 @@ export default function PT6ANO({ team, perguntas, img, setPage }: Props) {
                         />}
 
                     {team >= 4 && <CountCard
+                    id="R"
                         equipe={namer}
                         name={namer}
                         setName={setNameR}
@@ -577,6 +581,7 @@ export default function PT6ANO({ team, perguntas, img, setPage }: Props) {
 
                 <div className='lg:order-3 order-2'>
                     {team >= 2 && <CountCard
+                    id="Y"
                         equipe={namey}
                         name={namey}
                         setName={setNameY}
@@ -603,6 +608,7 @@ export default function PT6ANO({ team, perguntas, img, setPage }: Props) {
                     />}
 
                     {team >= 4 && <CountCard
+                    id="G"
                         equipe={nameg}
                         name={nameg}
                         setName={setNameG}

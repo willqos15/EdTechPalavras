@@ -76,6 +76,8 @@ interface Poupprops {
     setComplete: React.Dispatch<React.SetStateAction<number[]>>;
     setPtBlue: React.Dispatch<React.SetStateAction<number>>;
     setPtYellow: React.Dispatch<React.SetStateAction<number>>;
+    setPtRed: React.Dispatch<React.SetStateAction<number>>;
+    setPtGreen: React.Dispatch<React.SetStateAction<number>>;
     setEnerB: React.Dispatch<React.SetStateAction<number>>;
     setEnerY: React.Dispatch<React.SetStateAction<number>>;
     setEnerR: React.Dispatch<React.SetStateAction<number>>;
@@ -94,7 +96,7 @@ interface Poupprops {
 
 
 
-export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYellow, frases, fase, setPoupAcerto, poupdica,
+export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYellow,setPtRed,setPtGreen, frases, fase, setPoupAcerto, poupdica,
     setPoupDica,
     setEnerB,
     setEnerY,
@@ -123,10 +125,6 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
     setErroY,
     setErroR,
     setErroP,
-    nameb,
-    namey,
-    namer,
-    namep,
     setArrayErro,
     setArrayAcerto,
     turma,
@@ -229,28 +227,28 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
 
             f1={() => {
                 setErroB(ant => [...ant, `${erro[erro.length - 1]}`])
-                setArrayErro(arr => [...arr, { equipe: nameb, tentativa: erro[erro.length - 1], fase: fase, observacao: observacao }])
+                setArrayErro(arr => [...arr, { equipe: "B", tentativa: erro[erro.length - 1], fase: fase, observacao: observacao }])
                 setPoupErro(false)
                 setObservacao("")
             }}
 
             f2={() => {
                 setErroY(ant => [...ant, `${erro[erro.length - 1]}`])
-                setArrayErro(arr => [...arr, { equipe: namey, tentativa: erro[erro.length - 1], fase: fase, observacao: observacao }])
+                setArrayErro(arr => [...arr, { equipe: "Y", tentativa: erro[erro.length - 1], fase: fase, observacao: observacao }])
                 setPoupErro(false)
                 setObservacao("")
             }}
 
             f3={() => {
                 setErroR(ant => [...ant, `${erro[erro.length - 1]}`])
-                setArrayErro(arr => [...arr, { equipe: namer, tentativa: erro[erro.length - 1], fase: fase, observacao: observacao }])
+                setArrayErro(arr => [...arr, { equipe: "R", tentativa: erro[erro.length - 1], fase: fase, observacao: observacao }])
                 setPoupErro(false)
                 setObservacao("")
             }}
 
             f4={() => {
                 setErroP(ant => [...ant, `${erro[erro.length - 1]}`])
-                setArrayErro(arr => [...arr, { equipe: namep, tentativa: erro[erro.length - 1], fase: fase, observacao: observacao }])
+                setArrayErro(arr => [...arr, { equipe: "G", tentativa: erro[erro.length - 1], fase: fase, observacao: observacao }])
                 setPoupErro(false)
                 setObservacao("")
             }}
@@ -301,7 +299,7 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
             team={team}
             f1={() => {
                 setPtBlue(ant => ant + 1)
-                setArrayAcerto(arr => [...arr, { equipe: nameb, tentativa: frases[fase].palavra, fase: fase, observacao: observacao }])
+                setArrayAcerto(arr => [...arr, { equipe: "B", tentativa: frases[fase].palavra, fase: fase, observacao: observacao }])
                 setObservacao("")
                 setPoupAcerto(false)
 
@@ -309,7 +307,25 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
             f2={() => {
                 setPtYellow(ant => ant + 1)
 
-                setArrayAcerto(arr => [...arr, { equipe: namey, tentativa: frases[fase].palavra, fase: fase, observacao: observacao }])
+                setArrayAcerto(arr => [...arr, { equipe: "Y", tentativa: frases[fase].palavra, fase: fase, observacao: observacao }])
+                setObservacao("")
+                setPoupAcerto(false)
+
+            }}
+
+            f3={() => {
+                setPtRed(ant => ant + 1)
+
+                setArrayAcerto(arr => [...arr, { equipe: "R", tentativa: frases[fase].palavra, fase: fase, observacao: observacao }])
+                setObservacao("")
+                setPoupAcerto(false)
+
+            }}
+
+            f4={() => {
+                setPtGreen(ant => ant + 1)
+
+                setArrayAcerto(arr => [...arr, { equipe: "G", tentativa: frases[fase].palavra, fase: fase, observacao: observacao }])
                 setObservacao("")
                 setPoupAcerto(false)
 

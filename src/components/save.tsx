@@ -16,6 +16,7 @@ type objtentativa = {
 
 
 interface Docparams {
+    
     team: number;
     complete: number[];
     frases: Fraseparams[];
@@ -52,8 +53,10 @@ interface Docparams {
 }
 
 
-function Paragraph_team(color: string, name: string, totalpt: number, arrayacerto: objtentativa[],
+
+function Paragraph_team(id:string, color: string, name: string, totalpt: number, arrayacerto: objtentativa[],
     arrayerro: objtentativa[], comport: number, ener: number, observ: string) {
+
 
     return [
 
@@ -75,12 +78,12 @@ function Paragraph_team(color: string, name: string, totalpt: number, arrayacert
         new Paragraph({
             children: [
                 new TextRun({
-                    text: `${arrayacerto.filter(x => x.equipe === name && x.tentativa.length > 0).length} Palavras Completadas: `,
+                    text: `${arrayacerto.filter(x => x.equipe === id && x.tentativa.length > 0).length} Palavras Completadas: `,
                     size: 25,
                     bold: true,
                 }),
                 new TextRun({
-                    text: ` ${arrayacerto.filter(x => x.equipe === name && x.tentativa.length > 0).map(x => ` ${x.tentativa}${x.observacao?.trim() ? `(${x.observacao.trim()})` : ""}`)}`,
+                    text: ` ${arrayacerto.filter(x => x.equipe === id && x.tentativa.length > 0).map(x => ` ${x.tentativa}${x.observacao?.trim() ? `(${x.observacao.trim()})` : ""}`)}`,
                     size: 25,
                 })
             ]
@@ -89,12 +92,12 @@ function Paragraph_team(color: string, name: string, totalpt: number, arrayacert
         new Paragraph({
             children: [
                 new TextRun({
-                    text: `${arrayerro.filter(x => x.equipe === name).length} Erros: `,
+                    text: `${arrayerro.filter(x => x.equipe === id).length} Erros: `,
                     size: 25,
                     bold: true,
                 }),
                 new TextRun({
-                    text: ` ${arrayerro.filter(x => x.equipe === name && x.tentativa.length > 0).map(x => ` ${x.tentativa}${x.observacao?.trim() ? `(${x.observacao.trim()})` : ""}`)}`,
+                    text: ` ${arrayerro.filter(x => x.equipe === id && x.tentativa.length > 0).map(x => ` ${x.tentativa}${x.observacao?.trim() ? `(${x.observacao.trim()})` : ""}`)}`,
                     size: 25,
                 })
             ]
@@ -159,7 +162,8 @@ function Paragraph_team(color: string, name: string, totalpt: number, arrayacert
 }
 
 export const Save = async ({ team, complete, frases, histletra, histpalavra, histerro, arrayacerto, arrayerro, nameb, comportblue, observblue, totalptblue, enerb, namey, comportyellow, observyellow, totalptyellow, enery, namer, comportred, observred, totalptred, enerr, nameg, comportgreen, observgreen, totalptgreen, energ, }: Docparams) => {
-    console.log("oi")
+
+ 
 
     const tempo = new Date()
 
@@ -295,15 +299,15 @@ export const Save = async ({ team, complete, frases, histletra, histpalavra, his
 
                     new Paragraph(``),
 
-                    ...Paragraph_team("Azul", nameb, totalptblue, arrayacerto, arrayerro, comportblue, enerb, observblue),
+                    ...Paragraph_team("B", "Azul", nameb, totalptblue, arrayacerto, arrayerro, comportblue, enerb, observblue),
 
-                    ...Paragraph_team("Amarela", namey, totalptyellow, arrayacerto, arrayerro, comportyellow, enery, observyellow),
-
-                    ...(team>2?  
-                    Paragraph_team("Vermelha", namer, totalptred, arrayacerto, arrayerro, comportred, enerr, observred): []),
+                    ...Paragraph_team("Y", "Amarela", namey, totalptyellow, arrayacerto, arrayerro, comportyellow, enery, observyellow),
 
                     ...(team>2?  
-                    Paragraph_team("Verde", nameg, totalptgreen, arrayacerto, arrayerro, comportgreen, energ, observgreen): []),
+                    Paragraph_team("R", "Vermelha", namer, totalptred, arrayacerto, arrayerro, comportred, enerr, observred): []),
+
+                    ...(team>2?  
+                    Paragraph_team("G", "Verde", nameg, totalptgreen, arrayacerto, arrayerro, comportgreen, energ, observgreen): []),
 
 
 

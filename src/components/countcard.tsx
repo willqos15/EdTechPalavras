@@ -44,10 +44,11 @@ interface propcard {
     fase: number
     alerterro: number
     alertacerto: number
+    id: string
 
 }
 
-export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, statee, setStateE, setPt, pt, setTotalPt, totalpt, setComport, comport, observ, setObserv, name, setName, erro, arrayerro, frases, fase, arrayacerto, alerterro, alertacerto }: propcard) {
+export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, statee, setStateE, setPt, pt, setTotalPt, totalpt, setComport, comport, observ, setObserv, name, setName, erro, arrayerro, frases, fase, arrayacerto, alerterro, alertacerto, id }: propcard) {
 
 
     const [inputeb, setInputEB] = useState<number>(0)
@@ -101,7 +102,7 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
 
                         {(() => {
                             const acertosDaFase = arrayacerto.filter(
-                                x => x.equipe === equipe)
+                                x => x.equipe === id)
 
                             if (acertosDaFase.length === 0) return null
 
@@ -170,7 +171,7 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
                             return (
                                 <>
                                     <p key={lvl}> Fase {lvl + 1}:
-                                        {arrayacerto.filter(x => x.fase === lvl && x.equipe === equipe).map(x => ` ${x.tentativa}${x.observacao?.trim() ? `(${x.observacao.trim()})` : ""}`)}
+                                        {arrayacerto.filter(x => x.fase === lvl && x.equipe === id).map(x => ` ${x.tentativa}${x.observacao?.trim() ? `(${x.observacao.trim()})` : ""}`)}
                                     </p>
                                 </>
                             )
@@ -193,7 +194,7 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
                             return (
                                 <>
                                     <p key={lvl}> Fase {lvl + 1}:
-                                        {arrayerro.filter(x => x.fase === lvl && x.equipe === equipe).map(x => ` ${x.tentativa}${x.observacao?.trim() ? `(${x.observacao.trim()})` : ""},`)}
+                                        {arrayerro.filter(x => x.fase === lvl && x.equipe === id).map(x => ` ${x.tentativa}${x.observacao?.trim() ? `(${x.observacao.trim()})` : ""},`)}
                                     </p>
                                 </>
                             )
@@ -350,7 +351,7 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
         />
 
         <div className={`max-h-dvh w-fit bg-white font-bold px-0 whitespace-nowrap flex flex-col items-center justify-center gap-y-2 mb-4 ${textcolor}`}>
-            <p className={`${bgcolor} text-center w-full px-3 text-bold ${titlecolor}`}> {name ? name : equipe} </p>
+            <p className={`${bgcolor} text-center w-full px-3 text-bold ${titlecolor}`}> {name} </p>
 
             <div className={`flex items-end ${comport > 3 ? 'text-green-800' : comport < 3 ? 'text-red-700' : textcolor}`}>
 
@@ -377,7 +378,7 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
 
 
                 <button className={`cursor-pointer hover:text-red-700`} onClick={() => setShowErro(true)}>
-                    Erros : {arrayerro.filter(x => x.fase === fase && x.equipe === equipe).length}
+                    Erros : {arrayerro.filter(x => x.fase === fase && x.equipe === id).length}
                 </button>
 
 
