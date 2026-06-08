@@ -64,8 +64,13 @@ interface Poupprops {
     erro: string[];
     nameb: string;
     namey: string;
+    namer: string;
+    namep: string;
     errob: string[]
     erroy: string[]
+    error: string[]
+    errop: string[]
+    team: number
 
 
     setComplete: React.Dispatch<React.SetStateAction<number[]>>;
@@ -73,8 +78,12 @@ interface Poupprops {
     setPtYellow: React.Dispatch<React.SetStateAction<number>>;
     setEnerB: React.Dispatch<React.SetStateAction<number>>;
     setEnerY: React.Dispatch<React.SetStateAction<number>>;
+    setEnerR: React.Dispatch<React.SetStateAction<number>>;
+    setEnerP: React.Dispatch<React.SetStateAction<number>>;
     setErroB: React.Dispatch<React.SetStateAction<string[]>>;
     setErroY: React.Dispatch<React.SetStateAction<string[]>>;
+    setErroR: React.Dispatch<React.SetStateAction<string[]>>;
+    setErroP: React.Dispatch<React.SetStateAction<string[]>>;
     setArrayErro: React.Dispatch<React.SetStateAction<objtentativa[]>>;
     setArrayAcerto: React.Dispatch<React.SetStateAction<objtentativa[]>>;
     setAlertErro: React.Dispatch<React.SetStateAction<number>>;
@@ -89,6 +98,8 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
     setPoupDica,
     setEnerB,
     setEnerY,
+    setEnerR,
+    setEnerP,
     setHelp,
     disabledica,
     setDisableDica,
@@ -110,8 +121,12 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
     setPoupErro,
     setErroB,
     setErroY,
+    setErroR,
+    setErroP,
     nameb,
     namey,
+    namer,
+    namep,
     setArrayErro,
     setArrayAcerto,
     turma,
@@ -122,7 +137,8 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
     setAlertAcerto,
     setPoupBack,
     poupback,
-    setPage
+    setPage,
+    team
 
 
 }: Poupprops) {
@@ -147,7 +163,7 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
             titulo={<> <p className='inline-block'> AVISO </p> </>}
             show={poupback}
             modo='confirma'
-            qtdbtn={2}
+            qtdbtn={4}
             f1={() => {
                 setPage("home")
                 setPoupBack(false)
@@ -208,7 +224,8 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
                 VOCÊ ERROU! </p>}
             show={pouperro}
             modo='time'
-            qtdbtn={2}
+            qtdbtn={4}
+            team={team}
 
             f1={() => {
                 setErroB(ant => [...ant, `${erro[erro.length - 1]}`])
@@ -224,6 +241,20 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
                 setObservacao("")
             }}
 
+            f3={() => {
+                setErroR(ant => [...ant, `${erro[erro.length - 1]}`])
+                setArrayErro(arr => [...arr, { equipe: namer, tentativa: erro[erro.length - 1], fase: fase, observacao: observacao }])
+                setPoupErro(false)
+                setObservacao("")
+            }}
+
+            f4={() => {
+                setErroP(ant => [...ant, `${erro[erro.length - 1]}`])
+                setArrayErro(arr => [...arr, { equipe: namep, tentativa: erro[erro.length - 1], fase: fase, observacao: observacao }])
+                setPoupErro(false)
+                setObservacao("")
+            }}
+
             close={() => {
                 setPoupErro(false)
                 setObservacao("")
@@ -235,9 +266,13 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
 
                 <div className="flex items-center cursor-pointer" onClick={() => setMLista(!mlista)}>
                     {turma.length > 0 &&
+
+                    <>
                         <MdChangeCircle />
-                    }
+                    
                     {mlista ? "Modo lista" : "Modo texto"}
+                    </>
+                    }
                 </div>
 
                 {mlista && turma.length > 0 ?
@@ -262,8 +297,8 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
                 VOCÊ ACERTOU! </p >}
             show={poupacerto}
             modo='time'
-            qtdbtn={2}
-
+            qtdbtn={4}
+            team={team}
             f1={() => {
                 setPtBlue(ant => ant + 1)
                 setArrayAcerto(arr => [...arr, { equipe: nameb, tentativa: frases[fase].palavra, fase: fase, observacao: observacao }])
@@ -315,7 +350,8 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
         < Poup
             titulo={<><p className='inline-block'> Custa 1 de </p> <AiFillThunderbolt className='inline-block' /></>}
             show={poupdica}
-            modo='time' qtdbtn={3}
+            team={team}
+            modo='time' qtdbtn={5}
             f1={() => {
                 setEnerB(ant => ant - 1)
                 setHelp(true)
@@ -326,7 +362,20 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
                 setHelp(true)
                 setPoupDica(false)
             }}
+
             f3={() => {
+                setEnerR(ant => ant - 1)
+                setHelp(true)
+                setPoupDica(false)
+            }}
+
+            f4={() => {
+                setEnerP(ant => ant - 1)
+                setHelp(true)
+                setPoupDica(false)
+            }}
+            
+            f5={() => {
                 setPoupDica(false)
                 setHelp(true)
             }}
@@ -341,7 +390,7 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
             titulo={<> <p className='inline-block'> AVISO </p> </>}
             show={disabledica}
             modo='confirma'
-            qtdbtn={2}
+            qtdbtn={4}
             f1={() => {
                 setHelp(false)
                 setDisableDica(false)
@@ -360,7 +409,7 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
         < Poup
             titulo={< p className='inline-block' > AVISO </p >}
             show={poupsword} modo='confirma'
-            qtdbtn={2}
+            qtdbtn={4}
             f1={() => {
                 if (!complete.includes(fase)) {
                     setComplete(ant => [...ant, fase])
@@ -460,7 +509,7 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
             titulo={<> Imagem: {frases[fase].tema}</>}
             show={poupimg}
             modo='info'
-            qtdbtn={2}
+            qtdbtn={4}
 
             close={() => { setPoupImg(false) }}
 
@@ -473,7 +522,7 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
             titulo={<> SORTEAR </>}
             show={poupsorteio}
             modo='info'
-            qtdbtn={2}
+            qtdbtn={4}
 
             close={() => { setPoupSorteio(false) }}
 

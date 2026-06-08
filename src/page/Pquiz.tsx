@@ -36,12 +36,13 @@ type Aluno = {
 }
 
 type Props = {
+    team: number,
     perguntas: Tfrases[]
     img: string
     setPage: React.Dispatch<React.SetStateAction<string>>
 }
 
-export default function PT6ANO({ perguntas, img, setPage }: Props) {
+export default function PT6ANO({ team, perguntas, img, setPage }: Props) {
 
     const [turma, setTurma] = useState<Aluno[]>([])
     const [digi, setDigi] = useState<string[]>([])
@@ -53,8 +54,6 @@ export default function PT6ANO({ perguntas, img, setPage }: Props) {
     const [mletra, setMLetra] = useState<boolean>(true)
     const [fase, setFase] = useState<number>(0)
     const [complete, setComplete] = useState<number[]>([])
-    const [errob, setErroB] = useState<string[]>([])
-    const [erroy, setErroY] = useState<string[]>([])
     const [pouperro, setPoupErro] = useState<boolean>(false)
     const [sorteio, setSorteio] = useState<string>("")
     const [poupsorteio, setPoupSorteio] = useState<boolean>(false)
@@ -66,21 +65,43 @@ export default function PT6ANO({ perguntas, img, setPage }: Props) {
     const [poupduvidas, setPoupDuvidas] = useState<boolean>(false)
     const [poupTurma, setPoupTurma] = useState<boolean>(false)
     const [poupconfig, setPoupConfig] = useState<boolean>(false)
-    const [enerb, setEnerB] = useState<number>(5)
-    const [enery, setEnerY] = useState<number>(5)
-    const [ptblue, setPtBlue] = useState<number>(0)
-    const [ptyellow, setPtYellow] = useState<number>(0)
-    const [comportblue, setComportBlue] = useState<number>(3)
-    const [totalptblue, setTotalPtBlue] = useState<number>(0)
-    const [comportyellow, setComportYellow] = useState<number>(3)
-    const [totalptyellow, setTotalPtYellow] = useState<number>(0)
-    const [observblue, setObservBlue] = useState<string>("")
-    const [observyellow, setObservYellow] = useState<string>("")
-    const [nameb, setNameB] = useState<string>("Equipe Azul")
-    const [namey, setNameY] = useState<string>("Equipe Amarela")
     const [alerterro, setAlertErro] = useState<number>(0)
     const [alertacerto, setAlertAcerto] = useState<number>(0)
     const [poupback, setPoupBack] = useState<boolean>(false)
+
+    const [enerb, setEnerB] = useState<number>(5)
+    const [comportblue, setComportBlue] = useState<number>(3)
+    const [totalptblue, setTotalPtBlue] = useState<number>(0)
+    const [ptblue, setPtBlue] = useState<number>(0)
+    const [observblue, setObservBlue] = useState<string>("")
+    const [nameb, setNameB] = useState<string>("Equipe Azul")
+    const [errob, setErroB] = useState<string[]>([])
+
+
+    const [enery, setEnerY] = useState<number>(5)
+    const [comportyellow, setComportYellow] = useState<number>(3)
+    const [totalptyellow, setTotalPtYellow] = useState<number>(0)
+    const [ptyellow, setPtYellow] = useState<number>(0)
+    const [observyellow, setObservYellow] = useState<string>("")
+    const [namey, setNameY] = useState<string>("Equipe Amarela")
+    const [erroy, setErroY] = useState<string[]>([])
+
+    const [enerr, setEnerR] = useState<number>(5)
+    const [comportred, setComportRed] = useState<number>(3)
+    const [totalptred, setTotalPtRed] = useState<number>(0)
+    const [ptred, setPtRed] = useState<number>(0)
+    const [observred, setObservRed] = useState<string>("")
+    const [namer, setNameR] = useState<string>("Equipe Vermelha")
+    const [error, setErroR] = useState<string[]>([])
+
+    const [energ, setEnerG] = useState<number>(5)
+    const [comportgreen, setComportGreen] = useState<number>(3)
+    const [totalptgreen, setTotalPtGreen] = useState<number>(0)
+    const [ptgreen, setPtGreen] = useState<number>(0)
+    const [observgreen, setObservGreen] = useState<string>("")
+    const [nameg, setNameG] = useState<string>("Equipe Verde")
+    const [errog, setErroG] = useState<string[]>([])
+
 
 
     type objtentativa = {
@@ -96,13 +117,13 @@ export default function PT6ANO({ perguntas, img, setPage }: Props) {
 
 
 
-function normalizar(texto: string) {
-    return texto
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "") // remove acentos
-        .replace(/[\s-]/g, "")           // remove espaço e hífen
-        .toUpperCase()
-}
+    function normalizar(texto: string) {
+        return texto
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "") // remove acentos
+            .replace(/[\s-]/g, "")           // remove espaço e hífen
+            .toUpperCase()
+    }
 
     useEffect(() => {
         console.log(digi.length, 'digi leng', digi)
@@ -139,7 +160,7 @@ function normalizar(texto: string) {
             setFase(frases.length)
     }, [fase])
 
-    useEffect(()=>{setCampo("")},[mletra])
+    useEffect(() => { setCampo("") }, [mletra])
 
 
     function enviar(dados: Tdados) {
@@ -178,19 +199,25 @@ function normalizar(texto: string) {
 
     function sortear() {
 
-        const sort = Math.random() < 0.5 ? nameb : namey
+         const names: string[] =
+        team === 2
+            ? [nameb, namey]
+            : [nameb, namey, namer, nameg];
+        
+        const sort = names[Math.floor(Math.random() * names.length)];
         setSorteio("load")
         setTimeout(() => {
             setSorteio(sort)
-        }, 2000);
+        }, 1500);
     }
 
 
 
 
     return (<>
-        
+
         <AllPoups
+
             fase={fase}
             frases={frases}
             complete={complete}
@@ -219,17 +246,25 @@ function normalizar(texto: string) {
             setPtYellow={setPtYellow}
             setEnerB={setEnerB}
             setEnerY={setEnerY}
+            setEnerR={setEnerR}
+            setEnerP={setEnerG}
             setPoupErro={setPoupErro}
             erro={erro}
             setErroB={setErroB}
             setErroY={setErroY}
+            setErroR={setErroR}
+            setErroP={setErroG}
+            errob={errob}
+            erroy={erroy}
+            error={error}
+            errop={errog}
             pouperro={pouperro}
             nameb={nameb}
             namey={namey}
+            namer={namer}
+            namep={nameg}
             setArrayErro={setArrayErro}
             setArrayAcerto={setArrayAcerto}
-            errob={errob}
-            erroy={erroy}
             turma={turma}
             setTurma={setTurma}
             setPoupConfig={setPoupConfig}
@@ -239,6 +274,7 @@ function normalizar(texto: string) {
             poupback={poupback}
             setPoupBack={setPoupBack}
             setPage={setPage}
+            team={team}
         />
 
         <IoIosNotifications onClick={() => setPoupConfig(true)}
@@ -250,31 +286,58 @@ function normalizar(texto: string) {
 
 
                 <div className='xl:order-1 order-2'>
-                    <CountCard
-                        equipe={nameb}
-                        name={nameb}
-                        setName={setNameB}
-                        bgcolor='bg-[var(--aprimary)]'
+                    {team >= 2 &&
+                        <CountCard
+                            equipe={nameb}
+                            name={nameb}
+                            setName={setNameB}
+                            bgcolor='bg-[var(--aprimary)]'
+                            titlecolor='text-white'
+                            textcolor="text-[var(--asecondary)]"
+                            statee={enerb}
+                            setStateE={setEnerB}
+                            pt={ptblue}
+                            setPt={setPtBlue}
+                            setComport={setComportBlue}
+                            comport={comportblue}
+                            setTotalPt={setTotalPtBlue}
+                            totalpt={totalptblue}
+                            observ={observblue}
+                            setObserv={setObservBlue}
+                            erro={errob}
+                            arrayerro={arrayerro}
+                            arrayacerto={arrayacerto}
+                            frases={frases}
+                            fase={fase}
+                            alerterro={alerterro}
+                            alertacerto={alertacerto}
+                        />}
+
+                    {team >= 4 && <CountCard
+                        equipe={namer}
+                        name={namer}
+                        setName={setNameR}
+                        bgcolor='bg-[var(--cprimary)]'
                         titlecolor='text-white'
-                        textcolor="text-[var(--asecondary)]"
-                        statee={enerb}
-                        setStateE={setEnerB}
-                        pt={ptblue}
-                        setPt={setPtBlue}
-                        setComport={setComportBlue}
-                        comport={comportblue}
-                        setTotalPt={setTotalPtBlue}
-                        totalpt={totalptblue}
-                        observ={observblue}
-                        setObserv={setObservBlue}
-                        erro={errob}
+                        textcolor="text-[var(--csecondary)]"
+                        statee={enerr}
+                        setStateE={setEnerR}
+                        pt={ptred}
+                        setPt={setPtRed}
+                        setComport={setComportRed}
+                        comport={comportred}
+                        setTotalPt={setTotalPtRed}
+                        totalpt={totalptred}
+                        observ={observred}
+                        setObserv={setObservRed}
+                        erro={error}
                         arrayerro={arrayerro}
                         arrayacerto={arrayacerto}
                         frases={frases}
                         fase={fase}
                         alerterro={alerterro}
                         alertacerto={alertacerto}
-                    />
+                    />}
                 </div>
 
 
@@ -285,11 +348,11 @@ function normalizar(texto: string) {
 
                             <div className='flex flex-row justify-start gap-2 items-end mx-auto'>
                                 <div className='flex items-center justify-center bg-(--bprimary) rounded-t-md cursor-pointer text-(--bsecondary) hover:bg-white transition-all duration-300 px-2 pt-1'
-                                onClick={() => setPoupBack(true)}>
-                                {/* <img src={logo} className='h-8  px-5 p-1 '/> */}
-                                
-                                <IoArrowBackCircle className='text-2xl'/>
-                                <p className='text-xl sm:flex hidden'>
+                                    onClick={() => setPoupBack(true)}>
+                                    {/* <img src={logo} className='h-8  px-5 p-1 '/> */}
+
+                                    <IoArrowBackCircle className='text-2xl' />
+                                    <p className='text-xl sm:flex hidden'>
                                         Voltar</p>
                                 </div>
                                 <div
@@ -316,7 +379,7 @@ function normalizar(texto: string) {
 
 
                                 <div
-                                    onClick={() => Save({ complete, frases, histletra, histpalavra, histerro, nameb, namey, comportyellow, comportblue, observblue, observyellow, totalptyellow, totalptblue, enerb, enery, arrayacerto, arrayerro })}
+                                    onClick={() => Save({team, complete, frases, histletra, histpalavra, histerro, nameb, namey, comportyellow, comportblue, observblue, observyellow, totalptyellow, totalptblue, enerb, enery, arrayacerto, arrayerro, namer,comportred,  observred, totalptred,enerr,nameg,comportgreen,  observgreen, totalptgreen,energ })}
                                     className='cursor-pointer h-8 bg-(--bprimary) px-2 pt-1 rounded-t-md text-(--bsecondary) text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
                                     <IoIosSave /> <p className='sm:flex hidden'>Salvar</p>
                                 </div>
@@ -376,10 +439,10 @@ function normalizar(texto: string) {
 
                                 <div className='select-none flex sm:gap-2 gap-1 justify-center px-2'>
                                     {frases[fase].palavra.split("").map((letra) => (
-                                        <div className= {`${letra === " " ? " " : "bg-[#e6eae1]  text-(--asecondary) border-3 "} sm:w-8 sm:text-4xl sm:py-1 py-1 w-5 text-lg   rounded-md text-center`}>
+                                        <div className={`${letra === " " ? " " : "bg-[#e6eae1]  text-(--asecondary) border-3 "} sm:w-8 sm:text-4xl sm:py-1 py-1 w-5 text-lg   rounded-md text-center`}>
                                             <span className={
-                                                
-                                                    (Array.from(digi).map(normalizar)).includes(normalizar(letra))
+
+                                                (Array.from(digi).map(normalizar)).includes(normalizar(letra))
                                                     || normalizar(digi.join("")) === normalizar(frases[fase].palavra)
                                                     || complete.includes(fase) || letra === "-"
                                                     ? 'opacity-100'
@@ -495,8 +558,7 @@ function normalizar(texto: string) {
 
                                         <div className='overflow-x-auto overflow-y-hidden y-20 max-w-96'>
                                             <p className='font-bold text-red-600 px-2'>
-                                                {!complete.includes(fase) && !mletra && erro[erro.length - 1].length < 2 ? 'No modo Psalavra, digite a palavra completa. Letras únicas não são permitidas.".'
-                                                    : erro.join(" , ").toUpperCase()}</p>
+                                                {!complete.includes(fase) && erro && erro.join(" , ").toUpperCase()}</p>
 
 
 
@@ -514,7 +576,7 @@ function normalizar(texto: string) {
 
 
                 <div className='lg:order-3 order-2'>
-                    <CountCard
+                    {team >= 2 && <CountCard
                         equipe={namey}
                         name={namey}
                         setName={setNameY}
@@ -538,7 +600,33 @@ function normalizar(texto: string) {
                         fase={fase}
                         alerterro={alerterro}
                         alertacerto={alertacerto}
-                    />
+                    />}
+
+                    {team >= 4 && <CountCard
+                        equipe={nameg}
+                        name={nameg}
+                        setName={setNameG}
+                        bgcolor='bg-(--dprimary)'
+                        titlecolor='text-white'
+                        textcolor="text-(--dsecondary)"
+                        statee={energ}
+                        setStateE={setEnerG}
+                        pt={ptgreen}
+                        setPt={setPtGreen}
+                        setComport={setComportGreen}
+                        comport={comportgreen}
+                        setTotalPt={setTotalPtGreen}
+                        totalpt={totalptgreen}
+                        observ={observgreen}
+                        setObserv={setObservGreen}
+                        erro={errog}
+                        arrayerro={arrayerro}
+                        arrayacerto={arrayacerto}
+                        frases={frases}
+                        fase={fase}
+                        alerterro={alerterro}
+                        alertacerto={alertacerto}
+                    />}
                 </div>
 
 

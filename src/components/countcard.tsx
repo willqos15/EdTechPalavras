@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
-import { RiArrowDownWideLine } from "react-icons/ri";
-import { RiArrowUpWideLine } from "react-icons/ri";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { IoMdRemoveCircleOutline } from "react-icons/io";
 import { AiFillThunderbolt } from "react-icons/ai";
+import { FaGear } from "react-icons/fa6";
 import { HiCheck } from "react-icons/hi";
 import Poup from './poup';
 
@@ -48,16 +47,16 @@ interface propcard {
 
 }
 
-export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, statee, setStateE, setPt, pt, setTotalPt, totalpt, setComport, comport, observ, setObserv, name, setName, erro, arrayerro, frases, fase, arrayacerto, alerterro,alertacerto }: propcard) {
+export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, statee, setStateE, setPt, pt, setTotalPt, totalpt, setComport, comport, observ, setObserv, name, setName, erro, arrayerro, frases, fase, arrayacerto, alerterro, alertacerto }: propcard) {
 
 
     const [inputeb, setInputEB] = useState<number>(0)
     const [inputpb, setInputPB] = useState<number>(0)
-    const [showcb, setShowCB] = useState<boolean>(false)
     const [showerro, setShowErro] = useState<boolean>(false)
     const [showacerto, setShowAcerto] = useState<boolean>(false)
     const [showalerterro, setShowAlertErro] = useState<boolean>(false)
     const [showalertacerto, setShowAlertAcerto] = useState<boolean>(false)
+    const [showConfig, setShowConfig] = useState<boolean>(false)
     // const [pt, setPt] = useState<number>(0)
 
     useEffect(
@@ -68,7 +67,7 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
         }, [alerterro, erro])
 
 
-        useEffect(
+    useEffect(
         () => {
             if (alertacerto != 0 && alertacerto === pt) {
                 setShowAlertAcerto(true)
@@ -205,72 +204,13 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
             }
             close={() => setShowErro(false)} modo='info' show={showerro} />
 
-        <div className={`max-h-dvh w-fit bg-white font-bold px-0 whitespace-nowrap flex flex-col items-center justify-center gap-y-2 mb-4 ${textcolor}`}>
-            <p className={`${bgcolor} text-center w-full px-3 text-bold ${titlecolor}`}> {name ? name : equipe} </p>
 
-            <div className={`flex items-end ${comport > 3 ? 'text-green-800' : comport < 3 ? 'text-red-700' : textcolor}`}>
+        <Poup titulo={`Configuração`} modo='info' close={() => setShowConfig(false)} show={showConfig}
+            descricao={
 
-                <div className={`inline-block cursor-pointer hover:text-green-700`}
-                    onClick={() => setShowAcerto(true)}>
-                    <p className="inline-block text-5xl">
-                        {totalpt}</p>
-
-                    <p className='bottom-0 inline-block'>{totalpt == 1 || totalpt === 0 ? "Pt" : "Pts"}</p>
-                </div>
-            </div>
-
-            <div className='flex flex-col justify-center items-center w-fit'>
-                <div>
-                    <button onClick={() => setPt(ant => ant + 1)}
-                        className='cursor-pointer bg-white px-2'>
-                        <IoMdAddCircleOutline
-                            className='cursor-pointer hover:bg-green-400 active:bg-green-400 transition duration-300 text-4xl rounded-full  p-0 flex items-center justify-center' /> </button>
-
-                    <button onClick={() => setPt(ant => ant - 1)}
-                    >
-                        <IoMdRemoveCircleOutline className='cursor-pointer hover:bg-red-400 active:bg-red-400 transition duration-300 text-4xl rounded-full  p-0 flex items-center justify-center' /> </button>
-                </div>
-
-
-                <button className={`cursor-pointer hover:text-red-700`} onClick={() => setShowErro(true)}>
-                    Erros : {arrayerro.filter(x => x.fase === fase && x.equipe === equipe).length}
-                </button>
-
-
-                {statee > 5 ?
-                    <div className='flex justify-center items-center gap-1 bg-white '>
-                        <p className='pl-2 text-sm flex items-center justify-center'>Energia: {statee}</p> <AiFillThunderbolt className='inline-block' />
-
-                    </div>
-
-                    :
-
-                    <div className={`${statee < 5 ? `flex justify-center items-center` : "grid grid-cols-5 place-items-center justify-center w-fit"}`}>
-                        {
-                            [...Array(statee)].map(() => <AiFillThunderbolt className='inline-block' />)
-                        }
-                    </div>
-
-                }
-
-                {showcb ?
-                    <RiArrowUpWideLine
-                        onClick={() => setShowCB(!showcb)}
-                        className='cursor-pointer font-bold text-4xl text-gray-400 hover:text-gray-600 transition duration-300' />
-                    :
-                    <RiArrowDownWideLine
-                        onClick={() => setShowCB(!showcb)}
-                        className='cursor-pointer mx-auto font-bold text-4xl text-gray-400  hover:text-gray-600  transition duration-300' />
-                }
-
-
-                <div className={`flex flex-col items-center justify-center overflow-hidden transition-[max-height, opacity] duration-300 ease-in px-2 max-w-fit
-                        ${showcb ?
-                        'max-h-fit  opacity-100' :
-                        'max-h-0  opacity-0 ease-out'}
+                <div className={`flex flex-col items-center justify-center overflow-hidden transition-[max-height, opacity] duration-300 ease-in px-2 max-w-fit max-h-fit  opacity-100'
                         `}>
 
-                    <hr className='border mb-1 w-full' />
 
                     <p>Comportamento:</p>
                     <input type="range"
@@ -303,7 +243,7 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
 
                     <hr className='border my-2 w-full' />
 
-
+                    <p>Editar Campo </p>
                     <p className='text-sm text-center'>
                         Nome da Equipe:</p>
                     <input
@@ -403,6 +343,70 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
 
 
                 </div>
+
+
+            }
+
+        />
+
+        <div className={`max-h-dvh w-fit bg-white font-bold px-0 whitespace-nowrap flex flex-col items-center justify-center gap-y-2 mb-4 ${textcolor}`}>
+            <p className={`${bgcolor} text-center w-full px-3 text-bold ${titlecolor}`}> {name ? name : equipe} </p>
+
+            <div className={`flex items-end ${comport > 3 ? 'text-green-800' : comport < 3 ? 'text-red-700' : textcolor}`}>
+
+                <div className={`inline-block cursor-pointer hover:text-green-700`}
+                    onClick={() => setShowAcerto(true)}>
+                    <p className="inline-block text-5xl">
+                        {totalpt}</p>
+
+                    <p className='bottom-0 inline-block'>{totalpt == 1 || totalpt === 0 ? "Pt" : "Pts"}</p>
+                </div>
+            </div>
+
+            <div className='flex flex-col justify-center items-center w-fit'>
+                <div>
+                    <button onClick={() => setPt(ant => ant + 1)}
+                        className='cursor-pointer bg-white px-2'>
+                        <IoMdAddCircleOutline
+                            className='cursor-pointer hover:bg-green-400 active:bg-green-400 transition duration-300 text-4xl rounded-full  p-0 flex items-center justify-center' /> </button>
+
+                    <button onClick={() => setPt(ant => ant - 1)}
+                    >
+                        <IoMdRemoveCircleOutline className='cursor-pointer hover:bg-red-400 active:bg-red-400 transition duration-300 text-4xl rounded-full  p-0 flex items-center justify-center' /> </button>
+                </div>
+
+
+                <button className={`cursor-pointer hover:text-red-700`} onClick={() => setShowErro(true)}>
+                    Erros : {arrayerro.filter(x => x.fase === fase && x.equipe === equipe).length}
+                </button>
+
+
+                {statee > 5 ?
+                    <div className='flex justify-center items-center gap-1 bg-white '>
+                        <p className='pl-2 text-sm flex items-center justify-center'>Energia: {statee}</p> <AiFillThunderbolt className='inline-block' />
+
+                    </div>
+
+                    :
+
+                    <div className={`${statee < 5 ? `flex justify-center items-center` : "grid grid-cols-5 place-items-center justify-center w-fit"}`}>
+                        {
+                            [...Array(statee)].map(() => <AiFillThunderbolt className='inline-block' />)
+                        }
+                    </div>
+
+                }
+
+                <div className={`
+                ${textcolor} hover:text-gray-700 cursor-pointer
+                flex gap-1 px-3 py-1 items-center justify-center`}
+                onClick={() => setShowConfig(!showConfig)}>
+
+                <FaGear
+                    className='cursor-pointer font-bold text-xl transition duration-300' />
+                    Configurações
+                    </div>
+
 
             </div>
 

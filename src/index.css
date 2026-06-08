@@ -2,7 +2,11 @@
   --aprimary: #1e3a8a;
   --asecondary: #21285C;
   --bprimary: #F7CD21;
-  --bsecondary: #602e08;
+  --bsecondary: #76540a;
+  --cprimary: #f72121;
+  --csecondary: #920d0d;
+  --dprimary: #32c932;
+  --dsecondary: rgb(7, 104, 10);
 }
 
 :root {
