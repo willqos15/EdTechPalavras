@@ -91,12 +91,14 @@ interface Poupprops {
     setAlertErro: React.Dispatch<React.SetStateAction<number>>;
     setAlertAcerto: React.Dispatch<React.SetStateAction<number>>;
     setPage: React.Dispatch<React.SetStateAction<string>>;
+
+    img:string;
 }
 
 
 
 
-export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYellow,setPtRed,setPtGreen, frases, fase, setPoupAcerto, poupdica,
+export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setPtYellow,setPtRed,setPtGreen, frases, fase, setPoupAcerto, poupdica,
     setPoupDica,
     setEnerB,
     setEnerY,
@@ -531,7 +533,7 @@ export default function AllPoups({ poupacerto, setComplete, setPtBlue, setPtYell
 
             descricao={<>
                 <div className='sm:min-w-96 p-1'>
-                    <img className='min-w-full' src={frases[fase].imagem}></img> </div></>}
+                    <img className='min-w-full' src={ frases[fase].imagem? frases[fase].imagem : img}></img> </div></>}
         />
 
         < Poup

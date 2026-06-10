@@ -277,6 +277,7 @@ export default function PT6ANO({ team, perguntas, img, setPage }: Props) {
             setPoupBack={setPoupBack}
             setPage={setPage}
             team={team}
+            img={img}
         />
 
         <IoIosNotifications onClick={() => setPoupConfig(true)}
