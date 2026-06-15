@@ -21,6 +21,10 @@ close: ()=> void
 
 export default function Poup({titulo, descricao, show, modo, f1, f2,f3,f4,f5, close, team, qtdbtn}:Propriedades) {
 
+      if (!show) {
+        return null;
+    }
+
     return (<>
 
     <div className={`${ show ? "bg-[rgba(0,0,0,0.8)] fixed flex items-center inset-0 z-10" : "hidden" } `}>

@@ -1,9 +1,11 @@
-import { defineConfig} from 'vite'
+/// <reference types="vitest" />
+import { defineConfig } from "vitest/config";
 import type { Plugin } from "vite"
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import { viteSingleFile } from "vite-plugin-singlefile"
 import { Buffer } from "node:buffer"
+
 
 
 function autoEncodeArrays(): Plugin {
@@ -72,10 +74,22 @@ export default defineConfig({
       babel: {
         plugins: [['babel-plugin-react-compiler']],
       },
-    }),tailwindcss(), 
+    }),
+
+
+    
+    tailwindcss(), 
     viteSingleFile(),
 
   ],
+
+   test: {
+    globals: true,
+    environment: "jsdom",
+    setupFiles: "./src/test/setup.ts",
+  },
+
+  
 
 build: {
     minify: "terser",

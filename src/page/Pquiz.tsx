@@ -42,7 +42,7 @@ type Props = {
     setPage: React.Dispatch<React.SetStateAction<string>>
 }
 
-export default function PT6ANO({ team, perguntas, img, setPage }: Props) {
+export default function PQuiz({ team, perguntas, img, setPage }: Props) {
 
     const [turma, setTurma] = useState<Aluno[]>([])
     const [digi, setDigi] = useState<string[]>([])

@@ -54,7 +54,7 @@ interface Docparams {
 
 
 
-function Paragraph_team(id:string, color: string, name: string, totalpt: number, arrayacerto: objtentativa[],
+export function Paragraph_team(id:string, color: string, name: string, totalpt: number, arrayacerto: objtentativa[],
     arrayerro: objtentativa[], comport: number, ener: number, observ: string) {
 
 
