@@ -1,9 +1,8 @@
 import { useState } from "react"
 import PtQuiz from "./Pquiz"
-import img from '../assets/portugues.png'
+import img from '../assets/capsii.png'
 import Poup from "../components/poup"
-// import { geo6 } from "./data/geo6/geo6.ts"
-import { port6 } from "./data/kesley/port6.ts"
+import { caps01 } from "./data/ricardopsi/caps01.ts"
 
 
 export default function Pmenu() {
@@ -61,7 +60,7 @@ export default function Pmenu() {
                 }}
                     className="bg-white p-2  m-4 text-2xl hover:bg-amber-200 rounded-xl cursor-pointer">
                         {/* Geografia - 6ºano */}
-                        Português - 6ºano
+                        Saúde Mental - 01
                         </a>
             </li>
 
@@ -72,7 +71,7 @@ export default function Pmenu() {
 
 
         {route === "1" && <PtQuiz team={team} setPage={setRoute} img={img}
-            perguntas={port6}
+            perguntas={caps01}
         />}
 
 

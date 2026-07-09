@@ -448,29 +448,29 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
 
                     < div >
                         <h3>1 - Como a turma é organizada?</h3>
-                        <p>A turma é dividida em duas equipes: Azul e Amarela.</p>
+                        <p>A turma é dividida em duas ou quatro equipes.</p>
                     </div >
 
                     <div>
                         <h3>2 - Quem controla o jogo?</h3>
-                        <p>Somente o professor controla a aplicação, exibindo o jogo em uma TV ou DataShow.</p>
+                        <p>Somente uma pessoa controla os pontos da aplicação, exibindo o jogo em uma TV ou DataShow.</p>
                     </div>
 
 
                     <div>
                         <h3>3- Quem começa jogando?</h3>
-                        <p>O professor pode definir manualmente a equipe inicial ou usar a aba "Sorteio".</p>
+                        <p>O responsável pode definir manualmente a equipe inicial ou usar a aba "Sorteio".</p>
                     </div>
 
                     <div>
                         <h3>4 - Como funciona cada rodada?</h3>
-                        <p>Um aluno da equipe escolhe uma letra por rodada.</p>
-                        <p>O aluno só pode jogar novamente após todos de sua equipe participarem.</p>
+                        <p>Um participanet da equipe escolhe uma letra por rodada.</p>
+                        <p>O participante só pode jogar novamente após todos de sua equipe participarem.</p>
                     </div>
 
                     <div>
                         <h3>5 - É permitido adivinhar a palavra inteira?</h3>
-                        <p>Sim. O aluno pode tentar adivinhar a palavra completa a qualquer momento.</p>
+                        <p>Sim. O participante pode tentar adivinhar a palavra completa a qualquer momento.</p>
                         <p>Se acertar, a equipe ganha o ponto imediatamente.</p>
                     </div>
 

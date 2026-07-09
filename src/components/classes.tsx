@@ -58,7 +58,7 @@ export default function Classes({ turma, setTurma }: PropClasses) {
     return (<>
 
         <div className="flex flex-col justify-center items-center">
-            <p>Importar alunos.</p>
+            <p>Importar alunos/participantes.</p>
 
             <div className="flex flex-col items-start justify-start bg-gray-100 p-2">
                 <p>Requisitos:</p>
