@@ -20,7 +20,7 @@ Aplicação web desenvolvida em **React + Vite**, **TypeScript** e **Tailwind** 
 ## Como funciona 
 
 ### 1 - Como a turma é organizada?
-A turma é dividida em duas equipes: Azul e Amarela.
+A turma é dividida em 2 ou 4 equipes.
 
 ### 2 - Quem controla o jogo?
 Somente o professor controla a aplicação, exibindo o jogo em uma TV ou DataShow.
