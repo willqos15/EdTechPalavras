@@ -40,6 +40,7 @@ interface Poupprops {
     pouperro: boolean,
     poupconfig: boolean,
     poupback: boolean,
+    
 
 
 
@@ -55,6 +56,7 @@ interface Poupprops {
     setPoupErro: React.Dispatch<React.SetStateAction<boolean>>;
     setPoupConfig: React.Dispatch<React.SetStateAction<boolean>>;
     setPoupBack: React.Dispatch<React.SetStateAction<boolean>>;
+    
 
     complete: number[];
     frases: Fraseparams[];
@@ -93,6 +95,7 @@ interface Poupprops {
     setPage: React.Dispatch<React.SetStateAction<string>>;
 
     img:string;
+    dica:string;
 }
 
 
@@ -138,7 +141,9 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
     setPoupBack,
     poupback,
     setPage,
-    team
+    team,
+    
+    dica
 
 
 }: Poupprops) {
@@ -157,6 +162,10 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
 
     return (<>
 
+
+
+
+       
 
 
     < Poup
@@ -374,28 +383,38 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
                 setEnerB(ant => ant - 1)
                 setHelp(true)
                 setPoupDica(false)
+                
+                
             }}
             f2={() => {
                 setEnerY(ant => ant - 1)
                 setHelp(true)
                 setPoupDica(false)
+                
+                
             }}
 
             f3={() => {
                 setEnerR(ant => ant - 1)
                 setHelp(true)
                 setPoupDica(false)
+                
+                
             }}
 
             f4={() => {
                 setEnerP(ant => ant - 1)
                 setHelp(true)
                 setPoupDica(false)
+                
+                
             }}
             
             f5={() => {
                 setPoupDica(false)
                 setHelp(true)
+                
+                
             }}
 
             close={() => { setPoupDica(false) }}
@@ -405,22 +424,29 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
 
 
         < Poup
-            titulo={<> <p className='inline-block'> AVISO </p> </>}
+            titulo={<> <p className='inline-block'> </p> </>}
             show={disabledica}
-            modo='confirma'
-            qtdbtn={4}
-            f1={() => {
-                setHelp(false)
-                setDisableDica(false)
-            }}
-            f2={() => {
-                setDisableDica(false)
-            }}
+            modo='info'
+            // qtdbtn={4}
+            // f1={() => {
+            //     setHelp(false)
+            //     setDisableDica(false)
+            // }}
+            // f2={() => {
+            //     setDisableDica(false)
+            // }}
 
             close={() => { setDisableDica(false) }}
 
-            descricao={<>
-                <p className='p-2 text-center'>Deseja desativar a dica?</p></>}
+            descricao={<div className="flex flex-col items-center justify-center">
+             <p className='p-2 text-4xl text-center'>Dica: {dica}</p>
+                
+                <button
+                className="cursor-pointer bg-(--csecondary) w-fit font-bold text-white  hover:scale-110 transition-all duration-300 mx-auto rounded-md px-3 py-1"
+                 onClick={()=>{
+                    setHelp(false)
+                setDisableDica(false)}}>Desativar Dica</button>
+                </div>}
         />
 
 

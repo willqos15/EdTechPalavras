@@ -68,6 +68,8 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
     const [alerterro, setAlertErro] = useState<number>(0)
     const [alertacerto, setAlertAcerto] = useState<number>(0)
     const [poupback, setPoupBack] = useState<boolean>(false)
+    
+    const [dica, setDica] = useState<string>('')
 
     const [enerb, setEnerB] = useState<number>(5)
     const [comportblue, setComportBlue] = useState<number>(3)
@@ -124,6 +126,11 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
             .replace(/[\s-]/g, "")           // remove espaço e hífen
             .toUpperCase()
     }
+
+    useEffect(()=>{
+        setDica(frases[fase].dica)
+
+    },[dica])
 
     useEffect(() => {
         console.log(digi.length, 'digi leng', digi)
@@ -241,6 +248,7 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
             setDisableDica={setDisableDica}
             setHelp={setHelp}
             setComplete={setComplete}
+            dica = {dica}
 
             setPtBlue={setPtBlue}
             setPtYellow={setPtYellow}
