@@ -383,14 +383,14 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
                 setEnerB(ant => ant - 1)
                 setHelp(true)
                 setPoupDica(false)
-                setDisableDica(true)
+                
                 
             }}
             f2={() => {
                 setEnerY(ant => ant - 1)
                 setHelp(true)
                 setPoupDica(false)
-                setDisableDica(true)
+                
                 
             }}
 
@@ -398,7 +398,7 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
                 setEnerR(ant => ant - 1)
                 setHelp(true)
                 setPoupDica(false)
-                setDisableDica(true)
+                
                 
             }}
 
@@ -406,14 +406,14 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
                 setEnerP(ant => ant - 1)
                 setHelp(true)
                 setPoupDica(false)
-                setDisableDica(true)
+                
                 
             }}
             
             f5={() => {
                 setPoupDica(false)
                 setHelp(true)
-                setDisableDica(true)
+                
                 
             }}
 
