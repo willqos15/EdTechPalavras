@@ -130,7 +130,7 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
     useEffect(()=>{
         setDica(frases[fase].dica)
 
-    },[dica])
+    },[fase])
 
     useEffect(() => {
         console.log(digi.length, 'digi leng', digi)
