@@ -490,8 +490,8 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
 
                     <div>
                         <h3>4 - Como funciona cada rodada?</h3>
-                        <p>Um participanet da equipe escolhe uma letra por rodada.</p>
-                        <p>O participante só pode jogar novamente após todos de sua equipe participarem.</p>
+                        <p>Um participante da equipe escolhe uma letra ou palavra por rodada.</p>
+                        <p>Caso o participante acerte a palavra, ele tem direito a mais uma tentativa.</p>
                     </div>
 
                     <div>
@@ -502,7 +502,7 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
 
                     <div>
                         <h3>6 - Existe ajuda durante a rodada?</h3>
-                        <p>A equipe pode revelar uma dica da palavra com custo de 1 ponto de energia.</p>
+                        <p>Uma vez por rodada a equipe pode revelar uma dica da palavra com custo de 1 ponto de energia.</p>
                     </div>
 
                     <div>

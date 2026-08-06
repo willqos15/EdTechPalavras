@@ -1,8 +1,7 @@
 import { useState } from "react"
 import PtQuiz from "./Pquiz"
-import img from '../assets/mat.png'
 import Poup from "../components/poup"
-import { funclog } from "./data/benemat/funclog.ts"
+import { agua, img,title } from "./data/wannec6/agua"
 
 
 export default function Pmenu() {
@@ -58,9 +57,9 @@ export default function Pmenu() {
                     setPage("1")
                     setShowSelectTeam(true)
                 }}
+                data-testid="menu-item"
                     className="bg-white p-2  m-4 text-2xl hover:bg-amber-200 rounded-xl cursor-pointer">
-                        {/* Geografia - 6ºano */}
-                        Função Logarítmica
+                        {title}
                         </a>
             </li>
 
@@ -71,7 +70,7 @@ export default function Pmenu() {
 
 
         {route === "1" && <PtQuiz team={team} setPage={setRoute} img={img}
-            perguntas={funclog}
+            perguntas={agua}
         />}
 
 

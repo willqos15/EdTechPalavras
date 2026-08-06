@@ -29,19 +29,20 @@ describe("Pmenu", () => {
         ).toBeInTheDocument();
 
         expect(
-            screen.getByText("Geografia - 6ºano")
-        ).toBeInTheDocument();
+            screen.getAllByRole("listitem").length)
+            .toBeGreaterThan(0);
+      
 
     });
 
-    test("deve abrir popup ao clicar em Geografia", async () => {
+    test("deve abrir popup ao clicar em Assunto", async () => {
 
     const user = userEvent.setup();
 
     render(<Pmenu />);
 
     await user.click(
-        screen.getByText("Geografia - 6ºano")
+        screen.getByTestId('menu-item')
     );
 
     expect(
@@ -57,7 +58,7 @@ test("deve enviar team = 2", async () => {
     render(<Pmenu />);
 
     await user.click(
-        screen.getByText("Geografia - 6ºano")
+        screen.getByTestId('menu-item')
     );
 
     await user.click(
@@ -77,7 +78,7 @@ test("deve enviar team = 4", async () => {
     render(<Pmenu />);
 
     await user.click(
-        screen.getByText("Geografia - 6ºano")
+       screen.getByTestId('menu-item')
     );
 
     await user.click(

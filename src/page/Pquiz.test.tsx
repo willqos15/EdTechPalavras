@@ -45,10 +45,10 @@ const props = {
 
 describe("PQuiz", () => {
   test("deve renderizar o tema", () => {
-    render(<PQuiz {...props} />);
+  render(<PQuiz {...props} />);
 
-    expect(screen.getByText("Geografia")).toBeInTheDocument();
-  });
+  expect(screen.getByText(perguntas[0].tema!)).toBeInTheDocument();
+});
 
   test("deve mostrar equipes azul e amarela", () => {
     render(<PQuiz {...props} />);

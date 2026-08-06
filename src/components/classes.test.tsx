@@ -20,7 +20,7 @@ describe("Classes", () => {
         renderComponent();
 
         expect(
-            screen.getByText("Importar alunos.")
+            screen.getByText("Importar alunos/participantes.")
         ).toBeInTheDocument();
     });
 
