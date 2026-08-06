@@ -1,7 +1,7 @@
 import { useState } from "react"
 import PtQuiz from "./Pquiz"
 import Poup from "../components/poup"
-import { agua, img,title } from "./data/wannec6/agua"
+import { data, img,title } from "./data/otavio/celulas6.ts"
 
 
 export default function Pmenu() {
@@ -70,7 +70,7 @@ export default function Pmenu() {
 
 
         {route === "1" && <PtQuiz team={team} setPage={setRoute} img={img}
-            perguntas={agua}
+            perguntas={data}
         />}
 
 
