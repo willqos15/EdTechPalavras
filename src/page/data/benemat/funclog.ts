@@ -22,26 +22,26 @@ export const funclog:Tfrases[] = [
     dica: "Valor sobre o qual o logaritmo é calculado.",
     tema: "Função Logarítmica"
   },
-  {
-    palavra: "Domínio",
-    dica: "Conjunto de valores permitidos para a variável da função.",
-    tema: "Função Logarítmica"
-  },
-  {
-    palavra: "Imagem",
-    dica: "Conjunto de valores que a função pode assumir.",
-    tema: "Função Logarítmica"
-  },
-  {
-    palavra: "Crescente",
-    dica: "Comportamento da função quando a base é maior que 1.",
-    tema: "Função Logarítmica"
-  },
-  {
-    palavra: "Decrescente",
-    dica: "Comportamento da função quando a base está entre 0 e 1.",
-    tema: "Função Logarítmica"
-  },
+  // {
+  //   palavra: "Domínio",
+  //   dica: "Conjunto de valores permitidos para a variável da função.",
+  //   tema: "Função Logarítmica"
+  // },
+  // {
+  //   palavra: "Imagem",
+  //   dica: "Conjunto de valores que a função pode assumir.",
+  //   tema: "Função Logarítmica"
+  // },
+  // {
+  //   palavra: "Crescente",
+  //   dica: "Comportamento da função quando a base é maior que 1.",
+  //   tema: "Função Logarítmica"
+  // },
+  // {
+  //   palavra: "Decrescente",
+  //   dica: "Comportamento da função quando a base está entre 0 e 1.",
+  //   tema: "Função Logarítmica"
+  // },
   {
     palavra: "Inversa",
     dica: "Relação entre a função logarítmica e a função exponencial.",
@@ -62,11 +62,11 @@ export const funclog:Tfrases[] = [
     dica: "Propriedade que transforma uma divisão em diferença de logaritmos.",
     tema: "Função Logarítmica"
   },
-  {
-    palavra: "Potência",
-    dica: "Propriedade que permite mover o expoente para frente do logaritmo.",
-    tema: "Função Logarítmica"
-  },
+  // {
+  //   palavra: "Potência",
+  //   dica: "Propriedade que permite mover o expoente para frente do logaritmo.",
+  //   tema: "Função Logarítmica"
+  // },
   {
     palavra: "Mudança de Base",
     dica: "Propriedade utilizada para transformar um logaritmo em outra base.",
@@ -102,11 +102,11 @@ export const funclog:Tfrases[] = [
     dica: "Logaritmo que possui base igual a 10.",
     tema: "Função Logarítmica"
   },
-  {
-    palavra: "Neperiano",
-    dica: "Logaritmo cuja base é o número irracional e.",
-    tema: "Função Logarítmica"
-  },
+  // {
+  //   palavra: "Neperiano",
+  //   dica: "Logaritmo cuja base é o número irracional e.",
+  //   tema: "Função Logarítmica"
+  // },
   {
     palavra: "Característica",
     dica: "Parte inteira encontrada em um logaritmo decimal.",
@@ -152,9 +152,9 @@ export const funclog:Tfrases[] = [
     dica: "Conjunto que contém possíveis valores de saída da função.",
     tema: "Função Logarítmica"
   },
-  {
-    palavra: "Restrição",
-    dica: "Regra que limita os valores possíveis da função.",
-    tema: "Função Logarítmica"
-  }
+  // {
+  //   palavra: "Restrição",
+  //   dica: "Regra que limita os valores possíveis da função.",
+  //   tema: "Função Logarítmica"
+  // }
 ]
