@@ -11,6 +11,7 @@ show: boolean
 modo: propmodo
 qtdbtn?: propbtn
 team?: number
+color?: string
 f1?: () => void
 f2?: () => void
 f3?: () => void
@@ -19,7 +20,7 @@ f5?: () => void
 close: ()=> void
 }
 
-export default function Poup({titulo, descricao, show, modo, f1, f2,f3,f4,f5, close, team, qtdbtn}:Propriedades) {
+export default function Poup({titulo, descricao, show, modo, f1, f2,f3,f4,f5, close, team, qtdbtn, color}:Propriedades) {
 
       if (!show) {
         return null;
@@ -29,9 +30,13 @@ export default function Poup({titulo, descricao, show, modo, f1, f2,f3,f4,f5, cl
 
     <div className={`${ show ? "bg-[rgba(0,0,0,0.8)] fixed flex items-center inset-0 z-10" : "hidden" } `}>
 
-        <div className="bg-white max-w-96 mx-auto">
+        <div className={`max-w-96 mx-auto
+             bg-white`}>
 
-            <div className="flex items-center w-full bg-(--bprimary) font-bold text-(--bsecondary) text-xl relative">
+            <div className={`flex items-center w-full 
+            ${color ? `${color} text-white`: `bg-(--bprimary) text-black `}
+            font-bold text-xl relative`}
+            >
                <h1 className="w-full text-center">{titulo}</h1> 
                <IoClose
                onClick={close}

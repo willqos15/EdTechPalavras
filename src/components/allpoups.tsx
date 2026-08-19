@@ -6,6 +6,7 @@ import { GiPerspectiveDiceSixFacesFive } from "react-icons/gi";
 import { MdChangeCircle } from "react-icons/md";
 import { useState, useEffect } from 'react'
 import Classes from "./classes";
+import { normalizar } from "./normalizar";
 
 type Aluno = {
     nome: string;
@@ -40,7 +41,7 @@ interface Poupprops {
     pouperro: boolean,
     poupconfig: boolean,
     poupback: boolean,
-    
+
 
 
 
@@ -56,7 +57,7 @@ interface Poupprops {
     setPoupErro: React.Dispatch<React.SetStateAction<boolean>>;
     setPoupConfig: React.Dispatch<React.SetStateAction<boolean>>;
     setPoupBack: React.Dispatch<React.SetStateAction<boolean>>;
-    
+
 
     complete: number[];
     frases: Fraseparams[];
@@ -94,14 +95,15 @@ interface Poupprops {
     setAlertAcerto: React.Dispatch<React.SetStateAction<number>>;
     setPage: React.Dispatch<React.SetStateAction<string>>;
 
-    img:string;
-    dica:string;
+    img: string;
+    dica: string;
+    digi: string[]
 }
 
 
 
 
-export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setPtYellow,setPtRed,setPtGreen, frases, fase, setPoupAcerto, poupdica,
+export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setPtYellow, setPtRed, setPtGreen, frases, fase, setPoupAcerto, poupdica,
     setPoupDica,
     setEnerB,
     setEnerY,
@@ -142,8 +144,9 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
     poupback,
     setPage,
     team,
-    
-    dica
+
+    dica,
+    digi
 
 
 }: Poupprops) {
@@ -165,10 +168,10 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
 
 
 
-       
 
 
-    < Poup
+
+        < Poup
             titulo={<> <p className='inline-block'> AVISO </p> </>}
             show={poupback}
             modo='confirma'
@@ -188,9 +191,9 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
         />
 
 
-    
 
-     < Poup
+
+        < Poup
             titulo={< p className='inline-block ' > NOTIFICAÇÕES </p >}
             show={poupconfig} modo='info'
             close={() => setPoupConfig(false)}
@@ -198,29 +201,29 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
                 < div className='tduvida h-fit mt-2 overflow-y-auto px-2 py-2 flex flex-col gap-2 '>
 
                     <section className="flex justify-start">
-                    <p className="whitespace-nowrap">Notificar Erro:</p>
-                    <select className="bg-[#e6eae1] w-full" onChange={(e)=>setAlertErro(Number(e.target.value))}>
-                        <option value="1">Desativado</option>
-                        <option value="5">ao atingir 5 erros</option>
-                        <option value="7">ao atingir 7 erros</option>
-                        <option value="10">ao atingir 10 erros</option>
-                        <option value="15">ao atingir 15 erros</option>
-                        <option value="20">ao atingir 20 erros</option>
-                        <option value="30">ao atingir 30 erros</option>
-                    </select>
+                        <p className="whitespace-nowrap">Notificar Erro:</p>
+                        <select className="bg-[#e6eae1] w-full" onChange={(e) => setAlertErro(Number(e.target.value))}>
+                            <option value="1">Desativado</option>
+                            <option value="5">ao atingir 5 erros</option>
+                            <option value="7">ao atingir 7 erros</option>
+                            <option value="10">ao atingir 10 erros</option>
+                            <option value="15">ao atingir 15 erros</option>
+                            <option value="20">ao atingir 20 erros</option>
+                            <option value="30">ao atingir 30 erros</option>
+                        </select>
                     </section>
 
                     <section className="flex justify-start">
-                     <p className="whitespace-nowrap">Notificar Acerto:</p>
-                    <select className="bg-[#e6eae1] w-full" onChange={(e)=>setAlertAcerto(Number(e.target.value))}>
-                        <option value="1">Desativado</option>
-                        <option value="5">ao atingir 5 acertos</option>
-                        <option value="7">ao atingir 7 acertos</option>
-                        <option value="10">ao atingir 10 acertos</option>
-                        <option value="15">ao atingir 15 acertos</option>
-                        <option value="20">ao atingir 20 acertos</option>
-                        <option value="30">ao atingir 30 acertos</option>
-                    </select>
+                        <p className="whitespace-nowrap">Notificar Acerto:</p>
+                        <select className="bg-[#e6eae1] w-full" onChange={(e) => setAlertAcerto(Number(e.target.value))}>
+                            <option value="1">Desativado</option>
+                            <option value="5">ao atingir 5 acertos</option>
+                            <option value="7">ao atingir 7 acertos</option>
+                            <option value="10">ao atingir 10 acertos</option>
+                            <option value="15">ao atingir 15 acertos</option>
+                            <option value="20">ao atingir 20 acertos</option>
+                            <option value="30">ao atingir 30 acertos</option>
+                        </select>
                     </section>
 
                 </div >
@@ -229,12 +232,13 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
 
 
         <Poup
-            titulo={<p className='inline-block'>
-                VOCÊ ERROU! </p>}
+            titulo={< p className='inline-block text-4xl' >
+                INCORRETO! </p >}
             show={pouperro}
             modo='time'
             qtdbtn={4}
             team={team}
+            color="bg-red-700"
 
             f1={() => {
                 setErroB(ant => [...ant, `${erro[erro.length - 1]}`])
@@ -276,11 +280,11 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
                 <div className="flex items-center cursor-pointer" onClick={() => setMLista(!mlista)}>
                     {turma.length > 0 &&
 
-                    <>
-                        <MdChangeCircle />
-                    
-                    {mlista ? "Modo lista" : "Modo texto"}
-                    </>
+                        <>
+                            <MdChangeCircle />
+
+                            {mlista ? "Modo lista" : "Modo texto"}
+                        </>
                     }
                 </div>
 
@@ -302,12 +306,15 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
         />
 
         < Poup
-            titulo={< p className='inline-block' >
-                VOCÊ ACERTOU! </p >}
+            titulo={
+                < p className='inline-block text-4xl' >
+                CORRETO! </p >
+                }
             show={poupacerto}
             modo='time'
             qtdbtn={4}
             team={team}
+            color="bg-green-700"
             f1={() => {
                 setPtBlue(ant => ant + 1)
                 setArrayAcerto(arr => [...arr, { equipe: "B", tentativa: frases[fase].palavra, fase: fase, observacao: observacao }])
@@ -345,15 +352,15 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
             close={() => { setPoupAcerto(false) }}
 
             descricao={< div className="w-full flex flex-col justify-center items-center" >
-                <p className='px-2 text-center'> A palavra era {frases[fase].palavra}</p>
-                <p className='w-50 px-2 text-center'>Quem acertou a palavra?</p>
+                <p className='text-3xl'> {frases[fase].palavra}</p>
+                <p className='w-50 px-2 my-2 text-center'>Quem acertou a palavra?</p>
 
 
                 <div className="flex items-center cursor-pointer" onClick={() => setMLista(!mlista)}>
                     {turma.length > 0 &&
                         <MdChangeCircle />
                     }
-                    {mlista && turma.length>0 ? "Modo lista" : !mlista && turma.length>0 ? "Modo texto" : ""}
+                    {mlista && turma.length > 0 ? "Modo lista" : !mlista && turma.length > 0 ? "Modo texto" : ""}
                 </div>
 
                 {mlista && turma.length > 0 ?
@@ -383,38 +390,38 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
                 setEnerB(ant => ant - 1)
                 setHelp(true)
                 setPoupDica(false)
-                
-                
+
+
             }}
             f2={() => {
                 setEnerY(ant => ant - 1)
                 setHelp(true)
                 setPoupDica(false)
-                
-                
+
+
             }}
 
             f3={() => {
                 setEnerR(ant => ant - 1)
                 setHelp(true)
                 setPoupDica(false)
-                
-                
+
+
             }}
 
             f4={() => {
                 setEnerP(ant => ant - 1)
                 setHelp(true)
                 setPoupDica(false)
-                
-                
+
+
             }}
-            
+
             f5={() => {
                 setPoupDica(false)
                 setHelp(true)
-                
-                
+
+
             }}
 
             close={() => { setPoupDica(false) }}
@@ -427,26 +434,41 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
             titulo={<> <p className='inline-block'> </p> </>}
             show={disabledica}
             modo='info'
-            // qtdbtn={4}
-            // f1={() => {
-            //     setHelp(false)
-            //     setDisableDica(false)
-            // }}
-            // f2={() => {
-            //     setDisableDica(false)
-            // }}
-
             close={() => { setDisableDica(false) }}
 
-            descricao={<div className="flex flex-col items-center justify-center">
-             <p className='p-2 text-4xl text-center'>Dica: {dica}</p>
+            descricao={<div className="flex gap-4 m-4 flex-col items-center justify-center">
+
+                <p className='p-2 text-4xl text-center'>Dica: {dica}</p>
                 
+
+                <div className='select-none flex sm:gap-2 gap-1 justify-center px-2'>
+                    {frases[fase].palavra.split("").map((letra) => (
+                        <div className={`${letra === " " ? " " : "bg-[#e6eae1]  text-(--asecondary) border-3 "} sm:w-8 sm:text-4xl sm:py-1 py-1 w-5 text-lg   rounded-md text-center`}>
+                            <span className={
+
+                                (Array.from(digi).map(normalizar)).includes(normalizar(letra))
+                                    || normalizar(digi.join("")) === normalizar(frases[fase].palavra)
+                                    || complete.includes(fase) || letra === "-"
+                                    ? 'opacity-100'
+                                    : "opacity-0"
+                            }>
+                                {letra}
+                            </span>
+                        </div>
+                    ))}
+
+                    
+                </div>
+
+                
+
                 <button
-                className="cursor-pointer bg-(--csecondary) w-fit font-bold text-white  hover:scale-110 transition-all duration-300 mx-auto rounded-md px-3 py-1"
-                 onClick={()=>{
-                    setHelp(false)
-                setDisableDica(false)}}>Desativar Dica</button>
-                </div>}
+                    className="cursor-pointer bg-(--csecondary) w-fit font-bold text-white  hover:scale-110 transition-all duration-300 mx-auto rounded-md px-3 py-1"
+                    onClick={() => {
+                        setHelp(false)
+                        setDisableDica(false)
+                    }}>Desativar Dica</button>
+            </div>}
         />
 
 
@@ -528,14 +550,14 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
                     <span className='flex flex-col justify-center items-center px-2'>
 
 
-                        
+
                         <span className='flex flex-col items-start text-sm linkct px-2 text-center'>
 
                             <a
                                 href='https://canoatech.vercel.app/'> <FaGear className='inline-block' />   Desenvolvido por Canoa Tech:</a>
 
                             <span className='mx-auto text-base'>
-                               
+
                                 <a href='https://wa.me/5593991878598'> Contato: (93) 99187-8598 <IoLogoWhatsapp className='inline-block mr-1 ' /></a>
                             </span>
 
@@ -559,7 +581,7 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
 
             descricao={<>
                 <div className='sm:min-w-96 p-1'>
-                    <img className='min-w-full' src={ frases[fase].imagem? frases[fase].imagem : img}></img> </div></>}
+                    <img className='min-w-full' src={frases[fase].imagem ? frases[fase].imagem : img}></img> </div></>}
         />
 
         < Poup

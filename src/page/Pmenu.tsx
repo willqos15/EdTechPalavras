@@ -1,13 +1,10 @@
 import { useState } from "react"
 import PtQuiz from "./Pquiz"
-import img from '../assets/mat.png'
 import Poup from "../components/poup"
-import { funclog } from "./data/benemat/funclog.ts"
+import { data,  title, image } from "./data/data.ts"
 
 
 export default function Pmenu() {
-
-
 
 
     const [route, setRoute] = useState<string>("home")
@@ -59,19 +56,22 @@ export default function Pmenu() {
                     setShowSelectTeam(true)
                 }}
                     className="bg-white p-2  m-4 text-2xl hover:bg-amber-200 rounded-xl cursor-pointer">
-                        {/* Geografia - 6ºano */}
-                        Função Logarítmica
-                        </a>
+
+                        {title}
+                    
+                </a>
+
+                
             </li>
 
 
-            
+
 
         </ul>
 
 
-        {route === "1" && <PtQuiz team={team} setPage={setRoute} img={img}
-            perguntas={funclog}
+        {route === "1" && <PtQuiz team={team} setPage={setRoute} img={image}
+            perguntas={data}
         />}
 
 

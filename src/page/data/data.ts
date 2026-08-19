@@ -1,3 +1,7 @@
+import img from './image.png'
+
+
+export const image = img
 
 type Tfrases = {
     palavra: string
@@ -6,7 +10,13 @@ type Tfrases = {
     tema?: string
 }
 
-export const funclog:Tfrases[] = [
+
+
+export const title:string = "Função Logarítmica"
+
+export const data:Tfrases[] = [
+  
+
   {
     palavra: "Logaritmo",
     dica: "Operação inversa da potenciação.",

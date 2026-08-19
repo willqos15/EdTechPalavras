@@ -19,6 +19,8 @@ import { IoIosNotifications } from "react-icons/io";
 
 import CountCard from '../components/countcard';
 import AllPoups from '../components/allpoups';
+import { normalizar } from '../components/normalizar';
+import Timer from '../components/timer';
 
 
 
@@ -119,13 +121,7 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
 
 
 
-    function normalizar(texto: string) {
-        return texto
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "") // remove acentos
-            .replace(/[\s-]/g, "")           // remove espaço e hífen
-            .toUpperCase()
-    }
+  
 
     useEffect(()=>{
         setDica(frases[fase].dica)
@@ -286,6 +282,7 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
             setPage={setPage}
             team={team}
             img={img}
+            digi={digi}
         />
 
         <IoIosNotifications onClick={() => setPoupConfig(true)}
@@ -293,7 +290,7 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
 
 
         <div className='flex flex-row justify center items-center xl:h-screen'>
-            <div className='flex flex-row flex-wrap sm:gap-5 gap-y-3 gap-x-2 justify-center items-start mx-auto sm:p-0 my-24 sm:h-125'>
+            <div className='flex flex-row flex-wrap sm:gap-5 gap-y-3 gap-x-2 justify-center items-start mx-auto h-fit'>
 
 
                 <div className='xl:order-1 order-2'>
@@ -413,7 +410,9 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
                                 </div>
                             </div>
 
-                            <div className='bg-white'>
+                            <div className='bg-white relative'>
+
+                                <Timer fase={fase}/>
 
                                 <div className='flex justify-center gap-x-2 items-center py-3 h-40'>
 
@@ -466,6 +465,10 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
                                         </div>
                                     ))}
                                 </div>
+
+                                <p className='flex justify-center text-2xl text-(--asecondary) mt-4'>
+                                    {frases[fase].palavra.replace(/[^\p{L}]/gu, "").length} letras
+                                    </p>
 
                                 <div className='cursor-pointer flex flex-row justify-center items-center gap-3'>
                                     <button
