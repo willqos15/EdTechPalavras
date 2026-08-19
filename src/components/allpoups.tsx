@@ -4,7 +4,7 @@ import { FaGear } from "react-icons/fa6";
 import Poup from '../components/poup';
 import { GiPerspectiveDiceSixFacesFive } from "react-icons/gi";
 import { MdChangeCircle } from "react-icons/md";
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import Classes from "./classes";
 import { normalizar } from "./normalizar";
 
@@ -41,9 +41,6 @@ interface Poupprops {
     pouperro: boolean,
     poupconfig: boolean,
     poupback: boolean,
-
-
-
 
     setPoupAcerto: React.Dispatch<React.SetStateAction<boolean>>;
     setPoupDica: React.Dispatch<React.SetStateAction<boolean>>;
@@ -98,6 +95,10 @@ interface Poupprops {
     img: string;
     dica: string;
     digi: string[]
+
+
+    totalTime: number;
+    timeLeft: number;
 }
 
 
@@ -146,7 +147,8 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
     team,
 
     dica,
-    digi
+    digi,
+    totalTime, timeLeft
 
 
 }: Poupprops) {
@@ -162,6 +164,44 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
         }
         else { setMLista(false) }
     }, [turma])
+
+
+    const progress = useMemo(() => {
+
+        if (totalTime <= 0) return 0
+
+        return (timeLeft / totalTime) * 100
+
+    }, [timeLeft, totalTime])
+
+    function getProgressColor() {
+
+        if (timeLeft === 0) {
+            return "bg-red-600"
+        }
+
+        if (progress <= 25) {
+            return "bg-orange-500"
+        }
+
+        if (progress <= 50) {
+            return "bg-yellow-400"
+        }
+
+        return "bg-blue-600"
+    }
+
+    function formatTime(seconds: number) {
+
+        const minutes = Math.floor(seconds / 60)
+
+        const remainingSeconds = seconds % 60
+
+        return `${String(minutes).padStart(2, "0")}:${String(
+            remainingSeconds
+        ).padStart(2, "0")}`
+    }
+
 
     return (<>
 
@@ -308,8 +348,8 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
         < Poup
             titulo={
                 < p className='inline-block text-4xl' >
-                CORRETO! </p >
-                }
+                    CORRETO! </p >
+            }
             show={poupacerto}
             modo='time'
             qtdbtn={4}
@@ -381,6 +421,10 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
 
 
 
+
+
+
+
         < Poup
             titulo={<><p className='inline-block'> Custa 1 de </p> <AiFillThunderbolt className='inline-block' /></>}
             show={poupdica}
@@ -438,8 +482,57 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
 
             descricao={<div className="flex gap-4 m-4 flex-col items-center justify-center">
 
-                <p className='p-2 text-4xl text-center'>Dica: {dica}</p>
-                
+                <div className="flex items-center gap-4">
+
+                    <div className="
+                                h-8
+                                w-50
+                                overflow-hidden
+                                rounded-full
+                                bg-slate-200
+                            ">
+
+                        <div
+                            className={`
+                                        h-full
+                                        rounded-full
+                                        transition-[width]
+                                        duration-1000
+                                        ease-linear
+                                        ${getProgressColor()}
+                                    `}
+                            style={{
+                                width: `${progress}%`,
+                            }}
+                        />
+
+                    </div>
+
+                    <span
+                        className={`
+                                shrink-0
+                                text-4xl
+                                font-bold
+                                tabular-nums
+                                ${timeLeft === 0
+                                ? "text-red-600"
+                                : "text-slate-800"
+                            }
+                            `}
+                    >
+                        {formatTime(timeLeft)}
+                    </span>
+
+                </div>
+
+
+
+
+
+                <p className='p-2 text-4xl text-center max-w-200'>Dica: {dica}</p>
+
+
+
 
                 <div className='select-none flex sm:gap-2 gap-1 justify-center px-2'>
                     {frases[fase].palavra.split("").map((letra) => (
@@ -457,10 +550,14 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
                         </div>
                     ))}
 
-                    
+
                 </div>
 
-                
+                <p className='flex justify-center text-2xl text-(--asecondary)'>
+                    {frases[fase].palavra.replace(/[^\p{L}]/gu, "").length} letras
+                </p>
+
+
 
                 <button
                     className="cursor-pointer bg-(--csecondary) w-fit font-bold text-white  hover:scale-110 transition-all duration-300 mx-auto rounded-md px-3 py-1"

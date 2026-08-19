@@ -30,11 +30,11 @@ export default function Poup({titulo, descricao, show, modo, f1, f2,f3,f4,f5, cl
 
     <div className={`${ show ? "bg-[rgba(0,0,0,0.8)] fixed flex items-center inset-0 z-10" : "hidden" } `}>
 
-        <div className={`max-w-96 mx-auto
+        <div className={`max-w-10/12 w-fit mx-auto
              bg-white`}>
 
             <div className={`flex items-center w-full 
-            ${color ? `${color} text-white`: `bg-(--bprimary) text-black `}
+            ${color ? `${color} text-white`: `bg-(--bprimary) text-(--bsecondary) `}
             font-bold text-xl relative`}
             >
                <h1 className="w-full text-center">{titulo}</h1> 
@@ -45,8 +45,8 @@ export default function Poup({titulo, descricao, show, modo, f1, f2,f3,f4,f5, cl
 
             
 
-            <span className="text-(--asecondary)">
-            {descricao}</span>
+            <div className="text-(--asecondary)">
+            {descricao}</div>
 
 
            
@@ -94,7 +94,7 @@ export default function Poup({titulo, descricao, show, modo, f1, f2,f3,f4,f5, cl
                 </>}
 
                 <button onClick={f5}
-                className="cursor-pointer bg-[#2d5c21] w-fit text-white hover:scale-110 transition-all duration-300 mx-auto rounded-md px-3 py-1"> Livre </button>
+                className="cursor-pointer bg-[#525651] w-fit text-white hover:scale-110 transition-all duration-300 mx-auto rounded-md px-3 py-1"> Livre </button>
 
                 </>
 

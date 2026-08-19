@@ -12,9 +12,14 @@ import {
 
 type TimerProps = {
     fase: number
+    totalTime: number;
+    timeLeft: number;
+    initialTime: number;
+    setTotalTime: React.Dispatch<React.SetStateAction<number>>;
+    setTimeLeft: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export default function Timer({ fase }: TimerProps) {
+export default function Timer({ fase, totalTime, setTotalTime, timeLeft, setTimeLeft, initialTime }: TimerProps) {
 
     /*
      * ============================================================
@@ -22,10 +27,9 @@ export default function Timer({ fase }: TimerProps) {
      * ============================================================
      */
 
-    const initialTime = 120
 
-    const [totalTime, setTotalTime] = useState(initialTime)
-    const [timeLeft, setTimeLeft] = useState(initialTime)
+
+
 
     const [isRunning, setIsRunning] = useState(true)
 
@@ -393,7 +397,7 @@ export default function Timer({ fase }: TimerProps) {
                                 items-center
                                 justify-center
                                 rounded-full
-                                bg-blue-700
+                                bg-(--aprimary)
                                 text-white
                                 transition
                                 hover:bg-blue-800
@@ -456,10 +460,9 @@ export default function Timer({ fase }: TimerProps) {
                                 text-4xl
                                 font-bold
                                 tabular-nums
-                                ${
-                                    timeLeft === 0
-                                        ? "text-red-600"
-                                        : "text-slate-800"
+                                ${timeLeft === 0
+                                    ? "text-red-600"
+                                    : "text-slate-800"
                                 }
                             `}
                         >
@@ -582,7 +585,7 @@ export default function Timer({ fase }: TimerProps) {
                                     text-center
                                     font-bold
                                     outline-none
-                                    focus:border-blue-600
+                                    focus:border-(--aprimary)
                                 "
                             />
 
@@ -657,7 +660,7 @@ export default function Timer({ fase }: TimerProps) {
                                     text-center
                                     font-bold
                                     outline-none
-                                    focus:border-blue-600
+                                    focus:border-(--aprimary)
                                 "
                             />
 
@@ -678,7 +681,7 @@ export default function Timer({ fase }: TimerProps) {
                                 items-center
                                 gap-2
                                 rounded-lg
-                                bg-blue-700
+                                bg-(--aprimary)
                                 px-4
                                 font-bold
                                 text-white
@@ -712,10 +715,9 @@ export default function Timer({ fase }: TimerProps) {
                         rounded-full
                         transition
 
-                        ${
-                            isConfigOpen
-                                ? "bg-slate-200 text-blue-700"
-                                : "text-slate-700 hover:bg-slate-100"
+                        ${isConfigOpen
+                            ? "bg-slate-200 text-(--aprimary)"
+                            : "text-slate-700 hover:bg-slate-100"
                         }
                     `}
                     aria-label={
@@ -731,10 +733,9 @@ export default function Timer({ fase }: TimerProps) {
                             transition-transform
                             duration-200
 
-                            ${
-                                isConfigOpen
-                                    ? "rotate-45"
-                                    : ""
+                            ${isConfigOpen
+                                ? "rotate-45"
+                                : ""
                             }
                         `}
                     />

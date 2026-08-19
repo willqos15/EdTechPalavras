@@ -124,7 +124,7 @@ export const data:Tfrases[] = [
   },
   {
     palavra: "Mantissa",
-    dica: "Parte decimal encontrada em um logaritmo decimal.",
+    dica: "Número que fica na frente da base 10 em uma notação científica.",
     tema: "Função Logarítmica"
   },
   {

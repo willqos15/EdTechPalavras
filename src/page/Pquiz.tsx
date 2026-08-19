@@ -70,6 +70,9 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
     const [alerterro, setAlertErro] = useState<number>(0)
     const [alertacerto, setAlertAcerto] = useState<number>(0)
     const [poupback, setPoupBack] = useState<boolean>(false)
+  
+   
+ 
     
     const [dica, setDica] = useState<string>('')
 
@@ -119,17 +122,20 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
     const [arrayerro, setArrayErro] = useState<objtentativa[]>([])
     const [arrayacerto, setArrayAcerto] = useState<objtentativa[]>([])
 
+    const initialTime = 120
+    const [totalTime, setTotalTime] = useState(initialTime)
+    const [timeLeft, setTimeLeft] = useState(initialTime)
+
 
 
   
 
     useEffect(()=>{
         setDica(frases[fase].dica)
-
     },[fase])
 
     useEffect(() => {
-        console.log(digi.length, 'digi leng', digi)
+    
         if (digi.length < 1) return
 
         if (mletra && [... new Set(Array.from(normalizar(frases[fase].palavra)))].sort().join("") === [... new Set(digi.map(normalizar))].sort().join("")) {
@@ -151,6 +157,10 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
     const { register, handleSubmit, setValue, } = useForm({ mode: "onChange", defaultValues: { campo: "" } })
     const [campo, setCampo] = useState<string>("")
 
+     useEffect(() => 
+        { setCampo("") }
+     , [mletra])
+
 
     const frases: Array<Tfrases> = perguntas
 
@@ -163,7 +173,7 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
             setFase(frases.length)
     }, [fase])
 
-    useEffect(() => { setCampo("") }, [mletra])
+   
 
 
     function enviar(dados: Tdados) {
@@ -188,6 +198,7 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
         if (mletra && Array.from(normalizar(frases[fase].palavra)).includes((normalizar(dados.campo)))) {
             setDigi(ant => [...ant, dados.campo.toUpperCase()])
             setHistLetra(ant => [...ant, dados.campo.toUpperCase()])
+            
         }
 
         else if (mletra) {
@@ -220,7 +231,8 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
     return (<>
 
         <AllPoups
-
+        timeLeft={timeLeft}
+        totalTime={totalTime}
             fase={fase}
             frases={frases}
             complete={complete}
@@ -412,7 +424,12 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
 
                             <div className='bg-white relative'>
 
-                                <Timer fase={fase}/>
+                                <Timer fase={fase}
+                                initialTime={initialTime}
+                                setTotalTime={setTotalTime}
+                                setTimeLeft={setTimeLeft}
+                                totalTime={totalTime}
+                                timeLeft={timeLeft}/>
 
                                 <div className='flex justify-center gap-x-2 items-center py-3 h-40'>
 
