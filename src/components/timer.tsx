@@ -373,7 +373,7 @@ export default function Timer({ fase, totalTime, setTotalTime, timeLeft, setTime
      */
 
     return (
-        <div className="w-full p-4">
+        <div className="w-full px-4 pt-2">
 
             <div className="flex items-center gap-3">
 

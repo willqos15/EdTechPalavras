@@ -70,13 +70,13 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
     const [alerterro, setAlertErro] = useState<number>(0)
     const [alertacerto, setAlertAcerto] = useState<number>(0)
     const [poupback, setPoupBack] = useState<boolean>(false)
-  
-   
- 
-    
+
+
+
+
     const [dica, setDica] = useState<string>('')
 
-    const [enerb, setEnerB] = useState<number>(5)
+    const [enerb, setEnerB] = useState<number>(3)
     const [comportblue, setComportBlue] = useState<number>(3)
     const [totalptblue, setTotalPtBlue] = useState<number>(0)
     const [ptblue, setPtBlue] = useState<number>(0)
@@ -85,7 +85,7 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
     const [errob, setErroB] = useState<string[]>([])
 
 
-    const [enery, setEnerY] = useState<number>(5)
+    const [enery, setEnerY] = useState<number>(3)
     const [comportyellow, setComportYellow] = useState<number>(3)
     const [totalptyellow, setTotalPtYellow] = useState<number>(0)
     const [ptyellow, setPtYellow] = useState<number>(0)
@@ -93,7 +93,7 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
     const [namey, setNameY] = useState<string>("Equipe Amarela")
     const [erroy, setErroY] = useState<string[]>([])
 
-    const [enerr, setEnerR] = useState<number>(5)
+    const [enerr, setEnerR] = useState<number>(3)
     const [comportred, setComportRed] = useState<number>(3)
     const [totalptred, setTotalPtRed] = useState<number>(0)
     const [ptred, setPtRed] = useState<number>(0)
@@ -101,7 +101,7 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
     const [namer, setNameR] = useState<string>("Equipe Vermelha")
     const [error, setErroR] = useState<string[]>([])
 
-    const [energ, setEnerG] = useState<number>(5)
+    const [energ, setEnerG] = useState<number>(3)
     const [comportgreen, setComportGreen] = useState<number>(3)
     const [totalptgreen, setTotalPtGreen] = useState<number>(0)
     const [ptgreen, setPtGreen] = useState<number>(0)
@@ -128,24 +128,24 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
 
 
 
-  
 
-    useEffect(()=>{
-        setDica(frases[fase].dica)
-    },[fase])
 
     useEffect(() => {
-    
+        setDica(frases[fase].dica)
+    }, [fase])
+
+    useEffect(() => {
+
         if (digi.length < 1) return
 
         if (mletra && [... new Set(Array.from(normalizar(frases[fase].palavra)))].sort().join("") === [... new Set(digi.map(normalizar))].sort().join("")) {
-            setErro([])
+           
             setComplete(ant => [...ant, fase])
             setPoupAcerto(true)
         }
 
         if (!mletra && normalizar(frases[fase].palavra) == normalizar(digi[0])) {
-            setErro([])
+           
             setComplete(ant => [...ant, fase])
             setPoupAcerto(true)
         }
@@ -157,9 +157,8 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
     const { register, handleSubmit, setValue, } = useForm({ mode: "onChange", defaultValues: { campo: "" } })
     const [campo, setCampo] = useState<string>("")
 
-     useEffect(() => 
-        { setCampo("") }
-     , [mletra])
+    useEffect(() => { setCampo("") }
+        , [mletra])
 
 
     const frases: Array<Tfrases> = perguntas
@@ -169,11 +168,13 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
         if (fase < 0)
             setFase(0)
 
-        if (fase > frases.length)
+        if (fase > frases.length) {
             setFase(frases.length)
+           
+        }
     }, [fase])
 
-   
+
 
 
     function enviar(dados: Tdados) {
@@ -198,7 +199,7 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
         if (mletra && Array.from(normalizar(frases[fase].palavra)).includes((normalizar(dados.campo)))) {
             setDigi(ant => [...ant, dados.campo.toUpperCase()])
             setHistLetra(ant => [...ant, dados.campo.toUpperCase()])
-            
+
         }
 
         else if (mletra) {
@@ -213,11 +214,11 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
 
     function sortear() {
 
-         const names: string[] =
-        team === 2
-            ? [nameb, namey]
-            : [nameb, namey, namer, nameg];
-        
+        const names: string[] =
+            team === 2
+                ? [nameb, namey]
+                : [nameb, namey, namer, nameg];
+
         const sort = names[Math.floor(Math.random() * names.length)];
         setSorteio("load")
         setTimeout(() => {
@@ -231,8 +232,8 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
     return (<>
 
         <AllPoups
-        timeLeft={timeLeft}
-        totalTime={totalTime}
+            timeLeft={timeLeft}
+            totalTime={totalTime}
             fase={fase}
             frases={frases}
             complete={complete}
@@ -256,7 +257,7 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
             setDisableDica={setDisableDica}
             setHelp={setHelp}
             setComplete={setComplete}
-            dica = {dica}
+            dica={dica}
 
             setPtBlue={setPtBlue}
             setPtYellow={setPtYellow}
@@ -308,7 +309,7 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
                 <div className='xl:order-1 order-2'>
                     {team >= 2 &&
                         <CountCard
-                        id='B'
+                            id='B'
                             equipe={"Equipe Azul"}
                             name={nameb}
                             setName={setNameB}
@@ -335,7 +336,7 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
                         />}
 
                     {team >= 4 && <CountCard
-                    id="R"
+                        id="R"
                         equipe={namer}
                         name={namer}
                         setName={setNameR}
@@ -401,7 +402,7 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
 
 
                                 <div
-                                    onClick={() => Save({team, complete, frases, histletra, histpalavra, histerro, nameb, namey, comportyellow, comportblue, observblue, observyellow, totalptyellow, totalptblue, enerb, enery, arrayacerto, arrayerro, namer,comportred,  observred, totalptred,enerr,nameg,comportgreen,  observgreen, totalptgreen,energ })}
+                                    onClick={() => Save({ team, complete, frases, histletra, histpalavra, histerro, nameb, namey, comportyellow, comportblue, observblue, observyellow, totalptyellow, totalptblue, enerb, enery, arrayacerto, arrayerro, namer, comportred, observred, totalptred, enerr, nameg, comportgreen, observgreen, totalptgreen, energ })}
                                     className='cursor-pointer h-8 bg-(--bprimary) px-2 pt-1 rounded-t-md text-(--bsecondary) text-xl flex items-center gap-1 transition-all duration-300 hover:bg-white'>
                                     <IoIosSave /> <p className='sm:flex hidden'>Salvar</p>
                                 </div>
@@ -410,28 +411,32 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
 
                             <div className='sm:w-130 min-w-full text-(--bsecondary) bg-white  h-fit mx-auto '>
 
-                                <div className='text-3xl font-bold bg-(--bprimary) px-5 flex items-center h-12 justify-between w-full'>
+                                <div className='text-3xl font-bold bg-(--bprimary) pl-5 pr-2 flex items-center h-12 justify-between w-full'>
 
                                     <h1 className='inline-block text-color-(--bsecondary) py-2 sm:text-3xl text-2xl'>
-                                        {frases[fase].tema}
+                                        {fase + 1 <= 9 ? '0' + (fase + 1) : fase + 1}: {frases[fase].tema}
                                     </h1>
 
-                                    <div className='flex items-end h-full'>
-                                        <p className=' inline-block bg-white sm:text-3xl text-xl rounded-t-md px-2 h-10 pt-1'>{fase + 1 <= 9 ? '0' + (fase + 1) : fase + 1}</p>
-                                    </div>
+                                    <p className='inline-block bg-white sm:text-2xl text-xl rounded-md px-1 '>
+                                        {frases[fase].palavra.replace(/[^\p{L}]/gu, "").length} letras
+                                    </p>
+
+
+
+
                                 </div>
                             </div>
 
                             <div className='bg-white relative'>
 
                                 <Timer fase={fase}
-                                initialTime={initialTime}
-                                setTotalTime={setTotalTime}
-                                setTimeLeft={setTimeLeft}
-                                totalTime={totalTime}
-                                timeLeft={timeLeft}/>
+                                    initialTime={initialTime}
+                                    setTotalTime={setTotalTime}
+                                    setTimeLeft={setTimeLeft}
+                                    totalTime={totalTime}
+                                    timeLeft={timeLeft} />
 
-                                <div className='flex justify-center gap-x-2 items-center py-3 h-40'>
+                                <div className='flex justify-center gap-x-2 items-center h-fit'>
 
                                     <button
                                         onClick={() => {
@@ -441,13 +446,13 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
                                             setCampo("")
                                         }}
                                         className={
-                                            `bg-(--asecondary) text-white hover:scale-110 hover:p-1.4 transition-all duration-300 h-fit p-1 rounded-full ml-1 sm:text-4xl text-2xl flex justify-center items-center font-bold  ${fase > 0 ? 'cursor-pointer' : 'opacity-0 pointer-events-none'}`
+                                            `bg-(--asecondary) text-white hover:scale-110 hover:p-1.4 transition-all duration-300 h-fit p-1 rounded-full sm:text-4xl text-2xl flex justify-center items-center font-bold  ${fase > 0 ? 'cursor-pointer' : 'opacity-0 pointer-events-none'}`
                                         }>
                                         <FaArrowCircleLeft />
                                     </button>
 
                                     <div onClick={() => setPoupImg(true)}
-                                        className='flex items-center w-45 sm:max-h-30 h-32 px-2'>
+                                        className='flex items-center w-32 h-32 p-2'>
                                         <img className="w-auto mx-auto max-h-30 select-none rounded-xl" src={frases[fase].imagem ? frases[fase].imagem : img} />
                                     </div>
 
@@ -483,9 +488,7 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
                                     ))}
                                 </div>
 
-                                <p className='flex justify-center text-2xl text-(--asecondary) mt-4'>
-                                    {frases[fase].palavra.replace(/[^\p{L}]/gu, "").length} letras
-                                    </p>
+
 
                                 <div className='cursor-pointer flex flex-row justify-center items-center gap-3'>
                                     <button
@@ -584,18 +587,24 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
                                     {!complete.includes(fase) && !mletra && campo.length <= 1 ? 'No modo Palavra, digite a palavra completa. Letras únicas não são permitidas. ' : null}
                                 </p>
 
-                                {erro.length > 0 &&
+                                {arrayerro.filter(x => x.fase === fase).length > 0 &&
                                     <div className='flex justify-center text-center mt-0 m-3 px-3 w-11/12 pb-1 whitespace-nowrap'>
 
                                         <p className='font-bold text-(--asecondary) text-center pr-2'> Erros: </p>
 
                                         <div className='overflow-x-auto overflow-y-hidden y-20 max-w-96'>
                                             <p className='font-bold text-red-600 px-2'>
-                                                {!complete.includes(fase) && erro && erro.join(" , ").toUpperCase()}</p>
+                                                
+                                    <p className="flex gap-2">
 
-
-
-
+                                                {arrayerro.filter(x => x.fase === fase)
+                                                        .map((x) => (
+                                                           <>{x.tentativa},</>
+                                                        ))
+                                                }
+                                            
+                                            </p>
+                                            </p>
                                         </div>
 
                                     </div>
@@ -610,7 +619,7 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
 
                 <div className='lg:order-3 order-2'>
                     {team >= 2 && <CountCard
-                    id="Y"
+                        id="Y"
                         equipe={namey}
                         name={namey}
                         setName={setNameY}
@@ -637,7 +646,7 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
                     />}
 
                     {team >= 4 && <CountCard
-                    id="G"
+                        id="G"
                         equipe={nameg}
                         name={nameg}
                         setName={setNameG}

@@ -677,8 +677,8 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
             close={() => { setPoupImg(false) }}
 
             descricao={<>
-                <div className='sm:min-w-96 p-1'>
-                    <img className='min-w-full' src={frases[fase].imagem ? frases[fase].imagem : img}></img> </div></>}
+                <div className='max-h-120 max-w-120 m-2'>
+                    <img className='w-full h-auto object-contain' src={frases[fase].imagem ? frases[fase].imagem : img}></img> </div></>}
         />
 
         < Poup
