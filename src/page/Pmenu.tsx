@@ -1,7 +1,7 @@
 import { useState } from "react"
 import PtQuiz from "./Pquiz"
 import Poup from "../components/poup"
-import { data,  title, image } from "./data/data.ts"
+import { data } from "./data/data.ts"
 
 
 export default function Pmenu() {
@@ -50,19 +50,21 @@ export default function Pmenu() {
             </h2>
 
 
-            <li>
-                <a onClick={() => {
-                    setPage("1")
-                    setShowSelectTeam(true)
-                }}
-                    className="bg-white p-2  m-4 text-2xl hover:bg-amber-200 rounded-xl cursor-pointer">
+            
 
-                        {title}
-                    
-                </a>
+                    {data.map((x, index) => (<li><a onClick={() => {
+                setPage(String(index))
+                setShowSelectTeam(true)
+            }}
+                className="bg-white p-2  m-4 text-2xl hover:bg-amber-200 rounded-xl cursor-pointer">
 
-                
-            </li>
+                {x.titulo}
+
+            </a></li>) )}
+
+
+
+            
 
 
 
@@ -70,9 +72,22 @@ export default function Pmenu() {
         </ul>
 
 
-        {route === "1" && <PtQuiz team={team} setPage={setRoute} img={image}
-            perguntas={data}
-        />}
+        {data.map((x, index) =>
+        (<div key={index}>
+
+                {route== String(index) && 
+                <PtQuiz team={team} setPage={setRoute} img={x.imghome}
+                perguntas={x.frases} />}
+
+        </div>
+
+
+        ))}
+
+
+
+
+
 
 
 
