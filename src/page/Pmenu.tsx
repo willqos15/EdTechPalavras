@@ -1,95 +1,148 @@
-import { useState } from "react"
-import PtQuiz from "./Pquiz"
-import Poup from "../components/poup"
-import { data } from "./data/data.ts"
+import { useState } from "react";
 
+import PtQuiz from "./Pquiz";
+import Poup from "../components/poup";
+import { data } from "./data/data.ts";
+import PTutorial from "./Ptutorial.tsx";
+
+import { AiFillBulb } from "react-icons/ai";
+import { FaWhatsapp } from "react-icons/fa";
 
 export default function Pmenu() {
+    const [route, setRoute] = useState<string>("home");
+    const [page, setPage] = useState<string>("");
+    const [team, setTeam] = useState<number>(0);
+    const [showSelectTeam, setShowSelectTeam] = useState<boolean>(false);
+
+    return (
+        <div className="min-h-dvh flex flex-col overflow-hidden bg-gray-950">
+            {route == "home" && <>
+                <nav className="shrink-0 w-full bg-green-900 text-white px-4 sm:px-6 py-3 flex items-center justify-between gap-4 z-50">
+                    <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-shadow-4xl shadow-black whitespace-nowrap">
+                        EdTech Palavras
+                    </h2>
+
+                    <a
+                        href="https://wa.me/5593991878598?text=Olá!%20Tenho%20uma%20ideia%20de%20conteúdo%20e%20gostaria%20de%20encomendar"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 bg-white text-green-800 px-3 sm:px-5 py-2 rounded-xl font-bold text-sm sm:text-base text-center transition duration-300 hover:scale-105 hover:shadow-lg active:scale-95"
+                    >
+                        <FaWhatsapp className="text-2xl sm:text-3xl shrink-0" />
+
+                        <span className="hidden sm:inline">
+                            Encomende mais conteúdo.
+                        </span>
 
 
-    const [route, setRoute] = useState<string>("home")
-    const [page, setPage] = useState<string>("")
-    const [team, setTeam] = useState<number>(0)
+                    </a>
+                </nav>
 
-    const [showSelectTeam, setShowSelectTeam] = useState<boolean>(false)
+                <main className="flex-1 flex flex-col justify-center items-center px-4 pb-10">
 
+                    <h2 className="text-4xl sm:text-5xl font-bold text-white text-shadow-4xl shadow-white mb-6">
+                        CONTEÚDOS
+                    </h2>
 
+                    <ul className="flex flex-col gap-3 w-full max-w-md">
 
-    return (<div className="flex justify-center items-center h-dvh">
+                        <li>
+                            <a
+                                onClick={() => setRoute("tutorial")}
+                                className="bg-white p-3 flex items-center justify-center gap-x-2 text-xl sm:text-2xl hover:bg-amber-200 rounded-xl cursor-pointer transition duration-300 hover:scale-[1.02]"
+                            >
+                                <AiFillBulb className="text-amber-600" />
+                                Guia Rápido
+                            </a>
+                        </li>
 
-        <Poup show={showSelectTeam}
-            close={() => setShowSelectTeam(!showSelectTeam)}
-            titulo="Aviso" modo="info"
-            descricao={<div className="flex flex-col gap-2 px-4 pt-2">
+                        {data.map((x, index) => (
+                            <li key={index}>
+                                <a
+                                    onClick={() => {
+                                        setPage(String(index))
+                                        setShowSelectTeam(true)
+                                    }}
+                                    className="bg-white p-3 flex items-center justify-center text-xl sm:text-2xl hover:bg-amber-200 rounded-xl cursor-pointer transition duration-300 hover:scale-[1.02]"
+                                >
+                                    {x.titulo}
+                                </a>
+                            </li>
+                        ))}
 
-                <p>Escolha quantos times deseja: </p>
+                    </ul>
 
-                <div className="flex gap-2">
-                    <button
-                        className="cursor-pointer bg-(--asecondary) w-fit text-white hover:scale-110 transition-all duration-300 mx-auto rounded-md px-3 py-1"
-                        onClick={() => {
-                            setRoute(page)
-                            setShowSelectTeam(false)
-                            setTeam(2)
-                        }}>2 Times</button>
+                </main>
 
-                    <button
-                        className="cursor-pointer bg-(--bsecondary) w-fit text-white hover:scale-110 transition-all duration-300 mx-auto rounded-md px-3 py-1"
-                        onClick={() => {
-                            setRoute(page)
-                            setShowSelectTeam(false)
-                            setTeam(4)
-                        }}>4 Times</button>
+                <footer className="fixed bottom-2 left-0 w-full text-center text-white text-xs sm:text-sm">
+                    Desenvolvido por{" "}
+                    <a
+                        href="https://canoatech.vercel.app/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-bold hover:text-green-700 transition"
+                    >
+                        Canoa Tech
+                    </a>
+                </footer>
+            </>}
 
+            <Poup
+                show={showSelectTeam}
+                close={() => setShowSelectTeam(!showSelectTeam)}
+                titulo="Aviso"
+                modo="info"
+                descricao={
+                    <div className="flex flex-col gap-2 px-4 pt-2">
+                        <p>Escolha quantos times deseja:</p>
+
+                        <div className="flex gap-2">
+                            <button
+                                className="cursor-pointer bg-(--asecondary) w-fit text-white hover:scale-110 transition-all duration-300 mx-auto rounded-md px-3 py-1"
+                                onClick={() => {
+                                    setRoute(page)
+                                    setShowSelectTeam(false)
+                                    setTeam(2)
+                                }}
+                            >
+                                2 Times
+                            </button>
+
+                            <button
+                                className="cursor-pointer bg-(--bsecondary) w-fit text-white hover:scale-110 transition-all duration-300 mx-auto rounded-md px-3 py-1"
+                                onClick={() => {
+                                    setRoute(page)
+                                    setShowSelectTeam(false)
+                                    setTeam(4)
+                                }}
+                            >
+                                4 Times
+                            </button>
+                        </div>
+                    </div>
+                }
+            />
+
+            {data.map((x, index) => (
+                <div key={index}>
+                    {route === String(index) && (
+                        <PtQuiz
+                            team={team}
+                            setPage={setRoute}
+                            img={x.imghome}
+                            perguntas={x.frases}
+                        />
+                    )}
                 </div>
-            </div>} />
+            ))}
 
-        <ul className={`${route !== "home" && "hidden"} flex flex-col justify-center items-center h-fit gap-10`}>
-            <h2 className="text-5xl text-white text-shadow-2xl shadow-black">
-                Conteúdo
-            </h2>
-
-
-            
-
-                    {data.map((x, index) => (<li><a onClick={() => {
-                setPage(String(index))
-                setShowSelectTeam(true)
-            }}
-                className="bg-white p-2  m-4 text-2xl hover:bg-amber-200 rounded-xl cursor-pointer">
-
-                {x.titulo}
-
-            </a></li>) )}
-
-
-
-            
-
-
-
-
-        </ul>
-
-
-        {data.map((x, index) =>
-        (<div key={index}>
-
-                {route== String(index) && 
-                <PtQuiz team={team} setPage={setRoute} img={x.imghome}
-                perguntas={x.frases} />}
+            {route === "tutorial" && (
+                <PTutorial
+                    img={data[0].imghome}
+                    onFinish={() => setRoute("home")}
+                />
+            )}
 
         </div>
-
-
-        ))}
-
-
-
-
-
-
-
-
-    </div>)
+    )
 }
