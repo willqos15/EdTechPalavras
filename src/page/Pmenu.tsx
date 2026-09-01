@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import PtQuiz from "./Pquiz";
 import Poup from "../components/poup";
-import { data } from "./data/data.ts";
+import { client, data } from "./data/data.ts";
 import PTutorial from "./Ptutorial.tsx";
 
 import { AiFillBulb } from "react-icons/ai";
@@ -40,16 +40,16 @@ export default function Pmenu() {
 
                 <main className="flex-1 flex flex-col justify-center items-center px-4 pb-10">
 
-                    <h2 className="text-4xl sm:text-5xl font-bold text-white text-shadow-4xl shadow-white mb-6">
+                    <h2 className="text-4xl sm:text-5xl font-bold text-white text-shadow-4xl shadow-white mb-4">
                         CONTEÚDOS
                     </h2>
 
-                    <ul className="flex flex-col gap-3 w-full max-w-md">
+                    <ul className="flex flex-col gap-3 w-fit max-w-11/12 max-h-80 px-4 overflow-y-auto overflow-x-hidden">
 
                         <li>
                             <a
                                 onClick={() => setRoute("tutorial")}
-                                className="bg-white p-3 flex items-center justify-center gap-x-2 text-xl sm:text-2xl hover:bg-amber-200 rounded-xl cursor-pointer transition duration-300 hover:scale-[1.02]"
+                                className="bg-white p-2 flex items-center justify-center gap-x-2 text-xl sm:text-2xl hover:bg-amber-200 rounded-xl cursor-pointer transition duration-300 hover:scale-[1.02]"
                             >
                                 <AiFillBulb className="text-amber-600" />
                                 Guia Rápido
@@ -74,17 +74,7 @@ export default function Pmenu() {
 
                 </main>
 
-                <footer className="fixed bottom-2 left-0 w-full text-center text-white text-xs sm:text-sm">
-                    Desenvolvido por{" "}
-                    <a
-                        href="https://canoatech.vercel.app/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-bold hover:text-green-700 transition"
-                    >
-                        Canoa Tech
-                    </a>
-                </footer>
+                
             </>}
 
             <Poup
@@ -142,6 +132,20 @@ export default function Pmenu() {
                     onFinish={() => setRoute("home")}
                 />
             )}
+
+            <footer className="fixed bottom-0 left-0 p-2 w-full text-center text-white bg-gray-950 text-xsm sm:text-sm flex gap-1 justify-center  font-medium">
+                    Desenvolvido por{" "}
+                    <a
+                        href="https://canoatech.vercel.app/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-bold hover:text-green-700 transition"
+                    >
+                        Canoa Tech 
+                    </a>
+                    <p>
+                    e encomendado por {client}</p>
+                </footer>
 
         </div>
     )
