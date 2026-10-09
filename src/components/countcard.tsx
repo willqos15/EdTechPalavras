@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { IoMdRemoveCircleOutline } from "react-icons/io";
 import { AiFillThunderbolt } from "react-icons/ai";
 import { FaGear } from "react-icons/fa6";
 import { HiCheck } from "react-icons/hi";
 import Poup from './poup';
+import falar from './sounds';
 
 type Tfrases = {
     palavra: string
@@ -60,20 +61,57 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
     const [showConfig, setShowConfig] = useState<boolean>(false)
     // const [pt, setPt] = useState<number>(0)
 
-    useEffect(
-        () => {
-            if (alerterro != 0 && alerterro === arrayerro.filter(x => x.fase === fase && x.equipe === equipe).length) {
-                setShowAlertErro(true)
-            }
-        }, [alerterro, erro])
+  const alertaErroExecutado = useRef(false)
 
+useEffect(() => {
+    const quantidadeErros = arrayerro.filter(
+        x => x.fase === fase && x.equipe === id
+    ).length
 
-    useEffect(
-        () => {
-            if (alertacerto != 0 && alertacerto === pt) {
-                setShowAlertAcerto(true)
-            }
-        }, [alertacerto, pt])
+    if (quantidadeErros !== alerterro) {
+        alertaErroExecutado.current = false
+        return
+    }
+
+    if (
+        alerterro !== 0 &&
+        quantidadeErros === alerterro &&
+        !alertaErroExecutado.current
+    ) {
+        alertaErroExecutado.current = true
+
+        setShowAlertErro(true)
+
+        falar(
+            `${equipe} atingiu ${alerterro} erros na fase ${fase + 1}!`
+        )
+    }
+}, [alerterro, arrayerro, fase, id])
+
+   
+
+   const alertaAcertoExecutado = useRef(false)
+
+useEffect(() => {
+    if (
+        alertacerto !== 0 &&
+        pt === alertacerto &&
+        !alertaAcertoExecutado.current
+    ) {
+        alertaAcertoExecutado.current = true
+
+        setShowAlertAcerto(true)
+
+        falar(`${equipe} atingiu ${alertacerto} acertos!`)
+    }
+
+    // Permite disparar novamente caso a pontuação saia
+    // do valor configurado e depois volte para ele.
+    if (pt !== alertacerto) {
+        alertaAcertoExecutado.current = false
+    }
+
+}, [alertacerto, pt, equipe])
 
 
     useEffect(() => {
@@ -93,7 +131,8 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
     return (<>
 
 
-        <Poup titulo={`NOTIFICAÇÃO`}
+        <Poup titulo={<p className="font-bold text-4xl">NOTIFICAÇÃO</p>}
+        color="bg-green-700"
             descricao={
                 <div className='w-96 flex   flex-col justify-start items-center max-h-96 h-fit pt-4'>
                     <p className='text-lg bg-green-700 text-white px-2 py-1 mb-2 rounded-md'> {equipe} atingiu {alertacerto} acertos!</p>
@@ -126,10 +165,11 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
             close={() => setShowAlertAcerto(false)} modo='info' show={showalertacerto} />
 
 
-        <Poup titulo={`NOTIFICAÇÃO`}
+        <Poup titulo={<p className="font-bold text-4xl">NOTIFICAÇÃO</p>}
+         color="bg-red-700"
             descricao={
                 <div className='w-96 flex   flex-col justify-start items-center max-h-96 h-fit pt-4'>
-                    <p className='text-lg bg-red-700 text-white px-2 py-1 mb-2 rounded-md'> {equipe} atingiu {alerterro} erros na fase {fase + 1}!</p>
+                    <p className='text-lg text-red-900 px-2 py-1 mb-2 rounded-md'> {equipe} atingiu {alerterro} erros na fase {fase + 1}!</p>
 
                     <div className='flex flex-col items-center w-80 mx-auto max-h-64 overflow-y-auto'>
 
@@ -336,6 +376,7 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
 
                     <p>Observações:</p>
                     <textarea
+                        value={observ}
                         onChange={(e) => setObserv(e.target.value)}
                         className={`text-sm ${observ.length > 0 ? 'bg-white border-2 border-black' : 'bg-[#e6eae1'}] 
                     sm:w-30 w-25 min-h-7 max-h-15 px-1 mb-2 text-gray-700`}
@@ -401,12 +442,12 @@ export default function CountCard({ equipe, bgcolor, titlecolor, textcolor, stat
                 <div className={`
                 ${textcolor} hover:text-gray-700 cursor-pointer
                 flex gap-1 px-3 py-1 items-center justify-center`}
-                onClick={() => setShowConfig(!showConfig)}>
+                    onClick={() => setShowConfig(!showConfig)}>
 
-                <FaGear
-                    className='cursor-pointer font-bold text-xl transition duration-300' />
+                    <FaGear
+                        className='cursor-pointer font-bold text-xl transition duration-300' />
                     Configurações
-                    </div>
+                </div>
 
 
             </div>

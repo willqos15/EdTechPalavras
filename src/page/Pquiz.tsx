@@ -15,12 +15,15 @@ import { FaUserGroup } from "react-icons/fa6";
 import { IoArrowBackCircle } from "react-icons/io5";
 import { GiPerspectiveDiceSixFacesFive } from "react-icons/gi";
 import { Save } from '../components/save';
-import { IoIosNotifications } from "react-icons/io";
 
 import CountCard from '../components/countcard';
 import AllPoups from '../components/allpoups';
 import { normalizar } from '../components/normalizar';
 import Timer from '../components/timer';
+import falar, { somAcerto, tocarBipeComFrequencia } from '../components/sounds';
+
+import ControlSound from '../components/controlSound';
+import NotificationButton from '../components/NotificationButton';
 
 
 
@@ -45,7 +48,7 @@ type Props = {
 }
 
 export default function PQuiz({ team, perguntas, img, setPage }: Props) {
-
+    const [modeSound, setModeSound] = useState(true)
     const [turma, setTurma] = useState<Aluno[]>([])
     const [digi, setDigi] = useState<string[]>([])
     const [erro, setErro] = useState<string[]>([])
@@ -126,6 +129,13 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
     const [totalTime, setTotalTime] = useState(initialTime)
     const [timeLeft, setTimeLeft] = useState(initialTime)
 
+    useEffect(() => {
+        if (timeLeft <= 10 && timeLeft > 0) { tocarBipeComFrequencia(800, 100) }
+
+        if (timeLeft == 0) { tocarBipeComFrequencia(700, 2000) }
+    }
+        , [timeLeft])
+
 
 
 
@@ -139,13 +149,13 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
         if (digi.length < 1) return
 
         if (mletra && [... new Set(Array.from(normalizar(frases[fase].palavra)))].sort().join("") === [... new Set(digi.map(normalizar))].sort().join("")) {
-           
+
             setComplete(ant => [...ant, fase])
             setPoupAcerto(true)
         }
 
         if (!mletra && normalizar(frases[fase].palavra) == normalizar(digi[0])) {
-           
+
             setComplete(ant => [...ant, fase])
             setPoupAcerto(true)
         }
@@ -170,14 +180,14 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
 
         if (fase > frases.length) {
             setFase(frases.length)
-           
+
         }
     }, [fase])
 
 
 
 
-    function enviar(dados: Tdados) {
+    async function enviar(dados: Tdados) {
 
         if (!dados.campo) return
 
@@ -199,6 +209,8 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
         if (mletra && Array.from(normalizar(frases[fase].palavra)).includes((normalizar(dados.campo)))) {
             setDigi(ant => [...ant, dados.campo.toUpperCase()])
             setHistLetra(ant => [...ant, dados.campo.toUpperCase()])
+            await somAcerto()
+            falar('Acertou! Mais uma chance!')
 
         }
 
@@ -256,6 +268,7 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
             setPoupSobre={setPoupTurma}
             setDisableDica={setDisableDica}
             setHelp={setHelp}
+            help={help}
             setComplete={setComplete}
             dica={dica}
 
@@ -266,13 +279,13 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
             setEnerB={setEnerB}
             setEnerY={setEnerY}
             setEnerR={setEnerR}
-            setEnerP={setEnerG}
+            setEnerG={setEnerG}
             setPoupErro={setPoupErro}
             erro={erro}
             setErroB={setErroB}
             setErroY={setErroY}
             setErroR={setErroR}
-            setErroP={setErroG}
+            setErroG={setErroG}
             errob={errob}
             erroy={erroy}
             error={error}
@@ -281,7 +294,7 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
             nameb={nameb}
             namey={namey}
             namer={namer}
-            namep={nameg}
+            nameg={nameg}
             setArrayErro={setArrayErro}
             setArrayAcerto={setArrayAcerto}
             turma={turma}
@@ -289,7 +302,9 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
             setPoupConfig={setPoupConfig}
             poupconfig={poupconfig}
             setAlertErro={setAlertErro}
+            alertErro={alerterro}
             setAlertAcerto={setAlertAcerto}
+            alertAcerto={alertacerto}
             poupback={poupback}
             setPoupBack={setPoupBack}
             setPage={setPage}
@@ -298,8 +313,11 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
             digi={digi}
         />
 
-        <IoIosNotifications onClick={() => setPoupConfig(true)}
-            className='fixed bottom-4 right-4 text-white hover:text-amber-400 transition duration-300 text-5xl cursor-pointer' />
+        <NotificationButton
+            onClick={() => setPoupConfig(true)}
+        />
+
+        <ControlSound modeSound={modeSound} setModeSound={setModeSound} />
 
 
         <div className='flex flex-row justify center items-center xl:h-screen'>
@@ -594,16 +612,16 @@ export default function PQuiz({ team, perguntas, img, setPage }: Props) {
 
                                         <div className='overflow-x-auto overflow-y-hidden y-20 max-w-96'>
                                             <p className='font-bold text-red-600 px-2'>
-                                                
-                                    <p className="flex gap-2">
 
-                                                {arrayerro.filter(x => x.fase === fase)
+                                                <p className="flex gap-2">
+
+                                                    {arrayerro.filter(x => x.fase === fase)
                                                         .map((x) => (
-                                                           <>{x.tentativa},</>
+                                                            <>{x.tentativa},</>
                                                         ))
-                                                }
-                                            
-                                            </p>
+                                                    }
+
+                                                </p>
                                             </p>
                                         </div>
 

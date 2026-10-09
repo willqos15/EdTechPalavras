@@ -8,6 +8,8 @@ import { useState, useEffect, useMemo } from 'react'
 import Classes from "./classes";
 import { normalizar } from "./normalizar";
 
+import falar, { somAcerto, somErro } from "./sounds";
+
 type Aluno = {
     nome: string;
 }
@@ -54,8 +56,9 @@ interface Poupprops {
     setPoupErro: React.Dispatch<React.SetStateAction<boolean>>;
     setPoupConfig: React.Dispatch<React.SetStateAction<boolean>>;
     setPoupBack: React.Dispatch<React.SetStateAction<boolean>>;
-
-
+    alertErro:number
+    alertAcerto:number
+    help: boolean;
     complete: number[];
     frases: Fraseparams[];
     fase: number;
@@ -65,7 +68,7 @@ interface Poupprops {
     nameb: string;
     namey: string;
     namer: string;
-    namep: string;
+    nameg: string;
     errob: string[]
     erroy: string[]
     error: string[]
@@ -81,11 +84,11 @@ interface Poupprops {
     setEnerB: React.Dispatch<React.SetStateAction<number>>;
     setEnerY: React.Dispatch<React.SetStateAction<number>>;
     setEnerR: React.Dispatch<React.SetStateAction<number>>;
-    setEnerP: React.Dispatch<React.SetStateAction<number>>;
+    setEnerG: React.Dispatch<React.SetStateAction<number>>;
     setErroB: React.Dispatch<React.SetStateAction<string[]>>;
     setErroY: React.Dispatch<React.SetStateAction<string[]>>;
     setErroR: React.Dispatch<React.SetStateAction<string[]>>;
-    setErroP: React.Dispatch<React.SetStateAction<string[]>>;
+    setErroG: React.Dispatch<React.SetStateAction<string[]>>;
     setArrayErro: React.Dispatch<React.SetStateAction<objtentativa[]>>;
     setArrayAcerto: React.Dispatch<React.SetStateAction<objtentativa[]>>;
     setAlertErro: React.Dispatch<React.SetStateAction<number>>;
@@ -104,13 +107,14 @@ interface Poupprops {
 
 
 
-export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setPtYellow, setPtRed, setPtGreen, frases, fase, setPoupAcerto, poupdica,
+export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setPtYellow, setPtRed, setPtGreen, frases, fase, setPoupAcerto, poupdica,alertAcerto,alertErro,
     setPoupDica,
     setEnerB,
     setEnerY,
     setEnerR,
-    setEnerP,
+    setEnerG,
     setHelp,
+    help,
     disabledica,
     setDisableDica,
     poupsword,
@@ -132,7 +136,7 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
     setErroB,
     setErroY,
     setErroR,
-    setErroP,
+    setErroG,
     setArrayErro,
     setArrayAcerto,
     turma,
@@ -148,7 +152,7 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
 
     dica,
     digi,
-    totalTime, timeLeft
+    totalTime, timeLeft, nameb, namer, nameg, namey
 
 
 }: Poupprops) {
@@ -157,6 +161,39 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
     const [mlista, setMLista] = useState<boolean>(false);
 
     const [observacao, setObservacao] = useState<string>("")
+
+    useEffect(() => {
+
+        if (help) {
+        falar(`A dica é... ${dica}`)
+        }
+     },
+        [help])
+
+        useEffect(() => {
+
+        if (poupdica) {
+        falar(`A dica custa uma energia`)
+        }
+     },
+        [poupdica])
+
+    useEffect(() => { sounds() },
+        [poupacerto, pouperro])
+
+    async function sounds() {
+        if (pouperro) {
+            await somErro()
+            falar(`Resposta Errada!`)
+        }
+
+        if (poupacerto) {
+            await somAcerto()
+            falar(`Correto! A palavra era ${frases[fase].palavra}!`)
+        }
+    }
+
+
 
     useEffect(() => {
         if (turma.length > 0) {
@@ -242,7 +279,8 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
 
                     <section className="flex justify-start">
                         <p className="whitespace-nowrap">Notificar Erro:</p>
-                        <select className="bg-[#e6eae1] w-full" onChange={(e) => setAlertErro(Number(e.target.value))}>
+                        <select className="bg-[#e6eae1] w-full" onChange={(e) => setAlertErro(Number(e.target.value))}
+                            value={alertErro}>
                             <option value="1">Desativado</option>
                             <option value="5">ao atingir 5 erros</option>
                             <option value="7">ao atingir 7 erros</option>
@@ -255,7 +293,8 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
 
                     <section className="flex justify-start">
                         <p className="whitespace-nowrap">Notificar Acerto:</p>
-                        <select className="bg-[#e6eae1] w-full" onChange={(e) => setAlertAcerto(Number(e.target.value))}>
+                        <select className="bg-[#e6eae1] w-full" onChange={(e) => setAlertAcerto(Number(e.target.value))}
+                            value={alertAcerto}>
                             <option value="1">Desativado</option>
                             <option value="5">ao atingir 5 acertos</option>
                             <option value="7">ao atingir 7 acertos</option>
@@ -285,6 +324,7 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
                 setArrayErro(arr => [...arr, { equipe: "B", tentativa: erro[erro.length - 1], fase: fase, observacao: observacao }])
                 setPoupErro(false)
                 setObservacao("")
+                falar(`${nameb} errou! Pássou a vez!`)
             }}
 
             f2={() => {
@@ -292,6 +332,7 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
                 setArrayErro(arr => [...arr, { equipe: "Y", tentativa: erro[erro.length - 1], fase: fase, observacao: observacao }])
                 setPoupErro(false)
                 setObservacao("")
+                falar(`${namey} errou! Pássou a vez!`)
             }}
 
             f3={() => {
@@ -299,13 +340,15 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
                 setArrayErro(arr => [...arr, { equipe: "R", tentativa: erro[erro.length - 1], fase: fase, observacao: observacao }])
                 setPoupErro(false)
                 setObservacao("")
+                falar(`${namer} errou! Pássou a vez!`)
             }}
 
             f4={() => {
-                setErroP(ant => [...ant, `${erro[erro.length - 1]}`])
+                setErroG(ant => [...ant, `${erro[erro.length - 1]}`])
                 setArrayErro(arr => [...arr, { equipe: "G", tentativa: erro[erro.length - 1], fase: fase, observacao: observacao }])
                 setPoupErro(false)
                 setObservacao("")
+                falar(`${nameg} errou! Pássou a vez!`)
             }}
 
             close={() => {
@@ -335,7 +378,7 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
                         {turma.map(x => <option value={x.nome} key={x.nome}>{x.nome}</option>)}
                     </select> : <>
                         <textarea className="max-h-96 min-h-10 w-11/12 bg-[#e6eae1] px-2"
-                            placeholder="Digite o nome do aluno aqui"
+                            placeholder="Digite o nome do aluno aqui (Opcional)"
                             value={observacao}
                             onChange={(e) => setObservacao(e.target.value)} />
                     </>
@@ -360,6 +403,7 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
                 setArrayAcerto(arr => [...arr, { equipe: "B", tentativa: frases[fase].palavra, fase: fase, observacao: observacao }])
                 setObservacao("")
                 setPoupAcerto(false)
+                falar(`Ponto para ${nameb}!`)
 
             }}
             f2={() => {
@@ -368,6 +412,7 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
                 setArrayAcerto(arr => [...arr, { equipe: "Y", tentativa: frases[fase].palavra, fase: fase, observacao: observacao }])
                 setObservacao("")
                 setPoupAcerto(false)
+                falar(`Ponto para ${namey}!`)
 
             }}
 
@@ -377,6 +422,7 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
                 setArrayAcerto(arr => [...arr, { equipe: "R", tentativa: frases[fase].palavra, fase: fase, observacao: observacao }])
                 setObservacao("")
                 setPoupAcerto(false)
+                falar(`Ponto para ${namer}!`)
 
             }}
 
@@ -386,6 +432,7 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
                 setArrayAcerto(arr => [...arr, { equipe: "G", tentativa: frases[fase].palavra, fase: fase, observacao: observacao }])
                 setObservacao("")
                 setPoupAcerto(false)
+                falar(`Ponto para ${nameg}!`)
 
             }}
 
@@ -394,6 +441,8 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
             descricao={< div className="w-full flex flex-col justify-center items-center" >
                 <p className='text-3xl'> {frases[fase].palavra}</p>
                 <p className='w-50 px-2 my-2 text-center'>Quem acertou a palavra?</p>
+
+
 
 
                 <div className="flex items-center cursor-pointer" onClick={() => setMLista(!mlista)}>
@@ -410,7 +459,7 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
                         {turma.map(x => <option value={x.nome} key={x.nome}>{x.nome}</option>)}
                     </select> : <>
                         <textarea className="max-h-96 min-h-10 w-11/12 bg-[#e6eae1] px-2"
-                            placeholder="Digite o nome do aluno aqui"
+                            placeholder="Digite o nome do aluno aqui (Opcional)"
                             value={observacao}
                             onChange={(e) => setObservacao(e.target.value)} />
                     </>}
@@ -434,6 +483,10 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
                 setEnerB(ant => ant - 1)
                 setHelp(true)
                 setPoupDica(false)
+                falar(`${nameb} pediu uma dica`)
+                setDisableDica(true)
+            
+              
 
 
             }}
@@ -441,6 +494,9 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
                 setEnerY(ant => ant - 1)
                 setHelp(true)
                 setPoupDica(false)
+                falar(`${namey} pediu uma dica`)
+                setDisableDica(true)
+              
 
 
             }}
@@ -449,14 +505,18 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
                 setEnerR(ant => ant - 1)
                 setHelp(true)
                 setPoupDica(false)
+                falar(`${namer} pediu uma dica`)
+                setDisableDica(true)
 
 
             }}
 
             f4={() => {
-                setEnerP(ant => ant - 1)
+                setEnerG(ant => ant - 1)
                 setHelp(true)
                 setPoupDica(false)
+                falar(`${nameg} pediu uma dica`)
+                setDisableDica(true)
 
 
             }}
@@ -464,6 +524,8 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
             f5={() => {
                 setPoupDica(false)
                 setHelp(true)
+                falar(`Dica liberada!`)
+                setDisableDica(true)
 
 
             }}

@@ -1,0 +1,176 @@
+name: Build HTML único
+
+run-name: Build HTML ${{ inputs.generation_id }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      generation_id:
+        description: "Identificador único da geração"
+        required: true
+        type: string
+      payload:
+        description: "JSON do conteúdo educacional"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Baixar o projeto
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Validar JSON e preparar data.ts
+        env:
+          CONTENT_JSON: ${{ inputs.payload }}
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+
+          const parsed = JSON.parse(process.env.CONTENT_JSON);
+
+          const lessons = Array.isArray(parsed)
+            ? parsed
+            : Array.isArray(parsed.data)
+              ? parsed.data
+              : [parsed];
+
+          if (!lessons.length) {
+            throw new Error('O JSON não contém conteúdo.');
+          }
+
+          for (const lesson of lessons) {
+            if (
+              typeof lesson.titulo !== 'string' ||
+              !Array.isArray(lesson.frases)
+            ) {
+              throw new Error(
+                'Cada conteúdo precisa de titulo e frases[].'
+              );
+            }
+
+            for (const frase of lesson.frases) {
+              if (
+                typeof frase.palavra !== 'string' ||
+                typeof frase.dica !== 'string'
+              ) {
+                throw new Error(
+                  'Cada frase precisa de palavra e dica.'
+                );
+              }
+            }
+          }
+
+          const safeLessons = lessons.map((lesson) => ({
+            titulo: lesson.titulo,
+            imghome:
+              typeof lesson.imghome === 'string' &&
+              lesson.imghome.trim()
+                ? lesson.imghome
+                : null,
+            frases: lesson.frases.map((frase) => ({
+              palavra: frase.palavra,
+              dica: frase.dica,
+              ...(typeof frase.imagem === 'string'
+                ? { imagem: frase.imagem }
+                : {}),
+              ...(typeof frase.tema === 'string'
+                ? { tema: frase.tema }
+                : {})
+            }))
+          }));
+
+          const generated = `import img from "./image.png";
+
+          export const image = img;
+
+          export const client = "Prof. Jurandir Queiroz";
+
+          type Tfrases = {
+            palavra: string;
+            dica: string;
+            imagem?: string;
+            tema?: string;
+          };
+
+          type Tdata = {
+            titulo: string;
+            frases: Tfrases[];
+            imghome?: string | null;
+          };
+
+          export const data: Tdata[] = ${JSON.stringify(
+            safeLessons,
+            null,
+            2
+          ).replace(
+            /"imghome": null/g,
+            '\"imghome\": undefined'
+          )};
+          `;
+
+          fs.writeFileSync(
+            'src/page/data/data.ts',
+            generated,
+            'utf8'
+          );
+
+          console.log(
+            `Conteúdos preparados: ${lessons.length}`
+          );
+          NODE
+
+      - name: Executar build
+        run: npm run build
+
+      - name: Validar HTML único
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import path from 'node:path';
+
+          const dir = 'dist';
+
+          const files = fs.readdirSync(dir)
+            .filter((name) => name.endsWith('.html'));
+
+          if (files.length !== 1) {
+            throw new Error(
+              `Esperado 1 HTML em dist; encontrados ${files.length}.`
+            );
+          }
+
+          const html = fs.readFileSync(
+            path.join(dir, files[0]),
+            'utf8'
+          );
+
+          if (!html.includes('<html')) {
+            throw new Error('O arquivo gerado não parece HTML.');
+          }
+
+          console.log(`HTML gerado: ${files[0]}`);
+          NODE
+
+      - name: Disponibilizar HTML
+        uses: actions/upload-artifact@v4
+        with:
+          name: html-${{ inputs.generation_id }}
+          path: dist/*.html
+          if-no-files-found: error
+          retention-days: 1
