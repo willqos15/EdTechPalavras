@@ -162,6 +162,18 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
 
     const [observacao, setObservacao] = useState<string>("")
 
+      async function sounds() {
+        if (pouperro) {
+            await somErro()
+            falar(`Resposta Errada!`)
+        }
+
+        if (poupacerto) {
+            await somAcerto()
+            falar(`Correto! A palavra era ${frases[fase].palavra}!`)
+        }
+    }
+
     useEffect(() => {
 
         if (help) {
@@ -181,17 +193,7 @@ export default function AllPoups({ img, poupacerto, setComplete, setPtBlue, setP
     useEffect(() => { sounds() },
         [poupacerto, pouperro])
 
-    async function sounds() {
-        if (pouperro) {
-            await somErro()
-            falar(`Resposta Errada!`)
-        }
-
-        if (poupacerto) {
-            await somAcerto()
-            falar(`Correto! A palavra era ${frases[fase].palavra}!`)
-        }
-    }
+  
 
 
 
