@@ -42,7 +42,21 @@ jobs:
           node --input-type=module <<'NODE'
           import fs from 'node:fs';
 
-          const parsed = JSON.parse(process.env.CONTENT_JSON);
+          const raw = process.env.CONTENT_JSON;
+
+          if (!raw) {
+            throw new Error('O conteúdo JSON não foi informado.');
+          }
+
+          let parsed;
+
+          try {
+            parsed = JSON.parse(raw);
+          } catch {
+            throw new Error(
+              'O conteúdo enviado não é um JSON válido.'
+            );
+          }
 
           const lessons = Array.isArray(parsed)
             ? parsed
@@ -56,6 +70,7 @@ jobs:
 
           for (const lesson of lessons) {
             if (
+              !lesson ||
               typeof lesson.titulo !== 'string' ||
               !Array.isArray(lesson.frases)
             ) {
@@ -66,6 +81,7 @@ jobs:
 
             for (const frase of lesson.frases) {
               if (
+                !frase ||
                 typeof frase.palavra !== 'string' ||
                 typeof frase.dica !== 'string'
               ) {
@@ -78,17 +94,21 @@ jobs:
 
           const safeLessons = lessons.map((lesson) => ({
             titulo: lesson.titulo,
-            imghome:
-              typeof lesson.imghome === 'string' &&
-              lesson.imghome.trim()
-                ? lesson.imghome
-                : null,
+
+            ...(typeof lesson.imghome === 'string' &&
+            lesson.imghome.trim()
+              ? { imghome: lesson.imghome }
+              : {}),
+
             frases: lesson.frases.map((frase) => ({
               palavra: frase.palavra,
               dica: frase.dica,
-              ...(typeof frase.imagem === 'string'
+
+              ...(typeof frase.imagem === 'string' &&
+              frase.imagem.trim()
                 ? { imagem: frase.imagem }
                 : {}),
+
               ...(typeof frase.tema === 'string'
                 ? { tema: frase.tema }
                 : {})
@@ -111,16 +131,13 @@ jobs:
           type Tdata = {
             titulo: string;
             frases: Tfrases[];
-            imghome?: string | null;
+            imghome?: string;
           };
 
           export const data: Tdata[] = ${JSON.stringify(
             safeLessons,
             null,
             2
-          ).replace(
-            /"imghome": null/g,
-            '\"imghome\": undefined'
           )};
           `;
 
@@ -146,6 +163,10 @@ jobs:
 
           const dir = 'dist';
 
+          if (!fs.existsSync(dir)) {
+            throw new Error('A pasta dist não foi criada.');
+          }
+
           const files = fs.readdirSync(dir)
             .filter((name) => name.endsWith('.html'));
 
@@ -161,7 +182,9 @@ jobs:
           );
 
           if (!html.includes('<html')) {
-            throw new Error('O arquivo gerado não parece HTML.');
+            throw new Error(
+              'O arquivo gerado não parece HTML.'
+            );
           }
 
           console.log(`HTML gerado: ${files[0]}`);

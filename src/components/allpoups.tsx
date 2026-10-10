@@ -95,7 +95,7 @@ interface Poupprops {
     setAlertAcerto: React.Dispatch<React.SetStateAction<number>>;
     setPage: React.Dispatch<React.SetStateAction<string>>;
 
-    img: string;
+    img?: string;
     dica: string;
     digi: string[]
 

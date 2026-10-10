@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import PtQuiz from "./Pquiz";
 import Poup from "../components/poup";
-import { client, data } from "./data/data.ts";
+import { client, data} from "./data/data.ts";
 import PTutorial from "./Ptutorial.tsx";
 
 import { AiFillBulb } from "react-icons/ai";
@@ -119,7 +119,7 @@ export default function Pmenu() {
                         <PtQuiz
                             team={team}
                             setPage={setRoute}
-                            img={x.imghome}
+                            img={x.imghome ?? undefined}
                             perguntas={x.frases}
                         />
                     )}
@@ -128,7 +128,7 @@ export default function Pmenu() {
 
             {route === "tutorial" && (
                 <PTutorial
-                    img={data[0].imghome}
+                    img={data[0]?.imghome ?? undefined}
                     onFinish={() => setRoute("home")}
                 />
             )}

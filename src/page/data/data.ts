@@ -14,7 +14,7 @@ type Tfrases = {
 type Tdata = {
   titulo: string;
   frases: Tfrases[];
-  imghome: string,
+  imghome?: string,
 };
 
 export const data: Tdata[] = [
