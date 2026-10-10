@@ -43,7 +43,7 @@ type Aluno = {
 type Props = {
     team: number,
     perguntas: Tfrases[]
-    img: string
+    img?: string
     setPage: React.Dispatch<React.SetStateAction<string>>
 }
 
