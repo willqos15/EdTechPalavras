@@ -197,3 +197,95 @@ jobs:
           path: dist/*.html
           if-no-files-found: error
           retention-days: 1
+
+        
+      - name: Instalar Nodemailer para envio
+        run: npm install --prefix /tmp/edtech-mail nodemailer
+
+      - name: Enviar arquivos por e-mail
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          EMAIL_DESTINO: ${{ secrets.EMAIL_DESTINO }}
+          GENERATION_ID: ${{ inputs.generation_id }}
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const path = require('node:path');
+          const nodemailer = require(
+            '/tmp/edtech-mail/node_modules/nodemailer'
+          );
+
+          async function main() {
+            const {
+              GMAIL_USER,
+              GMAIL_APP_PASSWORD,
+              EMAIL_DESTINO,
+              GENERATION_ID
+            } = process.env;
+
+            if (
+              !GMAIL_USER ||
+              !GMAIL_APP_PASSWORD ||
+              !EMAIL_DESTINO
+            ) {
+              throw new Error(
+                'Configure GMAIL_USER, GMAIL_APP_PASSWORD e EMAIL_DESTINO nos Secrets.'
+              );
+            }
+
+            const htmlFiles = fs.readdirSync('dist')
+              .filter((name) => name.endsWith('.html'));
+
+            if (htmlFiles.length !== 1) {
+              throw new Error(
+                'Era esperado exatamente um arquivo HTML.'
+              );
+            }
+
+            const htmlPath = path.join('dist', htmlFiles[0]);
+            const dataPath = 'src/page/data/data.ts';
+
+            if (!fs.existsSync(dataPath)) {
+              throw new Error('O arquivo data.ts não foi encontrado.');
+            }
+
+            const transporter = nodemailer.createTransport({
+              service: 'gmail',
+              auth: {
+                user: GMAIL_USER,
+                pass: GMAIL_APP_PASSWORD
+              }
+            });
+
+            await transporter.sendMail({
+              from: GMAIL_USER,
+              to: EMAIL_DESTINO,
+              subject: `EdTechPalavras - Build ${GENERATION_ID}`,
+              text: [
+                'Uma nova geração do EdTechPalavras foi concluída.',
+                '',
+                `Identificador: ${GENERATION_ID}`,
+                '',
+                'Arquivos anexados: HTML offline e data.ts.'
+              ].join('\n'),
+              attachments: [
+                {
+                  filename: htmlFiles[0],
+                  path: htmlPath
+                },
+                {
+                  filename: 'data.ts',
+                  path: dataPath
+                }
+              ]
+            });
+
+            console.log('Arquivos enviados por e-mail com sucesso.');
+          }
+
+          main().catch((error) => {
+            console.error('Falha no envio do e-mail:', error.message);
+            process.exitCode = 1;
+          });
+          NODE
