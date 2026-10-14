@@ -2,8 +2,9 @@ import { useState } from "react";
 
 import PtQuiz from "./Pquiz";
 import Poup from "../components/poup";
-import { client, data} from "./data/data.ts";
+import { client, data } from "./data/data.ts";
 import PTutorial from "./Ptutorial.tsx";
+import logo from "../assets/logo.png"
 
 import { AiFillBulb } from "react-icons/ai";
 import { FaWhatsapp } from "react-icons/fa";
@@ -49,7 +50,7 @@ export default function Pmenu() {
                         <li>
                             <a
                                 onClick={() => setRoute("tutorial")}
-                                className="bg-white p-2 flex items-center justify-center gap-x-2 text-xl sm:text-2xl hover:bg-amber-200 rounded-xl cursor-pointer transition duration-300 hover:scale-[1.02]"
+                                className="bg-white p-2 flex items-center justify-center gap-x-2 text-xl sm:text-2xl hover:bg-amber-200 rounded-xl cursor-pointer transition duration-300"
                             >
                                 <AiFillBulb className="text-amber-600" />
                                 Guia Rápido
@@ -63,7 +64,7 @@ export default function Pmenu() {
                                         setPage(String(index))
                                         setShowSelectTeam(true)
                                     }}
-                                    className="bg-white p-3 flex items-center justify-center text-xl sm:text-2xl hover:bg-amber-200 rounded-xl cursor-pointer transition duration-300 hover:scale-[1.02]"
+                                    className="bg-white p-3 flex items-center justify-center text-xl sm:text-2xl hover:bg-amber-200 rounded-xl cursor-pointer transition duration-300"
                                 >
                                     {x.titulo}
                                 </a>
@@ -74,7 +75,7 @@ export default function Pmenu() {
 
                 </main>
 
-                
+
             </>}
 
             <Poup
@@ -119,7 +120,7 @@ export default function Pmenu() {
                         <PtQuiz
                             team={team}
                             setPage={setRoute}
-                            img={x.imghome ?? undefined}
+                            img={x.imghome ?? logo}
                             perguntas={x.frases}
                         />
                     )}
@@ -134,20 +135,23 @@ export default function Pmenu() {
             )}
 
             <footer className="fixed bottom-0 left-0 p-2 w-full text-center text-white bg-gray-950 text-xsm sm:text-sm flex gap-1 justify-center  font-medium">
-                    Desenvolvido por{" "}
-                    <a
-                        href="https://canoatech.vercel.app/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-bold hover:text-green-700 transition"
-                    >
-                        Canoa Tech 
-                    </a>
-                    {client && 
+                Desenvolvido por{" "}
+                <a
+                    href="https://canoatech.vercel.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-bold hover:text-green-700 transition"
+                >
+                    Canoa Tech
+                </a>
+                {client &&
                     <p>
-                    e encomendado por {client}</p>}
-                    
-                </footer>
+                        e encomendado por {client
+                            .toLowerCase()
+                            .replace(/\b\p{L}/gu, letra => letra.toUpperCase())}
+                    </p>}
+
+            </footer>
 
         </div>
     )
