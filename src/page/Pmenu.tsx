@@ -143,8 +143,10 @@ export default function Pmenu() {
                     >
                         Canoa Tech 
                     </a>
+                    {client && 
                     <p>
-                    e encomendado por {client}</p>
+                    e encomendado por {client}</p>}
+                    
                 </footer>
 
         </div>

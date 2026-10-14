@@ -65,6 +65,10 @@ jobs:
               ? parsed.data
               : [parsed];
 
+          const client = typeof parsed.client === 'string' && parsed.client.trim()
+            ? parsed.client.trim()
+            : '';
+
           if (!lessons.length) {
             throw new Error('O JSON não contém conteúdo.');
           }
