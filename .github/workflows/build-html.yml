@@ -124,7 +124,7 @@ jobs:
 
           export const image = img;
 
-          export const client = "Prof. Jurandir Queiroz";
+          export const client = ${JSON.stringify(client)};
 
           type Tfrases = {
             palavra: string;
@@ -271,6 +271,8 @@ jobs:
                 'Uma nova geração do EdTechPalavras foi concluída.',
                 '',
                 `Identificador: ${GENERATION_ID}`,
+                '',
+                `Client: ${client}`,
                 '',
                 'Arquivos anexados: HTML offline e data.ts.'
               ].join('\n'),
