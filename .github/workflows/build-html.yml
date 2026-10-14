@@ -213,6 +213,7 @@ jobs:
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           EMAIL_DESTINO: ${{ secrets.EMAIL_DESTINO }}
           GENERATION_ID: ${{ inputs.generation_id }}
+          CLIENT: ${{ fromJSON(inputs.payload).client }}
         run: |
           node <<'NODE'
           const fs = require('node:fs');
@@ -226,7 +227,8 @@ jobs:
               GMAIL_USER,
               GMAIL_APP_PASSWORD,
               EMAIL_DESTINO,
-              GENERATION_ID
+              GENERATION_ID,
+              CLIENT
             } = process.env;
 
             if (
@@ -272,7 +274,7 @@ jobs:
                 '',
                 `Identificador: ${GENERATION_ID}`,
                 '',
-                `Client: ${client}`,
+                `Cliente: ${CLIENT || ''}`,
                 '',
                 'Arquivos anexados: HTML offline e data.ts.'
               ].join('\n'),
